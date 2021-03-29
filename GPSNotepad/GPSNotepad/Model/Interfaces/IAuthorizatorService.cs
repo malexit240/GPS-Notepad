@@ -1,6 +1,6 @@
-﻿using GPSNotepad.Core.Entities;
+﻿using GPSNotepad.Model.Entities;
 
-namespace GPSNotepad.Core
+namespace GPSNotepad.Model.Interfaces
 {
     public interface IAuthorizatorService
     {

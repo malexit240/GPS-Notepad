@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GPSNotepad.Core.Entities
+namespace GPSNotepad.Model.Entities
 {
     public class User
     {
@@ -10,5 +10,10 @@ namespace GPSNotepad.Core.Entities
         public string HashPassword { get; set; }
 
         public List<Pin> Pins { get; set; }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(UserId);
+        }
     }
 }

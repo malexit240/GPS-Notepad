@@ -1,9 +1,9 @@
 ﻿using System.IO;
-using GPSNotepad.Core.Entities;
+using GPSNotepad.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Essentials;
 
-namespace GPSNotepad.DatabaseMocks
+namespace GPSNotepad.Database
 {
     public class Context : DbContext
     {
