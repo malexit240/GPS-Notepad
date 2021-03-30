@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace GPSNotepad.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class SettingsPageViewModel : ViewModelBase
     {
-        public MainPageViewModel(INavigationService navigationService) : base(navigationService)
+        public SettingsPageViewModel(INavigationService navigationService) : base(navigationService)
         {
 
         }

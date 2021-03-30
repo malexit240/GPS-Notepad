@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    x:Class="GPSNotepad.Styles.Styles">
+    <Style x:Key="pageStyle" 
+               TargetType="NavigationPage">
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}" />
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}"/>
+    </Style>
+
+    <Style x:Key="labelStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="labelLinkStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="TextDecorations"
+                    Value="Underline"/>
+        <Setter Property="HorizontalOptions"
+                    Value="Center"/>
+    </Style>
+
+    <Style x:Key="buttonStyle"
+               TargetType="Button">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+    <Style x:Key="entryStyle"
+               TargetType="Entry">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="editorStyle"
+               TargetType="Entry">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="floatButtonStyle"
+               TargetType="Button">
+        <Setter Property="VerticalOptions"
+                    Value="End"/>
+        <Setter Property="HorizontalOptions"
+                    Value="End"/>
+        <Setter Property="WidthRequest"
+                    Value="80"/>
+        <Setter Property="HeightRequest"
+                    Value="80"/>
+        <Setter Property="CornerRadius"
+                    Value="40"/>
+        <Setter Property="Margin"
+                    Value="0,0,40,40"/>
+        <Setter Property="BorderWidth"
+                    Value="10"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryColor}"/>
+    </Style>
+
+
+    <Style x:Key="switchStyle" TargetType="Switch">
+        <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+    <Style x:Key="activityIndicatorStyle" TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+</ResourceDictionary>

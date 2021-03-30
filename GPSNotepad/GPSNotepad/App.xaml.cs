@@ -22,7 +22,7 @@ namespace GPSNotepad
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -37,6 +37,15 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IPinService>(new PinStateService());
 
             containerRegistry.RegisterInstance<IPermanentPinService>(new DBPinService());
+
+            containerRegistry.RegisterInstance<ISettingsManagerService>(new SettingsManagerService());
+
+            containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
+            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainMapPage, MainMapViewModel>();
+            containerRegistry.RegisterForNavigation<ListOfPinspage, ListOfPinsViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
         }
     }
 }
