@@ -3,12 +3,13 @@ using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Database
 {
     public class DBAuthorizatorService : IAuthorizatorService
     {
-        public User Authorize(string login, string password)
+        public Task<User> Authorize(string login, string password)
         {
             using (var context = new Context())
             {
@@ -17,7 +18,7 @@ namespace GPSNotepad.Database
             }
         }
 
-        public bool IsUserExist(string login)
+        public Task<bool> IsUserExist(string login)
         {
             throw new System.NotImplementedException();
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Model
 {
@@ -20,7 +21,7 @@ namespace GPSNotepad.Model
 
         public BufferedPins()
         {
-            Pins = App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId);
+            Pins = App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId).Result;
         }
 
         public List<Pin> Pins { get; set; }

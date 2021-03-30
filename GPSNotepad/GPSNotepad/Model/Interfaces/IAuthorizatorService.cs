@@ -1,12 +1,13 @@
 ﻿using GPSNotepad.Model.Entities;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Model.Interfaces
 {
     public interface IAuthorizatorService
     {
-        bool IsUserExist(string login);
+        Task<bool> IsUserExist(string email);
 
-        User Authorize(string login, string password);
+        Task<User> Authorize(string email, string password);
 
     }
 }

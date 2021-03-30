@@ -1,16 +1,17 @@
 ﻿using GPSNotepad.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Model.Interfaces
 {
     public interface IPermanentPinService
     {
-        bool CreatePin(Pin pin);
+        Task<bool> CreatePin(Pin pin);
 
-        List<Pin> GetAllPinsForUser(Guid user_id);
+        Task<List<Pin>> GetAllPinsForUser(Guid user_id);
 
-        Pin UpdatePin(Pin pin);
+        Task<Pin> UpdatePin(Pin pin);
 
         void DeletePin(Pin pin);
     }

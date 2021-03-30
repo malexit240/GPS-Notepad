@@ -1,6 +1,7 @@
 ﻿using GPSNotepad.Model.Entities;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Model.Interfaces
 {
@@ -10,7 +11,7 @@ namespace GPSNotepad.Model.Interfaces
 
         List<Pin> GetAllPinsForUser(Guid user_id);
 
-        Pin FindPin(string name);
+        Task<Pin> FindPin(string name);
 
         Pin UpdatePin(Pin pin);
 

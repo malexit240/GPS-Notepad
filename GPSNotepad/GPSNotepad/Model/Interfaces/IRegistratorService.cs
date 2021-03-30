@@ -1,9 +1,10 @@
 ﻿using GPSNotepad.Model.Entities;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Model.Interfaces
 {
     public interface IRegistratorService
     {
-        User Registrate(string login, string password);
+        Task<bool> Registrate(string email,string login, string password);
     }
 }

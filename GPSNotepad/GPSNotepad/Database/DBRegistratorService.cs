@@ -2,26 +2,31 @@
 using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
 using System;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Database
 {
     public class DBRegistratorService : IRegistratorService
     {
-        public User Registrate(string login, string password)
+        public async Task<bool> Registrate(string email, string login, string password)
         {
-            var user = new User()
+            return await Task.Factory.StartNew(() =>
             {
-                UserId = Guid.NewGuid(),
-                Login = login,
-                HashPassword = password
-            };
+                var user = new User()
+                {
+                    UserId = Guid.NewGuid(),
+                    Email = email,
+                    Login = login,
+                    HashPassword = password
+                };
 
-            using (var context = new Context())
-            {
-                context.Users.Add(user);
-            }
+                using (var context = new Context())
+                {
+                    context.Users.Add(user);
+                }
 
-            return user;
+                return true;
+            });
         }
     }
 }
