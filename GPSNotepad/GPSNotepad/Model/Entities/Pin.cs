@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 using Xamarin.Forms.Maps;
 
 namespace GPSNotepad.Model.Entities
@@ -12,7 +13,20 @@ namespace GPSNotepad.Model.Entities
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Favorite { get; set; }
-        public Position Position { get; set; }
+
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
+
+        [NotMapped]
+        public Position Position
+        {
+            get => new Position(Latitude, Longitude);
+            set
+            {
+                Longitude = value.Longitude;
+                Latitude = value.Latitude;
+            }
+        }
 
         public override int GetHashCode()
         {

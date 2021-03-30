@@ -32,9 +32,9 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
 
-            containerRegistry.RegisterInstance<IAuthorizatorService>(new BufferedAuthorizatorService());
-            containerRegistry.RegisterInstance<IRegistratorService>(new BufferedRegistratorService());
-            containerRegistry.RegisterInstance<IPinService>(new BufferedPinService());
+            containerRegistry.RegisterInstance<IAuthorizatorService>(new DBAuthorizatorService());
+            containerRegistry.RegisterInstance<IRegistratorService>(new DBRegistratorService());
+            containerRegistry.RegisterInstance<IPinService>(new PinStateService());
 
             containerRegistry.RegisterInstance<IPermanentPinService>(new DBPinService());
         }

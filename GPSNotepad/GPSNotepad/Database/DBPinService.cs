@@ -1,31 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using GPSNotepad.Model;
 using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
+using System.Linq;
 
 namespace GPSNotepad.Database
 {
     public class DBPinService : IPermanentPinService
     {
-
-        public bool CreatePin(Pin pin)
+        public async Task<bool> CreatePin(Pin pin)
         {
-            throw new NotImplementedException();
+            return await Task.Factory.StartNew(() =>
+            {
+                using (var context = new Context())
+                {
+                    context.Pins.Add(pin);
+                    context.SaveChangesAsync();
+                }
+                return true;
+            });
         }
 
-        public List<Pin> GetAllPinsForUser(Guid user_id)
+        public async Task<List<Pin>> GetAllPinsForUser(Guid user_id)
         {
-            throw new NotImplementedException();
+            return await Task.Factory.StartNew(() =>
+            {
+                using (var context = new Context())
+                {
+                    return (from pin in context.Pins
+                            where pin.UserId == user_id
+                            select pin).ToList();
+                }
+            });
         }
 
-        public Pin UpdatePin(Pin pin)
+        public async void UpdatePin(Pin pin)
         {
-            throw new NotImplementedException();
+            await Task.Factory.StartNew(() =>
+            {
+                using (var context = new Context())
+                {
+                    context.Pins.Update(pin);
+                    context.SaveChangesAsync();
+                }
+            });
         }
-        public void DeletePin(Pin pin)
+
+        public async void DeletePin(Pin pin)
         {
-            throw new NotImplementedException();
+            await Task.Factory.StartNew(() =>
+            {
+                using (var context = new Context())
+                {
+                    context.Pins.Remove(pin);
+                    context.SaveChangesAsync();
+                }
+            });
         }
+
     }
 }

@@ -17,15 +17,17 @@ namespace GPSNotepad.Database
                     UserId = Guid.NewGuid(),
                     Email = email,
                     Login = login,
-                    HashPassword = password
+                    HashPassword = password,
+                    Pins = new System.Collections.Generic.List<Pin>()
                 };
 
                 using (var context = new Context())
                 {
                     context.Users.Add(user);
+                    context.SaveChangesAsync();
+                    return true;
                 }
 
-                return true;
             });
         }
     }

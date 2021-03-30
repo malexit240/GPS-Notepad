@@ -1,40 +1,47 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using GPSNotepad.DatabaseMocks.UserMocks;
-using GPSNotepad.DatabaseMocks;
-using GPSNotepad.Core.Entities;
+using GPSNotepad.Database;
+using GPSNotepad.Model.Entities;
+using GPSNotepad.Model;
 
 namespace DBTests
 {
     [TestClass]
     public class DBAuthorizatorTestClass
     {
-        User user;
+        string email = "user@mail.com";
+        string username = "user";
+        string password = "password";
 
         [TestInitialize]
         public void Initialize()
         {
+            (new Context()).ClearDatabase();
             var service = new DBRegistratorService();
-            user = service.Create("user", "password");
+            service.Registrate(email, username, password).Wait();
         }
 
         [TestCleanup]
         public void Cleanup()
         {
-
+            (new Context()).ClearDatabase();
         }
 
         [TestMethod]
         public void Authorize()
         {
             var authorize_service = new DBAuthorizatorService();
-            Assert.AreEqual(authorize_service.Authorize("user", "password").Login, user.Login);
+            var u = authorize_service.Authorize(email, password);
+            u.Wait();
+            Assert.AreEqual(u.Result.Login, username);
         }
 
         [TestMethod]
         public void IsUserExist()
         {
             var authorize_service = new DBAuthorizatorService();
-            Assert.IsTrue(authorize_service.IsUserExist("user"));
+            var task = authorize_service.IsUserExist(email);
+            task.Wait();
+            Assert.IsTrue(task.Result);
         }
     }
 }

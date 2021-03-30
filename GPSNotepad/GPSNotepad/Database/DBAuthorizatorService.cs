@@ -9,18 +9,27 @@ namespace GPSNotepad.Database
 {
     public class DBAuthorizatorService : IAuthorizatorService
     {
-        public Task<User> Authorize(string login, string password)
+        public async Task<User> Authorize(string email, string password)
         {
-            using (var context = new Context())
+            return await Task.Factory.StartNew(() =>
             {
-                var u = (from user in context.Users where user.Login == login && user.HashPassword == password select user).First();
-                return u;
-            }
+                using (var context = new Context())
+                {
+                    var u = (from user in context.Users where user.Email == email && user.HashPassword == password select user).FirstOrDefault();
+                    return u;
+                }
+            });
         }
 
-        public Task<bool> IsUserExist(string login)
+        public async Task<bool> IsUserExist(string email)
         {
-            throw new System.NotImplementedException();
+            return await Task.Factory.StartNew(() =>
+            {
+                using (var context = new Context())
+                {
+                    return context.Users.Any((user) => user.Email == email);
+                }
+            });
         }
     }
 }
