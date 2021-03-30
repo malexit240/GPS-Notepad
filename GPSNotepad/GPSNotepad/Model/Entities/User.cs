@@ -9,6 +9,7 @@ namespace GPSNotepad.Model.Entities
         public string Email { get; set; }
         public string Login { get; set; }
         public string HashPassword { get; set; }
+        public string SessionToken { get; set; }
 
         public List<Pin> Pins { get; set; }
 

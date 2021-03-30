@@ -4,5 +4,14 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignInPage">
-  
+    <StackLayout>
+        <Entry Text="{Binding Email}"/>
+        <Entry Text="{Binding Password}"/>
+        <Button Command="{Binding SignInCommand}"/>
+        <Label Text="Go">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToSignUpPageCommand}"/>
+            </Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
 </ContentPage>

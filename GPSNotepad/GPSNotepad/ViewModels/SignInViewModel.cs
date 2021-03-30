@@ -31,7 +31,7 @@ namespace GPSNotepad.ViewModels
 
         public ICommand SignInCommand { get; private set; }
 
-        public ICommand GoToSignUpPage { get; private set; }
+        public ICommand GoToSignUpPageCommand { get; private set; }
 
         public SignInViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -45,7 +45,7 @@ namespace GPSNotepad.ViewModels
             ((DelegateCommand)SignInCommand).ObservesProperty(() => Email);
             ((DelegateCommand)SignInCommand).ObservesProperty(() => Password);
 
-            GoToSignUpPage = new DelegateCommand(async () =>
+            GoToSignUpPageCommand = new DelegateCommand(async () =>
             {
                 await NavigationService.NavigateAsync(nameof(SignUpPage));
             });

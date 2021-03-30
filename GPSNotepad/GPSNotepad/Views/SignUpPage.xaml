@@ -4,5 +4,11 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignUpPage">
-  
+    <StackLayout>
+        <Entry Text="{Binding Email}"/>
+        <Entry Text="{Binding Login}"/>
+        <Entry Text="{Binding Password}"/>
+        <Entry Text="{Binding ConfirmPassword}"/>
+        <Button Command="{Binding SignUpCommand}"/>
+    </StackLayout>
 </ContentPage>

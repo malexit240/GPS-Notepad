@@ -16,7 +16,20 @@ namespace GPSNotepad.Database
                 using (var context = new Context())
                 {
                     var u = (from user in context.Users where user.Email == email && user.HashPassword == password select user).FirstOrDefault();
+                    if (u != null)
+                        CreateToken(ref u);
                     return u;
+                }
+            });
+        }
+
+        public async Task<User> ContinueSession(string token)
+        {
+            return await Task.Factory.StartNew(() =>
+            {
+                using (var context = new Context())
+                {
+                    return (from user in context.Users where user.SessionToken == token select user).FirstOrDefault();
                 }
             });
         }
@@ -30,6 +43,17 @@ namespace GPSNotepad.Database
                     return context.Users.Any((user) => user.Email == email);
                 }
             });
+        }
+
+        private void CreateToken(ref User user)
+        {
+            user.SessionToken = Guid.NewGuid().ToString();
+
+            using (var context = new Context())
+            {
+                context.Users.Update(user);
+                context.SaveChanges();
+            }
         }
     }
 }
