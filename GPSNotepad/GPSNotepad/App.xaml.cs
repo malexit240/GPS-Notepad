@@ -2,12 +2,14 @@ using GPSNotepad.ViewModels;
 using GPSNotepad.Views;
 using Prism;
 using Prism.Ioc;
+using Prism.Navigation;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 using GPSNotepad.Model;
 using GPSNotepad.Database;
 using GPSNotepad.Model.Interfaces;
+using System.Threading.Tasks;
 
 namespace GPSNotepad
 {
@@ -22,20 +24,18 @@ namespace GPSNotepad
         {
             InitializeComponent();
 
-            Authorizator.ContinueSessionAsync().Wait();
+            Authorizator.ContinueSessionAsync();
 
             if (CurrentUser.Instance != null)
-                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(GPSNotepad.Views.MainPage)}");
+                await NavigationService.NavigateAsync("NavigationPage/MainPage");
             else
-                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
+                await NavigationService.NavigateAsync("NavigationPage/SignInPage");
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
-            containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
 
             containerRegistry.RegisterInstance<IAuthorizatorService>(new DBAuthorizatorService());
             containerRegistry.RegisterInstance<IRegistratorService>(new DBRegistratorService());
@@ -46,12 +46,15 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<ISettingsManagerService>(new SettingsManagerService());
             containerRegistry.RegisterInstance<ISecureStorageService>(new SecureStorageService());
 
+            containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<MainMapPage, MainMapViewModel>();
             containerRegistry.RegisterForNavigation<ListOfPinspage, ListOfPinsViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
+
+
         }
     }
 }

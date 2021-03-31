@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Xamarin.Forms.Maps;
+using Xamarin.Forms.GoogleMaps;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
 

@@ -25,7 +25,7 @@ namespace GPSNotepad.ViewModels
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
-            TextResources = new LocalizedResources(typeof(GPSNotepad.Resources.UITextResources), (App.Current.Container.Resolve<ISettingsManagerService>()).Language);
+            TextResources = new LocalizedResources(typeof(GPSNotepad.Resources.UIResources), (App.Current.Container.Resolve<ISettingsManagerService>()).Language);
         }
 
         public virtual void Initialize(INavigationParameters parameters)

@@ -1,4 +1,5 @@
 ﻿using GPSNotepad.Model.Interfaces;
+using System;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
@@ -16,9 +17,14 @@ namespace GPSNotepad.Model
             return CurrentUser.Instance != null;
         }
 
-        public static async Task<bool> ContinueSessionAsync()
+        public static bool ContinueSessionAsync()
         {
-            CurrentUser.Instance = await App.Current.Container.Resolve<IAuthorizatorService>().ContinueSession(App.Current.Container.Resolve<ISecureStorageService>().SessionToken);
+            var token = App.Current.Container.Resolve<ISecureStorageService>().SessionToken;
+
+            var user = App.Current.Container.Resolve<IAuthorizatorService>().ContinueSession(token);
+
+            CurrentUser.Instance = user;
+
             return CurrentUser.Instance != null;
         }
     }

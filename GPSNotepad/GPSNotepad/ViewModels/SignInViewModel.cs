@@ -14,8 +14,8 @@ namespace GPSNotepad.ViewModels
     public class SignInViewModel : ViewModelBase
     {
 
-        private string _email;
-        private string _password;
+        private string _email = "";
+        private string _password = "";
 
         public string Email
         {
@@ -31,13 +31,13 @@ namespace GPSNotepad.ViewModels
 
         public ICommand SignInCommand { get; private set; }
 
-        public ICommand GoToSignUpPageCommand { get; private set; }
+        public DelegateCommand GoToSignUpPageCommand { get; set; }
 
         public SignInViewModel(INavigationService navigationService) : base(navigationService)
         {
             SignInCommand = new DelegateCommand(async () =>
             {
-                Authorizator.AutorizeAsync(Email, Password);
+                await Authorizator.AutorizeAsync(Email, Password);
                 if (CurrentUser.Instance != null)
                     await this.NavigationService.NavigateAsync(nameof(MainPage));
             }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0);
@@ -45,9 +45,9 @@ namespace GPSNotepad.ViewModels
             ((DelegateCommand)SignInCommand).ObservesProperty(() => Email);
             ((DelegateCommand)SignInCommand).ObservesProperty(() => Password);
 
-            GoToSignUpPageCommand = new DelegateCommand(async () =>
+            GoToSignUpPageCommand = new DelegateCommand(() =>
             {
-                await NavigationService.NavigateAsync(nameof(SignUpPage));
+                NavigationService.NavigateAsync(nameof(SignUpPage));
             });
 
         }

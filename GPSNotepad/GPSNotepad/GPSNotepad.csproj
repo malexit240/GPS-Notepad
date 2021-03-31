@@ -17,14 +17,14 @@
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
-    <PackageReference Include="Xamarin.Forms.Maps" Version="4.8.0.1364" />
+    <PackageReference Include="Xamarin.Forms.GoogleMaps" Version="3.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Resources\UITextResources.Designer.cs">
+    <Compile Update="Resources\UIResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>UITextResources.resx</DependentUpon>
+      <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
     <Compile Update="Views\ListOfPinsPage.xaml.cs">
       <DependentUpon>ListOfPinsPage.xaml</DependentUpon>
@@ -44,9 +44,9 @@
     <EmbeddedResource Update="DarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Resources\UITextResources.resx">
+    <EmbeddedResource Update="Resources\UIResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>UITextResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>UIResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ListOfPinsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

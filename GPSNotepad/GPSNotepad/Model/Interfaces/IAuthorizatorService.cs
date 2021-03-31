@@ -9,7 +9,7 @@ namespace GPSNotepad.Model.Interfaces
 
         Task<User> Authorize(string email, string password);
 
-        Task<User> ContinueSession(string token);
+        User ContinueSession(string token);
 
     }
 }

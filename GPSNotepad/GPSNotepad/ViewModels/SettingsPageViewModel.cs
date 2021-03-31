@@ -15,7 +15,7 @@ namespace GPSNotepad.ViewModels
         public bool IsLightTheme
         {
             get => _settingsManager.Theme == Theme.Light;
-            set => SetProperty(,) _settingsManager.Theme = value;
+           // set => SetProperty(,) _settingsManager.Theme = value;
         }
 
         public SettingsPageViewModel(INavigationService navigationService, ISettingsManagerService settingsManager)

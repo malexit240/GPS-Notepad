@@ -3,15 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.SignInPage">
+             x:Class="GPSNotepad.Views.SignInPage"
+             Title="{Binding TextResources[SignInTitle]}">
     <StackLayout>
         <Entry Text="{Binding Email}"/>
         <Entry Text="{Binding Password}"/>
-        <Button Command="{Binding SignInCommand}"/>
-        <Label Text="Go">
-            <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding GoToSignUpPageCommand}"/>
-            </Label.GestureRecognizers>
-        </Label>
+        <Button Text="Sign In" Command="{Binding SignInCommand}"/>
+        <Button Text="Sign Up" Command="{Binding GoToSignUpPageCommand}"/>
     </StackLayout>
 </ContentPage>

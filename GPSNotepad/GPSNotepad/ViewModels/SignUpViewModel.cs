@@ -46,7 +46,11 @@ namespace GPSNotepad.ViewModels
 
         public ICommand SignUpCommand { get; private set; }
 
-        public bool HasLongActivity { get; set; }
+        public bool HasLongActivity
+        {
+            get => _hasLongActivity;
+            set => SetProperty(ref _hasLongActivity, value);
+        }
 
         public SignUpViewModel(INavigationService navigationService, IRegistratorService registratorService) : base(navigationService)
         {
@@ -59,7 +63,7 @@ namespace GPSNotepad.ViewModels
                     done = false;
                 }
 
-                var emailValidationResult = Validators.Validators.IsEmailValid(Email).Result;
+                var emailValidationResult = await Validators.Validators.IsEmailValid(Email);
                 var passwordValidationResult = Validators.Validators.IsPasswordValid(Password);
 
                 switch (passwordValidationResult)
@@ -95,12 +99,13 @@ namespace GPSNotepad.ViewModels
                 {
                     await this.NavigationService.GoBackAsync();
                 }
-            }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0 && Login.Length != 0 && ConfirmPassword.Length != 0);
+            }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0 && Login.Length != 0 && ConfirmPassword.Length != 0 && HasLongActivity != true);
 
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => Email);
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => Login);
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => ConfirmPassword);
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => Password);
+            ((DelegateCommand)SignUpCommand).ObservesProperty(() => HasLongActivity);
 
         }
     }

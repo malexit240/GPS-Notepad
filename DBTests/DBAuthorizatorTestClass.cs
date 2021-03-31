@@ -23,7 +23,7 @@ namespace DBTests
         [TestCleanup]
         public void Cleanup()
         {
-            (new Context()).ClearDatabase();
+            //(new Context()).ClearDatabase();
         }
 
         [TestMethod]
@@ -42,6 +42,18 @@ namespace DBTests
             var task = authorize_service.IsUserExist(email);
             task.Wait();
             Assert.IsTrue(task.Result);
+        }
+
+        [TestMethod]
+        public void ContinueSessionTestMethod()
+        {
+            var authorize_service = new DBAuthorizatorService();
+            var u = authorize_service.Authorize(email, password);
+            u.Wait();
+            var token = u.Result.SessionToken;
+            u = authorize_service.ContinueSession(token);
+            u.Wait();
+            Assert.AreEqual(u.Result.Login, username);
         }
     }
 }

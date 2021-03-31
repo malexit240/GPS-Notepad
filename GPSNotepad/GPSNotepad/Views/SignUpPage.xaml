@@ -9,6 +9,6 @@
         <Entry Text="{Binding Login}"/>
         <Entry Text="{Binding Password}"/>
         <Entry Text="{Binding ConfirmPassword}"/>
-        <Button Command="{Binding SignUpCommand}"/>
+        <Button Text="SignUp" Command="{Binding SignUpCommand}"/>
     </StackLayout>
 </ContentPage>

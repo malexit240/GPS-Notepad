@@ -11,7 +11,7 @@ namespace GPSNotepad.Database
     {
         public async Task<User> Authorize(string email, string password)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 using (var context = new Context())
                 {
@@ -23,20 +23,20 @@ namespace GPSNotepad.Database
             });
         }
 
-        public async Task<User> ContinueSession(string token)
+        public User ContinueSession(string token)
         {
-            return await Task.Factory.StartNew(() =>
+
+            User u = null;
+            using (var context = new Context())
             {
-                using (var context = new Context())
-                {
-                    return (from user in context.Users where user.SessionToken == token select user).FirstOrDefault();
-                }
-            });
+                u = (from user in context.Users where user.SessionToken == token select user).FirstOrDefault();
+            }
+            return u;
         }
 
         public async Task<bool> IsUserExist(string email)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 using (var context = new Context())
                 {

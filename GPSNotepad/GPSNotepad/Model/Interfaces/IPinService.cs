@@ -11,7 +11,7 @@ namespace GPSNotepad.Model.Interfaces
 
         List<Pin> GetAllPinsForUser(Guid user_id);
 
-        Task<Pin> FindPin(string name);
+        Task<List<Pin>> FindPin(string name);
 
         Pin UpdatePin(Pin pin);
 

@@ -21,7 +21,9 @@ namespace GPSNotepad.Model
 
         public PinsState()
         {
-            Pins = App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId).Result;
+            var task = App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId);
+            task.Wait();
+            Pins = task.Result;
         }
 
         public List<Pin> Pins { get; set; }

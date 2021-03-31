@@ -23,7 +23,7 @@ namespace GPSNotepad.Database
             var dbPath = "db.sqlite";
             try
             {
-                optionsBuilder.UseSqlite(Path.Combine(FileSystem.AppDataDirectory, $"Filename={dbPath}"));
+                optionsBuilder.UseSqlite($"Filename={Path.Combine(FileSystem.AppDataDirectory, dbPath)}");
             }
             catch (Exception) // if tests run
             {

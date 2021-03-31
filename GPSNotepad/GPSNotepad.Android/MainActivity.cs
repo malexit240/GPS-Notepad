@@ -18,6 +18,7 @@ namespace GPSNotepad.Droid
             base.OnCreate(savedInstanceState);
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            global::Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));
         }
 
