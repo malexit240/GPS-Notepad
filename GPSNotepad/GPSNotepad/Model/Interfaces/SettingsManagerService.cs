@@ -1,4 +1,5 @@
-﻿using GPSNotepad.Resources;
+﻿using GPSNotepad.PlatformDependencyInterfaces;
+using GPSNotepad.Resources;
 using GPSNotepad.Styles;
 using System.Globalization;
 using Xamarin.Essentials;
@@ -19,12 +20,14 @@ namespace GPSNotepad.Model.Interfaces
                     App.Current.Resources.MergedDictionaries.Add(new LightTheme());
                 else
                     App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
+
+                DependencyService.Get<IChangerBarColor>().SetBarColor((Color)App.Current.Resources["PrimaryColor"]);
             }
         }
 
         public CultureInfo Language
         {
-            get => new CultureInfo(Preferences.Get(nameof(Language), "en_US"));
+            get => new CultureInfo(Preferences.Get(nameof(Language), "en-US"));
             set
             {
                 Preferences.Set(nameof(Language), value.Name);

@@ -118,45 +118,45 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConfirmPassword" xml:space="preserve">
-    <value>Confirm password</value>
+    <value>Подтвердите пароль</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Электронная почта</value>
   </data>
   <data name="English" xml:space="preserve">
-    <value>English</value>
+    <value>Английский</value>
   </data>
   <data name="ListOfPinsPageTitle" xml:space="preserve">
-    <value>Pins</value>
+    <value>Отметки</value>
   </data>
   <data name="Login" xml:space="preserve">
-    <value>Login</value>
+    <value>Логин</value>
   </data>
   <data name="MainMapPageTitle" xml:space="preserve">
-    <value>Map</value>
+    <value>Карта</value>
   </data>
   <data name="MainPageTitle" xml:space="preserve">
-    <value>GPS Notepad</value>
+    <value>GPS Блокнот</value>
   </data>
   <data name="Password" xml:space="preserve">
-    <value>Password</value>
+    <value>Пароль</value>
   </data>
   <data name="Russian" xml:space="preserve">
-    <value>Russian</value>
+    <value>Русский</value>
   </data>
   <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
+    <value>Настройки</value>
   </data>
   <data name="SignIn" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Войти</value>
   </data>
   <data name="SignInTitle" xml:space="preserve">
-    <value>Sign In</value>
+    <value>Вход</value>
   </data>
   <data name="SignUp" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Зарегистрироваться</value>
   </data>
   <data name="SignUpTitle" xml:space="preserve">
-    <value>Sign Up</value>
+    <value>Регистрация</value>
   </data>
 </root>

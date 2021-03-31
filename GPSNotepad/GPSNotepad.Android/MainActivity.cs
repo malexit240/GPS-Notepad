@@ -1,6 +1,8 @@
-﻿using Android.App;
+﻿using Acr.UserDialogs;
+using Android.App;
 using Android.Content.PM;
 using Android.OS;
+using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
 
@@ -19,6 +21,11 @@ namespace GPSNotepad.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+
+            UserDialogs.Init(this);
+            CrossCurrentActivity.Current.Init(this, savedInstanceState);
+            Plugin.InputKit.Platforms.Droid.Config.Init(this, savedInstanceState);
+
             LoadApplication(new App(new AndroidInitializer()));
         }
 

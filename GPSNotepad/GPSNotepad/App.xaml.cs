@@ -18,13 +18,15 @@ namespace GPSNotepad
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
+            Device.SetFlags(new string[] { "RadioButton_Experimental" });
         }
 
         protected override async void OnInitialized()
         {
             InitializeComponent();
 
-            Authorizator.ContinueSessionAsync();
+            Container.Resolve<ISettingsManagerService>().Init();
+            //Authorizator.ContinueSessionAsync();
 
             if (CurrentUser.Instance != null)
                 await NavigationService.NavigateAsync("NavigationPage/MainPage");

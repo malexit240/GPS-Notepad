@@ -3,12 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.SignUpPage">
+             x:Class="GPSNotepad.Views.SignUpPage"
+             Title="{Binding TextResources[SignUpTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.ToolbarItems>
+    <ToolbarItem Command="{prism:NavigateTo 'SettingsPage'}"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <Entry Text="{Binding Email}"/>
-        <Entry Text="{Binding Login}"/>
-        <Entry Text="{Binding Password}"/>
-        <Entry Text="{Binding ConfirmPassword}"/>
-        <Button Text="SignUp" Command="{Binding SignUpCommand}"/>
+        <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
+            Style="{DynamicResource activityStyle}"/>
+        <Entry Text="{Binding Email}" 
+               Placeholder="{Binding TextResources[Email]}"
+               Style="{DynamicResource entryStyle}"/>
+        <Entry Text="{Binding Login}"
+               Placeholder="{Binding TextResources[Login]}"
+               Style="{DynamicResource entryStyle}"/>
+        <Entry Text="{Binding Password}"
+               Placeholder="{Binding TextResources[Password]}"
+               Style="{DynamicResource entryStyle}"/>
+        <Entry Text="{Binding ConfirmPassword}"
+               Placeholder="{Binding TextResources[ConfirmPassword]}"
+               Style="{DynamicResource entryStyle}"/>
+        <Button Text="{Binding TextResources[SignUp]}"
+                Command="{Binding SignUpCommand}"
+                Style="{DynamicResource buttonStyle}"/>
     </StackLayout>
 </ContentPage>

@@ -4,11 +4,25 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignInPage"
-             Title="{Binding TextResources[SignInTitle]}">
+             Title="{Binding TextResources[SignInTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Command="{prism:NavigateTo 'SettingsPage'}"/>
+    </ContentPage.ToolbarItems>
     <StackLayout>
-        <Entry Text="{Binding Email}"/>
-        <Entry Text="{Binding Password}"/>
-        <Button Text="Sign In" Command="{Binding SignInCommand}"/>
-        <Button Text="Sign Up" Command="{Binding GoToSignUpPageCommand}"/>
+        <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
+                           Style="{DynamicResource activityIndicatorStyle}"/>
+        <Entry Text="{Binding Email}"
+               Placeholder="{Binding TextResources[Email]}"
+               Style="{DynamicResource entryStyle}"/>
+        <Entry Text="{Binding Password}"
+               Placeholder="{Binding TextResources[Password]}"
+               Style="{DynamicResource entryStyle}"/>
+        <Button Text="{Binding TextResources[SignIn]}"
+                Command="{Binding SignInCommand}"
+                Style="{DynamicResource buttonStyle}"/>
+        <Button Text="{Binding TextResources[SignUp]}"
+                Command="{Binding GoToSignUpPageCommand}"
+                Style="{DynamicResource buttonStyle}"/>
     </StackLayout>
 </ContentPage>
