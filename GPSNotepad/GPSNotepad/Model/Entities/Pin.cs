@@ -7,14 +7,20 @@ namespace GPSNotepad.Model.Entities
     public class Pin
     {
         public Guid PinId { get; set; }
+
         public Guid UserId { get; set; }
+
         public User User { get; set; }
 
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
         public bool Favorite { get; set; }
 
         public double Longitude { get; set; }
+
         public double Latitude { get; set; }
 
         [NotMapped]
@@ -28,9 +34,7 @@ namespace GPSNotepad.Model.Entities
             }
         }
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(PinId);
-        }
+        public override int GetHashCode() => HashCode.Combine(PinId);
+
     }
 }

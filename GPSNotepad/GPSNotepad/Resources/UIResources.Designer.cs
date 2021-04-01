@@ -144,9 +144,9 @@ namespace GPSNotepad.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
-        internal static string Settings {
+        internal static string SettingsTitle {
             get {
-                return ResourceManager.GetString("Settings", resourceCulture);
+                return ResourceManager.GetString("SettingsTitle", resourceCulture);
             }
         }
         

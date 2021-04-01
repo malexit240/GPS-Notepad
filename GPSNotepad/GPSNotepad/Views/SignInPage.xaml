@@ -7,7 +7,8 @@
              Title="{Binding TextResources[SignInTitle]}"
              Style="{DynamicResource pageStyle}">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Command="{prism:NavigateTo 'SettingsPage'}"/>
+        <ToolbarItem IconImageSource="icon_settings.png"
+            Command="{prism:NavigateTo 'SettingsPage'}"/>
     </ContentPage.ToolbarItems>
     <StackLayout>
         <ActivityIndicator IsEnabled="{Binding HasLongActivity}"

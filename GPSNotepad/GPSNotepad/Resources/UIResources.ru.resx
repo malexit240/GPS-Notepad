@@ -144,7 +144,7 @@
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>
   </data>
-  <data name="Settings" xml:space="preserve">
+  <data name="SettingsTitle" xml:space="preserve">
     <value>Настройки</value>
   </data>
   <data name="SignIn" xml:space="preserve">

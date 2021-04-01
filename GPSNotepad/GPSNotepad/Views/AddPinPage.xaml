@@ -7,11 +7,10 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.AddPinPage">
     <StackLayout>
-
         <Entry Text="{Binding Name}" />
         <Entry Text="{Binding Description}" />
         <Entry Text="{Binding Coordinate}"/>
         <Button Command="{Binding AddPinCommand}"/>
-        <gpsnotepad:BindableMap PinsSource="{Binding Pins}" MapSpan ="{Binding Span}" BindedInt ="{Binding IntInt}"/>
+        <gpsnotepad:BindableMap PinsSource="{Binding Pins}" MapSpan ="{Binding Span}"/>
     </StackLayout>
 </ContentPage>

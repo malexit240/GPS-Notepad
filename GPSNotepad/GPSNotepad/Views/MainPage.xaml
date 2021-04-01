@@ -8,7 +8,8 @@
             Title="{Binding TextResources[MainPageTitle]}"
             Style="{DynamicResource pageStyle}">
     <TabbedPage.ToolbarItems>
-        <ToolbarItem Command="{prism:NavigateTo 'SettingsPage'}"/>
+        <ToolbarItem IconImageSource="icon_settings.png"
+            Command="{prism:NavigateTo 'SettingsPage'}"/>
     </TabbedPage.ToolbarItems>
     <local:MainMapPage Title="{Binding TextResources[MainMapPageTitle]}" />
     <local:ListOfPinspage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
