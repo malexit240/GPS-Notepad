@@ -7,9 +7,9 @@
             x:Class="GPSNotepad.Views.MainPage"
             Title="{Binding TextResources[MainPageTitle]}"
             Style="{DynamicResource pageStyle}">
-    <ContentPage.ToolbarItems>
+    <TabbedPage.ToolbarItems>
         <ToolbarItem Command="{prism:NavigateTo 'SettingsPage'}"/>
-    </ContentPage.ToolbarItems>
-    <local:MainMapPage Title="{Binding TextResources[MainMapPageTitle]}"/>
+    </TabbedPage.ToolbarItems>
+    <local:MainMapPage Title="{Binding TextResources[MainMapPageTitle]}" />
     <local:ListOfPinspage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
 </TabbedPage>

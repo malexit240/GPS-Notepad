@@ -29,9 +29,12 @@ namespace GPSNotepad.Database
             {
                 using (var context = new Context())
                 {
-                    return (from pin in context.Pins
-                            where pin.UserId == user_id
-                            select pin).ToList();
+                    var pins =
+
+                    (from pin in context.Pins
+                     where pin.UserId == user_id
+                     select pin).ToList();
+                    return pins;
                 }
             });
         }

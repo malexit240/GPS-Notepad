@@ -2,9 +2,13 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
+             prism:ViewModelLocator.AutowireViewModel="False"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps"
              x:Class="GPSNotepad.Views.MainMapPage"
              Style="{DynamicResource pageStyle}">
-   
+    <StackLayout>
+        <maps:Map>
+
+        </maps:Map>
+    </StackLayout>
 </ContentPage>

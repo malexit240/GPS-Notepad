@@ -22,6 +22,7 @@ namespace GPSNotepad.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Xamarin.FormsGoogleMaps.Init("AIzaSyD175Ytn104FswHwZ_W9GdaYHZ8OCVn_Ik");
             LoadApplication(new App(new iOSInitializer()));
 
             return base.FinishedLaunching(app, options);

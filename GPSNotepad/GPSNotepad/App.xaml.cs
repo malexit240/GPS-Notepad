@@ -26,7 +26,7 @@ namespace GPSNotepad
             InitializeComponent();
 
             Container.Resolve<ISettingsManagerService>().Init();
-            //Authorizator.ContinueSessionAsync();
+            Authorizator.ContinueSessionAsync();
 
             if (CurrentUser.Instance != null)
                 await NavigationService.NavigateAsync("NavigationPage/MainPage");
@@ -52,11 +52,12 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<MainMapPage, MainMapViewModel>();
-            containerRegistry.RegisterForNavigation<ListOfPinspage, ListOfPinsViewModel>();
+            //containerRegistry.RegisterForNavigation<MainMapPage, MainMapViewModel>();
+            //containerRegistry.RegisterForNavigation<ListOfPinspage, ListOfPinsViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
 
 
+            containerRegistry.RegisterForNavigation<AddPinPage, AddPinPageViewModel>();
         }
     }
 }

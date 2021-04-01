@@ -21,7 +21,7 @@ namespace GPSNotepad.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
             UserDialogs.Init(this);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Plugin.InputKit.Platforms.Droid.Config.Init(this, savedInstanceState);

@@ -51,9 +51,9 @@ namespace DBTests
             var u = authorize_service.Authorize(email, password);
             u.Wait();
             var token = u.Result.SessionToken;
-            u = authorize_service.ContinueSession(token);
-            u.Wait();
-            Assert.AreEqual(u.Result.Login, username);
+            var user = authorize_service.ContinueSession(token);
+
+            Assert.AreEqual(user.Login, username);
         }
     }
 }

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
 using System.Threading.Tasks;
+using Prism.Mvvm;
+using Xamarin.Forms;
 
 namespace GPSNotepad.Model
 {
-    public class PinsState
+    public class PinsState : BindableBase
     {
         static PinsState _instance;
         public static PinsState Instance
@@ -21,12 +23,29 @@ namespace GPSNotepad.Model
 
         public PinsState()
         {
-            var task = App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId);
-            task.Wait();
-            Pins = task.Result;
+
+            _pins = new List<Pin>();
+            Intiialize();
+
         }
 
-        public List<Pin> Pins { get; set; }
+        public async void Intiialize()
+        {
+            await App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId).ContinueWith((result) =>
+            {
+                Pins = result.Result;
+                MessagingCenter.Send(App.Current, "pin_state_updated");
+            });
+        }
+
+        private List<Pin> _pins;
+
+        public List<Pin> Pins
+        {
+            get => _pins;
+
+            set => SetProperty(ref _pins, value);
+        }
 
         public void Create(Pin pin)
         {

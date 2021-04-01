@@ -37,7 +37,7 @@ namespace DBTests
             {
                 UserId = user.UserId,
                 PinId = Guid.NewGuid(),
-                Position = new Xamarin.Forms.Maps.Position(10, 10),
+                Position = new Xamarin.Forms.GoogleMaps.Position(10, 10),
                 Name = "Store",
                 Description = "This is store",
                 Favorite = true

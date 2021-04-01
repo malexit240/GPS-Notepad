@@ -7,10 +7,8 @@ using GPSNotepad.Model.Interfaces;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 
-
 namespace GPSNotepad.Model
 {
-
     public struct ValidCoordinates
     {
         public double X;
@@ -48,11 +46,6 @@ namespace GPSNotepad.Model
             return await Task.Run(() =>
             {
 
-                var coordinates = new ValidCoordinates();
-                if (coordinates.TryParseRequest(request))
-                {
-
-                }
 
                 return new List<Pin>();
             });
