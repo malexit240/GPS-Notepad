@@ -10,6 +10,7 @@ using GPSNotepad.Model;
 using GPSNotepad.Database;
 using GPSNotepad.Model.Interfaces;
 using System.Threading.Tasks;
+using GPSNotepad.Repositories;
 
 namespace GPSNotepad
 {

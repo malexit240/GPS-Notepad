@@ -20,8 +20,8 @@
                                               EventArgsConverter="{x:StaticResource cameraMovingEventArgsConverter}"/>
             </gpsnotepad:BindableMap.Behaviors>
         </gpsnotepad:BindableMap>
-        <Entry Text="{Binding Name}" />
-        <Entry Text="{Binding Description}" />
+        <Entry Text="{Binding Path=PinViewModel.Name}" />
+        <Entry Text="{Binding Path=PinViewModel.Description}" />
         <Entry Text="{Binding Coordinate}"/>
         <Button Command="{Binding AddPinCommand}"/>
     </StackLayout>

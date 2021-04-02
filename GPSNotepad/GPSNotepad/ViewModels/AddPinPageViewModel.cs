@@ -3,6 +3,7 @@ using Prism.Navigation;
 using Xamarin.Forms.GoogleMaps;
 using GPSNotepad.Model;
 using System.Windows.Input;
+using System;
 
 namespace GPSNotepad.ViewModels
 {
@@ -10,24 +11,13 @@ namespace GPSNotepad.ViewModels
     {
 
         #region ---Public Properties---
-        private string _name = "";
-        private string _description = "";
+
         private string _textCoordinates = "";
 
         private Position _position = new Position(41.8, 12.46);
         private MapSpan _span;
 
-        public string Name
-        {
-            get => _name;
-            set => SetProperty(ref _name, value);
-        }
 
-        public string Description
-        {
-            get => _description;
-            set => SetProperty(ref _description, value);
-        }
         public string Coordinate
         {
             get => _textCoordinates;
@@ -62,7 +52,7 @@ namespace GPSNotepad.ViewModels
             set
             {
                 Pins.Clear();
-                Pins.Add(new Pin() { Label = Name, Position = value });
+                Pins.Add(new Pin() { Label = PinViewModel.Name, Position = value });
                 RaisePropertyChanged(nameof(PinPosition));
             }
         }
@@ -75,6 +65,8 @@ namespace GPSNotepad.ViewModels
 
         public UniqueObservableCollection<Pin> Pins { get; set; }
 
+        public PinViewModel PinViewModel { get; set; }
+
         public ICommand AddPinCommand { get; set; }
         public DelegateCommand<object> OnCameraMovingCommand { get; set; }
         #endregion
@@ -82,6 +74,7 @@ namespace GPSNotepad.ViewModels
         #region ---Constructors---
         public AddPinPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+            PinViewModel = new PinViewModel(Guid.NewGuid(), CurrentUser.Instance.UserId);
             Pins = new UniqueObservableCollection<Pin>();
             //Position = new Position(0, 0);
             OnCameraMovingCommand = new DelegateCommand<object>((position) =>
