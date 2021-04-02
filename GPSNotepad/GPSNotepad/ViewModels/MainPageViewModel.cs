@@ -1,10 +1,6 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
 using GPSNotepad.Model;
@@ -38,10 +34,10 @@ namespace GPSNotepad.ViewModels
             });
 
             Pins = new ObservableCollection<Pin>();
-            MessagingCenter.Subscribe<Prism.PrismApplicationBase>(App.Current, "pin_state_updated", OnCultureChanged);
+            MessagingCenter.Subscribe<Prism.PrismApplicationBase>(App.Current, "pin_state_updated", OnPrismStateUpdated);
         }
 
-        private void OnCultureChanged(PrismApplicationBase obj)
+        private void OnPrismStateUpdated(PrismApplicationBase obj)
         {
             Pins = new ObservableCollection<Pin>(PinService.GetAllPinsForUser(CurrentUser.Instance.UserId));
         }

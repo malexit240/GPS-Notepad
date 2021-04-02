@@ -26,7 +26,7 @@ namespace GPSNotepad
             InitializeComponent();
 
             Container.Resolve<ISettingsManagerService>().Init();
-            Authorizator.ContinueSessionAsync();
+            Authorizator.ContinueSession();
 
             if (CurrentUser.Instance != null)
                 await NavigationService.NavigateAsync("NavigationPage/MainPage");

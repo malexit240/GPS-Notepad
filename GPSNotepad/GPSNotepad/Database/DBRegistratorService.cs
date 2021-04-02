@@ -8,6 +8,7 @@ namespace GPSNotepad.Database
 {
     public class DBRegistratorService : IRegistratorService
     {
+        #region ---IRegistratorService Implementation---
         public async Task<bool> Registrate(string email, string login, string password)
         {
             return await Task.Factory.StartNew(() =>
@@ -27,8 +28,8 @@ namespace GPSNotepad.Database
                     context.SaveChangesAsync();
                     return true;
                 }
-
             });
         }
+        #endregion
     }
 }

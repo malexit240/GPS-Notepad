@@ -9,6 +9,7 @@ namespace GPSNotepad.Database
 {
     public class DBAuthorizatorService : IAuthorizatorService
     {
+        #region ---IAuthorizatorService Implementation---
         public async Task<User> Authorize(string email, string password)
         {
             return await Task.Run(() =>
@@ -25,13 +26,12 @@ namespace GPSNotepad.Database
 
         public User ContinueSession(string token)
         {
-
-            User u = null;
+            User user = null;
             using (var context = new Context())
             {
-                u = (from user in context.Users where user.SessionToken == token select user).FirstOrDefault();
+                user = (from u in context.Users where u.SessionToken == token select u).FirstOrDefault();
             }
-            return u;
+            return user;
         }
 
         public async Task<bool> IsUserExist(string email)
@@ -44,7 +44,9 @@ namespace GPSNotepad.Database
                 }
             });
         }
+        #endregion
 
+        #region ---Private Helpers---
         private void CreateToken(ref User user)
         {
             user.SessionToken = Guid.NewGuid().ToString();
@@ -54,6 +56,7 @@ namespace GPSNotepad.Database
                 context.Users.Update(user);
                 context.SaveChanges();
             }
-        }
+        } 
+        #endregion
     }
 }

@@ -8,18 +8,24 @@ namespace GPSNotepad.Database
 {
     public class Context : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Pin> Pins { get; set; }
-
+        #region ---Constructors---
         public Context()
         {
             SQLitePCL.Batteries_V2.Init();
             this.Database.EnsureCreated();
         }
+        #endregion
 
+        #region ---Public Properties---
+        public DbSet<User> Users { get; set; }
+        public DbSet<Pin> Pins { get; set; }
+        #endregion
+
+        #region ---Overrides---
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
+
             var dbPath = "db.sqlite";
             try
             {
@@ -29,6 +35,7 @@ namespace GPSNotepad.Database
             {
                 optionsBuilder.UseSqlite($"Filename={dbPath}");
             }
-        }
+        } 
+        #endregion
     }
 }

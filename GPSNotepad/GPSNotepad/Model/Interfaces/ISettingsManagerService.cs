@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
+﻿using System.Globalization;
 
 namespace GPSNotepad.Model.Interfaces
 {
-
     public interface ISettingsManagerService
     {
         Theme Theme { get; set; }

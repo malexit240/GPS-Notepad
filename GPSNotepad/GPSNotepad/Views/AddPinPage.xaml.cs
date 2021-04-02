@@ -7,7 +7,7 @@ namespace GPSNotepad.Views
         public AddPinPage()
         {
             InitializeComponent();
-
         }
+
     }
 }

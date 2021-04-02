@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace GPSNotepad.Model.Interfaces
 {
-    public interface IPinService
+    public interface IPinService // Workes with "buffered" pin state
     {
         Pin CreatePin(Guid user_id, string name);
 

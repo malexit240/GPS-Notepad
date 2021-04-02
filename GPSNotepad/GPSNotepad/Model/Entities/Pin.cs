@@ -6,12 +6,12 @@ namespace GPSNotepad.Model.Entities
 {
     public class Pin
     {
+        #region ---Model Fileds---
         public Guid PinId { get; set; }
 
         public Guid UserId { get; set; }
 
         public User User { get; set; }
-
 
         public string Name { get; set; }
 
@@ -23,6 +23,7 @@ namespace GPSNotepad.Model.Entities
 
         public double Latitude { get; set; }
 
+
         [NotMapped]
         public Position Position
         {
@@ -33,8 +34,11 @@ namespace GPSNotepad.Model.Entities
                 Latitude = value.Latitude;
             }
         }
+        #endregion
 
+        #region ---Overrides---
         public override int GetHashCode() => HashCode.Combine(PinId);
+        #endregion
 
     }
 }

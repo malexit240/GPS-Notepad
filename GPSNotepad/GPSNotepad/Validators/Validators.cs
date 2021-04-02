@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using GPSNotepad.Model.Interfaces;
 using System.Linq;
@@ -9,12 +7,13 @@ namespace GPSNotepad.Validators
 {
     public static class Validators
     {
+        #region ---Public Static Methods---
         public static async Task<EmailValidationStatus> IsEmailValid(string email)
         {
 
             try
             {
-                var addr = new System.Net.Mail.MailAddress(email);
+                var adress = new System.Net.Mail.MailAddress(email);
             }
             catch
             {
@@ -36,7 +35,8 @@ namespace GPSNotepad.Validators
                 return PasswordValidationStatus.InvalidContent;
 
             return PasswordValidationStatus.Done;
-        }
+        } 
+        #endregion
 
 
     }

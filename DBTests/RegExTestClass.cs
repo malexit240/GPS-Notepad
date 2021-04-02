@@ -14,12 +14,12 @@ namespace DBTests
         public void ParseStringToPositionTestMethod()
         {
             var pos = new Position();
-            Assert.IsTrue(StringPositionConverter.TryGetPosition(out pos, "60N 20E"));
-            Assert.IsTrue(StringPositionConverter.TryGetPosition(out pos, "60,23N 20,52E"));
-            Assert.IsTrue(StringPositionConverter.TryGetPosition(out pos, "Text text 60s 20w Text text"));
-            Assert.IsFalse(StringPositionConverter.TryGetPosition(out pos, "60N 20S"));
-            Assert.IsFalse(StringPositionConverter.TryGetPosition(out pos, "60W 20E"));
-            Assert.IsFalse(StringPositionConverter.TryGetPosition(out pos, "1260N 21230S"));
+            Assert.IsTrue(StringToPositionConverter.TryGetPosition(out pos, "60N 20E"));
+            Assert.IsTrue(StringToPositionConverter.TryGetPosition(out pos, "60,23N 20,52E"));
+            Assert.IsTrue(StringToPositionConverter.TryGetPosition(out pos, "Text text 60s 20w Text text"));
+            Assert.IsFalse(StringToPositionConverter.TryGetPosition(out pos, "60N 20S"));
+            Assert.IsFalse(StringToPositionConverter.TryGetPosition(out pos, "60W 20E"));
+            Assert.IsFalse(StringToPositionConverter.TryGetPosition(out pos, "1260N 21230S"));
         }
 
     }

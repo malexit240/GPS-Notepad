@@ -7,14 +7,14 @@ namespace GPSNotepad
     class PinsManyMaps
     {
         #region ---Constructors---
-        public PinsManyMaps(ICollection<Pin> pins, Map map)
+        public PinsManyMaps(UniqueObservableCollection<Pin> pins, Map map)
         {
             Pins = pins;
             Maps = new List<Map>();
             Maps.Add(map);
         }
 
-        public PinsManyMaps(ICollection<Pin> pins)
+        public PinsManyMaps(UniqueObservableCollection<Pin> pins)
         {
             Pins = pins;
             Maps = new List<Map>();
@@ -22,13 +22,13 @@ namespace GPSNotepad
         #endregion
 
         #region ---Properties---
-        public ICollection<Pin> Pins { get; private set; }
+        public UniqueObservableCollection<Pin> Pins { get; private set; }
 
         public IList<Map> Maps { get; set; }
         #endregion
 
         #region ---Public Methods---
-        public static PinsManyMaps GetEquivalent(ICollection<Pin> pins) => new PinsManyMaps(pins);
+        public static PinsManyMaps GetEquivalent(UniqueObservableCollection<Pin> pins) => new PinsManyMaps(pins);
 
         public void UpdateMaps()
         {
@@ -38,12 +38,12 @@ namespace GPSNotepad
         #endregion
 
         #region ---Overrides---
-        public override int GetHashCode() => HashCode.Combine(Pins);
+        public override int GetHashCode() => Pins.GetHashCode();
 
         #endregion
 
         #region ---Private Helpers---
-        private void UpdatePinsSource(Map bindableMap, ICollection<Pin> newSource)
+        private void UpdatePinsSource(Map bindableMap, UniqueObservableCollection<Pin> newSource)
         {
             bindableMap.Pins.Clear();
             foreach (var pin in newSource)

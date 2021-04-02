@@ -1,12 +1,7 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms.GoogleMaps;
 using GPSNotepad.Model;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace GPSNotepad.ViewModels
@@ -14,10 +9,13 @@ namespace GPSNotepad.ViewModels
     public class AddPinPageViewModel : ViewModelBase
     {
 
+        #region ---Public Properties---
         private string _name = "";
         private string _description = "";
         private string _textCoordinates = "";
+
         private Position _position = new Position(41.8, 12.46);
+        private MapSpan _span;
 
         public string Name
         {
@@ -35,8 +33,11 @@ namespace GPSNotepad.ViewModels
             get => _textCoordinates;
             set
             {
-                if (StringPositionConverter.TryGetPosition(out _position, value))
-                    Position = _position;
+                _textCoordinates = value;
+
+                if (StringToPositionConverter.TryGetPosition(out _position, value))
+                    if (Position != _position)
+                        Position = _position;
             }
         }
 
@@ -45,27 +46,50 @@ namespace GPSNotepad.ViewModels
             get => _position;
             set
             {
-                Pins.Clear();
-                Pins.Add(new Pin() { Position = _position });
+                if (_textCoordinates != StringToPositionConverter.ToFormatString(value))
+                    Coordinate = StringToPositionConverter.ToFormatString(value);
 
                 SetProperty(ref _position, value);
+
+                RaisePropertyChanged("Coordinate");
+                PinPosition = _position;
             }
         }
 
-        public ObservableCollection<Pin> Pins { get; set; }
+        public Position PinPosition
+        {
+            get => Position;
+            set
+            {
+                Pins.Clear();
+                Pins.Add(new Pin() { Label = Name, Position = value });
+                RaisePropertyChanged(nameof(PinPosition));
+            }
+        }
 
-        public ICommand AddPinCommand { get; set; }
-
-        private MapSpan _span;
         public MapSpan Span
         {
             get => _span;
             set => SetProperty(ref _span, value);
         }
 
+        public UniqueObservableCollection<Pin> Pins { get; set; }
+
+        public ICommand AddPinCommand { get; set; }
+        public DelegateCommand<object> OnCameraMovingCommand { get; set; }
+        #endregion
+
+        #region ---Constructors---
         public AddPinPageViewModel(INavigationService navigationService) : base(navigationService)
         {
+            Pins = new UniqueObservableCollection<Pin>();
+            //Position = new Position(0, 0);
+            OnCameraMovingCommand = new DelegateCommand<object>((position) =>
+            {
+                Position = (Position)position;
+            });
 
         }
+        #endregion
     }
 }

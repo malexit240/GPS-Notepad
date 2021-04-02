@@ -10,9 +10,9 @@ namespace GPSNotepad
     public class BindableMap : Map
     {
         #region ---Source Properties---
-        public ICollection<Pin> PinsSource
+        public UniqueObservableCollection<Pin> PinsSource
         {
-            get => (ICollection<Pin>)GetValue(PinsSourceProperty);
+            get => (UniqueObservableCollection<Pin>)GetValue(PinsSourceProperty);
             set => SetValue(PinsSourceProperty, value);
         }
 
@@ -26,7 +26,7 @@ namespace GPSNotepad
         #region ---Bindable Source Properties---
         public static readonly BindableProperty PinsSourceProperty = BindableProperty.Create(
                                                          propertyName: "PinsSource",
-                                                         returnType: typeof(ICollection<Pin>),
+                                                         returnType: typeof(UniqueObservableCollection<Pin>),
                                                          declaringType: typeof(BindableMap),
                                                          defaultBindingMode: BindingMode.TwoWay,
                                                          propertyChanged: PinsSourcePropertyChanged);
@@ -38,7 +38,7 @@ namespace GPSNotepad
                                                          defaultBindingMode: BindingMode.TwoWay,
                                                          propertyChanged: MapSpanPropertyChanged);
 
-        private static HashSet<PinsManyMaps> PinsMapsScope { get; set; } = new HashSet<PinsManyMaps>();
+        private static List<PinsManyMaps> PinsMapsScope { get; set; } = new List<PinsManyMaps>();
         #endregion
 
         #region ---Event Handlers---
@@ -53,7 +53,7 @@ namespace GPSNotepad
         private static void PinsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newValue)
         {
             var thisInstance = bindable as BindableMap;
-            var newPinsSource = newValue as ObservableCollection<Pin>;
+            var newPinsSource = newValue as UniqueObservableCollection<Pin>;
 
             if (thisInstance == null ||
                 newPinsSource == null)
@@ -64,25 +64,25 @@ namespace GPSNotepad
 
         private static void PinsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var pins = sender as ObservableCollection<Pin>;
+            var pins = sender as UniqueObservableCollection<Pin>;
 
-            if (!PinsMapsScope.Contains(PinsManyMaps.GetEquivalent(pins)))
-                return;
+            PinsManyMaps _pinMap = PinsMapsScope.Find((pms) => pms.GetHashCode() == PinsManyMaps.GetEquivalent(pins).GetHashCode());
 
-            PinsManyMaps _pinMap;
-            if (PinsMapsScope.TryGetValue(PinsManyMaps.GetEquivalent(pins), out _pinMap))
+            if (_pinMap != null)
                 _pinMap.UpdateMaps();
         }
         #endregion
 
         #region ---Static Helpers---
-        private static void AddMapToPinsCollection(BindableMap map, ObservableCollection<Pin> pins)
+        private static void AddMapToPinsCollection(BindableMap map, UniqueObservableCollection<Pin> pins)
         {
-            PinsManyMaps _pinMap;
+            PinsManyMaps _pinMap = PinsMapsScope.Find((pms) => pms.GetHashCode() == PinsManyMaps.GetEquivalent(pins).GetHashCode());
 
-            if (PinsMapsScope.Contains(PinsManyMaps.GetEquivalent(pins)))
+
+            if (_pinMap != null)
             {
-                if (PinsMapsScope.TryGetValue(PinsManyMaps.GetEquivalent(pins), out _pinMap))
+                _pinMap = PinsMapsScope.Find((pms) => pms == PinsManyMaps.GetEquivalent(pins));
+                if (_pinMap != null)
                     _pinMap.Maps.Add(map);
             }
             else

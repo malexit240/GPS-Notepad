@@ -1,12 +1,7 @@
 ﻿using GPSNotepad.Model;
-using GPSNotepad.Validators;
 using GPSNotepad.Views;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 
 namespace GPSNotepad.ViewModels
@@ -14,6 +9,7 @@ namespace GPSNotepad.ViewModels
     public class SignInViewModel : ViewModelBase
     {
 
+        #region ---Public Properties---
         private string _email = "";
         private string _password = "";
 
@@ -32,7 +28,9 @@ namespace GPSNotepad.ViewModels
         public ICommand SignInCommand { get; private set; }
 
         public DelegateCommand GoToSignUpPageCommand { get; set; }
+        #endregion
 
+        #region ---Constructors---
         public SignInViewModel(INavigationService navigationService) : base(navigationService)
         {
             SignInCommand = new DelegateCommand(async () =>
@@ -51,5 +49,6 @@ namespace GPSNotepad.ViewModels
             });
 
         }
+        #endregion
     }
 }

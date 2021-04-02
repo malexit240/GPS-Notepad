@@ -7,6 +7,7 @@ namespace GPSNotepad.Model
 {
     public static class Authorizator
     {
+        #region ---Public Static Methods---
         public static async Task<bool> AutorizeAsync(string email, string password)
         {
             CurrentUser.Instance = await App.Current.Container.Resolve<IAuthorizatorService>().Authorize(email, password);
@@ -17,15 +18,14 @@ namespace GPSNotepad.Model
             return CurrentUser.Instance != null;
         }
 
-        public static bool ContinueSessionAsync()
+        public static bool ContinueSession()
         {
             var token = App.Current.Container.Resolve<ISecureStorageService>().SessionToken;
 
-            var user = App.Current.Container.Resolve<IAuthorizatorService>().ContinueSession(token);
-
-            CurrentUser.Instance = user;
+            CurrentUser.Instance = App.Current.Container.Resolve<IAuthorizatorService>().ContinueSession(token);
 
             return CurrentUser.Instance != null;
-        }
+        } 
+        #endregion
     }
 }

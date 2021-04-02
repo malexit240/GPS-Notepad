@@ -5,6 +5,7 @@ namespace GPSNotepad.Model.Entities
 {
     public class User
     {
+        #region ---Model Fields---
         public Guid UserId { get; set; }
 
         public string Email { get; set; }
@@ -16,8 +17,11 @@ namespace GPSNotepad.Model.Entities
         public string SessionToken { get; set; }
 
         public List<Pin> Pins { get; set; }
+        #endregion
 
+        #region ---Overrides---
         public override int GetHashCode() => HashCode.Combine(UserId);
+        #endregion
 
     }
 }

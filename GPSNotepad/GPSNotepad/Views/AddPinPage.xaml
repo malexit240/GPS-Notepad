@@ -4,13 +4,25 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps" 
              xmlns:gpsnotepad="clr-namespace:GPSNotepad"
+             xmlns:converters="clr-namespace:GPSNotepad.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.AddPinPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:CameraMovingEventArgsConverter x:Key="cameraMovingEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <StackLayout>
+        <gpsnotepad:BindableMap x:Name="map" PinsSource="{Binding Pins}" MapSpan ="{Binding Span}">
+            <gpsnotepad:BindableMap.Behaviors>
+                <prism:EventToCommandBehavior EventName="CameraMoving" 
+                                              Command="{Binding OnCameraMovingCommand}" 
+                                              EventArgsConverter="{x:StaticResource cameraMovingEventArgsConverter}"/>
+            </gpsnotepad:BindableMap.Behaviors>
+        </gpsnotepad:BindableMap>
         <Entry Text="{Binding Name}" />
         <Entry Text="{Binding Description}" />
         <Entry Text="{Binding Coordinate}"/>
         <Button Command="{Binding AddPinCommand}"/>
-        <gpsnotepad:BindableMap PinsSource="{Binding Pins}" MapSpan ="{Binding Span}"/>
     </StackLayout>
 </ContentPage>

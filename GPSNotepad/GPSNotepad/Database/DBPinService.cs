@@ -10,6 +10,7 @@ namespace GPSNotepad.Database
 {
     public class DBPinService : IPermanentPinService
     {
+        #region ---IPermanentPinService Implementation---
         public async Task<bool> CreatePin(Pin pin)
         {
             return await Task.Factory.StartNew(() =>
@@ -61,7 +62,8 @@ namespace GPSNotepad.Database
                     context.SaveChangesAsync();
                 }
             });
-        }
+        } 
+        #endregion
 
     }
 }

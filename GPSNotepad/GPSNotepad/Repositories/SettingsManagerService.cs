@@ -4,11 +4,13 @@ using GPSNotepad.Styles;
 using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using GPSNotepad.Model.Interfaces;
 
-namespace GPSNotepad.Model.Interfaces
+namespace GPSNotepad.Repositories
 {
     public class SettingsManagerService : ISettingsManagerService
     {
+        #region ---Public Properties---
         public Theme Theme
         {
             get => (Theme)Preferences.Get(nameof(Theme), (int)Theme.Light);
@@ -40,11 +42,14 @@ namespace GPSNotepad.Model.Interfaces
             get => Preferences.Get(nameof(IsAuthorized), false);
             set => Preferences.Set(nameof(IsAuthorized), value);
         }
+        #endregion
 
+        #region ---Public Methods---
         public void Init()
         {
             Theme = Theme;
             Language = Language;
         }
+        #endregion
     }
 }

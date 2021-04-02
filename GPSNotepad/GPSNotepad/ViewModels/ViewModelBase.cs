@@ -1,9 +1,5 @@
-﻿using Prism.Commands;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GPSNotepad.Resources;
 using GPSNotepad.Model.Interfaces;
 
@@ -15,12 +11,15 @@ namespace GPSNotepad.ViewModels
 
         public LocalizedResources TextResources { get; private set; }
 
+        #region ---Constructors---
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
             TextResources = new LocalizedResources(typeof(GPSNotepad.Resources.UIResources), (App.Current.Container.Resolve<ISettingsManagerService>()).Language);
         }
+        #endregion
 
+        #region ---Overrides---
         public virtual void Initialize(INavigationParameters parameters)
         {
 
@@ -40,5 +39,6 @@ namespace GPSNotepad.ViewModels
         {
 
         }
+        #endregion
     }
 }
