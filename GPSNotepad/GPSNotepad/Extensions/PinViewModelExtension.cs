@@ -1,10 +1,13 @@
-﻿namespace GPSNotepad.Extensions
+﻿using Prism.Navigation;
+
+namespace GPSNotepad.Extensions
 {
     public static class PinViewModelExtension
     {
         public static PinViewModel GetViewModel(this GPSNotepad.Model.Entities.Pin pin)
         {
-            return new PinViewModel(pin.PinId, pin.UserId)
+            var a = App.Current.Container.Resolve<INavigationService>();
+            return new PinViewModel(a,pin.PinId, pin.UserId)
             {
 
                 Name = pin.Name,

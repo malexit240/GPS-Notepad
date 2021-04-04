@@ -46,14 +46,28 @@ namespace GPSNotepad.Model
             await App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId).ContinueWith((result) =>
             {
                 Pins = result.Result;
-                MessagingCenter.Send(App.Current, "pin_state_updated");
+                MessagingCenter.Send(App.Current, "pins_state_changed", new PinsStateChangedMessage(result.Result, PinsStateChangedType.Add));
+            });
+        }
+
+        public bool ContainsPin(System.Guid pinId)
+        {
+            return _pins.Contains(new Pin()
+            {
+                PinId = pinId
             });
         }
 
         public void Create(Pin pin)
         {
             Pins.Add(pin);
+
             App.Current.Container.Resolve<IPermanentPinService>().CreatePin(pin);
+
+            MessagingCenter.Send(App.Current, "pins_state_changed",
+                new PinsStateChangedMessage(new List<Pin>() { pin },
+                PinsStateChangedType.Add));
+
         }
 
         public void Update(Pin pin)
@@ -66,12 +80,20 @@ namespace GPSNotepad.Model
             Pins.RemoveAt(index);
             Pins.Insert(index, pin);
             App.Current.Container.Resolve<IPermanentPinService>().UpdatePin(pin);
+
+            MessagingCenter.Send(App.Current, "pins_state_changed",
+                new PinsStateChangedMessage(new List<Pin>() { pin },
+                PinsStateChangedType.Update));
         }
 
         public void Delete(Pin pin)
         {
             Pins.Remove(pin);
             App.Current.Container.Resolve<IPermanentPinService>().DeletePin(pin);
+
+            MessagingCenter.Send(App.Current, "pins_state_changed",
+                new PinsStateChangedMessage(new List<Pin>() { pin },
+                PinsStateChangedType.Delete));
         }
         #endregion
     }

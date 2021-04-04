@@ -12,9 +12,20 @@ namespace GPSNotepad.Model
         #region ---Public Static Methods---
         public static async Task<Position> GetAsync()
         {
-            var location = await Geolocation.GetLastKnownLocationAsync();
-            return new Position(location.Latitude, location.Longitude);
-        } 
+            Position position = new Position();
+
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                position = new Position(location.Latitude, location.Longitude);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return position;
+        }
         #endregion
     }
 }

@@ -5,17 +5,17 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GPSNotepad.Converters
 {
-    public class CameraMovingEventArgsConverter : IValueConverter
+    public class MapClickedEventArgsConverter : IValueConverter
     {
         #region ---IValueConverter Implementation---
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            var cameraMovingEventArgs = value as CameraMovingEventArgs;
-            if (cameraMovingEventArgs == null)
+            var mapClickedEventArgs = value as MapClickedEventArgs;
+            if (mapClickedEventArgs == null)
             {
-                throw new ArgumentException("Expected value to be of type CameraMovingEventArgs", nameof(value));
+                throw new ArgumentException("Expected value to be of type MapClickedEventArgs", nameof(value));
             }
-            return cameraMovingEventArgs.Position.Target;
+            return mapClickedEventArgs.Point.Rounded();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

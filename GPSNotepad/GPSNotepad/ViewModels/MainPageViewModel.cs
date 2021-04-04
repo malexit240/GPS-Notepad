@@ -8,38 +8,83 @@ using Xamarin.Forms;
 using Prism;
 using System.Windows.Input;
 using GPSNotepad.Views;
+using System.Linq;
+using GPSNotepad.Extensions;
+using System;
 
 namespace GPSNotepad.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
-        private ObservableCollection<Pin> _pins;
+        private UniqueObservableCollection<PinViewModel> _pins;
         protected IPinService PinService { get; set; }
 
-        public ObservableCollection<Pin> Pins
+        public UniqueObservableCollection<PinViewModel> Pins
         {
             get => _pins;
             set => SetProperty(ref _pins, value);
         }
 
         public ICommand GoToAddPinForm { get; set; }
+        public DelegateCommand<PinViewModel> PinTappedCommand { get; set; }
+
+        public MainMapViewModel MainMapViewModel { get; set; }
+
+        private int _choosenPage = 0;
+        public int ChoosenPage
+        {
+            get => _choosenPage;
+            set => SetProperty(ref _choosenPage, value);
+        }
 
         public MainPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
         {
             PinService = pinService;
+
+            MainMapViewModel = new MainMapViewModel(navigationService);
+
+            Pins = new UniqueObservableCollection<PinViewModel>();
+
+            MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPrismStateUpdated);
+
             pinService.GetAllPinsForUser(CurrentUser.Instance.UserId);
+
+            PinTappedCommand = new DelegateCommand<PinViewModel>(item =>
+            {
+
+                ChoosenPage = 0;
+                MainMapViewModel.Span = new Xamarin.Forms.GoogleMaps.MapSpan(item.Position, 0.01, 0.01);
+
+            });
+
+           
+
             GoToAddPinForm = new DelegateCommand(() =>
             {
                 NavigationService.NavigateAsync(nameof(AddPinPage));
             });
-
-            Pins = new ObservableCollection<Pin>();
-            MessagingCenter.Subscribe<Prism.PrismApplicationBase>(App.Current, "pin_state_updated", OnPrismStateUpdated);
         }
 
-        private void OnPrismStateUpdated(PrismApplicationBase obj)
+        private void OnPrismStateUpdated(PrismApplicationBase obj, PinsStateChangedMessage message)
         {
-            Pins = new ObservableCollection<Pin>(PinService.GetAllPinsForUser(CurrentUser.Instance.UserId));
+            switch (message.ChangedType)
+            {
+                case PinsStateChangedType.Add:
+
+                    foreach (var p in message.NewPins)
+                        Pins.Add(p.GetViewModel());
+                    break;
+                case PinsStateChangedType.Update:
+                    var pin = message.ChangedPin.GetViewModel();
+                    var index = Pins.IndexOf(pin);
+                    if (index == -1)
+                        return;
+                    Pins[index] = pin;
+                    break;
+                case PinsStateChangedType.Delete:
+                    Pins.Remove(message.ChangedPin.GetViewModel());
+                    break;
+            }
         }
     }
 }

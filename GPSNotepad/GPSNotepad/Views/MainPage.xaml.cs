@@ -2,11 +2,13 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class MainPage : TabbedPage
+
+    public partial class MainPage : NavigableTabbedPage
     {
         public MainPage()
         {
             InitializeComponent();
+            this.SetBinding(ChoosenPageProperty, new Binding("ChoosenPage"));
         }
     }
 }

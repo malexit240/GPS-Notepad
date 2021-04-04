@@ -58,7 +58,7 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
 
 
-            containerRegistry.RegisterForNavigation<AddPinPage, AddPinPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddPinPage, AddEditPinPageViewModel>();
         }
     }
 }

@@ -2,15 +2,33 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:converters="clr-namespace:GPSNotepad.Converters"
              prism:ViewModelLocator.AutowireViewModel="False"
              x:Class="GPSNotepad.Views.ListOfPinspage"
              Style="{DynamicResource pageStyle}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <Grid RowDefinitions="*">
-        <ListView Grid.Row="0">
+        <ListView Grid.Row="0" ItemsSource="{Binding Pins}">
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemTapped"
+                                              Command="{Binding PinTappedCommand}"
+                                              EventArgsConverter="{x:StaticResource itemTappedEventArgsConverter}"/>
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-
+                        <ViewCell.ContextActions>
+                            <MenuItem Command="{Binding EditPinContextCommand}" Text="Edit"/>
+                            <MenuItem Command="{Binding DeletePinContextCommand}" Text="Delete"/>
+                        </ViewCell.ContextActions>
+                        <StackLayout>
+                            <Label Text="{Binding Name}"/>
+                            <Label Text="{Binding Description}"/>
+                        </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>

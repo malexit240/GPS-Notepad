@@ -35,6 +35,13 @@ namespace GPSNotepad.Model
             return pin;
         }
 
+        public void CreateOrUpdatePin(Pin pin)
+        {
+            if (!PinsState.Instance.ContainsPin(pin.PinId))
+                PinsState.Instance.Create(pin);
+            else
+                PinsState.Instance.Update(pin);
+        }
 
         public Pin UpdatePin(Pin pin)
         {
@@ -43,6 +50,8 @@ namespace GPSNotepad.Model
         }
 
         public void DeletePin(Pin pin) => PinsState.Instance.Delete(pin);
+
+
         #endregion
 
     }

@@ -38,7 +38,7 @@ namespace GPSNotepad.Model
             latitude *= Regex.IsMatch(coordinates[0].Value, @"[Ss]") ? -1 : 1;
             longitude *= Regex.IsMatch(coordinates[1].Value, @"[Ww]") ? -1 : 1;
 
-            position = new Position(latitude, longitude);
+            position = new Position(latitude, longitude).Rounded();
 
             return true;
         }

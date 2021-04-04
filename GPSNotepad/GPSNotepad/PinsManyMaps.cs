@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using Xamarin.Forms.GoogleMaps;
+using GPSNotepad.Extensions;
 
 namespace GPSNotepad
 {
     class PinsManyMaps
     {
         #region ---Constructors---
-        public PinsManyMaps(UniqueObservableCollection<Pin> pins, Map map)
+        public PinsManyMaps(UniqueObservableCollection<PinViewModel> pins, Map map)
         {
             Pins = pins;
             Maps = new List<Map>();
             Maps.Add(map);
         }
 
-        public PinsManyMaps(UniqueObservableCollection<Pin> pins)
+        public PinsManyMaps(UniqueObservableCollection<PinViewModel> pins)
         {
             Pins = pins;
             Maps = new List<Map>();
@@ -22,13 +23,13 @@ namespace GPSNotepad
         #endregion
 
         #region ---Properties---
-        public UniqueObservableCollection<Pin> Pins { get; private set; }
+        public UniqueObservableCollection<PinViewModel> Pins { get; private set; }
 
         public IList<Map> Maps { get; set; }
         #endregion
 
         #region ---Public Methods---
-        public static PinsManyMaps GetEquivalent(UniqueObservableCollection<Pin> pins) => new PinsManyMaps(pins);
+        public static PinsManyMaps GetEquivalent(UniqueObservableCollection<PinViewModel> pins) => new PinsManyMaps(pins);
 
         public void UpdateMaps()
         {
@@ -43,11 +44,11 @@ namespace GPSNotepad
         #endregion
 
         #region ---Private Helpers---
-        private void UpdatePinsSource(Map bindableMap, UniqueObservableCollection<Pin> newSource)
+        private void UpdatePinsSource(Map bindableMap, UniqueObservableCollection<PinViewModel> newSource)
         {
             bindableMap.Pins.Clear();
             foreach (var pin in newSource)
-                bindableMap.Pins.Add(pin);
+                bindableMap.Pins.Add(pin.GetGoogleMapsPin());
         }
         #endregion
     }

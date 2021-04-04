@@ -4,15 +4,49 @@ using System.Collections.Specialized;
 using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+using System;
 
 namespace GPSNotepad
 {
     public class BindableMap : Map
     {
-        #region ---Source Properties---
-        public UniqueObservableCollection<Pin> PinsSource
+        public BindableMap()
         {
-            get => (UniqueObservableCollection<Pin>)GetValue(PinsSourceProperty);
+            IsMapLoading = true;
+            this.CameraMoveStarted += OnCameraMoveStarted;
+            this.CameraIdled += OnCameraIdled;
+            this.CameraMoving += OnCameraMoving;
+
+        }
+
+        public event EventHandler MapLoaded;
+        private bool IsMapLoading { get; set; }
+
+        public bool IsIdle { get; private set; } = true;
+
+        private void OnCameraIdled(object sender, CameraIdledEventArgs e)
+        {
+            IsIdle = true;
+
+            if (IsMapLoading)
+            {
+                IsMapLoading = false;
+                MapLoaded?.Invoke(this, new EventArgs());
+            }
+        }
+        private void OnCameraMoveStarted(object sender, CameraMoveStartedEventArgs e) => IsIdle = false;
+
+        private void OnCameraMoving(object sender, CameraMovingEventArgs e)
+        {
+            this.MapSpan = new MapSpan(e.Position.Target,
+                this.MapSpan?.LatitudeDegrees ?? 0.01,
+                this.MapSpan?.LongitudeDegrees ?? 0.01);
+        }
+
+        #region ---Source Properties---
+        public UniqueObservableCollection<PinViewModel> PinsSource
+        {
+            get => (UniqueObservableCollection<PinViewModel>)GetValue(PinsSourceProperty);
             set => SetValue(PinsSourceProperty, value);
         }
 
@@ -26,7 +60,7 @@ namespace GPSNotepad
         #region ---Bindable Source Properties---
         public static readonly BindableProperty PinsSourceProperty = BindableProperty.Create(
                                                          propertyName: "PinsSource",
-                                                         returnType: typeof(UniqueObservableCollection<Pin>),
+                                                         returnType: typeof(UniqueObservableCollection<PinViewModel>),
                                                          declaringType: typeof(BindableMap),
                                                          defaultBindingMode: BindingMode.TwoWay,
                                                          propertyChanged: PinsSourcePropertyChanged);
@@ -47,13 +81,16 @@ namespace GPSNotepad
             var thisInstance = bindable as BindableMap;
             var newMapSpan = newValue as MapSpan;
 
-            thisInstance?.MoveToRegion(newMapSpan);
+            if (thisInstance.IsIdle)
+                thisInstance?.MoveToRegion(newMapSpan);
+
+
         }
 
         private static void PinsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newValue)
         {
             var thisInstance = bindable as BindableMap;
-            var newPinsSource = newValue as UniqueObservableCollection<Pin>;
+            var newPinsSource = newValue as UniqueObservableCollection<PinViewModel>;
 
             if (thisInstance == null ||
                 newPinsSource == null)
@@ -64,7 +101,7 @@ namespace GPSNotepad
 
         private static void PinsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var pins = sender as UniqueObservableCollection<Pin>;
+            var pins = sender as UniqueObservableCollection<PinViewModel>;
 
             PinsManyMaps _pinMap = PinsMapsScope.Find((pms) => pms.GetHashCode() == PinsManyMaps.GetEquivalent(pins).GetHashCode());
 
@@ -74,7 +111,7 @@ namespace GPSNotepad
         #endregion
 
         #region ---Static Helpers---
-        private static void AddMapToPinsCollection(BindableMap map, UniqueObservableCollection<Pin> pins)
+        private static void AddMapToPinsCollection(BindableMap map, UniqueObservableCollection<PinViewModel> pins)
         {
             PinsManyMaps _pinMap = PinsMapsScope.Find((pms) => pms.GetHashCode() == PinsManyMaps.GetEquivalent(pins).GetHashCode());
 
