@@ -4,7 +4,8 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GPSNotepad.Model.Entities
 {
-    public class Pin
+
+    public class Pin : IUniqueElement
     {
         #region ---Model Fileds---
         public Guid PinId { get; set; }
@@ -34,10 +35,21 @@ namespace GPSNotepad.Model.Entities
                 Latitude = value.Latitude;
             }
         }
+        [NotMapped]
+        public Guid Id => PinId;
         #endregion
 
         #region ---Overrides---
-        public override int GetHashCode() => HashCode.Combine(PinId);
+        public override int GetHashCode() => HashCode.Combine(Id);
+        public override bool Equals(object obj)
+        {
+            if (!(obj is IUniqueElement))
+                return false;
+
+            var pin = (IUniqueElement)obj;
+
+            return this.PinId == pin.Id;
+        }
         #endregion
 
     }

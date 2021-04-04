@@ -22,9 +22,9 @@
                 <prism:EventToCommandBehavior EventName="MapLoaded" Command="{Binding OnMapLoadedCommand}"/>
             </gpsnotepad:BindableMap.Behaviors>
         </gpsnotepad:BindableMap>
-        <Entry Text="{Binding Path=PinViewModel.Name}" 
+        <Entry Text="{Binding Name}" 
                Style="{DynamicResource entryStyle}"/>
-        <Entry Text="{Binding Path=PinViewModel.Description}" 
+        <Entry Text="{Binding Description}" 
                Style="{DynamicResource entryStyle}"/>
         <Entry Text="{Binding TextCoordinates}"
                Style="{DynamicResource entryStyle}"/>

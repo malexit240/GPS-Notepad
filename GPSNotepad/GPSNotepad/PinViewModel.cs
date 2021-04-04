@@ -8,10 +8,11 @@ using GPSNotepad.Extensions;
 using GPSNotepad.ViewModels;
 using Prism.Navigation;
 using GPSNotepad.Views;
+using GPSNotepad.Model.Entities;
 
 namespace GPSNotepad
 {
-    public class PinViewModel : ViewModelBase
+    public class PinViewModel : ViewModelBase, IUniqueElement
     {
         private Guid _pinId;
         private Guid _userId;
@@ -67,6 +68,18 @@ namespace GPSNotepad
 
         }
 
-        public override int GetHashCode() => HashCode.Combine(_pinId);
+        public Guid Id => _pinId;
+
+
+        public override int GetHashCode() => HashCode.Combine(Id);
+        public override bool Equals(object obj)
+        {
+            if (!(obj is IUniqueElement))
+                return false;
+
+            var pin = (IUniqueElement)obj;
+
+            return this.PinId == pin.Id;
+        }
     }
 }

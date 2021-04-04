@@ -45,7 +45,7 @@ namespace GPSNotepad.ViewModels
 
             Pins = new UniqueObservableCollection<PinViewModel>();
 
-            MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPrismStateUpdated);
+            MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
             pinService.GetAllPinsForUser(CurrentUser.Instance.UserId);
 
@@ -57,7 +57,6 @@ namespace GPSNotepad.ViewModels
 
             });
 
-           
 
             GoToAddPinForm = new DelegateCommand(() =>
             {
@@ -65,12 +64,16 @@ namespace GPSNotepad.ViewModels
             });
         }
 
-        private void OnPrismStateUpdated(PrismApplicationBase obj, PinsStateChangedMessage message)
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+        }
+
+        private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)
         {
             switch (message.ChangedType)
             {
                 case PinsStateChangedType.Add:
-
                     foreach (var p in message.NewPins)
                         Pins.Add(p.GetViewModel());
                     break;

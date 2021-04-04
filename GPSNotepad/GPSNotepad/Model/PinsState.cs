@@ -3,6 +3,7 @@ using GPSNotepad.Model.Entities;
 using GPSNotepad.Model.Interfaces;
 using Prism.Mvvm;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace GPSNotepad.Model
 {
@@ -52,10 +53,7 @@ namespace GPSNotepad.Model
 
         public bool ContainsPin(System.Guid pinId)
         {
-            return _pins.Contains(new Pin()
-            {
-                PinId = pinId
-            });
+            return _pins.Any(p => p.PinId == pinId);
         }
 
         public void Create(Pin pin)
@@ -73,6 +71,7 @@ namespace GPSNotepad.Model
         public void Update(Pin pin)
         {
             var index = Pins.IndexOf(pin);
+
 
             if (index == -1)
                 return;
