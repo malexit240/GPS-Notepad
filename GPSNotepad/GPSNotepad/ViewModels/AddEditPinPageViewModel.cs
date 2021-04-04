@@ -20,6 +20,10 @@ namespace GPSNotepad.ViewModels
         private string _name = "";
         private string _description;
 
+        public UniqueObservableCollection<PinViewModel> Pins { get; set; }
+
+        public PinViewModel PinViewModel { get; set; }
+
         public string Name
         {
             get => _name;
@@ -31,6 +35,11 @@ namespace GPSNotepad.ViewModels
             get => _description;
             set => SetProperty(ref _description, value);
         }
+        public MapSpan Span
+        {
+            get => _span;
+            set => SetProperty(ref _span, value);
+        }
 
         public string TextCoordinates
         {
@@ -40,28 +49,18 @@ namespace GPSNotepad.ViewModels
                 if (_textCoordinates == value)
                     return;
 
-                Position position;
-                if (StringToPositionConverter.TryGetPosition(out position, value))
+                Position? position = StringToPositionConverter.GetPosition(value);
+                if (position != null)
                 {
-                    SetNewPinPosition(position);
-                    Span = new MapSpan(position, Span.LatitudeDegrees, Span.LongitudeDegrees);
+                    SetNewPinPosition(position.Value);
+                    Span = new MapSpan(position.Value, Span.LatitudeDegrees, Span.LongitudeDegrees);
                 }
             }
         }
 
-        public MapSpan Span
-        {
-            get => _span;
-            set => SetProperty(ref _span, value);
-        }
-
-        public UniqueObservableCollection<PinViewModel> Pins { get; set; }
-
-        public PinViewModel PinViewModel { get; set; }
-
         public ICommand AddEditPinCommand { get; set; }
         public DelegateCommand<object> OnMapClickedCommand { get; set; }
-        public DelegateCommand OnMapLoadedCommand { get; set; }
+        public ICommand OnMapLoadedCommand { get; set; }
         #endregion
 
         #region ---Constructors---
@@ -76,56 +75,11 @@ namespace GPSNotepad.ViewModels
                 pinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
             });
 
-            OnMapLoadedCommand = new DelegateCommand(async () =>
-            {
-                if (PinViewModel == null)
-                {
-                    var position = await CurrentPosition.GetAsync();
-
-                    try
-                    {
-                        PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), CurrentUser.Instance.UserId)
-                        {
-                            Position = position
-
-                        };
-                        Pins.Add(PinViewModel);
-                        Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
-
-                        _textCoordinates = StringToPositionConverter.ToFormatString(PinViewModel.Position);
-                        RaisePropertyChanged(nameof(TextCoordinates));
-                    }
-                    catch (Exception e)
-                    {
-
-                        Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
-
-                        _textCoordinates = StringToPositionConverter.ToFormatString(PinViewModel.Position);
-                        RaisePropertyChanged(nameof(TextCoordinates));
-                    }
-
-                }
-                else
-                {
-                    Name = PinViewModel.Name;
-                    Description = PinViewModel.Description;
-
-                    Pins.Add(PinViewModel);
-
-                    Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
-
-                    _textCoordinates = StringToPositionConverter.ToFormatString(PinViewModel.Position);
-                    RaisePropertyChanged(nameof(TextCoordinates));
-                }
-
-            });
-
+            OnMapLoadedCommand = new DelegateCommand(OnMapLoadedHelper);
 
             OnMapClickedCommand = new DelegateCommand<object>((newPosition) =>
             {
-                var position = (Position)newPosition;
-
-                SetNewPinPosition(position);
+                SetNewPinPosition((Position)newPosition);
             });
 
         }
@@ -139,13 +93,45 @@ namespace GPSNotepad.ViewModels
                 PinViewModel = (PinViewModel)parameters[nameof(GPSNotepad.PinViewModel)];
         }
 
+        private async void OnMapLoadedHelper()
+        {
+            if (PinViewModel == null)
+            {
+                var position = await CurrentPosition.GetAsync();
+
+                PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), CurrentUser.Instance.UserId)
+                {
+                    Position = position
+                };
+
+                Pins.Add(PinViewModel);
+                Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+
+                _textCoordinates = StringToPositionConverter.ToFormatedString(PinViewModel.Position);
+                RaisePropertyChanged(nameof(TextCoordinates));
+            }
+            else
+            {
+                Name = PinViewModel.Name;
+                Description = PinViewModel.Description;
+
+                Pins.Add(PinViewModel);
+
+                Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+
+                _textCoordinates = StringToPositionConverter.ToFormatedString(PinViewModel.Position);
+                RaisePropertyChanged(nameof(TextCoordinates));
+            }
+        }
+
         private void SetNewPinPosition(Position position)
         {
             if (PinViewModel.Position.Rounded() == position.Rounded())
                 return;
+
             PinViewModel.Position = position.Rounded();
             Pins[0] = PinViewModel;
-            _textCoordinates = StringToPositionConverter.ToFormatString(position.Rounded());
+            _textCoordinates = StringToPositionConverter.ToFormatedString(position.Rounded());
             RaisePropertyChanged(nameof(TextCoordinates));
         }
     }

@@ -13,7 +13,7 @@ namespace GPSNotepad.Database
         #region ---IPermanentPinService Implementation---
         public async Task<bool> CreatePin(Pin pin)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 using (var context = new Context())
                 {
@@ -26,15 +26,15 @@ namespace GPSNotepad.Database
 
         public async Task<List<Pin>> GetAllPinsForUser(Guid user_id)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 using (var context = new Context())
                 {
                     var pins =
-
                     (from pin in context.Pins
                      where pin.UserId == user_id
                      select pin).ToList();
+
                     return pins;
                 }
             });
@@ -42,7 +42,7 @@ namespace GPSNotepad.Database
 
         public async void UpdatePin(Pin pin)
         {
-            await Task.Factory.StartNew(() =>
+            await Task.Run(() =>
             {
                 using (var context = new Context())
                 {
@@ -54,7 +54,7 @@ namespace GPSNotepad.Database
 
         public async void DeletePin(Pin pin)
         {
-            await Task.Factory.StartNew(() =>
+            await Task.Run(() =>
             {
                 using (var context = new Context())
                 {

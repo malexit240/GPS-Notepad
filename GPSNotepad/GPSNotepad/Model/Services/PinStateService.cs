@@ -50,9 +50,7 @@ namespace GPSNotepad.Model
         }
 
         public void DeletePin(Pin pin) => PinsState.Instance.Delete(pin);
-
-
-        #endregion
+                #endregion
 
     }
 }

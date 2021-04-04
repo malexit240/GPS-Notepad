@@ -72,12 +72,12 @@ namespace GPSNotepad.Model
         {
             var index = Pins.IndexOf(pin);
 
-
             if (index == -1)
                 return;
 
             Pins.RemoveAt(index);
             Pins.Insert(index, pin);
+
             App.Current.Container.Resolve<IPermanentPinService>().UpdatePin(pin);
 
             MessagingCenter.Send(App.Current, "pins_state_changed",

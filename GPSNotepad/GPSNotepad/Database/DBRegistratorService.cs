@@ -11,7 +11,7 @@ namespace GPSNotepad.Database
         #region ---IRegistratorService Implementation---
         public async Task<bool> Registrate(string email, string login, string password)
         {
-            return await Task.Factory.StartNew(() =>
+            return await Task.Run(() =>
             {
                 var user = new User()
                 {

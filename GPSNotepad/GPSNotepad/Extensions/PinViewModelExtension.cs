@@ -6,10 +6,9 @@ namespace GPSNotepad.Extensions
     {
         public static PinViewModel GetViewModel(this GPSNotepad.Model.Entities.Pin pin)
         {
-            var a = App.Current.Container.Resolve<INavigationService>();
-            return new PinViewModel(a,pin.PinId, pin.UserId)
+            var navigationService = App.Current.Container.Resolve<INavigationService>();
+            return new PinViewModel(navigationService, pin.PinId, pin.UserId)
             {
-
                 Name = pin.Name,
                 Description = pin.Description,
                 Position = pin.Position,
@@ -35,6 +34,7 @@ namespace GPSNotepad.Extensions
             return new Xamarin.Forms.GoogleMaps.Pin()
             {
                 Label = pin.Name,
+                Type = Xamarin.Forms.GoogleMaps.PinType.SavedPin,
                 Position = pin.Position
             };
         }
