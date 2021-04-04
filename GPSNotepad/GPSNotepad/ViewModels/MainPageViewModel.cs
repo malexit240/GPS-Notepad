@@ -17,12 +17,19 @@ namespace GPSNotepad.ViewModels
     public class MainPageViewModel : ViewModelBase
     {
         private UniqueObservableCollection<PinViewModel> _pins;
+        private PinViewModel _selectedPin = null;
         protected IPinService PinService { get; set; }
 
         public UniqueObservableCollection<PinViewModel> Pins
         {
             get => _pins;
             set => SetProperty(ref _pins, value);
+        }
+
+        public PinViewModel SelectedPin
+        {
+            get => _selectedPin;
+            set => SetProperty(ref _selectedPin, value);
         }
 
         public ICommand GoToAddPinForm { get; set; }
@@ -37,6 +44,8 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _choosenPage, value);
         }
 
+        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnPinClicked { get; set; }
+
         public MainPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
         {
             PinService = pinService;
@@ -47,16 +56,24 @@ namespace GPSNotepad.ViewModels
 
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
-            pinService.GetAllPinsForUser(CurrentUser.Instance.UserId);
+            pinService.LoadUserPins(CurrentUser.Instance.UserId);
 
             PinTappedCommand = new DelegateCommand<PinViewModel>(item =>
             {
-
                 ChoosenPage = 0;
-                MainMapViewModel.Span = new Xamarin.Forms.GoogleMaps.MapSpan(item.Position, 0.01, 0.01);
-
+                MainMapViewModel.Span = new Xamarin.Forms.GoogleMaps.MapSpan(item.Position,
+                    MainMapViewModel.Span.LatitudeDegrees,
+                    MainMapViewModel.Span.LongitudeDegrees);
             });
 
+            OnPinClicked = new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>((pin) =>
+            {
+
+                Guid id;
+                if (!Guid.TryParse(pin.Label, out id))
+                    return;
+                SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
+            });
 
             GoToAddPinForm = new DelegateCommand(() =>
             {
@@ -64,15 +81,11 @@ namespace GPSNotepad.ViewModels
             });
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-        }
-
         private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)
         {
             switch (message.ChangedType)
             {
+                case PinsStateChangedType.Load:
                 case PinsStateChangedType.Add:
                     foreach (var p in message.NewPins)
                         Pins.Add(p.GetViewModel());

@@ -13,6 +13,6 @@
             Command="{prism:NavigateTo 'SettingsPage'}"/>
     </local:NavigableTabbedPage.ToolbarItems>
 
-    <local:MainMapPage Title="{Binding TextResources[MainMapPageTitle]}" />
+    <local:MainMapPage Title="{Binding TextResources[MainMapPageTitle]}"/>
     <local:ListOfPinspage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
 </local:NavigableTabbedPage>

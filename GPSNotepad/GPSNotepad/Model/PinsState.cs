@@ -4,6 +4,7 @@ using GPSNotepad.Model.Interfaces;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace GPSNotepad.Model
 {
@@ -20,13 +21,39 @@ namespace GPSNotepad.Model
                 return _instance;
             }
         }
+
+        public async void LoadPins(System.Guid user_id)
+        {
+            await Task.Run(async () =>
+            {
+                var pins = await App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId);
+
+                Pins = pins;
+
+                MessagingCenter.Send(App.Current, "pins_state_changed", new PinsStateChangedMessage(pins, PinsStateChangedType.Load));
+
+            });
+        }
+
+        public async Task<List<Pin>> GetPins()
+        {
+            return await Task.Run(async () =>
+            {
+                var pins = await App.Current.Container.Resolve<IPermanentPinService>().GetAllPinsForUser(CurrentUser.Instance.UserId);
+
+                Pins = pins;
+                MessagingCenter.Send(App.Current, "pins_state_changed", new PinsStateChangedMessage(pins, PinsStateChangedType.Load));
+                return Pins;
+            });
+
+        }
         #endregion
 
         #region ---Constructors---
         public PinsState()
         {
             _pins = new List<Pin>();
-            Intiialize();
+            //Intiialize();
         }
         #endregion
 

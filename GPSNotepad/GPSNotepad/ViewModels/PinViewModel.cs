@@ -21,6 +21,9 @@ namespace GPSNotepad
         private Position _position = new Position();
         private bool _favorite = false;
 
+
+        public bool HideInfoWindow { get; set; } = true;
+
         public Guid PinId
         {
             get => _pinId;

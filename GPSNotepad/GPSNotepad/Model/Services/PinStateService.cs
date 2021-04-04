@@ -10,7 +10,9 @@ namespace GPSNotepad.Model
     {
 
         #region ---IPinService Implementation---
-        public List<Pin> GetAllPinsForUser(Guid user_id) => PinsState.Instance.Pins;
+        public Task<List<Pin>> GetAllPinsForUser(Guid user_id) => PinsState.Instance.GetPins();
+        public void LoadUserPins(Guid user_id) => PinsState.Instance.LoadPins(user_id);
+        
 
         public async Task<List<Pin>> FindPin(string request) // not implemented code
         {
@@ -50,7 +52,9 @@ namespace GPSNotepad.Model
         }
 
         public void DeletePin(Pin pin) => PinsState.Instance.Delete(pin);
-                #endregion
+
+
+        #endregion
 
     }
 }

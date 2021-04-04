@@ -1,4 +1,5 @@
 ﻿using GPSNotepad.Model.Entities;
+using ObjCRuntime;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -10,7 +11,10 @@ namespace GPSNotepad.Model.Interfaces
         Pin CreatePin(Guid user_id, string name);
         void CreateOrUpdatePin(Pin pin);
 
-        List<Pin> GetAllPinsForUser(Guid user_id);
+        void LoadUserPins(Guid user_id);
+
+        [Obsolete]
+        Task<List<Pin>> GetAllPinsForUser(Guid user_id);
 
         Task<List<Pin>> FindPin(string name);
 

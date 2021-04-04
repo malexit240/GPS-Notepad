@@ -75,6 +75,7 @@
     <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BindableMapRenderer.cs" />
     <Compile Include="DroidChangerStatusBarColor.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />

@@ -8,24 +8,24 @@ namespace GPSNotepad
     class PinsManyMaps
     {
         #region ---Constructors---
-        public PinsManyMaps(UniqueObservableCollection<PinViewModel> pins, Map map)
+        public PinsManyMaps(UniqueObservableCollection<PinViewModel> pins, BindableMap map)
         {
             Pins = pins;
-            Maps = new List<Map>();
+            Maps = new List<BindableMap>();
             Maps.Add(map);
         }
 
         public PinsManyMaps(UniqueObservableCollection<PinViewModel> pins)
         {
             Pins = pins;
-            Maps = new List<Map>();
+            Maps = new List<BindableMap>();
         }
         #endregion
 
         #region ---Properties---
         public UniqueObservableCollection<PinViewModel> Pins { get; private set; }
 
-        public IList<Map> Maps { get; set; }
+        public IList<BindableMap> Maps { get; set; }
         #endregion
 
         #region ---Public Methods---
@@ -44,11 +44,19 @@ namespace GPSNotepad
         #endregion
 
         #region ---Private Helpers---
-        private void UpdatePinsSource(Map bindableMap, UniqueObservableCollection<PinViewModel> newSource)
+        private void UpdatePinsSource(BindableMap bindableMap, UniqueObservableCollection<PinViewModel> newSource)
         {
             bindableMap.Pins.Clear();
             foreach (var pin in newSource)
-                bindableMap.Pins.Add(pin.GetGoogleMapsPin());
+            {
+
+                var p = pin.GetGoogleMapsPin();
+                p.Type = PinType.Place;
+                if (bindableMap.ShowInfoWindow == false)
+                    p.Label = pin.PinId.ToString();
+                bindableMap.Pins.Add(p);
+            }
+
         }
         #endregion
     }

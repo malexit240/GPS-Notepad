@@ -5,6 +5,7 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using System;
+using System.Runtime;
 
 namespace GPSNotepad
 {
@@ -13,13 +14,24 @@ namespace GPSNotepad
         public BindableMap()
         {
             IsMapLoading = true;
+            ShowInfoWindow = false;
             this.CameraMoveStarted += OnCameraMoveStarted;
             this.CameraIdled += OnCameraIdled;
             this.CameraMoving += OnCameraMoving;
+            this.PinClicked += OnPinClicked;
+        }
 
+        private void OnPinClicked(object sender, PinClickedEventArgs e)
+        {
+            UpdatedPinClicked?.Invoke(sender, e);
+
+            if (ShowInfoWindow == false)
+                e.Handled = true;
         }
 
         public event EventHandler MapLoaded;
+
+        public event EventHandler<PinClickedEventArgs> UpdatedPinClicked;
         private bool IsMapLoading { get; set; }
 
         public bool IsIdle { get; private set; } = true;
@@ -50,6 +62,12 @@ namespace GPSNotepad
             set => SetValue(PinsSourceProperty, value);
         }
 
+        public bool ShowInfoWindow
+        {
+            get => (bool)GetValue(ShowInfoWindowProperty);
+            set => SetValue(ShowInfoWindowProperty, value);
+        }
+
         public MapSpan MapSpan
         {
             get => (MapSpan)GetValue(MapSpanProperty);
@@ -72,6 +90,12 @@ namespace GPSNotepad
                                                          defaultBindingMode: BindingMode.TwoWay,
                                                          propertyChanged: MapSpanPropertyChanged);
 
+        public static readonly BindableProperty ShowInfoWindowProperty = BindableProperty.Create(
+                                                         propertyName: "ShowInfoWindow",
+                                                         returnType: typeof(bool),
+                                                         declaringType: typeof(BindableMap),
+                                                         defaultBindingMode: BindingMode.TwoWay);
+
         private static List<PinsManyMaps> PinsMapsScope { get; set; } = new List<PinsManyMaps>();
         #endregion
 
@@ -83,8 +107,6 @@ namespace GPSNotepad
 
             if (thisInstance.IsIdle)
                 thisInstance?.MoveToRegion(newMapSpan);
-
-
         }
 
         private static void PinsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newValue)

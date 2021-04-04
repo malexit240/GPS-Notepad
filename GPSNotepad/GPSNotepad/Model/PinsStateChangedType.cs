@@ -1,4 +1,4 @@
 ﻿namespace GPSNotepad.Model
 {
-    public enum PinsStateChangedType { None, Add, Update, Delete }
+    public enum PinsStateChangedType { Load, Add, Update, Delete }
 }
