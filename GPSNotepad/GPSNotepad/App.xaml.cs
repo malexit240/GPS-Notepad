@@ -2,14 +2,10 @@ using GPSNotepad.ViewModels;
 using GPSNotepad.Views;
 using Prism;
 using Prism.Ioc;
-using Prism.Navigation;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
 using GPSNotepad.Model;
 using GPSNotepad.Database;
 using GPSNotepad.Model.Interfaces;
-using System.Threading.Tasks;
 using GPSNotepad.Repositories;
 
 namespace GPSNotepad
@@ -19,7 +15,7 @@ namespace GPSNotepad
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
-            Device.SetFlags(new string[] { "RadioButton_Experimental" });
+            Device.SetFlags(new string[] { "RadioButton_Experimental" });// Remake as View with button and label
         }
 
         protected override async void OnInitialized()
@@ -27,38 +23,34 @@ namespace GPSNotepad
             InitializeComponent();
 
             Container.Resolve<ISettingsManagerService>().Init();
-            Authorizator.ContinueSession();
+            Authorizator.ContinueSession();// Remake as One Service
 
-            if (CurrentUser.Instance != null)
-                await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            if (CurrentUser.Instance != null)//Remake througnt IAuthorizationService
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
             else
-                await NavigationService.NavigateAsync("NavigationPage/SignInPage");
+                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
 
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
+            containerRegistry.RegisterInstance<IAuthorizatorService>(Container.Resolve<DBAuthorizatorService>());
+            containerRegistry.RegisterInstance<IRegistratorService>(Container.Resolve<DBRegistratorService>());
+            containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinStateService>());
 
-            containerRegistry.RegisterInstance<IAuthorizatorService>(new DBAuthorizatorService());
-            containerRegistry.RegisterInstance<IRegistratorService>(new DBRegistratorService());
-            containerRegistry.RegisterInstance<IPinService>(new PinStateService());
+            containerRegistry.RegisterInstance<IPermanentPinService>(Container.Resolve<DBPinService>());
 
-            containerRegistry.RegisterInstance<IPermanentPinService>(new DBPinService());
-
-            containerRegistry.RegisterInstance<ISettingsManagerService>(new SettingsManagerService());
-            containerRegistry.RegisterInstance<ISecureStorageService>(new SecureStorageService());
+            containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
+            containerRegistry.RegisterInstance<ISecureStorageService>(Container.Resolve<SecureStorageService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            //containerRegistry.RegisterForNavigation<MainMapPage, MainMapViewModel>();
-            //containerRegistry.RegisterForNavigation<ListOfPinspage, ListOfPinsViewModel>();
+            containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
-
-
             containerRegistry.RegisterForNavigation<AddPinPage, AddEditPinPageViewModel>();
+
+
         }
     }
 }

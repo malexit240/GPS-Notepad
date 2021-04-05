@@ -4,7 +4,7 @@
             xmlns:local="clr-namespace:GPSNotepad.Views"
             xmlns:prism="http://prismlibrary.com"
             prism:ViewModelLocator.AutowireViewModel="True"
-            x:Class="GPSNotepad.Views.MainPage"
+            x:Class="GPSNotepad.Views.MainTabbedPage"
             Title="{Binding TextResources[MainPageTitle]}"
             Style="{DynamicResource pageStyle}"
             ChoosenPage="{Binding ChoosenPage}">
@@ -13,6 +13,6 @@
             Command="{prism:NavigateTo 'SettingsPage'}"/>
     </local:NavigableTabbedPage.ToolbarItems>
 
-    <local:MainMapPage Title="{Binding TextResources[MainMapPageTitle]}"/>
-    <local:ListOfPinspage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
+    <local:MainMapTabPage Title="{Binding TextResources[MainMapPageTitle]}"/>
+    <local:PinsTabPage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
 </local:NavigableTabbedPage>

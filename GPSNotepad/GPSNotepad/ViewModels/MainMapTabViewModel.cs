@@ -10,7 +10,7 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GPSNotepad.ViewModels
 {
-    public class MainMapViewModel : ViewModelBase
+    public class MainMapTabViewModel : ViewModelBase
     {
         private MapSpan _span;
 
@@ -22,7 +22,7 @@ namespace GPSNotepad.ViewModels
 
         
 
-        public MainMapViewModel(INavigationService navigationService) : base(navigationService)
+        public MainMapTabViewModel(INavigationService navigationService) : base(navigationService)
         {
             CurrentPosition.GetAsync().ContinueWith(
                 result => _span = new MapSpan(result.Result, 0.01, 0.01));

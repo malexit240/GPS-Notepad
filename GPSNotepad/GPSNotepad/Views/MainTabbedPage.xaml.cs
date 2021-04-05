@@ -3,9 +3,9 @@
 namespace GPSNotepad.Views
 {
 
-    public partial class MainPage : NavigableTabbedPage
+    public partial class MainTabbedPage : NavigableTabbedPage
     {
-        public MainPage()
+        public MainTabbedPage()
         {
             InitializeComponent();
             this.SetBinding(ChoosenPageProperty, new Binding("ChoosenPage"));

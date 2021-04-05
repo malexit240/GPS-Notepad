@@ -35,11 +35,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Views\ListOfPinsPage.xaml.cs">
-      <DependentUpon>ListOfPinsPage.xaml</DependentUpon>
+    <Compile Update="Views\PinsTabPage.xaml.cs">
+      <DependentUpon>PinsTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainMapPage.xaml.cs">
-      <DependentUpon>MainMapPage.xaml</DependentUpon>
+    <Compile Update="Views\MainMapTapPage.xaml.cs">
+      <DependentUpon>MainMapTapPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MainTabbedPage.xaml.cs">
+      <DependentUpon>MainTabbedPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
@@ -63,13 +66,13 @@
     <EmbeddedResource Update="Views\AddPinPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ListOfPinsPage.xaml">
+    <EmbeddedResource Update="Views\PinsTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MainMapPage.xaml">
+    <EmbeddedResource Update="Views\MainMapTapPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MainPage.xaml">
+    <EmbeddedResource Update="Views\MainTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\SettingsPage.xaml">

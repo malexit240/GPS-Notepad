@@ -5,7 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="False"
              xmlns:gpsnotepad="clr-namespace:GPSNotepad"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
-             x:Class="GPSNotepad.Views.MainMapPage"
+             x:Class="GPSNotepad.Views.MainMapTabPage"
              Style="{DynamicResource pageStyle}">
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -14,7 +14,7 @@ using System;
 
 namespace GPSNotepad.ViewModels
 {
-    public class MainPageViewModel : ViewModelBase
+    public class MainTabbedPageViewModel : ViewModelBase
     {
         private UniqueObservableCollection<PinViewModel> _pins;
         private PinViewModel _selectedPin = null;
@@ -35,7 +35,7 @@ namespace GPSNotepad.ViewModels
         public ICommand GoToAddPinForm { get; set; }
         public DelegateCommand<PinViewModel> PinTappedCommand { get; set; }
 
-        public MainMapViewModel MainMapViewModel { get; set; }
+        public MainMapTabViewModel MainMapViewModel { get; set; }
 
         private int _choosenPage = 0;
         public int ChoosenPage
@@ -56,11 +56,11 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _showDetailView, value);
         }
 
-        public MainPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
+        public MainTabbedPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
         {
             PinService = pinService;
 
-            MainMapViewModel = new MainMapViewModel(navigationService);
+            MainMapViewModel = new MainMapTabViewModel(navigationService);
 
             Pins = new UniqueObservableCollection<PinViewModel>();
 

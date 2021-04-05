@@ -2,9 +2,9 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class ListOfPinspage : ContentPage
+    public partial class MainMapTabPage : ContentPage
     {
-        public ListOfPinspage()
+        public MainMapTabPage()
         {
             InitializeComponent();
         }

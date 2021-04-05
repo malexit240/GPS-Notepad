@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace GPSNotepad.ViewModels
 {
-    public class ListOfPinsViewModel : ViewModelBase
+    public class PinsTabViewModel : ViewModelBase
     {
-        public ListOfPinsViewModel(INavigationService navigationService) : base(navigationService)
+        public PinsTabViewModel(INavigationService navigationService) : base(navigationService)
         {
 
         }

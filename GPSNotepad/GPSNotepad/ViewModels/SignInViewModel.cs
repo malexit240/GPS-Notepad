@@ -37,7 +37,7 @@ namespace GPSNotepad.ViewModels
             {
                 await Authorizator.AutorizeAsync(Email, Password);
                 if (CurrentUser.Instance != null)
-                    await this.NavigationService.NavigateAsync(nameof(MainPage));
+                    await this.NavigationService.NavigateAsync(nameof(MainTabbedPage));
             }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0);
 
             ((DelegateCommand)SignInCommand).ObservesProperty(() => Email);

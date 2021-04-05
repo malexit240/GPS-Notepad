@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              prism:ViewModelLocator.AutowireViewModel="False"
-             x:Class="GPSNotepad.Views.ListOfPinspage"
+             x:Class="GPSNotepad.Views.PinsTabPage"
              Style="{DynamicResource pageStyle}">
     <ContentPage.Resources>
         <ResourceDictionary>
