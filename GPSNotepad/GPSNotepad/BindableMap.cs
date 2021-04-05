@@ -9,6 +9,14 @@ using System.Runtime;
 
 namespace GPSNotepad
 {
+    public class PinTappedEventArgs : EventArgs
+    {
+        public Pin Pin { get; set; }
+
+        public PinTappedEventArgs(Pin pin) => Pin = pin;
+    }
+
+
     public class BindableMap : Map
     {
         public BindableMap()
@@ -18,20 +26,17 @@ namespace GPSNotepad
             this.CameraMoveStarted += OnCameraMoveStarted;
             this.CameraIdled += OnCameraIdled;
             this.CameraMoving += OnCameraMoving;
-            this.PinClicked += OnPinClicked;
-        }
-
-        private void OnPinClicked(object sender, PinClickedEventArgs e)
-        {
-            UpdatedPinClicked?.Invoke(sender, e);
-
-            if (ShowInfoWindow == false)
-                e.Handled = true;
         }
 
         public event EventHandler MapLoaded;
 
-        public event EventHandler<PinClickedEventArgs> UpdatedPinClicked;
+        public event EventHandler<PinTappedEventArgs> ShowDetaiPinView;
+
+        public void RaiseShowDetaiPinView(Pin pin)
+        {
+            ShowDetaiPinView?.Invoke(this, new PinTappedEventArgs(pin));
+        }
+
         private bool IsMapLoading { get; set; }
 
         public bool IsIdle { get; private set; } = true;

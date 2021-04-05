@@ -44,7 +44,17 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _choosenPage, value);
         }
 
-        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnPinClicked { get; set; }
+        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetaiPinViewCommand { get; set; }
+
+        public DelegateCommand HideDetailPinView { get; set; }
+
+        private bool _showDetailView = false;
+
+        public bool ShowDetailView
+        {
+            get => _showDetailView;
+            set => SetProperty(ref _showDetailView, value);
+        }
 
         public MainPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
         {
@@ -66,13 +76,18 @@ namespace GPSNotepad.ViewModels
                     MainMapViewModel.Span.LongitudeDegrees);
             });
 
-            OnPinClicked = new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>((pin) =>
+            OnShowDetaiPinViewCommand = new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>((pin) =>
             {
-
                 Guid id;
                 if (!Guid.TryParse(pin.Label, out id))
                     return;
                 SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
+                ShowDetailView = true;
+            });
+            HideDetailPinView = new DelegateCommand(() =>
+            {
+                SelectedPin = null;
+                ShowDetailView = false;
             });
 
             GoToAddPinForm = new DelegateCommand(() =>

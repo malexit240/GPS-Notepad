@@ -9,7 +9,7 @@
              Style="{DynamicResource pageStyle}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:PinClickedEventArgsConverter x:Key="pinClickedEventArgsConverter"/>
+            <converters:PinTappedEventArgsConverter x:Key="showDetaiPinViewEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -20,16 +20,21 @@
             <gpsnotepad:BindableMap
                                 PinsSource="{Binding Pins}"
                                 MapSpan="{Binding Path=MainMapViewModel.Span}">
-            <gpsnotepad:BindableMap.Behaviors>
-                    <prism:EventToCommandBehavior EventName="UpdatedPinClicked" 
-                                              Command="{Binding Path=MainMapViewModel.OnPinClicked}"
-                                              EventArgsConverter="{x:StaticResource pinClickedEventArgsConverter}"/>
-            </gpsnotepad:BindableMap.Behaviors>
-        </gpsnotepad:BindableMap>
+                <gpsnotepad:BindableMap.Behaviors>
+                    <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
+                                              Command="{Binding OnShowDetaiPinViewCommand}"
+                                              EventArgsConverter="{x:StaticResource showDetaiPinViewEventArgsConverter}"/>
+                    <prism:EventToCommandBehavior EventName="MapClicked" 
+                                              Command="{Binding HideDetailPinView}"
+                                              />
+
+                </gpsnotepad:BindableMap.Behaviors>
+            </gpsnotepad:BindableMap>
         </StackLayout>
-        <StackLayout Grid.Row="1" BackgroundColor="#70A0B0A0">
-            <Label Text="{Binding Path=SelectedItem.Name}"/>
-            <Label Text="{Binding Path=SelectedItem.Description}"
+        <StackLayout Grid.Row="1" BackgroundColor="#E0F0F0F0" IsVisible="{Binding ShowDetailView}">
+            <Label Text="Detail"/>
+            <Label Text="{Binding Path=SelectedPin.Name}"/>
+            <Label Text="{Binding Path=SelectedPin.Description}"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"/>
         </StackLayout>
