@@ -2,7 +2,7 @@
 
 namespace GPSNotepad.Model.Entities
 {
-    public interface IUniqueElement
+    public interface IEntityBase
     {
         public Guid Id { get; }
     }

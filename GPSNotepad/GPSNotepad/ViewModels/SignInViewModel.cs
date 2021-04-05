@@ -3,6 +3,8 @@ using GPSNotepad.Views;
 using Prism.Commands;
 using Prism.Navigation;
 using System.Windows.Input;
+using GPSNotepad.Services.Authentication;
+using GPSNotepad.Services.Authorization;
 
 namespace GPSNotepad.ViewModels
 {
@@ -31,13 +33,16 @@ namespace GPSNotepad.ViewModels
         #endregion
 
         #region ---Constructors---
-        public SignInViewModel(INavigationService navigationService) : base(navigationService)
+        public SignInViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IAuthorizationService authorizationService) : base(navigationService)
         {
+
             SignInCommand = new DelegateCommand(async () =>
             {
-                await Authorizator.AutorizeAsync(Email, Password);
-                if (CurrentUser.Instance != null)
+                await authenticationService.SignInAsync(Email, Password);
+
+                if (authorizationService.IsAuthorized)
                     await this.NavigationService.NavigateAsync(nameof(MainTabbedPage));
+
             }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0);
 
             ((DelegateCommand)SignInCommand).ObservesProperty(() => Email);

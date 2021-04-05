@@ -29,7 +29,7 @@ namespace DBTests
         [TestMethod]
         public void Authorize()
         {
-            var authorize_service = new DBAuthorizatorService();
+            var authorize_service = new AuthorizatioService();
             var u = authorize_service.Authorize(email, password);
             u.Wait();
             Assert.AreEqual(u.Result.Login, username);
@@ -38,7 +38,7 @@ namespace DBTests
         [TestMethod]
         public void IsUserExist()
         {
-            var authorize_service = new DBAuthorizatorService();
+            var authorize_service = new AuthorizatioService();
             var task = authorize_service.IsUserExist(email);
             task.Wait();
             Assert.IsTrue(task.Result);
@@ -47,7 +47,7 @@ namespace DBTests
         [TestMethod]
         public void ContinueSessionTestMethod()
         {
-            var authorize_service = new DBAuthorizatorService();
+            var authorize_service = new AuthorizatioService();
             var u = authorize_service.Authorize(email, password);
             u.Wait();
             var token = u.Result.SessionToken;

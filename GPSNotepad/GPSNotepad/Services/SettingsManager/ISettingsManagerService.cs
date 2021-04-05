@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
+using GPSNotepad.Styles;
 
-namespace GPSNotepad.Model.Interfaces
+namespace GPSNotepad.Services.Settings
 {
     public interface ISettingsManagerService
     {

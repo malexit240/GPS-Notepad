@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using GPSNotepad.Model.Interfaces;
 using System.Linq;
+using GPSNotepad.Services.Authorization;
 
 namespace GPSNotepad.Validators
 {
@@ -20,7 +21,7 @@ namespace GPSNotepad.Validators
                 return EmailValidationStatus.InvalidFormat;
             }
 
-            if (await App.Current.Container.Resolve<IAuthorizatorService>().IsUserExist(email))
+            if (await App.Current.Container.Resolve<IAuthorizationService>().IsUserExist(email))
                 return EmailValidationStatus.EmailAlreadyExist;
 
             return EmailValidationStatus.Done;

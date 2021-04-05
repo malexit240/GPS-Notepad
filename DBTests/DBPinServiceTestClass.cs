@@ -18,7 +18,7 @@ namespace DBTests
         {
             (new Context()).ClearDatabase();
             (new DBRegistratorService()).Registrate("user@mail.com", "username", "password").Wait();
-            var service = (new DBAuthorizatorService()).Authorize("user@mail.com", "password");
+            var service = (new AuthorizatioService()).Authorize("user@mail.com", "password");
             service.Wait();
             user = service.Result;
             this.service = new DBPinService();

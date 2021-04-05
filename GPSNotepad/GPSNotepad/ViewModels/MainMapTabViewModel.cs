@@ -20,14 +20,12 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _span, value);
         }
 
-        
-
         public MainMapTabViewModel(INavigationService navigationService) : base(navigationService)
         {
             CurrentPosition.GetAsync().ContinueWith(
                 result => _span = new MapSpan(result.Result, 0.01, 0.01));
 
-            
+
 
         }
     }

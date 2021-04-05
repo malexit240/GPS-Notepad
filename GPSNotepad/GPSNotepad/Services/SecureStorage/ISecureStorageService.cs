@@ -1,4 +1,4 @@
-﻿namespace GPSNotepad.Model.Interfaces
+﻿namespace GPSNotepad.Services.SecureStorageService
 {
     public interface ISecureStorageService
     {

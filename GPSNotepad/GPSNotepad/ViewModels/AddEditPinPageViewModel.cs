@@ -6,7 +6,8 @@ using System.Windows.Input;
 using System;
 using GPSNotepad.Model.Interfaces;
 using GPSNotepad.Extensions;
-
+using GPSNotepad.Services.Authorization;
+using GPSNotepad.Services.PinService;
 
 namespace GPSNotepad.ViewModels
 {
@@ -63,11 +64,13 @@ namespace GPSNotepad.ViewModels
         public ICommand OnMapLoadedCommand { get; set; }
         #endregion
 
+        protected IAuthorizationService AuthorizationService { get; set; }
+
         #region ---Constructors---
-        public AddEditPinPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
+        public AddEditPinPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
             Pins = new UniqueObservableCollection<PinViewModel>();
-
+            AuthorizationService = authorizationService;
             AddEditPinCommand = new DelegateCommand(() =>
             {
                 PinViewModel.Name = Name;
@@ -99,7 +102,7 @@ namespace GPSNotepad.ViewModels
             {
                 var position = await CurrentPosition.GetAsync();
 
-                PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), CurrentUser.Instance.UserId)
+                PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), AuthorizationService.GetCurrenUserId())
                 {
                     Position = position
                 };

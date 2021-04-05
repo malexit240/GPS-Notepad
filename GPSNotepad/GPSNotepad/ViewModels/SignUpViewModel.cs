@@ -2,7 +2,7 @@
 using Prism.Navigation;
 using GPSNotepad.Validators;
 using System.Windows.Input;
-using GPSNotepad.Model.Interfaces;
+using GPSNotepad.Services.Authentication;
 
 namespace GPSNotepad.ViewModels
 {
@@ -49,7 +49,7 @@ namespace GPSNotepad.ViewModels
         #endregion
 
         #region ---Constructors---
-        public SignUpViewModel(INavigationService navigationService, IRegistratorService registratorService) : base(navigationService)
+        public SignUpViewModel(INavigationService navigationService, IAuthenticationService authorizationService) : base(navigationService)
         {
             SignUpCommand = new DelegateCommand(async () =>
             {
@@ -84,14 +84,15 @@ namespace GPSNotepad.ViewModels
                 if (!done)
                 {
                     HasLongActivity = false;
-                    return;
+
                 }
-
-                if (!await registratorService.Registrate(Email, Login, Password))
-                    HasLongActivity = false;
                 else
-                    await this.NavigationService.GoBackAsync();
-
+                {
+                    if (!await authorizationService.SignUpAsync(Email, Login, Password))
+                        HasLongActivity = false;
+                    else
+                        await this.NavigationService.GoBackAsync();
+                }
             }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0 && Login.Length != 0 && ConfirmPassword.Length != 0 && HasLongActivity != true);
 
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => Email);
@@ -99,7 +100,7 @@ namespace GPSNotepad.ViewModels
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => ConfirmPassword);
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => Password);
             ((DelegateCommand)SignUpCommand).ObservesProperty(() => HasLongActivity);
-        } 
+        }
         #endregion
     }
 }

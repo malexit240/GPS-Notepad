@@ -2,7 +2,7 @@
 using Prism.Navigation;
 using System.Collections.ObjectModel;
 using GPSNotepad.Model.Entities;
-using GPSNotepad.Model.Interfaces;
+using GPSNotepad.Services.PinService;
 using GPSNotepad.Model;
 using Xamarin.Forms;
 using Prism;
@@ -11,6 +11,7 @@ using GPSNotepad.Views;
 using System.Linq;
 using GPSNotepad.Extensions;
 using System;
+using GPSNotepad.Services.Authorization;
 
 namespace GPSNotepad.ViewModels
 {
@@ -56,7 +57,7 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _showDetailView, value);
         }
 
-        public MainTabbedPageViewModel(INavigationService navigationService, IPinService pinService) : base(navigationService)
+        public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
             PinService = pinService;
 
@@ -66,7 +67,7 @@ namespace GPSNotepad.ViewModels
 
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
-            pinService.LoadUserPins(CurrentUser.Instance.UserId);
+            pinService.LoadUserPins(authorizationService.GetCurrenUserId());
 
             PinTappedCommand = new DelegateCommand<PinViewModel>(item =>
             {

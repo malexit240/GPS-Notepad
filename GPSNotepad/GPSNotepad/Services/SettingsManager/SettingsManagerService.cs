@@ -4,9 +4,8 @@ using GPSNotepad.Styles;
 using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using GPSNotepad.Model.Interfaces;
 
-namespace GPSNotepad.Repositories
+namespace GPSNotepad.Services.Settings
 {
     public class SettingsManagerService : ISettingsManagerService
     {

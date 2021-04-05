@@ -9,10 +9,11 @@ using GPSNotepad.ViewModels;
 using Prism.Navigation;
 using GPSNotepad.Views;
 using GPSNotepad.Model.Entities;
+using GPSNotepad.Services.PinService;
 
 namespace GPSNotepad
 {
-    public class PinViewModel : ViewModelBase, IUniqueElement
+    public class PinViewModel : ViewModelBase, IEntityBase
     {
         private Guid _pinId;
         private Guid _userId;
@@ -59,6 +60,8 @@ namespace GPSNotepad
             _pinId = pinId;
             _userId = userId;
 
+            IPinService pinService = App.Current.Container.Resolve<IPinService>();
+
             EditPinContextCommand = new DelegateCommand(() =>
             {
                 navigationService.NavigateAsync(nameof(AddPinPage), (nameof(PinViewModel), this));
@@ -66,7 +69,7 @@ namespace GPSNotepad
 
             DeletePinContextCommand = new DelegateCommand(() =>
             {
-                App.Current.Container.Resolve<IPinService>().DeletePin(this.GetModelPin());
+                pinService.Delete(this.GetModelPin());
             });
 
         }
@@ -77,10 +80,10 @@ namespace GPSNotepad
         public override int GetHashCode() => HashCode.Combine(Id);
         public override bool Equals(object obj)
         {
-            if (!(obj is IUniqueElement))
+            if (!(obj is IEntityBase))
                 return false;
 
-            var pin = (IUniqueElement)obj;
+            var pin = (IEntityBase)obj;
 
             return this.PinId == pin.Id;
         }

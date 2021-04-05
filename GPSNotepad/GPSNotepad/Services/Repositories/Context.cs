@@ -4,7 +4,7 @@ using GPSNotepad.Model.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Essentials;
 
-namespace GPSNotepad.Database
+namespace GPSNotepad.Repositories
 {
     public class Context : DbContext
     {
@@ -35,7 +35,7 @@ namespace GPSNotepad.Database
             {
                 optionsBuilder.UseSqlite($"Filename={dbPath}");
             }
-        } 
+        }
         #endregion
     }
 }

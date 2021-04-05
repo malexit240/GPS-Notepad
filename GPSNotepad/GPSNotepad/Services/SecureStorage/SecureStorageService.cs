@@ -1,8 +1,7 @@
 ﻿using System;
 using Xamarin.Essentials;
-using GPSNotepad.Model.Interfaces;
 
-namespace GPSNotepad.Repositories
+namespace GPSNotepad.Services.SecureStorageService
 {
     public class SecureStorageService : ISecureStorageService
     {

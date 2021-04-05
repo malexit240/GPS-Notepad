@@ -4,9 +4,11 @@ using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
 using GPSNotepad.Model;
-using GPSNotepad.Database;
-using GPSNotepad.Model.Interfaces;
-using GPSNotepad.Repositories;
+using GPSNotepad.Services.Authentication;
+using GPSNotepad.Services.Authorization;
+using GPSNotepad.Services.Settings;
+using GPSNotepad.Services.SecureStorageService;
+using GPSNotepad.Services.PinService;
 
 namespace GPSNotepad
 {
@@ -18,30 +20,41 @@ namespace GPSNotepad
             Device.SetFlags(new string[] { "RadioButton_Experimental" });// Remake as View with button and label
         }
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             InitializeComponent();
 
             Container.Resolve<ISettingsManagerService>().Init();
-            Authorizator.ContinueSession();// Remake as One Service
 
-            if (CurrentUser.Instance != null)//Remake througnt IAuthorizationService
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+            var authorizationService = Container.Resolve<IAuthorizationService>();
+            var authenticationService = Container.Resolve<IAuthenticationService>();
+            var secureStorage = Container.Resolve<ISecureStorageService>();
+
+            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
+            {
+                NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+            }
             else
-                await NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
+            {
+                NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
+
+            }
+
+
 
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<IAuthorizatorService>(Container.Resolve<DBAuthorizatorService>());
-            containerRegistry.RegisterInstance<IRegistratorService>(Container.Resolve<DBRegistratorService>());
-            containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinStateService>());
-
-            containerRegistry.RegisterInstance<IPermanentPinService>(Container.Resolve<DBPinService>());
-
+            containerRegistry.RegisterInstance<ISecureStorageService>
+                (Container.Resolve<SecureStorageService>());
             containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
-            containerRegistry.RegisterInstance<ISecureStorageService>(Container.Resolve<SecureStorageService>());
+
+            containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
+            containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>());
+            containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
+
+
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();

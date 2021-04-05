@@ -2,6 +2,7 @@
 using Prism.Navigation;
 using GPSNotepad.Resources;
 using GPSNotepad.Model.Interfaces;
+using GPSNotepad.Services.Settings;
 
 namespace GPSNotepad.ViewModels
 {

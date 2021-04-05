@@ -1,4 +1,4 @@
-﻿namespace GPSNotepad.Model.Interfaces
+﻿namespace GPSNotepad.Styles
 {
     public enum Theme { Light, Dark }
 }
