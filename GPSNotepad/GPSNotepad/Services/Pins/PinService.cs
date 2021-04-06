@@ -66,6 +66,7 @@ namespace GPSNotepad.Services.PinService
                 }
                 return true;
             });
+
         }
 
         public async Task<bool> Delete(Pin pin)
@@ -121,7 +122,13 @@ namespace GPSNotepad.Services.PinService
 
             var position = StringToPositionConverter.GetPosition(searchField);
             if (position != null)
-                result = new PinPositionComparer(position.Value);
+            {
+                //result = new PinPositionComparer(position.Value);
+            }
+            else
+            {
+                //result = new PinNameCoparer(searchField);
+            }
 
             return result;
         }

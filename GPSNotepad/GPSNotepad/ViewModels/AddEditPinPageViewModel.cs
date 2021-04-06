@@ -97,32 +97,42 @@ namespace GPSNotepad.ViewModels
 
         private async void OnMapLoadedHelper()
         {
-            if (PinViewModel == null)
+            try
             {
-                var position = await CurrentPosition.GetAsync();
 
-                PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), AuthorizationService.GetCurrenUserId())
+
+                if (PinViewModel == null)
                 {
-                    Position = position
-                };
+                    var position = await CurrentPosition.GetAsync();
 
-                Pins.Add(PinViewModel);
-                Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+                    PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), AuthorizationService.GetCurrenUserId())
+                    {
+                        Position = position
+                    };
 
-                _textCoordinates = StringToPositionConverter.ToFormatedString(PinViewModel.Position);
-                RaisePropertyChanged(nameof(TextCoordinates));
+                    Pins.Add(PinViewModel);
+                    Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+
+                    _textCoordinates = StringToPositionConverter.ToFormatedString(PinViewModel.Position);
+                    RaisePropertyChanged(nameof(TextCoordinates));
+                }
+                else
+                {
+                    Name = PinViewModel.Name;
+                    Description = PinViewModel.Description;
+
+                    Pins.Add(PinViewModel);
+
+                    Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+
+                    _textCoordinates = StringToPositionConverter.ToFormatedString(PinViewModel.Position);
+                    RaisePropertyChanged(nameof(TextCoordinates));
+                }
             }
-            else
+            catch (Exception e)
             {
-                Name = PinViewModel.Name;
-                Description = PinViewModel.Description;
 
-                Pins.Add(PinViewModel);
 
-                Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
-
-                _textCoordinates = StringToPositionConverter.ToFormatedString(PinViewModel.Position);
-                RaisePropertyChanged(nameof(TextCoordinates));
             }
         }
 

@@ -63,8 +63,16 @@ namespace GPSNotepad.ViewModels
         {
             var pins = Pins.Select(p => p.GetModelPin()).ToList();
             pins.Sort(comparer);
+            try
+            {
+                Pins.Clear();
+            }
+            catch (Exception e)
+            {
 
-            Pins.Clear();
+
+            }
+
             foreach (var pin in pins)
             {
                 Pins.Add(pin.GetViewModel());
@@ -108,9 +116,9 @@ namespace GPSNotepad.ViewModels
         }
 
 
-        private DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> _onShowDetaiPinViewCommand;
-        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetaiPinViewCommand => _onShowDetaiPinViewCommand ??= new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>(OnShowDetaiPinViewHandler);
-        private void OnShowDetaiPinViewHandler(Xamarin.Forms.GoogleMaps.Pin pin)
+        private DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> _onShowDetailPinViewCommand;
+        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetailPinViewCommand => _onShowDetailPinViewCommand ??= new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>(OnShowDetailPinViewHandler);
+        private void OnShowDetailPinViewHandler(Xamarin.Forms.GoogleMaps.Pin pin)
         {
             Guid id;
             if (!Guid.TryParse(pin.Label, out id))
@@ -133,19 +141,19 @@ namespace GPSNotepad.ViewModels
                     var pin = message.ChangedPin.GetViewModel();
                     var index = Pins.IndexOf(pin);
                     if (index == -1)
-                        return;
+                        break;
                     Pins[index] = pin;
                     break;
                 case PinsStateChangedType.Delete:
                     Pins.Remove(message.ChangedPin.GetViewModel());
                     break;
             }
-            CurrentPosition.GetAsync().
-                ContinueWith(result =>
-                {
-                    SortPins(new PinPositionComparer(result.Result));
-                });
-
+            //CurrentPosition.GetAsync().
+            //    ContinueWith(result =>
+            //    {
+            //        SortPins(new PinPositionComparer(result.Result));
+            //    });
+            //SortPins(new PinPositionComparer(new Xamarin.Forms.GoogleMaps.Position()));
 
         }
     }

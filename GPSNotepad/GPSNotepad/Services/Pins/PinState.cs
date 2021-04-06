@@ -39,7 +39,6 @@ namespace GPSNotepad.Model
         public PinState()
         {
             _pins = new List<Pin>();
-            //Intiialize();
         }
         #endregion
 

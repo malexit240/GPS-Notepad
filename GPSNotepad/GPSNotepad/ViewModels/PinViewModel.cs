@@ -93,7 +93,6 @@ namespace GPSNotepad
 
         public Guid Id => _pinId;
 
-
         public override int GetHashCode() => HashCode.Combine(Id);
         public override bool Equals(object obj)
         {

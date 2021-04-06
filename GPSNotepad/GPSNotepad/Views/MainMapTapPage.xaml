@@ -20,7 +20,7 @@
                                 MapSpan="{Binding Path=MainMapViewModel.Span}">
                 <controls:BindableMap.Behaviors>
                     <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
-                                              Command="{Binding OnShowDetaiPinViewCommand}"
+                                              Command="{Binding OnShowDetailPinViewCommand}"
                                               EventArgsConverter="{x:StaticResource showDetaiPinViewEventArgsConverter}"/>
                     <prism:EventToCommandBehavior EventName="MapClicked" 
                                               Command="{Binding HideDetailPinViewCommand}"/>
