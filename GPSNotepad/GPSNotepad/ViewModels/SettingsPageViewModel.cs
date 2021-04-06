@@ -1,6 +1,5 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
-using GPSNotepad.Model.Interfaces;
 using System.Windows.Input;
 using GPSNotepad.Services.Settings;
 using GPSNotepad.Styles;

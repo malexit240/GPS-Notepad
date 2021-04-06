@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using GPSNotepad.Model;
 using GPSNotepad.Model.Entities;
-using GPSNotepad.Model.Interfaces;
 using System.Linq;
 using GPSNotepad.Repositories;
+using System.Collections;
 
 namespace GPSNotepad.Services.PinService
 {
     public class PinService : IPinService
     {
-
         protected static PinState PinState { get; set; } = new PinState();
 
         #region ---IPermanentPinService Implementation---
@@ -115,7 +114,17 @@ namespace GPSNotepad.Services.PinService
 
             return result;
         }
-        #endregion
 
+        public IComparer<Pin> Find(string searchField)
+        {
+            IComparer<Pin> result = null;
+
+            var position = StringToPositionConverter.GetPosition(searchField);
+            if (position != null)
+                result = new PinPositionComparer(position.Value);
+
+            return result;
+        }
+        #endregion
     }
 }

@@ -23,7 +23,7 @@
                                               Command="{Binding OnShowDetaiPinViewCommand}"
                                               EventArgsConverter="{x:StaticResource showDetaiPinViewEventArgsConverter}"/>
                     <prism:EventToCommandBehavior EventName="MapClicked" 
-                                              Command="{Binding HideDetailPinView}"/>
+                                              Command="{Binding HideDetailPinViewCommand}"/>
 
                 </controls:BindableMap.Behaviors>
             </controls:BindableMap>

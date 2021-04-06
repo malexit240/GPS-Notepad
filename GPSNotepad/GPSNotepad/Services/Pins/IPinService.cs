@@ -1,5 +1,6 @@
 ﻿using GPSNotepad.Model.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -17,5 +18,6 @@ namespace GPSNotepad.Services.PinService
 
         Task<bool> Delete(Pin pin);
         Task<bool> CreateOrUpdatePin(Pin pin);
+        IComparer<Pin> Find(string searchField);
     }
 }

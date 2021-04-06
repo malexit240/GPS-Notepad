@@ -9,10 +9,12 @@ namespace GPSNotepad.Model
 {
     public static class CurrentPosition
     {
+        public static Position LastChecked { get; private set; } = new Position();
+
         #region ---Public Static Methods---
         public static async Task<Position> GetAsync()
         {
-            Position position = new Position();
+            Position position = LastChecked;
 
             try
             {
@@ -23,6 +25,8 @@ namespace GPSNotepad.Model
             {
 
             }
+
+            LastChecked = position;
 
             return position;
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using GPSNotepad.Model.Interfaces;
 using System.Linq;
 using GPSNotepad.Services.Authorization;
 

@@ -4,7 +4,6 @@ using Xamarin.Forms.GoogleMaps;
 using GPSNotepad.Model;
 using System.Windows.Input;
 using System;
-using GPSNotepad.Model.Interfaces;
 using GPSNotepad.Extensions;
 using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.PinService;

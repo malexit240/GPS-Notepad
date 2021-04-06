@@ -1,5 +1,4 @@
-﻿using GPSNotepad.Model.Interfaces;
-using Prism.Commands;
+﻿using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Windows.Input;
@@ -61,7 +60,7 @@ namespace GPSNotepad
             set
             {
                 SetProperty(ref _favorite, value);
-                PinService?.Update(this.GetModelPin());
+                //PinService?.Update(this.GetModelPin());
             }
         }
 

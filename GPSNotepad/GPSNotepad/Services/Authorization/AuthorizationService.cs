@@ -1,7 +1,4 @@
-﻿using GPSNotepad.Model;
-using GPSNotepad.Model.Entities;
-using GPSNotepad.Model.Interfaces;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using GPSNotepad.Repositories;

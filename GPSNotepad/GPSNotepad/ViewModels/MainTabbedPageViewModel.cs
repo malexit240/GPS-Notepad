@@ -12,51 +12,12 @@ using System.Linq;
 using GPSNotepad.Extensions;
 using System;
 using GPSNotepad.Services.Authorization;
+using System.Collections.Generic;
 
 namespace GPSNotepad.ViewModels
 {
     public class MainTabbedPageViewModel : ViewModelBase
     {
-        private UniqueObservableCollection<PinViewModel> _pins;
-        private PinViewModel _selectedPin = null;
-        protected IPinService PinService { get; set; }
-
-        public UniqueObservableCollection<PinViewModel> Pins
-        {
-            get => _pins;
-            set => SetProperty(ref _pins, value);
-        }
-
-        public PinViewModel SelectedPin
-        {
-            get => _selectedPin;
-            set => SetProperty(ref _selectedPin, value);
-        }
-
-        public ICommand GoToAddPinForm { get; set; }
-        public DelegateCommand<PinViewModel> PinTappedCommand { get; set; }
-
-        public MainMapTabViewModel MainMapViewModel { get; set; }
-
-        private int _choosenPage = 0;
-        public int ChoosenPage
-        {
-            get => _choosenPage;
-            set => SetProperty(ref _choosenPage, value);
-        }
-
-        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetaiPinViewCommand { get; set; }
-
-        public DelegateCommand HideDetailPinView { get; set; }
-
-        //private bool _showDetailView = false;
-        //
-        //public bool ShowDetailView
-        //{
-        //    get => _showDetailView;
-        //    set => SetProperty(ref _showDetailView, value);
-        //}
-
         public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
             PinService = pinService;
@@ -68,34 +29,96 @@ namespace GPSNotepad.ViewModels
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
             pinService.LoadUserPins(authorizationService.GetCurrenUserId());
-
-            PinTappedCommand = new DelegateCommand<PinViewModel>(item =>
-            {
-                ChoosenPage = 0;
-                MainMapViewModel.Span = new Xamarin.Forms.GoogleMaps.MapSpan(item.Position,
-                    MainMapViewModel.Span.LatitudeDegrees,
-                    MainMapViewModel.Span.LongitudeDegrees);
-            });
-
-            OnShowDetaiPinViewCommand = new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>((pin) =>
-            {
-                Guid id;
-                if (!Guid.TryParse(pin.Label, out id))
-                    return;
-                SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
-                MainMapViewModel.ShowDetailView = true;
-            });
-            HideDetailPinView = new DelegateCommand(() =>
-            {
-                SelectedPin = null;
-                MainMapViewModel.ShowDetailView = false;
-            });
-
-            GoToAddPinForm = new DelegateCommand(() =>
-            {
-                NavigationService.NavigateAsync(nameof(AddPinPage));
-            });
         }
+
+        protected IPinService PinService { get; set; }
+
+        private UniqueObservableCollection<PinViewModel> _pins;
+        public UniqueObservableCollection<PinViewModel> Pins
+        {
+            get => _pins;
+            set => SetProperty(ref _pins, value);
+        }
+
+        private PinViewModel _selectedPin = null;
+        public PinViewModel SelectedPin
+        {
+            get => _selectedPin;
+            set => SetProperty(ref _selectedPin, value);
+        }
+
+        private string _searchField = "";
+        public string SearchField
+        {
+            get => _searchField;
+            set
+            {
+                SetProperty(ref _searchField, value);
+                var comparer = PinService.Find(_searchField) ?? new PinPositionComparer(CurrentPosition.LastChecked);
+                SortPins(comparer);
+            }
+        }
+
+        private void SortPins(IComparer<Pin> comparer)
+        {
+            var pins = Pins.Select(p => p.GetModelPin()).ToList();
+            pins.Sort(comparer);
+
+            Pins.Clear();
+            foreach (var pin in pins)
+            {
+                Pins.Add(pin.GetViewModel());
+            }
+        }
+
+        private int _choosenPage = 0;
+        public int ChoosenPage
+        {
+            get => _choosenPage;
+            set => SetProperty(ref _choosenPage, value);
+        }
+
+        public MainMapTabViewModel MainMapViewModel { get; set; }
+
+
+        #region ---Commands---
+
+        private ICommand _goToAddPinFormCommand = null;
+        public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
+        private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddPinPage));
+
+
+        private ICommand _hideDetailViewCommand;
+        public ICommand HideDetailPinViewCommand => _hideDetailViewCommand ??= new DelegateCommand(HideDetailPinViewHandler);
+        private void HideDetailPinViewHandler()
+        {
+            SelectedPin = null;
+            MainMapViewModel.ShowDetailView = false;
+        }
+
+
+        private DelegateCommand<PinViewModel> _pinTappedCommand;
+        public DelegateCommand<PinViewModel> PinTappedCommand => _pinTappedCommand ??= new DelegateCommand<PinViewModel>(PinTappedHandler);
+        private void PinTappedHandler(PinViewModel pin)
+        {
+            ChoosenPage = 0;
+            MainMapViewModel.Span = new Xamarin.Forms.GoogleMaps.MapSpan(pin.Position,
+                MainMapViewModel.Span.LatitudeDegrees,
+                MainMapViewModel.Span.LongitudeDegrees);
+        }
+
+
+        private DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> _onShowDetaiPinViewCommand;
+        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetaiPinViewCommand => _onShowDetaiPinViewCommand ??= new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>(OnShowDetaiPinViewHandler);
+        private void OnShowDetaiPinViewHandler(Xamarin.Forms.GoogleMaps.Pin pin)
+        {
+            Guid id;
+            if (!Guid.TryParse(pin.Label, out id))
+                return;
+            SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
+            MainMapViewModel.ShowDetailView = true;
+        }
+        #endregion
 
         private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)
         {
@@ -117,6 +140,13 @@ namespace GPSNotepad.ViewModels
                     Pins.Remove(message.ChangedPin.GetViewModel());
                     break;
             }
+            CurrentPosition.GetAsync().
+                ContinueWith(result =>
+                {
+                    SortPins(new PinPositionComparer(result.Result));
+                });
+
+
         }
     }
 }

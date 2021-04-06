@@ -1,7 +1,4 @@
-﻿using GPSNotepad.Model.Interfaces;
-using System;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
+﻿using System.Threading.Tasks;
 
 namespace GPSNotepad.Model
 {
