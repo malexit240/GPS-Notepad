@@ -39,9 +39,6 @@ namespace GPSNotepad
                 NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
 
             }
-
-
-
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -54,16 +51,12 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>());
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
 
-
-
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
             containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<AddPinPage, AddEditPinPageViewModel>();
-
-
         }
     }
 }

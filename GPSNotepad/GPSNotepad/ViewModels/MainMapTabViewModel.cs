@@ -12,14 +12,6 @@ namespace GPSNotepad.ViewModels
 {
     public class MainMapTabViewModel : ViewModelBase
     {
-        private MapSpan _span;
-
-        public MapSpan Span
-        {
-            get => _span;
-            set => SetProperty(ref _span, value);
-        }
-
         public MainMapTabViewModel(INavigationService navigationService) : base(navigationService)
         {
             CurrentPosition.GetAsync().ContinueWith(
@@ -28,5 +20,34 @@ namespace GPSNotepad.ViewModels
 
 
         }
+
+        private MapSpan _span;
+        public MapSpan Span
+        {
+            get => _span;
+            set => SetProperty(ref _span, value);
+        }
+
+        private bool _showDetailView = false;
+        public bool ShowDetailView
+        {
+            get => _showDetailView;
+            set
+            {
+                SetProperty(ref _showDetailView, value);
+                RaisePropertyChanged(nameof(ShowMoveToMyLocationButton));
+            }
+        }
+
+        public bool ShowMoveToMyLocationButton => !_showDetailView;
+
+
+        private ICommand _moveToMyLocationCommand;
+        public ICommand MoveToMyLocationCommand => _moveToMyLocationCommand ??= new DelegateCommand(MoveToMyLocationHandler);
+        private void MoveToMyLocationHandler()
+        {
+            CurrentPosition.GetAsync().ContinueWith(result => Span = new MapSpan(result.Result, 0.01, 0.01));
+        }
+
     }
 }

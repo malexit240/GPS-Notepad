@@ -13,10 +13,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="3*,1*" BackgroundColor="Green" HorizontalOptions="FillAndExpand">
-        <StackLayout  Grid.Row="0" Grid.RowSpan="2" BackgroundColor="Red">
-
-
+    <Grid RowDefinitions="3*,1*" HorizontalOptions="FillAndExpand">
+        <StackLayout  Grid.Row="0" Grid.RowSpan="2">
             <gpsnotepad:BindableMap
                                 PinsSource="{Binding Pins}"
                                 MapSpan="{Binding Path=MainMapViewModel.Span}">
@@ -25,18 +23,22 @@
                                               Command="{Binding OnShowDetaiPinViewCommand}"
                                               EventArgsConverter="{x:StaticResource showDetaiPinViewEventArgsConverter}"/>
                     <prism:EventToCommandBehavior EventName="MapClicked" 
-                                              Command="{Binding HideDetailPinView}"
-                                              />
+                                              Command="{Binding HideDetailPinView}"/>
 
                 </gpsnotepad:BindableMap.Behaviors>
             </gpsnotepad:BindableMap>
         </StackLayout>
-        <StackLayout Grid.Row="1" BackgroundColor="#E0F0F0F0" IsVisible="{Binding ShowDetailView}">
+        <StackLayout Grid.Row="1" BackgroundColor="#E0F0F0F0" IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}">
             <Label Text="Detail"/>
             <Label Text="{Binding Path=SelectedPin.Name}"/>
             <Label Text="{Binding Path=SelectedPin.Description}"
                    HorizontalOptions="CenterAndExpand"
                    VerticalOptions="CenterAndExpand"/>
         </StackLayout>
+        <Button Grid.Row="0" 
+                Grid.RowSpan="2"
+                Style="{DynamicResource floatButtonStyle}"
+                IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"
+                Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>
     </Grid>
 </ContentPage>

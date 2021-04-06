@@ -12,7 +12,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <Grid RowDefinitions="*">
-        <ListView Grid.Row="0" ItemsSource="{Binding Pins}">
+        <ListView Grid.Row="0" ItemsSource="{Binding Pins}" HasUnevenRows="True">
             <ListView.Behaviors>
                 <prism:EventToCommandBehavior EventName="ItemTapped"
                                               Command="{Binding PinTappedCommand}"
@@ -26,6 +26,7 @@
                             <MenuItem Command="{Binding DeletePinContextCommand}" Text="Delete"/>
                         </ViewCell.ContextActions>
                         <StackLayout>
+                            <CheckBox IsChecked="{Binding Favorite}"/>
                             <Label Text="{Binding Name}"/>
                             <Label Text="{Binding Description}"/>
                         </StackLayout>

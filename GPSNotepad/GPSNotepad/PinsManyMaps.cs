@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms.GoogleMaps;
 using GPSNotepad.Extensions;
+using Xamarin.Forms;
 
 namespace GPSNotepad
 {
@@ -52,6 +53,10 @@ namespace GPSNotepad
 
                 var p = pin.GetGoogleMapsPin();
                 p.Type = PinType.Place;
+                if (pin.Favorite == true)
+                    p.Icon = BitmapDescriptorFactory.FromBundle("purpleMarkerSmallWithCrown.png");
+                else
+                    p.Icon = BitmapDescriptorFactory.FromBundle("green_grayMarkerSmall.png");
                 if (bindableMap.ShowInfoWindow == false)
                     p.Label = pin.PinId.ToString();
                 bindableMap.Pins.Add(p);

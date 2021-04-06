@@ -22,6 +22,8 @@ namespace GPSNotepad
         private Position _position = new Position();
         private bool _favorite = false;
 
+        protected IPinService PinService { get; set; }
+
 
         public bool HideInfoWindow { get; set; } = true;
 
@@ -50,17 +52,33 @@ namespace GPSNotepad
             get => _position.Rounded();
             set => SetProperty(ref _position, value.Rounded());
         }
-        public bool Favorite { get; set; }
+
+
+        public bool Favorite
+        {
+            get => _favorite;
+
+            set
+            {
+                SetProperty(ref _favorite, value);
+                PinService?.Update(this.GetModelPin());
+            }
+        }
 
         public ICommand EditPinContextCommand { get; set; }
         public ICommand DeletePinContextCommand { get; set; }
 
-        public PinViewModel(INavigationService navigationService, Guid pinId, Guid userId) : base(navigationService)
+        public PinViewModel(INavigationService navigationService, Guid pinId, Guid userId, string name = "", string description = "", bool favorite = false, Position? position = null) : base(navigationService)
         {
             _pinId = pinId;
             _userId = userId;
 
-            IPinService pinService = App.Current.Container.Resolve<IPinService>();
+            _name = name;
+            _description = description;
+            _favorite = favorite;
+            _position = position ?? new Xamarin.Forms.GoogleMaps.Position();
+
+            PinService = App.Current.Container.Resolve<IPinService>();
 
             EditPinContextCommand = new DelegateCommand(() =>
             {
@@ -69,7 +87,7 @@ namespace GPSNotepad
 
             DeletePinContextCommand = new DelegateCommand(() =>
             {
-                pinService.Delete(this.GetModelPin());
+                PinService.Delete(this.GetModelPin());
             });
 
         }

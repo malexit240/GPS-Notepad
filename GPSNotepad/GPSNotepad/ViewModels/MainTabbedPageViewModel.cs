@@ -49,13 +49,13 @@ namespace GPSNotepad.ViewModels
 
         public DelegateCommand HideDetailPinView { get; set; }
 
-        private bool _showDetailView = false;
-
-        public bool ShowDetailView
-        {
-            get => _showDetailView;
-            set => SetProperty(ref _showDetailView, value);
-        }
+        //private bool _showDetailView = false;
+        //
+        //public bool ShowDetailView
+        //{
+        //    get => _showDetailView;
+        //    set => SetProperty(ref _showDetailView, value);
+        //}
 
         public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
@@ -83,12 +83,12 @@ namespace GPSNotepad.ViewModels
                 if (!Guid.TryParse(pin.Label, out id))
                     return;
                 SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
-                ShowDetailView = true;
+                MainMapViewModel.ShowDetailView = true;
             });
             HideDetailPinView = new DelegateCommand(() =>
             {
                 SelectedPin = null;
-                ShowDetailView = false;
+                MainMapViewModel.ShowDetailView = false;
             });
 
             GoToAddPinForm = new DelegateCommand(() =>

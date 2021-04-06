@@ -5,6 +5,7 @@ using Android.OS;
 using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;
+using Xamarin.Forms.GoogleMaps.Android;
 
 namespace GPSNotepad.Droid
 {
@@ -21,7 +22,16 @@ namespace GPSNotepad.Droid
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState);
+
+
+            var platformConfig = new PlatformConfig
+            {
+                BitmapDescriptorFactory = new CachingNativeBitmapDescriptorFactory()
+            };
+
+            Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig); // initialize for Xamarin.Forms.GoogleMaps
+            
+
             UserDialogs.Init(this);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Plugin.InputKit.Platforms.Droid.Config.Init(this, savedInstanceState);

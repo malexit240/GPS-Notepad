@@ -11,10 +11,6 @@ namespace GPSNotepad.Services.PinService
 {
     public class PinService : IPinService
     {
-        public PinService()
-        {
-
-        }
 
         protected static PinState PinState { get; set; } = new PinState();
 
@@ -69,7 +65,7 @@ namespace GPSNotepad.Services.PinService
                     context.Pins.Update(pin);
                     context.SaveChangesAsync();
                 }
-                return false;
+                return true;
             });
         }
 
@@ -85,7 +81,7 @@ namespace GPSNotepad.Services.PinService
                     context.Pins.Remove(pin);
                     context.SaveChangesAsync();
                 }
-                return false;
+                return true;
             });
         }
 
@@ -107,10 +103,15 @@ namespace GPSNotepad.Services.PinService
         public async Task<bool> CreateOrUpdatePin(Pin pin)
         {
             bool result = false;
+
             if (PinState.ContainsPin(pin.PinId))
+            {
                 result = await this.Update(pin);
+            }
             else
+            {
                 result = await this.Create(pin);
+            }
 
             return result;
         }

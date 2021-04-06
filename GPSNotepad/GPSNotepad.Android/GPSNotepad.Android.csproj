@@ -75,9 +75,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindableMapRenderer.cs" />
+    <Compile Include="CachingNativeBitmapDescriptorFactory.cs" />
     <Compile Include="DroidChangerStatusBarColor.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="OnMarkerClickListener.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StyledNavigationRenderer.cs" />
@@ -127,6 +129,21 @@
     <AndroidResource Include="Resources\drawable\icon_settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\marker_favorite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\marker_simple.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\purpleMarkerSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\green_grayMarkerSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidAsset Include="Assets\purpleMarkerSmallWithCrown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
