@@ -1,22 +1,12 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Collections.Specialized;
-using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using System;
-using System.Runtime;
+using GPSNotepad.Extensions;
 
-namespace GPSNotepad
+namespace GPSNotepad.Controls
 {
-    public class PinTappedEventArgs : EventArgs
-    {
-        public Pin Pin { get; set; }
-
-        public PinTappedEventArgs(Pin pin) => Pin = pin;
-    }
-
-
     public class BindableMap : Map
     {
         public BindableMap()
@@ -101,65 +91,65 @@ namespace GPSNotepad
                                                          declaringType: typeof(BindableMap),
                                                          defaultBindingMode: BindingMode.TwoWay);
 
-        private static List<PinsManyMaps> PinsMapsScope { get; set; } = new List<PinsManyMaps>();
+
+        private static Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap> Scope = new Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap>();
         #endregion
 
         #region ---Event Handlers---
         private static void MapSpanPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var thisInstance = bindable as BindableMap;
+            var map = bindable as BindableMap;
             var newMapSpan = newValue as MapSpan;
 
-            if (thisInstance.IsIdle)
-                thisInstance?.MoveToRegion(newMapSpan);
+            if (map.IsIdle)
+            {
+                map?.MoveToRegion(newMapSpan);
+            }
         }
 
         private static void PinsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newValue)
         {
-            var thisInstance = bindable as BindableMap;
+            var map = bindable as BindableMap;
             var newPinsSource = newValue as UniqueObservableCollection<PinViewModel>;
 
-            if (thisInstance == null ||
-                newPinsSource == null)
-                return;
+            if (map != null && newPinsSource != null)
+            {
+                Scope.Add(newPinsSource, map);
+                newPinsSource.CollectionChanged += PinsSourceOnCollectionChanged;
 
-            AddMapToPinsCollection(thisInstance, newPinsSource);
+                map.UpdatePinsSource(newPinsSource);
+            }
         }
 
         private static void PinsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             var pins = sender as UniqueObservableCollection<PinViewModel>;
 
-            PinsManyMaps _pinMap = PinsMapsScope.Find((pms) => pms.GetHashCode() == PinsManyMaps.GetEquivalent(pins).GetHashCode());
+            if (Scope.ContainsKey(pins))
+            {
+                var map = Scope[pins];
 
-            if (_pinMap != null)
-                _pinMap.UpdateMaps();
+                map.UpdatePinsSource(pins);
+            }
         }
         #endregion
 
-        #region ---Static Helpers---
-        private static void AddMapToPinsCollection(BindableMap map, UniqueObservableCollection<PinViewModel> pins)
+        private void UpdatePinsSource(UniqueObservableCollection<PinViewModel> newSource)
         {
-            PinsManyMaps _pinMap = PinsMapsScope.Find((pms) => pms.GetHashCode() == PinsManyMaps.GetEquivalent(pins).GetHashCode());
-
-
-            if (_pinMap != null)
+            Pins.Clear();
+            foreach (var pin in newSource)
             {
-                _pinMap = PinsMapsScope.Find((pms) => pms == PinsManyMaps.GetEquivalent(pins));
-                if (_pinMap != null)
-                    _pinMap.Maps.Add(map);
-            }
-            else
-            {
-
-                _pinMap = new PinsManyMaps(pins, map);
-                PinsMapsScope.Add(_pinMap);
-
-                pins.CollectionChanged += PinsSourceOnCollectionChanged;
-
-                _pinMap.UpdateMaps();
+                var p = pin.GetGoogleMapsPin();
+                p.Type = PinType.Place;
+                if (pin.Favorite == true)
+                    p.Icon = BitmapDescriptorFactory.FromBundle("purpleMarkerSmallWithCrown.png");
+                else
+                    p.Icon = BitmapDescriptorFactory.FromBundle("green_grayMarkerSmall.png");
+                if (ShowInfoWindow == false)
+                    p.Label = pin.PinId.ToString();
+                Pins.Add(p);
             }
         }
-        #endregion
+
     }
 }

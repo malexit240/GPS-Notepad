@@ -1,5 +1,6 @@
 ﻿using Android.Content;
 using Android.Gms.Maps;
+using GPSNotepad.Controls;
 using System;
 using System.ComponentModel;
 using Xamarin.Forms;
@@ -8,7 +9,7 @@ using Xamarin.Forms.GoogleMaps.Android;
 using Xamarin.Forms.Platform.Android;
 using static Android.Gms.Maps.GoogleMap;
 
-[assembly: ExportRenderer(typeof(GPSNotepad.BindableMap), typeof(GPSNotepad.Droid.BindableMapRenderer))]
+[assembly: ExportRenderer(typeof(GPSNotepad.Controls.BindableMap), typeof(GPSNotepad.Droid.BindableMapRenderer))]
 namespace GPSNotepad.Droid
 {
     public class BindableMapRenderer : MapRenderer

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:maps="clr-namespace:Xamarin.Forms.GoogleMaps;assembly=Xamarin.Forms.GoogleMaps" 
-             xmlns:gpsnotepad="clr-namespace:GPSNotepad"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.AddPinPage"
@@ -14,14 +14,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <gpsnotepad:BindableMap x:Name="map" PinsSource="{Binding Pins}" MapSpan="{Binding Span}" >
-            <gpsnotepad:BindableMap.Behaviors>
+        <controls:BindableMap x:Name="map" PinsSource="{Binding Pins}" MapSpan="{Binding Span}" >
+            <controls:BindableMap.Behaviors>
                 <prism:EventToCommandBehavior EventName="MapClicked" 
                                               Command="{Binding OnMapClickedCommand}" 
                                               EventArgsConverter="{x:StaticResource mapClickedEventArgsConverter}"/>
                 <prism:EventToCommandBehavior EventName="MapLoaded" Command="{Binding OnMapLoadedCommand}"/>
-            </gpsnotepad:BindableMap.Behaviors>
-        </gpsnotepad:BindableMap>
+            </controls:BindableMap.Behaviors>
+        </controls:BindableMap>
         <Entry Text="{Binding Name}" 
                Style="{DynamicResource entryStyle}"/>
         <Entry Text="{Binding Description}" 

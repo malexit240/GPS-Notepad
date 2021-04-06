@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="False"
-             xmlns:gpsnotepad="clr-namespace:GPSNotepad"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              x:Class="GPSNotepad.Views.MainMapTabPage"
              Style="{DynamicResource pageStyle}">
@@ -15,18 +15,18 @@
 
     <Grid RowDefinitions="3*,1*" HorizontalOptions="FillAndExpand">
         <StackLayout  Grid.Row="0" Grid.RowSpan="2">
-            <gpsnotepad:BindableMap
+            <controls:BindableMap
                                 PinsSource="{Binding Pins}"
                                 MapSpan="{Binding Path=MainMapViewModel.Span}">
-                <gpsnotepad:BindableMap.Behaviors>
+                <controls:BindableMap.Behaviors>
                     <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
                                               Command="{Binding OnShowDetaiPinViewCommand}"
                                               EventArgsConverter="{x:StaticResource showDetaiPinViewEventArgsConverter}"/>
                     <prism:EventToCommandBehavior EventName="MapClicked" 
                                               Command="{Binding HideDetailPinView}"/>
 
-                </gpsnotepad:BindableMap.Behaviors>
-            </gpsnotepad:BindableMap>
+                </controls:BindableMap.Behaviors>
+            </controls:BindableMap>
         </StackLayout>
         <StackLayout Grid.Row="1" BackgroundColor="#E0F0F0F0" IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}">
             <Label Text="Detail"/>

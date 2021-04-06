@@ -7,7 +7,7 @@ namespace GPSNotepad
     public class UniqueObservableCollection<T> : ObservableCollection<T>
     {
         #region ---Public Properties---
-        public Guid CollectionId { get; private set; } 
+        public Guid CollectionId { get; private set; }
         #endregion
 
         #region ---Constructors---
@@ -18,6 +18,12 @@ namespace GPSNotepad
 
         #region ---Overrides---
         public override int GetHashCode() => HashCode.Combine(CollectionId);
+        public override bool Equals(object obj)
+        {
+            var pins = (UniqueObservableCollection<PinViewModel>)obj;
+
+            return pins is null ? true : pins.CollectionId == this.CollectionId;
+        }
         #endregion
 
         #region ---Private Helpers---
