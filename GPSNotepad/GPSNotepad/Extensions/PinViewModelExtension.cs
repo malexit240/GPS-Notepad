@@ -6,8 +6,7 @@ namespace GPSNotepad.Extensions
     {
         public static PinViewModel GetViewModel(this GPSNotepad.Model.Entities.Pin pin)
         {
-            var navigationService = App.Current.Container.Resolve<INavigationService>();
-            return new PinViewModel(navigationService, pin.PinId, pin.UserId, pin.Name, pin.Description, pin.Favorite, pin.Position);
+            return new PinViewModel(pin.PinId, pin.UserId, pin.Name, pin.Description, pin.Favorite, pin.Position);
         }
 
         public static GPSNotepad.Model.Entities.Pin GetModelPin(this PinViewModel pin)

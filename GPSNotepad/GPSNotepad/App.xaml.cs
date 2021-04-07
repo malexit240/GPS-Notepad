@@ -9,11 +9,14 @@ using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.Settings;
 using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
+using Prism.Navigation;
 
 namespace GPSNotepad
 {
     public partial class App
     {
+
+        public new INavigationService navigationService { get; set; }
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -29,6 +32,7 @@ namespace GPSNotepad
             var authorizationService = Container.Resolve<IAuthorizationService>();
             var authenticationService = Container.Resolve<IAuthenticationService>();
             var secureStorage = Container.Resolve<ISecureStorageService>();
+            navigationService = NavigationService;
 
             if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
             {

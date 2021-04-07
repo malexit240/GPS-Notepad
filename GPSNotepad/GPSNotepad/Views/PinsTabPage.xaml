@@ -5,6 +5,7 @@
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              prism:ViewModelLocator.AutowireViewModel="False"
              x:Class="GPSNotepad.Views.PinsTabPage"
+             x:Name="page"
              Style="{DynamicResource pageStyle}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -24,7 +25,8 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Command="{Binding EditPinContextCommand}" Text="Edit"/>
+                                <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand , Source={x:Reference page}}"
+                                          CommandParameter="{Binding Self}" Text="Edit"/>
                                 <MenuItem Command="{Binding DeletePinContextCommand}" Text="Delete"/>
                             </ViewCell.ContextActions>
                             <StackLayout>

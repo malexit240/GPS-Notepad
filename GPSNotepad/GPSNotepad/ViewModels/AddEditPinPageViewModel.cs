@@ -70,11 +70,12 @@ namespace GPSNotepad.ViewModels
         {
             Pins = new UniqueObservableCollection<PinViewModel>();
             AuthorizationService = authorizationService;
-            AddEditPinCommand = new DelegateCommand(() =>
+            AddEditPinCommand = new DelegateCommand(async () =>
             {
                 PinViewModel.Name = Name;
                 PinViewModel.Description = Description;
-                pinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
+                await navigationService.GoBackAsync();
+                await pinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
             });
 
             OnMapLoadedCommand = new DelegateCommand(OnMapLoadedHelper);
@@ -105,7 +106,7 @@ namespace GPSNotepad.ViewModels
                 {
                     var position = await CurrentPosition.GetAsync();
 
-                    PinViewModel = new PinViewModel(NavigationService, Guid.NewGuid(), AuthorizationService.GetCurrenUserId())
+                    PinViewModel = new PinViewModel(Guid.NewGuid(), AuthorizationService.GetCurrenUserId())
                     {
                         Position = position
                     };

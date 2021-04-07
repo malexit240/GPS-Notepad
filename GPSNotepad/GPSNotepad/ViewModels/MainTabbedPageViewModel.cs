@@ -59,26 +59,6 @@ namespace GPSNotepad.ViewModels
             }
         }
 
-        private void SortPins(IComparer<Pin> comparer)
-        {
-            var pins = Pins.Select(p => p.GetModelPin()).ToList();
-            pins.Sort(comparer);
-            try
-            {
-                Pins.Clear();
-            }
-            catch (Exception e)
-            {
-
-
-            }
-
-            foreach (var pin in pins)
-            {
-                Pins.Add(pin.GetViewModel());
-            }
-        }
-
         private int _choosenPage = 0;
         public int ChoosenPage
         {
@@ -90,6 +70,14 @@ namespace GPSNotepad.ViewModels
 
 
         #region ---Commands---
+
+        private ICommand _editPinContextCommand;
+        public ICommand EditPinContextCommand => _editPinContextCommand ??= new DelegateCommand<PinViewModel>(EditPinContextHandler);
+        private async void EditPinContextHandler(PinViewModel pin)
+        {
+            await NavigationService.NavigateAsync(nameof(AddPinPage), (nameof(PinViewModel), pin));
+        }
+
 
         private ICommand _goToAddPinFormCommand = null;
         public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
@@ -128,6 +116,14 @@ namespace GPSNotepad.ViewModels
         }
         #endregion
 
+        private void SortPins(IComparer<Pin> comparer)
+        {
+            var pins = Pins.Select(p => p.GetModelPin()).ToList();
+            pins.Sort(comparer);
+            Pins = new UniqueObservableCollection<PinViewModel>(pins.Select(p => p.GetViewModel()).ToList());
+
+        }
+
         private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)
         {
             switch (message.ChangedType)
@@ -148,12 +144,11 @@ namespace GPSNotepad.ViewModels
                     Pins.Remove(message.ChangedPin.GetViewModel());
                     break;
             }
-            //CurrentPosition.GetAsync().
-            //    ContinueWith(result =>
-            //    {
-            //        SortPins(new PinPositionComparer(result.Result));
-            //    });
-            //SortPins(new PinPositionComparer(new Xamarin.Forms.GoogleMaps.Position()));
+            CurrentPosition.GetAsync().
+                ContinueWith(result =>
+                {
+                    SortPins(new PinPositionComparer(result.Result));
+                });
 
         }
     }

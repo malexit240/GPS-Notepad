@@ -9,7 +9,7 @@
              Style="{DynamicResource pageStyle}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:PinTappedEventArgsConverter x:Key="showDetaiPinViewEventArgsConverter"/>
+            <converters:PinTappedEventArgsConverter x:Key="showDetailPinViewEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -21,7 +21,7 @@
                 <controls:BindableMap.Behaviors>
                     <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
                                               Command="{Binding OnShowDetailPinViewCommand}"
-                                              EventArgsConverter="{x:StaticResource showDetaiPinViewEventArgsConverter}"/>
+                                              EventArgsConverter="{x:StaticResource showDetailPinViewEventArgsConverter}"/>
                     <prism:EventToCommandBehavior EventName="MapClicked" 
                                               Command="{Binding HideDetailPinViewCommand}"/>
 

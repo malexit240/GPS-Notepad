@@ -12,7 +12,7 @@ using GPSNotepad.Services.PinService;
 
 namespace GPSNotepad
 {
-    public class PinViewModel : ViewModelBase, IEntityBase
+    public class PinViewModel : BindableBase, IEntityBase
     {
         private Guid _pinId;
         private Guid _userId;
@@ -23,6 +23,8 @@ namespace GPSNotepad
 
         protected IPinService PinService { get; set; }
 
+
+        public PinViewModel Self => this;
 
         public bool HideInfoWindow { get; set; } = true;
 
@@ -67,7 +69,7 @@ namespace GPSNotepad
         public ICommand EditPinContextCommand { get; set; }
         public ICommand DeletePinContextCommand { get; set; }
 
-        public PinViewModel(INavigationService navigationService, Guid pinId, Guid userId, string name = "", string description = "", bool favorite = false, Position? position = null) : base(navigationService)
+        public PinViewModel(Guid pinId, Guid userId, string name = "", string description = "", bool favorite = false, Position? position = null)
         {
             _pinId = pinId;
             _userId = userId;
@@ -79,10 +81,10 @@ namespace GPSNotepad
 
             PinService = App.Current.Container.Resolve<IPinService>();
 
-            EditPinContextCommand = new DelegateCommand(() =>
-            {
-                navigationService.NavigateAsync(nameof(AddPinPage), (nameof(PinViewModel), this));
-            });
+            //EditPinContextCommand = new DelegateCommand(async () =>
+            //{
+            //    await ((App)App.Current).navigationService.NavigateAsync(nameof(AddPinPage), (nameof/(PinViewModel), /this.GetModelPin().GetViewModel()));
+            //});
 
             DeletePinContextCommand = new DelegateCommand(() =>
             {

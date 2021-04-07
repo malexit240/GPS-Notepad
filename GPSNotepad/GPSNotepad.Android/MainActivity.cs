@@ -37,7 +37,7 @@ namespace GPSNotepad.Droid
             Plugin.InputKit.Platforms.Droid.Config.Init(this, savedInstanceState);
 
             LoadApplication(new App(new AndroidInitializer()));
-        }
+        }z
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {

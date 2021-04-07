@@ -123,11 +123,11 @@ namespace GPSNotepad.Services.PinService
             var position = StringToPositionConverter.GetPosition(searchField);
             if (position != null)
             {
-                //result = new PinPositionComparer(position.Value);
+                result = new PinPositionComparer(position.Value);
             }
             else
             {
-                //result = new PinNameCoparer(searchField);
+                result = new PinNameDescriptionComparer(searchField);
             }
 
             return result;

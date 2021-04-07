@@ -20,9 +20,6 @@ namespace GPSNotepad.Services.PinService
             double oneDistance = one.Position.CalculateDistance(ethalon);
             double twoDistance = two.Position.CalculateDistance(ethalon);
 
-            one.Description = oneDistance.ToString();
-            two.Description = twoDistance.ToString();
-
             if (oneDistance > twoDistance)
                 result = 1;
             if (oneDistance < twoDistance)
