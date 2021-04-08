@@ -5,7 +5,7 @@ using GPSNotepad.Extensions;
 
 namespace GPSNotepad.Services.PinService
 {
-    public class PinPositionComparer : IComparer<Pin>
+    public class PinPositionComparer : ExcludedComparer<Pin>
     {
         Xamarin.Forms.GoogleMaps.Position ethalon;
         public PinPositionComparer(Xamarin.Forms.GoogleMaps.Position ethalon)
@@ -13,12 +13,12 @@ namespace GPSNotepad.Services.PinService
             this.ethalon = ethalon;
         }
 
-        public int Compare(Pin one, Pin two)
+        public override int Compare(Pin one, Pin two)
         {
             int result = 0;
 
-            double oneDistance = one.Position.CalculateDistance(ethalon);
-            double twoDistance = two.Position.CalculateDistance(ethalon);
+            double oneDistance = GetComparation(one);
+            double twoDistance = GetComparation(two);
 
             if (oneDistance > twoDistance)
                 result = 1;
@@ -27,6 +27,11 @@ namespace GPSNotepad.Services.PinService
 
             return result;
 
+        }
+
+        public override double GetComparation(Pin item)
+        {
+            return item.Position.CalculateDistance(ethalon);
         }
     }
 }

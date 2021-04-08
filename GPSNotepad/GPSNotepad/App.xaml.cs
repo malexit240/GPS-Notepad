@@ -15,8 +15,6 @@ namespace GPSNotepad
 {
     public partial class App
     {
-
-        public new INavigationService navigationService { get; set; }
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
@@ -32,7 +30,6 @@ namespace GPSNotepad
             var authorizationService = Container.Resolve<IAuthorizationService>();
             var authenticationService = Container.Resolve<IAuthenticationService>();
             var secureStorage = Container.Resolve<ISecureStorageService>();
-            navigationService = NavigationService;
 
             if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
             {
@@ -41,7 +38,6 @@ namespace GPSNotepad
             else
             {
                 NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
-
             }
         }
 

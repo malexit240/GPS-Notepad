@@ -33,6 +33,7 @@ namespace GPSNotepad.ViewModels
 
         protected IPinService PinService { get; set; }
 
+
         private UniqueObservableCollection<PinViewModel> _pins;
         public UniqueObservableCollection<PinViewModel> Pins
         {
@@ -53,9 +54,11 @@ namespace GPSNotepad.ViewModels
             get => _searchField;
             set
             {
+                if (_searchField == value)
+                    return;
                 SetProperty(ref _searchField, value);
-                var comparer = PinService.Find(_searchField) ?? new PinPositionComparer(CurrentPosition.LastChecked);
-                SortPins(comparer);
+
+                Pins = new UniqueObservableCollection<PinViewModel>(PinService.Find(_searchField).Select(p => p.GetViewModel()));
             }
         }
 
@@ -114,6 +117,28 @@ namespace GPSNotepad.ViewModels
             SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
             MainMapViewModel.ShowDetailView = true;
         }
+
+        //public bool _isDropDownPinsVisible = false;
+        //public bool IsDropDownPinsVisible
+        //{
+        //    get => _isDropDownPinsVisible;
+        //    set => SetProperty(ref _isDropDownPinsVisible, value);
+        //}
+        //
+        //private ICommand _onSearchFieldFocusCommand;
+        //public ICommand OnSearchFieldFocusCommand => _onSearchFieldFocusCommand ??= new DelegateCommand//(OnSearchFieldFocusHandler);
+        //private void OnSearchFieldFocusHandler()
+        //{
+        //    IsDropDownPinsVisible = true;
+        //}
+        //
+        //private ICommand _onSearchFieldUnfocusCommand;
+        //public ICommand OnSearchFieldUnfocusCommand => _onSearchFieldUnfocusCommand ??= new DelegateCommand//(OnSearchFieldUnfocusHandler);
+        //private void OnSearchFieldUnfocusHandler()
+        //{
+        //    IsDropDownPinsVisible = false;
+        //}
+
         #endregion
 
         private void SortPins(IComparer<Pin> comparer)
@@ -121,7 +146,6 @@ namespace GPSNotepad.ViewModels
             var pins = Pins.Select(p => p.GetModelPin()).ToList();
             pins.Sort(comparer);
             Pins = new UniqueObservableCollection<PinViewModel>(pins.Select(p => p.GetViewModel()).ToList());
-
         }
 
         private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)

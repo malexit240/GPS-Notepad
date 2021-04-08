@@ -18,6 +18,7 @@ namespace GPSNotepad.Services.PinService
 
         Task<bool> Delete(Pin pin);
         Task<bool> CreateOrUpdatePin(Pin pin);
-        IComparer<Pin> Find(string searchField);
+        IList<Pin> Find(string searchField);
+        //IComparer<Pin> Find(string searchField);
     }
 }

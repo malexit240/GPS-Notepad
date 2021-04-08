@@ -1,5 +1,6 @@
 ﻿using Acr.UserDialogs;
 using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Plugin.CurrentActivity;
@@ -23,21 +24,20 @@ namespace GPSNotepad.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             global::Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-
             var platformConfig = new PlatformConfig
             {
                 BitmapDescriptorFactory = new CachingNativeBitmapDescriptorFactory()
             };
 
             Xamarin.FormsGoogleMaps.Init(this, savedInstanceState, platformConfig); // initialize for Xamarin.Forms.GoogleMaps
-            
+
 
             UserDialogs.Init(this);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             Plugin.InputKit.Platforms.Droid.Config.Init(this, savedInstanceState);
 
             LoadApplication(new App(new AndroidInitializer()));
-        }z
+        }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {

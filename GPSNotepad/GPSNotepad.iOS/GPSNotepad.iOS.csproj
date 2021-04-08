@@ -107,6 +107,7 @@
     <Compile Include="IOSChangerStatusBarColor.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="SettingsPageViewModel.cs" />
     <Compile Include="StyledNavigationRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />

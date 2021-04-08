@@ -116,9 +116,26 @@ namespace GPSNotepad.Services.PinService
             return result;
         }
 
-        public IComparer<Pin> Find(string searchField)
+        public IList<Pin> Find(string searchField)
         {
-            IComparer<Pin> result = null;
+
+            var result = PinState.Pins.ToList();
+
+            if (searchField != "")
+            {
+                var comparer = this.GetComparer(searchField);
+
+                result.Sort(comparer);
+
+                result = comparer.GetExclusion(result) as List<Pin>;
+            }
+
+            return result;
+        }
+
+        private ExcludedComparer<Pin> GetComparer(string searchField)
+        {
+            ExcludedComparer<Pin> result = null;
 
             var position = StringToPositionConverter.GetPosition(searchField);
             if (position != null)
