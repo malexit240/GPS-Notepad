@@ -14,9 +14,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="1*,1*,3*,1*" HorizontalOptions="FillAndExpand">
-        <Entry Grid.Row="0" Text="{Binding SearchField}"/>
-        <StackLayout  Grid.Row="1" Grid.RowSpan="3">
+    <Grid RowDefinitions="1*,2*,6*,2*" HorizontalOptions="FillAndExpand">
+        <Entry Grid.Row="0" Text="{Binding SearchField}">
+            <Entry.Behaviors>
+                <prism:EventToCommandBehavior EventName="Focused" Command="{Binding OnSearchFieldFocusCommand}"/>
+                <prism:EventToCommandBehavior EventName="Unfocused" Command="{Binding OnSearchFieldUnfocusCommand}"/>
+            </Entry.Behaviors>
+        </Entry>
+        <StackLayout  Grid.Row="1" Grid.RowSpan="3" >
             <controls:BindableMap
                                 PinsSource="{Binding Pins}"
                                 MapSpan="{Binding Path=MainMapViewModel.Span}">
@@ -31,7 +36,7 @@
             </controls:BindableMap>
         </StackLayout>
 
-        <StackLayout Grid.Row="1" BackgroundColor="#E0F0F0F0">
+        <StackLayout Grid.Row="1" BackgroundColor="#E0F0F0F0" IsVisible="{Binding IsDropDownPinsVisible}">
             <ListView  ItemsSource="{Binding Pins}" HasUnevenRows="True">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped"

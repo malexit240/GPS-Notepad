@@ -61,8 +61,10 @@ namespace GPSNotepad
 
             set
             {
+                if (_favorite == value)
+                    return;
                 SetProperty(ref _favorite, value);
-                //PinService?.Update(this.GetModelPin());
+                PinService?.Update(this.GetModelPin());
             }
         }
 
