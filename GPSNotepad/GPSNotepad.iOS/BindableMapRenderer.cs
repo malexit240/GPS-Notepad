@@ -1,0 +1,25 @@
+﻿using Foundation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.GoogleMaps.iOS;
+
+[assembly: ExportRenderer(typeof(GPSNotepad.Controls.BindableMap), typeof(GPSNotepad.iOS.BindableMapRenderer))]
+namespace GPSNotepad.iOS
+{
+    public class BindableMapRenderer : MapRenderer
+    {
+        public BindableMapRenderer() : base()
+        {
+            this.NativeMap.CoordinateTapped += NativeMap_CoordinateTapped;
+        }
+
+        private void NativeMap_CoordinateTapped(object sender, Google.Maps.GMSCoordEventArgs e)
+        {
+
+        }
+    }
+}

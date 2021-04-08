@@ -2,7 +2,7 @@
 using Prism;
 using Prism.Ioc;
 using UIKit;
-
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace GPSNotepad.iOS
 {
