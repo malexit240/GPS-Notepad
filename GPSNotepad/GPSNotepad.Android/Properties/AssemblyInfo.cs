@@ -4,6 +4,8 @@ using System.Runtime.InteropServices;
 using Android.App;
 using GPSNotepad.Droid;
 using Xamarin.Forms;
+using Xamarin.Forms.GoogleMaps.Clustering;
+using Xamarin.Forms.GoogleMaps.Clustering.Android;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information

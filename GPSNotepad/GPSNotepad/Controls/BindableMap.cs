@@ -2,12 +2,13 @@
 using System.Collections.Specialized;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
+using Xamarin.Forms.GoogleMaps.Clustering;
 using System;
 using GPSNotepad.Extensions;
 
 namespace GPSNotepad.Controls
 {
-    public class BindableMap : Map
+    public class BindableMap : ClusteredMap
     {
         public BindableMap()
         {
@@ -149,6 +150,7 @@ namespace GPSNotepad.Controls
                     p.Label = pin.PinId.ToString();
                 Pins.Add(p);
             }
+            this.Cluster();
         }
 
     }
