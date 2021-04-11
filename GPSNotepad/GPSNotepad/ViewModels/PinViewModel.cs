@@ -57,7 +57,7 @@ namespace GPSNotepad
 
         public bool Favorite
         {
-            get => _favorite;
+            get =>  _favorite;
 
             set
             {

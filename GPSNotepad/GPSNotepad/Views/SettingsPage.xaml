@@ -8,14 +8,28 @@
              Style="{DynamicResource pageStyle}"
              Title="{Binding TextResources[SettingsTitle]}">
     <StackLayout>
-        <Switch IsToggled="{Binding IsLightTheme}"/>
+        <Label Text="{Binding TextResources[Theme]}"
+               Style="{DynamicResource labelStyle}"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding ThemeName}"
+                   Style="{DynamicResource labelStyle}"/>
+            <Switch IsToggled="{Binding IsLightTheme}"
+                    Style="{DynamicResource switchStyle}"/>
+
+        </StackLayout>
+
+
         <input:RadioButtonGroupView>
             <input:RadioButton  Text="{Binding TextResources[English]}" 
                                 IsChecked="{Binding IsEnglish}"
-                                ClickCommand="{Binding CheckedEnglish}"/>
+                                ClickCommand="{Binding CheckedEnglish}"
+                                Style="{DynamicResource radioButtonStyle}"/>
             <input:RadioButton  Text="{Binding TextResources[Russian]}"
                                 IsChecked="{Binding IsRussian}"
-                                ClickCommand="{Binding CheckedRussian}"/>
+                                ClickCommand="{Binding CheckedRussian}"
+                                Style="{DynamicResource radioButtonStyle}"/>
         </input:RadioButtonGroupView>
+
+
     </StackLayout>
 </ContentPage>

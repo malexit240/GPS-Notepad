@@ -3,13 +3,11 @@ using GPSNotepad.Views;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
-using GPSNotepad.Model;
 using GPSNotepad.Services.Authentication;
 using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.Settings;
 using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
-using Prism.Navigation;
 
 namespace GPSNotepad
 {
@@ -18,7 +16,6 @@ namespace GPSNotepad
         public App(IPlatformInitializer initializer)
             : base(initializer)
         {
-            Device.SetFlags(new string[] { "RadioButton_Experimental" });// Remake as View with button and label
         }
 
         protected override void OnInitialized()

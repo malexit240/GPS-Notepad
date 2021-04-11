@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
                     x:Class="GPSNotepad.Styles.Styles">
     <Style x:Key="pageStyle" 
                TargetType="NavigationPage">
@@ -13,6 +14,14 @@
                TargetType="Label">
         <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="labelDetailStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="HorizontalOptions"
+                    Value="CenterAndExpand"/>
     </Style>
 
     <Style x:Key="labelLinkStyle"
@@ -49,6 +58,13 @@
                     Value="{DynamicResource SecondaryTextColor}"/>
     </Style>
 
+    <Style x:Key="radioButtonStyle" TargetType="input:RadioButton">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="TextFontSize" Value="14"/>
+        <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="CircleColor" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
     <Style x:Key="floatButtonStyle"
                TargetType="Button">
         <Setter Property="VerticalOptions"
@@ -80,4 +96,13 @@
     <Style x:Key="activityIndicatorStyle" TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
     </Style>
+
+    <Style x:Key="detailViewStyle" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="dropDownStyle" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
 </ResourceDictionary>

@@ -37,3 +37,4 @@ using Xamarin.Forms;
 
 
 [assembly: ExportRenderer(typeof(NavigationPage), typeof(StyledNavigationRenderer))]
+[assembly: ExportRenderer(typeof(CheckBox), typeof(CustomCheckboxRenderer))]

@@ -88,6 +88,7 @@
     <Compile Include="OnMarkerClickListener.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomCheckboxRenderer.cs" />
     <Compile Include="StyledNavigationRenderer.cs" />
     <LinkDescription Include="LinkerSettings.xml" />
   </ItemGroup>
@@ -150,6 +151,15 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\purpleMarkerSmallWithCrown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\icon_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\FavoriteUnchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\FavoriteChecked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

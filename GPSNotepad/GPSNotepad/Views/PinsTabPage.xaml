@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
              prism:ViewModelLocator.AutowireViewModel="False"
              x:Class="GPSNotepad.Views.PinsTabPage"
              x:Name="page"
@@ -14,8 +15,14 @@
     </ContentPage.Resources>
     <Grid RowDefinitions="*">
         <StackLayout Grid.Row="0">
-            <Entry  Text="{Binding SearchField}"/>
-            <ListView  ItemsSource="{Binding Pins}" HasUnevenRows="True">
+            <Entry Placeholder="{Binding TextResources[Search]}"
+                   Text="{Binding SearchField}"
+                   Style="{DynamicResource entryStyle}"
+                   ClearButtonVisibility="WhileEditing"/>
+            <ListView  ItemsSource="{Binding Pins}" 
+                       HasUnevenRows="True"
+                       IsPullToRefreshEnabled="False"
+                       SelectionMode="None">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped"
                                               Command="{Binding PinTappedCommand}"
@@ -25,15 +32,29 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand , Source={x:Reference page}}"
-                                          CommandParameter="{Binding Self}" Text="Edit"/>
-                                <MenuItem Command="{Binding DeletePinContextCommand}" Text="Delete"/>
+                                <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand,
+                                          Source={x:Reference page}}"
+                                          CommandParameter="{Binding Self}"
+                                          Text="{Binding Path=BindingContext.TextResources[Edit],
+                                          Source={x:Reference page}}"/>
+                                <MenuItem Command="{Binding DeletePinContextCommand}" 
+                                          Text="{Binding Path=BindingContext.TextResources[Delete],
+                                          Source={x:Reference page}}"/>
                             </ViewCell.ContextActions>
-                            <StackLayout>
-                                <CheckBox IsChecked="{Binding Favorite}"/>
-                                <Label Text="{Binding Name}"/>
-                                <Label Text="{Binding Description}"/>
-                            </StackLayout>
+                            <Grid ColumnDefinitions="60,*" HeightRequest="120">
+                                <controls:ImageCheckBox Grid.Column="0"
+                                                        Margin="10"
+                                                        CheckedImageSource="FavoriteChecked.png" 
+                                                        UncheckedImageSource="FavoriteUnchecked.png" 
+                                                        IsChecked="{Binding Favorite}"                                                       />
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="{Binding Name}"
+                                       Style="{DynamicResource labelStyle}"/>
+                                    <Label Text="{Binding Description}"
+                                       Style="{DynamicResource labelStyle}"/>
+                                </StackLayout>
+
+                            </Grid>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

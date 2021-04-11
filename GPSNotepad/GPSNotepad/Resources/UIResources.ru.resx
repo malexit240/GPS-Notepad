@@ -117,14 +117,35 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEditPinTitle" xml:space="preserve">
+    <value>Редактирование пина</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Подтвердите пароль</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Темная</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Detail" xml:space="preserve">
+    <value>Детали</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Редактировать</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Электронная почта</value>
   </data>
   <data name="English" xml:space="preserve">
     <value>Английский</value>
+  </data>
+  <data name="LightTheme" xml:space="preserve">
+    <value>Светлая</value>
   </data>
   <data name="ListOfPinsPageTitle" xml:space="preserve">
     <value>Отметки</value>
@@ -138,11 +159,17 @@
   <data name="MainPageTitle" xml:space="preserve">
     <value>GPS Блокнот</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Название</value>
+  </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
   </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Настройки</value>
@@ -158,5 +185,8 @@
   </data>
   <data name="SignUpTitle" xml:space="preserve">
     <value>Регистрация</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Тема</value>
   </data>
 </root>

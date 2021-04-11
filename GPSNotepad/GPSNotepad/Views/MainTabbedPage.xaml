@@ -12,7 +12,7 @@
         <ToolbarItem IconImageSource="icon_settings.png"
             Command="{prism:NavigateTo 'SettingsPage'}"/>
     </local:NavigableTabbedPage.ToolbarItems>
-
+    
     <local:MainMapTabPage Title="{Binding TextResources[MainMapPageTitle]}"/>
     <local:PinsTabPage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
 </local:NavigableTabbedPage>

@@ -11,12 +11,21 @@ namespace GPSNotepad.ViewModels
         #region ---Public Properties---
         ISettingsManagerService _settingsManager;
 
+
+        private string _themeName = "";
+        public string ThemeName
+        {
+            get => _themeName;
+            set => SetProperty(ref _themeName, value);
+        }
+
         public bool IsLightTheme
         {
             get => _settingsManager.Theme == Theme.Light;
             set
             {
                 _settingsManager.Theme = value ? Theme.Light : Theme.Dark;
+                ThemeName = value ? TextResources["LightTheme"] : TextResources["DarkTheme"];
                 RaisePropertyChanged(nameof(IsLightTheme));
             }
         }
@@ -31,8 +40,10 @@ namespace GPSNotepad.ViewModels
             get => _settingsManager.Language.Name == "ru-RU";
         }
 
-        public ICommand CheckedEnglish { get; set; }
-        public ICommand CheckedRussian { get; set; }
+        public ICommand CheckedEnglish =>
+        new DelegateCommand(() => _settingsManager.Language = new System.Globalization.CultureInfo("en-US"));
+        public ICommand CheckedRussian =>
+        new DelegateCommand(() => _settingsManager.Language = new System.Globalization.CultureInfo("ru-RU"));
         #endregion
 
         #region ---Connstructors---
@@ -41,8 +52,6 @@ namespace GPSNotepad.ViewModels
         {
             this._settingsManager = settingsManager;
 
-            CheckedEnglish = new DelegateCommand(() => _settingsManager.Language = new System.Globalization.CultureInfo("en-US"));
-            CheckedRussian = new DelegateCommand(() => _settingsManager.Language = new System.Globalization.CultureInfo("ru-RU"));
         }
         #endregion
     }
