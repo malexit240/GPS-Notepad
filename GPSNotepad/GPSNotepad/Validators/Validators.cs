@@ -8,7 +8,7 @@ namespace GPSNotepad.Validators
     public static class Validators
     {
         #region ---Public Static Methods---
-        public static async Task<EmailValidationStatus> IsEmailValid(string email)
+        public static EmailValidationStatus IsEmailValid(string email)
         {
 
             try
@@ -19,9 +19,6 @@ namespace GPSNotepad.Validators
             {
                 return EmailValidationStatus.InvalidFormat;
             }
-
-            if (await App.Current.Container.Resolve<IAuthorizationService>().IsUserExist(email))
-                return EmailValidationStatus.EmailAlreadyExist;
 
             return EmailValidationStatus.Done;
         }
@@ -35,7 +32,7 @@ namespace GPSNotepad.Validators
                 return PasswordValidationStatus.InvalidContent;
 
             return PasswordValidationStatus.Done;
-        } 
+        }
         #endregion
 
 

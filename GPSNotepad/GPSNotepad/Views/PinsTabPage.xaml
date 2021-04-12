@@ -61,6 +61,7 @@
             </ListView>
         </StackLayout>
         <Button Grid.Row="0" 
+                ImageSource="ic_add3x.png"
                 Style="{DynamicResource floatButtonStyle}"
                 Command="{Binding GoToAddPinFormCommand}"/>
     </Grid>

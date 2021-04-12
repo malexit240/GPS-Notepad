@@ -11,6 +11,8 @@
     <local:NavigableTabbedPage.ToolbarItems>
         <ToolbarItem IconImageSource="icon_settings.png"
             Command="{prism:NavigateTo 'SettingsPage'}"/>
+        <ToolbarItem IconImageSource="ic_exit_to_app3x.png"
+            Command="{Binding LogoutCommand}"/>
     </local:NavigableTabbedPage.ToolbarItems>
     
     <local:MainMapTabPage Title="{Binding TextResources[MainMapPageTitle]}"/>

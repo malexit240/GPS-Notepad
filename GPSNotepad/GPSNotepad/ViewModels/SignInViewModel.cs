@@ -5,6 +5,7 @@ using Prism.Navigation;
 using System.Windows.Input;
 using GPSNotepad.Services.Authentication;
 using GPSNotepad.Services.Authorization;
+using Xamarin.Forms;
 
 namespace GPSNotepad.ViewModels
 {
@@ -41,7 +42,7 @@ namespace GPSNotepad.ViewModels
                 await authenticationService.SignInAsync(Email, Password);
 
                 if (authorizationService.IsAuthorized)
-                    await this.NavigationService.NavigateAsync(nameof(MainTabbedPage));
+                    await this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
 
             }, canExecuteMethod: () => Email.Length != 0 && Password.Length != 0);
 

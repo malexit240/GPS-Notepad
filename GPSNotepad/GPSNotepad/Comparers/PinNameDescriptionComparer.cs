@@ -12,19 +12,24 @@ namespace GPSNotepad.Services.PinService
         {
             double result = 0;
 
-            string ethalon = Ethalon.ToLower();
-            string compared = source.ToLower();
+            if (source.Length != 0 && Ethalon.Length != 0)
+            {
 
-            result = compared.Contains(ethalon) ? 1 : 0;
 
-            result *= Math.Abs(ethalon.Length / (compared.Length * 1.0));
+                string ethalon = Ethalon.ToLower();
+                string compared = source.ToLower();
+
+                result = compared.Contains(ethalon) ? 1 : 0;
+
+                result *= Math.Abs(ethalon.Length / (compared.Length * 1.0));
+            }
 
             return result;
         }
 
         public override double GetComparation(Pin item)
         {
-            return CompareStringContent(item.Name);
+            return CompareStringContent(item.Name ?? "") + CompareStringContent(item.Description ?? "");
         }
 
         public override int Compare(Pin one, Pin two)

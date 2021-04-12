@@ -142,6 +142,60 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid format.
+        /// </summary>
+        internal static string InvalidEmailFormat {
+            get {
+                return ResourceManager.GetString("InvalidEmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid email.
+        /// </summary>
+        internal static string InvalidEmailFormatMessage {
+            get {
+                return ResourceManager.GetString("InvalidEmailFormatMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid password format.
+        /// </summary>
+        internal static string InvalidPasswordContent {
+            get {
+                return ResourceManager.GetString("InvalidPasswordContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password must contains minimum one digit and letter in UPPER case.
+        /// </summary>
+        internal static string InvalidPasswordContentMessage {
+            get {
+                return ResourceManager.GetString("InvalidPasswordContentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Invalid length.
+        /// </summary>
+        internal static string InvalidPasswordLength {
+            get {
+                return ResourceManager.GetString("InvalidPasswordLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Password length must be greater than 8 and lower than 16.
+        /// </summary>
+        internal static string InvalidPasswordLengthMessage {
+            get {
+                return ResourceManager.GetString("InvalidPasswordLengthMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Light.
         /// </summary>
         internal static string LightTheme {
@@ -273,6 +327,24 @@ namespace GPSNotepad.Resources {
         internal static string Theme {
             get {
                 return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User already exist.
+        /// </summary>
+        internal static string UserAlreadyExist {
+            get {
+                return ResourceManager.GetString("UserAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на User with inputed email already registred.
+        /// </summary>
+        internal static string UserAlreadyExistMessage {
+            get {
+                return ResourceManager.GetString("UserAlreadyExistMessage", resourceCulture);
             }
         }
     }

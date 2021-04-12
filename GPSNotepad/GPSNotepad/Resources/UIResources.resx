@@ -144,6 +144,24 @@
   <data name="English" xml:space="preserve">
     <value>English</value>
   </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>Invalid format</value>
+  </data>
+  <data name="InvalidEmailFormatMessage" xml:space="preserve">
+    <value>Invalid email</value>
+  </data>
+  <data name="InvalidPasswordContent" xml:space="preserve">
+    <value>Invalid password format</value>
+  </data>
+  <data name="InvalidPasswordContentMessage" xml:space="preserve">
+    <value>Password must contains minimum one digit and letter in UPPER case</value>
+  </data>
+  <data name="InvalidPasswordLength" xml:space="preserve">
+    <value>Invalid length</value>
+  </data>
+  <data name="InvalidPasswordLengthMessage" xml:space="preserve">
+    <value>Password length must be greater than 8 and lower than 16</value>
+  </data>
   <data name="LightTheme" xml:space="preserve">
     <value>Light</value>
   </data>
@@ -188,5 +206,11 @@
   </data>
   <data name="Theme" xml:space="preserve">
     <value>Theme</value>
+  </data>
+  <data name="UserAlreadyExist" xml:space="preserve">
+    <value>User already exist</value>
+  </data>
+  <data name="UserAlreadyExistMessage" xml:space="preserve">
+    <value>User with inputed email already registred</value>
   </data>
 </root>

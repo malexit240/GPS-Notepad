@@ -75,6 +75,7 @@
         </StackLayout>
         <Button Grid.Row="0" 
                 Grid.RowSpan="4"
+                ImageSource="TargetSmall.png"
                 Style="{DynamicResource floatButtonStyle}"
                 IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"
                 Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>

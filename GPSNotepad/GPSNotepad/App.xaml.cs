@@ -30,11 +30,11 @@ namespace GPSNotepad
 
             if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
             {
-                NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
             }
             else
             {
-                NavigationService.NavigateAsync($"{nameof(NavigationPage)}/{nameof(SignInPage)}");
+                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
             }
         }
 

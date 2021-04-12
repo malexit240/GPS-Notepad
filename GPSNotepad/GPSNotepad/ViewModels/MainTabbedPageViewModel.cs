@@ -21,6 +21,7 @@ namespace GPSNotepad.ViewModels
         public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
             PinService = pinService;
+            AuthorizationService = authorizationService;
 
             MainMapViewModel = new MainMapTabViewModel(navigationService);
 
@@ -28,10 +29,11 @@ namespace GPSNotepad.ViewModels
 
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
-            pinService.LoadUserPins(authorizationService.GetCurrenUserId());
+            pinService.LoadUserPins(AuthorizationService.GetCurrenUserId());
         }
 
         protected IPinService PinService { get; set; }
+        protected IAuthorizationService AuthorizationService;
 
 
         private UniqueObservableCollection<PinViewModel> _pins;
@@ -138,6 +140,15 @@ namespace GPSNotepad.ViewModels
         {
             IsDropDownPinsVisible = false;
         }
+
+        private ICommand _logoutCommand;
+        public ICommand LogoutCommand => _logoutCommand ??= new DelegateCommand(LogoutCommandHandler);
+        private void LogoutCommandHandler()
+        {
+            AuthorizationService.Unauthorize();
+            this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
+        }
+
 
         #endregion
 
