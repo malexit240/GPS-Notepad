@@ -1,6 +1,7 @@
 using System;
 using Android.App;
 using Android.Runtime;
+using Shiny;
 
 namespace GPSNotepad.Droid
 {
@@ -17,6 +18,8 @@ namespace GPSNotepad.Droid
         public override void OnCreate()
         {
             base.OnCreate();
+            Shiny.AndroidShinyHost.Init(this, new YourShinyStartup());
+
             Xamarin.Essentials.Platform.Init(this);
         }
     }

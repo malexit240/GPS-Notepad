@@ -85,6 +85,7 @@
     <Compile Include="DroidChangerStatusBarColor.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="NotificationService.cs" />
     <Compile Include="OnMarkerClickListener.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

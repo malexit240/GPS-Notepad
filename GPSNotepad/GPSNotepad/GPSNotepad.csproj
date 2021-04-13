@@ -8,6 +8,8 @@
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.483" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
+    <PackageReference Include="Shiny.Core" Version="1.2.0.1755" />
+    <PackageReference Include="Shiny.Notifications" Version="1.2.0.1755" />
     <PackageReference Include="System.ObjectModel" Version="4.3.0" />
     <PackageReference Include="System.Runtime" Version="4.3.1" />
     <PackageReference Include="Xamarin.Forms" Version="4.8.0.1364" />

@@ -12,11 +12,13 @@ using System.Text;
 using Xamarin.Forms;
 using Plugin.CurrentActivity;
 using Android.Support.V4.App;
+using GPSNotepad.Droid.Services;
 
 [assembly: Dependency(typeof(GPSNotepad.Droid.DroidChangerStatusBarColor))]
 
 namespace GPSNotepad.Droid
 {
+
     class DroidChangerStatusBarColor : IChangerBarColor
     {
         public void SetBarColor(Color color)
@@ -26,13 +28,19 @@ namespace GPSNotepad.Droid
 
             //PushNotification("Theme changed!");
 
+
+            //
+            //            var startServiceIntent = new Intent(CrossCurrentActivity.Current?.Activity, typeof(NotificationService));
+            //            
+            //            startServiceIntent.SetAction(NotificationServiceConstants.ACTION_ADD_NOTIFICATION_INFO);
+
         }
 
         private void PushNotification(string text)
         {
             NotificationCompat.Builder builder = new NotificationCompat.Builder(CrossCurrentActivity.Current?.Activity, "2113")
 .SetContentTitle(text)
-.SetContentText(text).SetSmallIcon(Resource.Drawable.icon_settings);
+.SetContentText(text).SetSmallIcon(Resource.Drawable.icon_settings).SetAutoCancel(true);
 
             // Build the notification:
             Notification notification = builder.Build();
