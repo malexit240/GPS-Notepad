@@ -32,6 +32,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\PinEventsListTabPage.xaml.cs">
+      <DependentUpon>PinEventsListTabPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PinsTabPage.xaml.cs">
       <DependentUpon>PinsTabPage.xaml</DependentUpon>
     </Compile>
@@ -59,6 +62,12 @@
     <EmbeddedResource Update="Resources\UIResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddEditPinAndEventsCarouselPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddEditPlaceEventPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AddPinPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>

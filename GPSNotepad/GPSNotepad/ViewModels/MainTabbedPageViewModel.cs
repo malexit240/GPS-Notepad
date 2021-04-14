@@ -60,7 +60,7 @@ namespace GPSNotepad.ViewModels
                     return;
                 SetProperty(ref _searchField, value);
 
-                Pins = new UniqueObservableCollection<PinViewModel>(PinService.Find(_searchField).Select(p => p.GetViewModel()));
+                Pins = new UniqueObservableCollection<PinViewModel>(PinService.Find(_searchField).Select(p => p.ToViewModel()));
             }
         }
 
@@ -80,13 +80,13 @@ namespace GPSNotepad.ViewModels
         public ICommand EditPinContextCommand => _editPinContextCommand ??= new DelegateCommand<PinViewModel>(EditPinContextHandler);
         private async void EditPinContextHandler(PinViewModel pin)
         {
-            await NavigationService.NavigateAsync(nameof(AddPinPage), (nameof(PinViewModel), pin));
+            await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsCarouselPage), (nameof(PinViewModel), pin));
         }
 
 
         private ICommand _goToAddPinFormCommand = null;
         public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
-        private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddPinPage));
+        private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddEditPinAndEventsCarouselPage));
 
 
         private ICommand _hideDetailViewCommand;
@@ -156,7 +156,7 @@ namespace GPSNotepad.ViewModels
         {
             var pins = Pins.Select(p => p.GetModelPin()).ToList();
             pins.Sort(comparer);
-            Pins = new UniqueObservableCollection<PinViewModel>(pins.Select(p => p.GetViewModel()).ToList());
+            Pins = new UniqueObservableCollection<PinViewModel>(pins.Select(p => p.ToViewModel()).ToList());
         }
 
         private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)
@@ -166,17 +166,17 @@ namespace GPSNotepad.ViewModels
                 case PinsStateChangedType.Load:
                 case PinsStateChangedType.Add:
                     foreach (var p in message.NewPins)
-                        Pins.Add(p.GetViewModel());
+                        Pins.Add(p.ToViewModel());
                     break;
                 case PinsStateChangedType.Update:
-                    var pin = message.ChangedPin.GetViewModel();
+                    var pin = message.ChangedPin.ToViewModel();
                     var index = Pins.IndexOf(pin);
                     if (index == -1)
                         break;
                     Pins[index] = pin;
                     break;
                 case PinsStateChangedType.Delete:
-                    Pins.Remove(message.ChangedPin.GetViewModel());
+                    Pins.Remove(message.ChangedPin.ToViewModel());
                     break;
             }
             CurrentPosition.GetAsync().

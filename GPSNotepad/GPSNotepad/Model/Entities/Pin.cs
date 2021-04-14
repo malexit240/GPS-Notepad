@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using Xamarin.Forms.GoogleMaps;
 
@@ -14,15 +15,17 @@ namespace GPSNotepad.Model.Entities
 
         public User User { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         public bool Favorite { get; set; }
 
         public double Longitude { get; set; }
 
         public double Latitude { get; set; }
+
+        public List<PlaceEvent> Events { get; set; } = new List<PlaceEvent>();
 
 
         [NotMapped]

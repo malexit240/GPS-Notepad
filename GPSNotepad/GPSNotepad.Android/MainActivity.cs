@@ -82,8 +82,8 @@ namespace GPSNotepad.Droid
         public override void ConfigureServices(IServiceCollection builder)
         {
             builder.UseNotifications();
-            builder.RegisterJob(new JobInfo(typeof(GPSNotepad.NotificationJob)) { RunOnForeground = true });
-            builder.UseJobForegroundService(TimeSpan.FromMinutes(1));
+            //builder.RegisterJob(new JobInfo(typeof(GPSNotepad.NotificationJob)) { RunOnForeground = true });
+            //builder.UseJobForegroundService(TimeSpan.FromMinutes(1));
         }
     }
 

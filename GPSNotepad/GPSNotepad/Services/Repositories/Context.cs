@@ -19,6 +19,7 @@ namespace GPSNotepad.Repositories
         #region ---Public Properties---
         public DbSet<User> Users { get; set; }
         public DbSet<Pin> Pins { get; set; }
+        public DbSet<PlaceEvent> Events { get; set; }
         #endregion
 
         #region ---Overrides---

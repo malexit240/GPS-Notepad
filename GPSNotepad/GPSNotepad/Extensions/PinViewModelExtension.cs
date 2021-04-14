@@ -1,12 +1,13 @@
 ﻿using Prism.Navigation;
+using System.Linq;
 
 namespace GPSNotepad.Extensions
 {
     public static class PinViewModelExtension
     {
-        public static PinViewModel GetViewModel(this GPSNotepad.Model.Entities.Pin pin)
+        public static PinViewModel ToViewModel(this GPSNotepad.Model.Entities.Pin pin)
         {
-            return new PinViewModel(pin.PinId, pin.UserId, pin.Name, pin.Description, pin.Favorite, pin.Position);
+            return new PinViewModel(pin.PinId, pin.UserId, pin.Name, pin.Description, pin.Favorite, pin.Position,pin.Events);
         }
 
         public static GPSNotepad.Model.Entities.Pin GetModelPin(this PinViewModel pin)
@@ -18,7 +19,8 @@ namespace GPSNotepad.Extensions
                 Name = pin.Name,
                 Description = pin.Description,
                 Position = pin.Position,
-                Favorite = pin.Favorite
+                Favorite = pin.Favorite,
+                Events = pin.Events.Select(e => e.ToModelEntity()).ToList()
             };
         }
 

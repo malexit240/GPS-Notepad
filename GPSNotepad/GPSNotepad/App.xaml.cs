@@ -8,6 +8,8 @@ using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.Settings;
 using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
+using System;
+using GPSNotepad.Services.PlaceEventsService;
 
 namespace GPSNotepad
 {
@@ -47,6 +49,7 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>());
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
+            containerRegistry.RegisterInstance<IPlaceEventsService>(Container.Resolve<PlaceEventsService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
@@ -54,6 +57,8 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<AddPinPage, AddEditPinPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditPinAndEventsCarouselPage, AddEditPinAndEventsPageViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventPageViewModel>();
         }
     }
 }

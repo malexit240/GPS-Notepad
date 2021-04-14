@@ -30,7 +30,7 @@ namespace GPSNotepad.Views
 
         private static void OnChoosenPagePropertyChange(BindableObject bindable, object oldValue, object newValue)
         {
-            var page = (MainTabbedPage)bindable;
+            var page = (NavigableTabbedPage)bindable;
             var index = (int)newValue;
 
             if (page.Children.IndexOf(page.CurrentPage) == index)

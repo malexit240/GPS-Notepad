@@ -6,12 +6,13 @@ using GPSNotepad.Model.Entities;
 using System.Linq;
 using GPSNotepad.Repositories;
 using System.Collections;
+using Microsoft.EntityFrameworkCore;
 
 namespace GPSNotepad.Services.PinService
 {
     public class PinService : IPinService
     {
-        protected static PinState PinState { get; set; } = new PinState();
+        protected static PinState PinState { get; set; } = PinState.Instance;
 
         #region ---IPermanentPinService Implementation---
         public async Task<bool> Create(Pin pin)
@@ -42,12 +43,8 @@ namespace GPSNotepad.Services.PinService
                 {
                     using (var context = new Context())
                     {
-                        var pins =
-                        (from pin in context.Pins
-                         where pin.UserId == user_id
-                         select pin).ToList();
 
-                        return pins;
+                        return context.Pins.Include(p => p.Events).Select(p => p).Where(p => p.UserId == user_id).ToList();
                     }
                 });
             }

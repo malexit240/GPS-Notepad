@@ -9,6 +9,8 @@ using Prism.Navigation;
 using GPSNotepad.Views;
 using GPSNotepad.Model.Entities;
 using GPSNotepad.Services.PinService;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace GPSNotepad
 {
@@ -57,7 +59,7 @@ namespace GPSNotepad
 
         public bool Favorite
         {
-            get =>  _favorite;
+            get => _favorite;
 
             set
             {
@@ -71,7 +73,7 @@ namespace GPSNotepad
         public ICommand EditPinContextCommand { get; set; }
         public ICommand DeletePinContextCommand { get; set; }
 
-        public PinViewModel(Guid pinId, Guid userId, string name = "", string description = "", bool favorite = false, Position? position = null)
+        public PinViewModel(Guid pinId, Guid userId, string name = "", string description = "", bool favorite = false, Position? position = null, List<PlaceEvent> events = null)
         {
             _pinId = pinId;
             _userId = userId;
@@ -81,18 +83,24 @@ namespace GPSNotepad
             _favorite = favorite;
             _position = position ?? new Xamarin.Forms.GoogleMaps.Position();
 
-            PinService = App.Current.Container.Resolve<IPinService>();
+            Events = new ObservableCollection<PlaceEventViewModel>();
 
-            //EditPinContextCommand = new DelegateCommand(async () =>
-            //{
-            //    await ((App)App.Current).navigationService.NavigateAsync(nameof(AddPinPage), (nameof/(PinViewModel), /this.GetModelPin().GetViewModel()));
-            //});
+            events?.ForEach(e => Events.Add(e.ToViewModel()));
+
+            PinService = App.Current.Container.Resolve<IPinService>();
 
             DeletePinContextCommand = new DelegateCommand(() =>
             {
                 PinService.Delete(this.GetModelPin());
             });
 
+        }
+
+        private ObservableCollection<PlaceEventViewModel> _events;
+        public ObservableCollection<PlaceEventViewModel> Events
+        {
+            get => _events;
+            set => SetProperty(ref _events, value);
         }
 
         public Guid Id => _pinId;
