@@ -8,16 +8,18 @@ namespace GPSNotepad
         public int Id { get; set; }
         public DateTime TimeToNotify { get; set; }
 
+        public string NotificationTitle { get; set; }
         public string NotificationText { get; set; }
 
         public bool IsFired { get; set; }
 
-        public static FutureNotification Create(string text, DateTime TimeToNotify)
+        public static FutureNotification Create(string pinName, string notificationText, DateTime TimeToNotify)
         {
             return Create(new FutureNotification()
             {
                 Id = new Random().Next(),
-                NotificationText = text,
+                NotificationTitle = pinName,
+                NotificationText = notificationText,
                 TimeToNotify = TimeToNotify
             });
         }
