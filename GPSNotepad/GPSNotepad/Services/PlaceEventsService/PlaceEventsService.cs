@@ -25,6 +25,22 @@ namespace GPSNotepad.Services.PlaceEventsService
             });
         }
 
+        public async void CreateOrUpdate(PlaceEvent @event)
+        {
+            await Task.Run(() =>
+            {
+                using (var context = new Context())
+                {
+                    if (context.Events.Any(e => e.PlaceEventId == @event.PlaceEventId))
+                        this.Update(@event);
+                    else
+                    {
+                        this.Create(@event);
+                    }
+                }
+            });
+
+        }
 
         public async void Delete(PlaceEvent placeEvent)
         {

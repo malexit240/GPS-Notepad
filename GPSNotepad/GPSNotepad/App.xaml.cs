@@ -48,8 +48,8 @@ namespace GPSNotepad
 
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>());
-            containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
             containerRegistry.RegisterInstance<IPlaceEventsService>(Container.Resolve<PlaceEventsService>());
+            containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();

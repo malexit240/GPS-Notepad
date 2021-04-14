@@ -112,7 +112,7 @@ namespace GPSNotepad.ViewModels
                 SetNewPinPosition((Position)newPosition);
             });
 
-            MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinsStateChanged);
+            //MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinsStateChanged);
 
             GoToAddPlaceEventFormCommand = new DelegateCommand(async () =>
             {

@@ -7,17 +7,23 @@ using System.Linq;
 using GPSNotepad.Repositories;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
+using GPSNotepad.Services.PlaceEventsService;
 
 namespace GPSNotepad.Services.PinService
 {
     public class PinService : IPinService
     {
         protected static PinState PinState { get; set; } = PinState.Instance;
+        protected IPlaceEventsService PlaceEventService { get; set; }
+
+        public PinService(IPlaceEventsService placeEventService)
+        {
+            PlaceEventService = placeEventService;
+        }
 
         #region ---IPermanentPinService Implementation---
         public async Task<bool> Create(Pin pin)
         {
-
             PinState.Create(pin);
 
             return await Task.Run(() =>
@@ -58,6 +64,7 @@ namespace GPSNotepad.Services.PinService
             {
                 using (var context = new Context())
                 {
+                    pin.Events.ForEach(e => PlaceEventService.CreateOrUpdate(e));
                     context.Pins.Update(pin);
                     context.SaveChangesAsync();
                 }
