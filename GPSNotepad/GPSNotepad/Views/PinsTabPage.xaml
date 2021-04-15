@@ -2,9 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="False"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
-             prism:ViewModelLocator.AutowireViewModel="False"
              x:Class="GPSNotepad.Views.PinsTabPage"
              x:Name="page"
              Style="{DynamicResource pageStyle}">
@@ -40,6 +40,10 @@
                                 <MenuItem Command="{Binding DeletePinContextCommand}" 
                                           Text="{Binding Path=BindingContext.TextResources[Delete],
                                           Source={x:Reference page}}"/>
+                                <MenuItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
+                                          Source={x:Reference page}}" 
+                                          Text="QR"
+                                          CommandParameter="{Binding Self}"/>
                             </ViewCell.ContextActions>
                             <Grid ColumnDefinitions="60,*" HeightRequest="120">
                                 <controls:ImageCheckBox Grid.Column="0"

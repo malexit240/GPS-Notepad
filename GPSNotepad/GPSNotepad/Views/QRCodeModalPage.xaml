@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:zx="clr-namespace:ZXing.Net.Mobile.Forms;assembly=ZXing.Net.Mobile.Forms"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
+             x:Class="GPSNotepad.Views.QRCodeModalPage">
+    <zx:ZXingBarcodeImageView 
+        IsVisible="True"
+        BarcodeFormat="QR_CODE" 
+        HeightRequest="300"
+        WidthRequest="300"
+        BarcodeValue="{Binding QRCodeValue}">
+        <zx:ZXingBarcodeImageView.BarcodeOptions>
+            <zxcm:EncodingOptions Width="300" Height="300" />
+        </zx:ZXingBarcodeImageView.BarcodeOptions>
+    </zx:ZXingBarcodeImageView>
+
+</ContentPage>

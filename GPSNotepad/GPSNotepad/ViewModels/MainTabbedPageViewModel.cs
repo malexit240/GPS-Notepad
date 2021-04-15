@@ -13,15 +13,17 @@ using GPSNotepad.Extensions;
 using System;
 using GPSNotepad.Services.Authorization;
 using System.Collections.Generic;
+using GPSNotepad.Services.QRCodeService;
 
 namespace GPSNotepad.ViewModels
 {
     public class MainTabbedPageViewModel : ViewModelBase
     {
-        public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
+        public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
         {
             PinService = pinService;
             AuthorizationService = authorizationService;
+            QrScanerService = qrScanerService;
 
             MainMapViewModel = new MainMapTabViewModel(navigationService);
 
@@ -33,7 +35,8 @@ namespace GPSNotepad.ViewModels
         }
 
         protected IPinService PinService { get; set; }
-        protected IAuthorizationService AuthorizationService;
+        protected IQrScanerService QrScanerService { get; set; }
+        protected IAuthorizationService AuthorizationService { get; set; }
 
 
         private UniqueObservableCollection<PinViewModel> _pins;
@@ -81,6 +84,27 @@ namespace GPSNotepad.ViewModels
         private async void EditPinContextHandler(PinViewModel pin)
         {
             await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsCarouselPage), (nameof(PinViewModel), pin));
+        }
+
+        private ICommand _showQRCodeCommand;
+        public ICommand ShowQRCodeCommand => _showQRCodeCommand ??= new DelegateCommand<PinViewModel>(ShowQRCodeHandler);
+        private void ShowQRCodeHandler(PinViewModel pin)
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add(nameof(QRCodeModalViewModel.QRCodeValue), pin.GetModelPin().GetPinAsQRCode());
+            NavigationService.NavigateAsync(nameof(QRCodeModalPage), parameters, useModalNavigation: true, false);
+        }
+
+        private ICommand _scanQRCommand;
+        public ICommand ScanQRCommand => _scanQRCommand ??= new DelegateCommand(ScanQRHandler);
+        private async void ScanQRHandler()
+        {
+            var pin = await QrScanerService.GetPinAsync();
+
+            if (pin != null)
+            {
+                await PinService.Create(pin);
+            }
         }
 
 

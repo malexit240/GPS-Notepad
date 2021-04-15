@@ -8,8 +8,11 @@ using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.Settings;
 using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
+using GPSNotepad.Services.QRCodeService;
 using System;
 using GPSNotepad.Services.PlaceEventsService;
+using ZXing.Mobile;
+using GPSNotepad.PlatformDependencyInterfaces;
 
 namespace GPSNotepad
 {
@@ -50,6 +53,7 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>());
             containerRegistry.RegisterInstance<IPlaceEventsService>(Container.Resolve<PlaceEventsService>());
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
+            containerRegistry.RegisterInstance<IQrScanerService>(Container.Resolve<QrScanerService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
@@ -59,6 +63,7 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<AddPinPage, AddEditPinPageViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPinAndEventsCarouselPage, AddEditPinAndEventsPageViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventPageViewModel>();
+            containerRegistry.RegisterForNavigation<QRCodeModalPage, QRCodeModalViewModel>();
         }
     }
 }
