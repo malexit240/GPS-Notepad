@@ -27,6 +27,8 @@ namespace GPSNotepad
         {
             InitializeComponent();
 
+            Loger.Instance.Log("Start");
+
             Container.Resolve<ISettingsManagerService>().Init();
 
             var authorizationService = Container.Resolve<IAuthorizationService>();
@@ -41,6 +43,7 @@ namespace GPSNotepad
             {
                 NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
             }
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
