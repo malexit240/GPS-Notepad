@@ -11,38 +11,9 @@ using GPSNotepad.Model.Entities;
 using GPSNotepad.Repositories;
 using Xamarin.Essentials;
 using Microsoft.EntityFrameworkCore;
-using Xamarin.Forms;
-using GPSNotepad.Model;
-using Prism;
 
 namespace GPSNotepad
 {
-
-    public class NotificationJobManager
-    {
-        public NotificationJobManager()
-        {
-            MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
-        }
-
-        private void OnPinStateChanged(PrismApplicationBase app, PinsStateChangedMessage message)
-        {
-            switch (message.ChangedType)
-            {
-                case PinsStateChangedType.Add:
-                case PinsStateChangedType.UpdateEvents:
-                case PinsStateChangedType.Delete:
-                    this.Reload();
-                    break;
-            }
-        }
-
-        public void Reload()
-        {
-            NotificationJob.ReloadShedule();
-        }
-    }
-
     public class NotificationJob : IJob
     {
         public static List<FutureNotification> NotificationsShedulde = null;
@@ -98,7 +69,6 @@ namespace GPSNotepad
                     }
                 }
             }
-
         }
 
         public async Task<bool> Run(JobInfo jobInfo, CancellationToken cancelToken)
@@ -135,7 +105,5 @@ namespace GPSNotepad
 
             await notificationManager.Send(Notification);
         }
-
-
     }
 }

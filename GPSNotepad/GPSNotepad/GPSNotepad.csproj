@@ -98,6 +98,7 @@
 
   <ItemGroup>
     <Folder Include="Enums\" />
+    <Folder Include="Trash\" />
   </ItemGroup>
 
 </Project>
