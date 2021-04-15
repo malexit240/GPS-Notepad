@@ -2,26 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             xmlns:controls="clr-namespace:GPSNotepad.Controls"
-             xmlns:converters="clr-namespace:GPSNotepad.Converters"
              prism:ViewModelLocator.AutowireViewModel="False"
              x:Class="GPSNotepad.Views.PinEventsListTabPage"
              x:Name="page"
              Style="{DynamicResource pageStyle}">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <Grid RowDefinitions="*">
         <StackLayout Grid.Row="0">
             <ListView  ItemsSource="{Binding Events}" 
                        HasUnevenRows="True"
+                       SeparatorVisibility="None"
                        IsPullToRefreshEnabled="False"
                        SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
+                        <ViewCell >
                             <ViewCell.ContextActions>
                                 <MenuItem Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
                                           Source={x:Reference page}}"
@@ -32,10 +26,23 @@
                                           Text="{Binding Path=BindingContext.TextResources[Delete],
                                           Source={x:Reference page}}"/>
                             </ViewCell.ContextActions>
-                            <StackLayout>
-                                <Label Text="{Binding Description}"
+                            <StackLayout HorizontalOptions="FillAndExpand"
+                                         Padding="5,15,5,5">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Description}"
+                                       HorizontalOptions="StartAndExpand"
                                        Style="{DynamicResource labelStyle}"/>
+                                    <StackLayout HorizontalOptions="EndAndExpand"
+                                             Orientation="Horizontal">
+                                        <Label Text="{Binding DateString}"
+                                       Style="{DynamicResource labelStyle}"/>
+                                        <Label Text="{Binding TimeString}"
+                                       Style="{DynamicResource labelStyle}"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Style="{DynamicResource stripStyle}"/>
                             </StackLayout>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

@@ -18,7 +18,6 @@
 
         </StackLayout>
 
-
         <input:RadioButtonGroupView>
             <input:RadioButton  Text="{Binding TextResources[English]}" 
                                 IsChecked="{Binding IsEnglish}"

@@ -18,6 +18,7 @@
                Style="{DynamicResource entryStyle}"/>
         <Entry Text="{Binding Password}"
                Placeholder="{Binding TextResources[Password]}"
+               IsPassword="True"
                Style="{DynamicResource entryStyle}"/>
         <Button Text="{Binding TextResources[SignIn]}"
                 Command="{Binding SignInCommand}"

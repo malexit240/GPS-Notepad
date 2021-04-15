@@ -46,7 +46,8 @@
                      Style="{DynamicResource dropDownStyle}">
             <ListView  ItemsSource="{Binding Pins}" 
                        HasUnevenRows="True"
-                       SelectionMode="None">
+                       SelectionMode="None"
+                       SeparatorVisibility="None">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped"
                                               Command="{Binding PinTappedCommand}"
@@ -55,8 +56,13 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Label Text="{Binding Name}"
+                            <StackLayout HorizontalOptions="FillAndExpand"
+                                         Padding="0,5,0,0">
+                                <Label Text="{Binding Name}"
                                    Style="{DynamicResource labelStyle}"/>
+                                <BoxView Style="{DynamicResource stripStyle}"/>
+                            </StackLayout>
+
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

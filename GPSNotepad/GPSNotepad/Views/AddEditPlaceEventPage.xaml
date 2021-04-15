@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.AddEditPlaceEventPage"
-             Title="AddEditPlaceEventTitle"
+             Title="{Binding TextResources[AddEditPlaceEventTitle]}"
              Style="{DynamicResource pageStyle}">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="icon_save.png" Command="{Binding AddEditPlaceEventCommand}"/>

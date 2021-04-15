@@ -120,6 +120,9 @@
   <data name="AddEditPinTitle" xml:space="preserve">
     <value>Edit pin</value>
   </data>
+  <data name="AddEditPlaceEventTitle" xml:space="preserve">
+    <value>Edit event</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="English" xml:space="preserve">
     <value>English</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>Events</value>
   </data>
   <data name="InvalidEmailFormat" xml:space="preserve">
     <value>Invalid format</value>
@@ -182,6 +188,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Pin</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Russian</value>

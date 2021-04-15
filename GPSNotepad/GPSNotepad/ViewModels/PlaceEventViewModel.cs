@@ -33,6 +33,9 @@ namespace GPSNotepad
             set => SetProperty(ref _time, value);
         }
 
+        public string TimeString => Time.ToShortTimeString();
+        public string DateString => Time.ToShortDateString();
+
         private string _description;
 
         public PlaceEventViewModel(Guid placeEventId, Guid pinId, DateTime time, string description)

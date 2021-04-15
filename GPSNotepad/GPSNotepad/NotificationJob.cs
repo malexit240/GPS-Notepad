@@ -55,8 +55,6 @@ namespace GPSNotepad
 
         protected bool OnStart()
         {
-            Loger.Instance.Log("OnStart()");
-
             bool result = true;
             IsInitialize = true;
 
@@ -76,8 +74,6 @@ namespace GPSNotepad
 
         public static void ReloadShedule()
         {
-
-            Loger.Instance.Log("ReloadShedule()");
             NotificationsShedulde = new List<FutureNotification>();
 
             var token = SecureStorage.GetAsync("SessionToken").Result ?? Guid.Empty.ToString();
@@ -115,7 +111,6 @@ namespace GPSNotepad
 
             var info = new JobInfo(typeof(NotificationJob));
             info.RunOnForeground = true;
-            Loger.Instance.Log(NotificationsShedulde.Count.ToString());
 
             if (NotificationsShedulde.Count != 0)
             {

@@ -120,6 +120,9 @@
   <data name="AddEditPinTitle" xml:space="preserve">
     <value>Редактирование пина</value>
   </data>
+  <data name="AddEditPlaceEventTitle" xml:space="preserve">
+    <value>Редактирование события</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Подтвердите пароль</value>
   </data>
@@ -144,6 +147,27 @@
   <data name="English" xml:space="preserve">
     <value>Английский</value>
   </data>
+  <data name="Events" xml:space="preserve">
+    <value>События</value>
+  </data>
+  <data name="InvalidEmailFormat" xml:space="preserve">
+    <value>Неверный формат</value>
+  </data>
+  <data name="InvalidEmailFormatMessage" xml:space="preserve">
+    <value>Неправильная форма емаила</value>
+  </data>
+  <data name="InvalidPasswordContent" xml:space="preserve">
+    <value>Неправильный формат</value>
+  </data>
+  <data name="InvalidPasswordContentMessage" xml:space="preserve">
+    <value>Пароль должен содержать по меньшей мере одну заглавную букву и одну цифру</value>
+  </data>
+  <data name="InvalidPasswordLength" xml:space="preserve">
+    <value>Ошибка длины</value>
+  </data>
+  <data name="InvalidPasswordLengthMessage" xml:space="preserve">
+    <value>Пароль должен быть длинее 8 символов, но меньше 16</value>
+  </data>
   <data name="LightTheme" xml:space="preserve">
     <value>Светлая</value>
   </data>
@@ -164,6 +188,9 @@
   </data>
   <data name="Password" xml:space="preserve">
     <value>Пароль</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Пин</value>
   </data>
   <data name="Russian" xml:space="preserve">
     <value>Русский</value>
@@ -188,5 +215,11 @@
   </data>
   <data name="Theme" xml:space="preserve">
     <value>Тема</value>
+  </data>
+  <data name="UserAlreadyExist" xml:space="preserve">
+    <value>Пользователь уже существует</value>
+  </data>
+  <data name="UserAlreadyExistMessage" xml:space="preserve">
+    <value>Пользователь с таким емаилом уже существует</value>
   </data>
 </root>

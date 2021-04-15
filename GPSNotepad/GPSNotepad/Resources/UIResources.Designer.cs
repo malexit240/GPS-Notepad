@@ -70,6 +70,15 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Edit event.
+        /// </summary>
+        internal static string AddEditPlaceEventTitle {
+            get {
+                return ResourceManager.GetString("AddEditPlaceEventTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Confirm password.
         /// </summary>
         internal static string ConfirmPassword {
@@ -138,6 +147,15 @@ namespace GPSNotepad.Resources {
         internal static string English {
             get {
                 return ResourceManager.GetString("English", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Events.
+        /// </summary>
+        internal static string Events {
+            get {
+                return ResourceManager.GetString("Events", resourceCulture);
             }
         }
         
@@ -255,6 +273,15 @@ namespace GPSNotepad.Resources {
         internal static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Pin.
+        /// </summary>
+        internal static string Pin {
+            get {
+                return ResourceManager.GetString("Pin", resourceCulture);
             }
         }
         

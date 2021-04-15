@@ -105,4 +105,11 @@
         <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
     </Style>
 
+    <Style x:Key="stripStyle" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="Opacity" Value="0.3"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="HeightRequest" Value="1"/>
+    </Style>
+
 </ResourceDictionary>

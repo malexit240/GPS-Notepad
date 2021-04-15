@@ -22,7 +22,8 @@
             <ListView  ItemsSource="{Binding Pins}" 
                        HasUnevenRows="True"
                        IsPullToRefreshEnabled="False"
-                       SelectionMode="None">
+                       SelectionMode="None"
+                       SeparatorVisibility="None">
                 <ListView.Behaviors>
                     <prism:EventToCommandBehavior EventName="ItemTapped"
                                               Command="{Binding PinTappedCommand}"
@@ -45,7 +46,9 @@
                                           Text="QR"
                                           CommandParameter="{Binding Self}"/>
                             </ViewCell.ContextActions>
-                            <Grid ColumnDefinitions="60,*" HeightRequest="120">
+                            <StackLayout Padding="5,0,5,15">
+                                
+                            <Grid ColumnDefinitions="60,*" HeightRequest="60">
                                 <controls:ImageCheckBox Grid.Column="0"
                                                         Margin="10"
                                                         CheckedImageSource="FavoriteChecked.png" 
@@ -59,6 +62,8 @@
                                 </StackLayout>
 
                             </Grid>
+                                <BoxView Style="{DynamicResource stripStyle}"/>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
