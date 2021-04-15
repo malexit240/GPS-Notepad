@@ -104,9 +104,6 @@ namespace GPSNotepad.Model
                         new PinsStateChangedMessage(new List<Pin>() { pin },
                         PinsStateChangedType.UpdateEvents));
             }
-
-
-
         }
 
         public void Update(Pin pin)

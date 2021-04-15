@@ -11,9 +11,38 @@ using GPSNotepad.Model.Entities;
 using GPSNotepad.Repositories;
 using Xamarin.Essentials;
 using Microsoft.EntityFrameworkCore;
+using Xamarin.Forms;
+using GPSNotepad.Model;
+using Prism;
 
 namespace GPSNotepad
 {
+
+    public class NotificationJobManager
+    {
+        public NotificationJobManager()
+        {
+            MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
+        }
+
+        private void OnPinStateChanged(PrismApplicationBase app, PinsStateChangedMessage message)
+        {
+            switch (message.ChangedType)
+            {
+                case PinsStateChangedType.Add:
+                case PinsStateChangedType.UpdateEvents:
+                case PinsStateChangedType.Delete:
+                    this.Reload();
+                    break;
+            }
+        }
+
+        public void Reload()
+        {
+            NotificationJob.ReloadShedule();
+        }
+    }
+
     public class NotificationJob : IJob
     {
         public static List<FutureNotification> NotificationsShedulde = null;
@@ -26,6 +55,8 @@ namespace GPSNotepad
 
         protected bool OnStart()
         {
+            Loger.Instance.Log("OnStart()");
+
             bool result = true;
             IsInitialize = true;
 
@@ -38,6 +69,15 @@ namespace GPSNotepad
                 Notification.Android.ChannelId = "8976";
             }
 
+            ReloadShedule();
+
+            return result;
+        }
+
+        public static void ReloadShedule()
+        {
+
+            Loger.Instance.Log("ReloadShedule()");
             NotificationsShedulde = new List<FutureNotification>();
 
             var token = SecureStorage.GetAsync("SessionToken").Result ?? Guid.Empty.ToString();
@@ -60,19 +100,22 @@ namespace GPSNotepad
                             FutureNotification.Create(pin.Name, @event.Description, @event.Time);
                         }
                     }
-
                 }
             }
 
-            return result;
         }
 
         public async Task<bool> Run(JobInfo jobInfo, CancellationToken cancelToken)
         {
             if (IsInitialize == false)
-                OnStart();
+                if (OnStart() != true)
+                    return true;
 
             var currentTime = DateTime.Now;
+
+            var info = new JobInfo(typeof(NotificationJob));
+            info.RunOnForeground = true;
+            Loger.Instance.Log(NotificationsShedulde.Count.ToString());
 
             if (NotificationsShedulde.Count != 0)
             {
@@ -81,11 +124,9 @@ namespace GPSNotepad
                     FireNotification(NotificationsShedulde[0]);
                     NotificationsShedulde.RemoveAt(0);
                 }
-
-                var info = new JobInfo(typeof(NotificationJob));
-                info.RunOnForeground = true;
-                await jobManager.Schedule(info);
             }
+
+            await jobManager.Schedule(info);
 
             return true;
         }

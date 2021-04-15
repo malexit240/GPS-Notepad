@@ -20,9 +20,13 @@ namespace GPSNotepad
         {
         }
 
+        NotificationJobManager NotificationJobManager;
+
         protected override void OnInitialized()
         {
             InitializeComponent();
+
+            NotificationJobManager = new NotificationJobManager();
 
             Container.Resolve<ISettingsManagerService>().Init();
 
