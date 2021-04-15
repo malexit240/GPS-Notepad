@@ -103,6 +103,8 @@ namespace GPSNotepad.ViewModels
 
             if (pin != null)
             {
+                pin.PinId = Guid.NewGuid();
+                pin.UserId = AuthorizationService.GetCurrenUserId();
                 await PinService.Create(pin);
             }
         }

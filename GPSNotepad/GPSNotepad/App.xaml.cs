@@ -9,10 +9,7 @@ using GPSNotepad.Services.Settings;
 using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
 using GPSNotepad.Services.QRCodeService;
-using System;
 using GPSNotepad.Services.PlaceEventsService;
-using ZXing.Mobile;
-using GPSNotepad.PlatformDependencyInterfaces;
 
 namespace GPSNotepad
 {
@@ -26,8 +23,6 @@ namespace GPSNotepad
         protected override void OnInitialized()
         {
             InitializeComponent();
-
-            Loger.Instance.Log("Start");
 
             Container.Resolve<ISettingsManagerService>().Init();
 
@@ -43,7 +38,6 @@ namespace GPSNotepad
             {
                 NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
             }
-
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

@@ -6,8 +6,7 @@
             prism:ViewModelLocator.AutowireViewModel="True"
             x:Class="GPSNotepad.Views.MainTabbedPage"
             Title="{Binding TextResources[MainPageTitle]}"
-            Style="{DynamicResource pageStyle}"
-            ChoosenPage="{Binding ChoosenPage}">
+            Style="{DynamicResource pageStyle}">
     <local:NavigableTabbedPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_exit_to_app3x.png"
             Command="{Binding LogoutCommand}"/>
