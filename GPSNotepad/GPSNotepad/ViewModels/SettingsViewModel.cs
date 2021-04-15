@@ -6,7 +6,7 @@ using GPSNotepad.Styles;
 
 namespace GPSNotepad.ViewModels
 {
-    public class SettingsPageViewModel : ViewModelBase
+    public class SettingsViewModel : ViewModelBase
     {
         #region ---Public Properties---
         ISettingsManagerService _settingsManager;
@@ -47,7 +47,7 @@ namespace GPSNotepad.ViewModels
         #endregion
 
         #region ---Connstructors---
-        public SettingsPageViewModel(INavigationService navigationService, ISettingsManagerService settingsManager)
+        public SettingsViewModel(INavigationService navigationService, ISettingsManagerService settingsManager)
            : base(navigationService)
         {
             this._settingsManager = settingsManager;

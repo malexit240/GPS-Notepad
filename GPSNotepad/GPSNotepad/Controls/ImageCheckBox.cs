@@ -1,16 +1,14 @@
 ﻿using System;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace GPSNotepad.Controls
 {
     public class ImageCheckBox : ImageButton
     {
-
         public ImageCheckBox()
         {
             this.BackgroundColor = Color.Transparent;
-            this.Clicked += ImageCheckBox_Clicked;
+            this.Clicked += OnImageCheckBoxClicked;
         }
 
         public void ReSetSource()
@@ -19,7 +17,7 @@ namespace GPSNotepad.Controls
         }
 
 
-        private void ImageCheckBox_Clicked(object sender, EventArgs e)
+        private void OnImageCheckBoxClicked(object sender, EventArgs e)
         {
             IsChecked = !IsChecked;
         }

@@ -14,8 +14,6 @@ namespace GPSNotepad.Services.PinService
 
             if (source.Length != 0 && Ethalon.Length != 0)
             {
-
-
                 string ethalon = Ethalon.ToLower();
                 string compared = source.ToLower();
 
@@ -34,14 +32,10 @@ namespace GPSNotepad.Services.PinService
 
         public override int Compare(Pin one, Pin two)
         {
-            int result = 0;
-
             double oneToEthalon = GetComparation(one);
             double twoToEthalon = GetComparation(two);
 
-            result = twoToEthalon.CompareTo(oneToEthalon);
-
-            return result;
+            return twoToEthalon.CompareTo(oneToEthalon);
         }
     }
 }

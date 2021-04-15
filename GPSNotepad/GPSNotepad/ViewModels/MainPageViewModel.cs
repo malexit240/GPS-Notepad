@@ -17,15 +17,15 @@ using GPSNotepad.Services.QRCodeService;
 
 namespace GPSNotepad.ViewModels
 {
-    public class MainTabbedPageViewModel : ViewModelBase
+    public class MainPageViewModel : ViewModelBase
     {
-        public MainTabbedPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
+        public MainPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
         {
             PinService = pinService;
             AuthorizationService = authorizationService;
             QrScanerService = qrScanerService;
 
-            MainMapViewModel = new MainMapTabViewModel(navigationService);
+            MainMapViewModel = new MainMapViewModel(navigationService);
 
             Pins = new UniqueObservableCollection<PinViewModel>();
 
@@ -74,7 +74,7 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _choosenPage, value);
         }
 
-        public MainMapTabViewModel MainMapViewModel { get; set; }
+        public MainMapViewModel MainMapViewModel { get; set; }
 
 
         #region ---Commands---
@@ -83,7 +83,7 @@ namespace GPSNotepad.ViewModels
         public ICommand EditPinContextCommand => _editPinContextCommand ??= new DelegateCommand<PinViewModel>(EditPinContextHandler);
         private async void EditPinContextHandler(PinViewModel pin)
         {
-            await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsCarouselPage), (nameof(PinViewModel), pin));
+            await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage), (nameof(PinViewModel), pin));
         }
 
         private ICommand _showQRCodeCommand;
@@ -112,7 +112,7 @@ namespace GPSNotepad.ViewModels
 
         private ICommand _goToAddPinFormCommand = null;
         public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
-        private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddEditPinAndEventsCarouselPage));
+        private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage));
 
 
         private ICommand _hideDetailViewCommand;

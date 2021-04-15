@@ -16,7 +16,7 @@ namespace GPSNotepad.Views
             set => SetValue(ChoosenPageProperty, value);
         }
 
-        public BindableProperty ChoosenPageProperty = BindableProperty.Create("ChoosenPage",
+        public BindableProperty ChoosenPageProperty = BindableProperty.Create(nameof(ChoosenPage),
             typeof(int),
             typeof(NavigableTabbedPage),
             defaultValue: 0,
@@ -35,14 +35,8 @@ namespace GPSNotepad.Views
 
             if (page.Children.IndexOf(page.CurrentPage) == index)
                 return;
-            try
-            {
-                page.CurrentPage = page.Children[index];
-            }
-            catch (IndexOutOfRangeException)
-            {
-                throw new IndexOutOfRangeException();
-            }
+
+            page.CurrentPage = page.Children[index];
         }
     }
 }

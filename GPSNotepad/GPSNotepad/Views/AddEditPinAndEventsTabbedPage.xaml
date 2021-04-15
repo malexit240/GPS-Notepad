@@ -4,9 +4,9 @@
              xmlns:local="clr-namespace:GPSNotepad.Views"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.AddEditPinAndEventsCarouselPage"
+             x:Class="GPSNotepad.Views.AddEditPinAndEventsTabbedPage"
              Title="{Binding TextResources[AddEditPinTitle]}"
              Style="{DynamicResource pageStyle}">
-    <local:AddPinPage Title="{Binding TextResources[Pin]}"/>
+    <local:AddEditPinTabPage Title="{Binding TextResources[Pin]}"/>
     <local:PinEventsListTabPage Title="{Binding TextResources[Events]}"/>
 </local:NavigableTabbedPage>

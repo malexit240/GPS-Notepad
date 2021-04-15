@@ -10,7 +10,7 @@ using GPSNotepad.Extensions;
 
 namespace GPSNotepad.ViewModels
 {
-    public class AddEditPlaceEventPageViewModel : ViewModelBase
+    public class AddEditPlaceEventViewModel : ViewModelBase
     {
 
         private TimeSpan _time;
@@ -41,7 +41,7 @@ namespace GPSNotepad.ViewModels
 
         public bool IsEdit { get; set; }
 
-        public AddEditPlaceEventPageViewModel(INavigationService navigationService) : base(navigationService)
+        public AddEditPlaceEventViewModel(INavigationService navigationService) : base(navigationService)
         {
             AddEditPlaceEventCommand = new DelegateCommand(async () =>
             {

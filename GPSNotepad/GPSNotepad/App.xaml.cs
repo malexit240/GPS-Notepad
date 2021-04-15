@@ -15,18 +15,14 @@ namespace GPSNotepad
 {
     public partial class App
     {
-        public App(IPlatformInitializer initializer)
-            : base(initializer)
-        {
-        }
-
-        NotificationJobManager NotificationJobManager;
+        public App(IPlatformInitializer initializer) : base(initializer)
+        { }
 
         protected override void OnInitialized()
         {
             InitializeComponent();
 
-            NotificationJobManager = new NotificationJobManager();
+            var NotificationJobManager = new NotificationJobManager();
 
             Container.Resolve<ISettingsManagerService>().Init();
 
@@ -46,8 +42,7 @@ namespace GPSNotepad
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<ISecureStorageService>
-                (Container.Resolve<SecureStorageService>());
+            containerRegistry.RegisterInstance<ISecureStorageService>(Container.Resolve<SecureStorageService>());
             containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
 
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());
@@ -59,11 +54,10 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
-            containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
-            containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddPinPage, AddEditPinPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddEditPinAndEventsCarouselPage, AddEditPinAndEventsPageViewModel>();
-            containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventPageViewModel>();
+            containerRegistry.RegisterForNavigation<MainTabbedPage, MainPageViewModel>();
+            containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditPinAndEventsTabbedPage, AddEditPinAndEventsViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventViewModel>();
             containerRegistry.RegisterForNavigation<QRCodeModalPage, QRCodeModalViewModel>();
         }
     }

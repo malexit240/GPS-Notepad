@@ -16,7 +16,7 @@ using Xamarin.Forms.GoogleMaps;
 
 namespace GPSNotepad.ViewModels
 {
-    public class AddEditPinAndEventsPageViewModel : ViewModelBase
+    public class AddEditPinAndEventsViewModel : ViewModelBase
     {
         #region ---Public Properties---
 
@@ -83,7 +83,7 @@ namespace GPSNotepad.ViewModels
         protected IAuthorizationService AuthorizationService { get; set; }
 
         #region ---Constructors---
-        public AddEditPinAndEventsPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
+        public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
             Pins = new UniqueObservableCollection<PinViewModel>();
             AuthorizationService = authorizationService;

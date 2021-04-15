@@ -2,7 +2,6 @@
 
 namespace GPSNotepad.Views
 {
-
     public partial class MainTabbedPage : NavigableTabbedPage
     {
         public MainTabbedPage()

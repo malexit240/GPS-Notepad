@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Xamarin.Essentials;
 using GPSNotepad.Model.Entities;
-using Xamarin.Essentials;
 using GPSNotepad.Extensions;
 
 namespace GPSNotepad.Services.PinService
@@ -15,18 +14,10 @@ namespace GPSNotepad.Services.PinService
 
         public override int Compare(Pin one, Pin two)
         {
-            int result = 0;
-
             double oneDistance = GetComparation(one);
             double twoDistance = GetComparation(two);
 
-            if (oneDistance > twoDistance)
-                result = 1;
-            if (oneDistance < twoDistance)
-                result = -1;
-
-            return result;
-
+            return oneDistance.CompareTo(twoDistance);
         }
 
         public override double GetComparation(Pin item)

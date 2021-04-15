@@ -42,6 +42,7 @@ namespace GPSNotepad.Controls
                 MapLoaded?.Invoke(this, new EventArgs());
             }
         }
+
         private void OnCameraMoveStarted(object sender, CameraMoveStartedEventArgs e) => IsIdle = false;
 
         private void OnCameraMoving(object sender, CameraMovingEventArgs e)

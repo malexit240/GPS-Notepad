@@ -33,17 +33,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddEditPinAndEventsTabbedPage.xaml.cs">
+      <DependentUpon>AddEditPinAndEventsTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\AddEditPinTabPage.xaml.cs">
+      <DependentUpon>AddEditPinTabPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\PinEventsListTabPage.xaml.cs">
       <DependentUpon>PinEventsListTabPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\PinsTabPage.xaml.cs">
       <DependentUpon>PinsTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainMapTapPage.xaml.cs">
-      <DependentUpon>MainMapTapPage.xaml</DependentUpon>
+    <Compile Update="Views\MainMapTabPage.xaml.cs">
+      <DependentUpon>MainMapTabPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\MainTabbedPage.xaml.cs">
       <DependentUpon>MainTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\QRCodeModalPage.xaml.cs">
+      <DependentUpon>QRCodeModalPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
@@ -64,19 +73,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddEditPinAndEventsCarouselPage.xaml">
+    <EmbeddedResource Update="Views\AddEditPinAndEventsTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AddEditPlaceEventPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddPinPage.xaml">
+    <EmbeddedResource Update="Views\AddEditPinTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\PinsTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MainMapTapPage.xaml">
+    <EmbeddedResource Update="Views\MainMapTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\MainTabbedPage.xaml">
