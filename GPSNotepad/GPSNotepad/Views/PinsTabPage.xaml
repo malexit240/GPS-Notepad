@@ -33,6 +33,10 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
+                                          Source={x:Reference page}}" 
+                                          IconImageSource="icon_qr.png"
+                                          CommandParameter="{Binding Self}"/>
                                 <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand,
                                           Source={x:Reference page}}"
                                           CommandParameter="{Binding Self}"
@@ -41,27 +45,23 @@
                                 <MenuItem Command="{Binding DeletePinContextCommand}" 
                                           Text="{Binding Path=BindingContext.TextResources[Delete],
                                           Source={x:Reference page}}"/>
-                                <MenuItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
-                                          Source={x:Reference page}}" 
-                                          Text="QR"
-                                          CommandParameter="{Binding Self}"/>
                             </ViewCell.ContextActions>
                             <StackLayout Padding="5,0,5,15">
-                                
-                            <Grid ColumnDefinitions="60,*" HeightRequest="60">
-                                <controls:ImageCheckBox Grid.Column="0"
+
+                                <Grid ColumnDefinitions="60,*" HeightRequest="60">
+                                    <controls:ImageCheckBox Grid.Column="0"
                                                         Margin="10"
                                                         CheckedImageSource="FavoriteChecked.png" 
                                                         UncheckedImageSource="FavoriteUnchecked.png" 
                                                         IsChecked="{Binding Favorite}"                                                       />
-                                <StackLayout Grid.Column="1">
-                                    <Label Text="{Binding Name}"
+                                    <StackLayout Grid.Column="1">
+                                        <Label Text="{Binding Name}"
                                        Style="{DynamicResource labelStyle}"/>
-                                    <Label Text="{Binding Description}"
+                                        <Label Text="{Binding Description}"
                                        Style="{DynamicResource labelStyle}"/>
-                                </StackLayout>
+                                    </StackLayout>
 
-                            </Grid>
+                                </Grid>
                                 <BoxView Style="{DynamicResource stripStyle}"/>
                             </StackLayout>
                         </ViewCell>
