@@ -6,12 +6,17 @@ namespace GPSNotepad.Comparers
 {
     public class PinPositionComparer : ExcludedComparer<Pin>
     {
-        readonly Xamarin.Forms.GoogleMaps.Position ethalon;
+
+        #region ---Constructors---
         public PinPositionComparer(Xamarin.Forms.GoogleMaps.Position ethalon)
         {
             this.ethalon = ethalon;
         }
+        #endregion
 
+        private readonly Xamarin.Forms.GoogleMaps.Position ethalon;
+
+        #region ---Overrides---
         public override int Compare(Pin one, Pin two)
         {
             double oneDistance = GetComparation(one);
@@ -24,5 +29,6 @@ namespace GPSNotepad.Comparers
         {
             return item.Position.CalculateDistance(ethalon);
         }
+        #endregion
     }
 }

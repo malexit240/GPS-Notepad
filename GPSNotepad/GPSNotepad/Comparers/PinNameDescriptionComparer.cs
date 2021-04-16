@@ -5,26 +5,17 @@ namespace GPSNotepad.Comparers
 {
     public class PinNameDescriptionComparer : ExcludedComparer<Pin>
     {
-        private string Ethalon { get; set; }
-        public PinNameDescriptionComparer(string ethalon) => this.Ethalon = ethalon;
-
-        private double CompareStringContent(string source)
+        #region ---Constructors---
+        public PinNameDescriptionComparer(string ethalon)
         {
-            double result = 0;
-
-            if (source.Length != 0 && Ethalon.Length != 0)
-            {
-                string ethalon = Ethalon.ToLower();
-                string compared = source.ToLower();
-
-                result = compared.Contains(ethalon) ? 1 : 0;
-
-                result *= Math.Abs(ethalon.Length / (compared.Length * 1.0));
-            }
-
-            return result;
+            this.Ethalon = ethalon;
         }
+        #endregion
 
+        private string Ethalon { get; set; }
+
+
+        #region ---Overrides---
         public override double GetComparation(Pin item)
         {
             return CompareStringContent(item.Name ?? "") + CompareStringContent(item.Description ?? "");
@@ -37,5 +28,25 @@ namespace GPSNotepad.Comparers
 
             return twoToEthalon.CompareTo(oneToEthalon);
         }
+        #endregion
+
+        #region ---Private Helpers---
+        private double CompareStringContent(string source)
+        {
+            double result = 0;
+
+            if (source.Length != 0 && Ethalon.Length != 0)
+            {
+                string ethalon = Ethalon.ToLower();
+                string compared = source.ToLower();
+
+                result = compared.Contains(ethalon) ? 1 : 0;//absolute comparsion
+
+                result *= Math.Abs(ethalon.Length / (compared.Length * 1.0));//add relativity to comparsion
+            }
+
+            return result;
+        }
+        #endregion
     }
 }

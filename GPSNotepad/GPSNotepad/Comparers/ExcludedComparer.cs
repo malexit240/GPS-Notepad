@@ -4,6 +4,7 @@ namespace GPSNotepad.Comparers
 {
     public abstract class ExcludedComparer<T> : IExcludedComparer<T>
     {
+        #region ---IExcludedComparer implementation---
         public abstract int Compare(T x, T y);
 
         public abstract double GetComparation(T item);
@@ -14,7 +15,7 @@ namespace GPSNotepad.Comparers
 
             for (int i = 0; i < source.Count; i++)
             {
-                if (GetComparation(source[i]) == 0)
+                if (GetComparation(source[i]) == 0)//Exclude elements with zero similarity to ethalon
                 {
                     break;
                 }
@@ -23,5 +24,6 @@ namespace GPSNotepad.Comparers
 
             return result;
         }
+        #endregion
     }
 }

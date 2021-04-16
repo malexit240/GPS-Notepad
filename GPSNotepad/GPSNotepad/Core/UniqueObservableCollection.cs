@@ -17,13 +17,13 @@ namespace GPSNotepad
         #endregion
 
         #region ---Overrides---
-        public override int GetHashCode() => HashCode.Combine(CollectionId);
-        public override bool Equals(object obj)
-        {
-            var pins = (UniqueObservableCollection<PinViewModel>)obj;
-
-            return pins != null ? pins.CollectionId == this.CollectionId : false;
-        }
+       // public override int GetHashCode() => HashCode.Combine(CollectionId);
+       // public override bool Equals(object obj)
+       // {
+       //     var pins = (UniqueObservableCollection<PinViewModel>)obj;
+       //
+       //     return pins != null ? pins.CollectionId == this.CollectionId : false;
+       // }
         #endregion
 
         #region ---Private Helpers---
