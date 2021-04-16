@@ -28,7 +28,7 @@ namespace GPSNotepad.ViewModels
 
             MainMapViewModel = new MainMapViewModel(navigationService);
 
-            Pins = new UniqueObservableCollection<PinViewModel>();
+            Pins = new ObservableCollection<PinViewModel>();
 
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
@@ -40,8 +40,8 @@ namespace GPSNotepad.ViewModels
         protected IAuthorizationService AuthorizationService { get; set; }
 
 
-        private UniqueObservableCollection<PinViewModel> _pins;
-        public UniqueObservableCollection<PinViewModel> Pins
+        private ObservableCollection<PinViewModel> _pins;
+        public ObservableCollection<PinViewModel> Pins
         {
             get => _pins;
             set => SetProperty(ref _pins, value);
@@ -64,7 +64,7 @@ namespace GPSNotepad.ViewModels
                     return;
                 SetProperty(ref _searchField, value);
 
-                Pins = new UniqueObservableCollection<PinViewModel>(PinService.Find(_searchField).Select(p => p.ToViewModel()));
+                Pins = new ObservableCollection<PinViewModel>(PinService.Find(_searchField).Select(p => p.ToViewModel()));
             }
         }
 
@@ -182,7 +182,7 @@ namespace GPSNotepad.ViewModels
         {
             var pins = Pins.Select(p => p.GetModelPin()).ToList();
             pins.Sort(comparer);
-            Pins = new UniqueObservableCollection<PinViewModel>(pins.Select(p => p.ToViewModel()).ToList());
+            Pins = new ObservableCollection<PinViewModel>(pins.Select(p => p.ToViewModel()).ToList());
         }
 
         private void OnPinStateChanged(PrismApplicationBase obj, PinsStateChangedMessage message)

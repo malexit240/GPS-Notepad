@@ -28,7 +28,7 @@ namespace GPSNotepad.ViewModels
         private string _name = "";
         private string _description;
 
-        public UniqueObservableCollection<PinViewModel> Pins { get; set; }
+        public ObservableCollection<PinViewModel> Pins { get; set; }
         public bool IsEdit { get; private set; } = false;
         public PinViewModel PinViewModel { get; set; }
 
@@ -86,7 +86,7 @@ namespace GPSNotepad.ViewModels
         #region ---Constructors---
         public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
         {
-            Pins = new UniqueObservableCollection<PinViewModel>();
+            Pins = new ObservableCollection<PinViewModel>();
             AuthorizationService = authorizationService;
             PinService = pinService;
             AddEditPinCommand = new DelegateCommand(async () =>

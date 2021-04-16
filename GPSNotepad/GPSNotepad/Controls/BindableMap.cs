@@ -5,6 +5,7 @@ using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.GoogleMaps.Clustering;
 using System;
 using GPSNotepad.Extensions;
+using System.Collections.ObjectModel;
 
 namespace GPSNotepad.Controls
 {
@@ -46,9 +47,9 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Source Properties---
-        public UniqueObservableCollection<PinViewModel> PinsSource
+        public ObservableCollection<PinViewModel> PinsSource
         {
-            get => (UniqueObservableCollection<PinViewModel>)GetValue(PinsSourceProperty);
+            get => (ObservableCollection<PinViewModel>)GetValue(PinsSourceProperty);
             set => SetValue(PinsSourceProperty, value);
         }
 
@@ -69,22 +70,19 @@ namespace GPSNotepad.Controls
 
         public bool IsIdle { get; private set; }
 
+        private ObservableCollection<PinViewModel> _pins;
 
-        private UniqueObservableCollection<PinViewModel> _pins;
-
-        public void SetPins(UniqueObservableCollection<PinViewModel> pins)
+        public void SetPins(ObservableCollection<PinViewModel> pins)
         {
             this._pins = pins;
-            this._pins.CollectionChanged += PinsSourceOnCollectionChanged1;
+            this._pins.CollectionChanged += PinsSourceOnCollectionChanged;
         }
-
-        private static readonly Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap> Scope = new Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap>();
 
 
         #region ---Bindable Source Properties---
         public static readonly BindableProperty PinsSourceProperty = BindableProperty.Create(
                                                          propertyName: nameof(PinsSource),
-                                                         returnType: typeof(UniqueObservableCollection<PinViewModel>),
+                                                         returnType: typeof(ObservableCollection<PinViewModel>),
                                                          declaringType: typeof(BindableMap),
                                                          defaultBindingMode: BindingMode.TwoWay,
                                                          propertyChanged: PinsSourcePropertyChanged);
@@ -140,38 +138,23 @@ namespace GPSNotepad.Controls
         private static void PinsSourcePropertyChanged(BindableObject bindable, object oldvalue, object newValue)
         {
             var map = bindable as BindableMap;
-            var newPinsSource = newValue as UniqueObservableCollection<PinViewModel>;
+            var newPinsSource = newValue as ObservableCollection<PinViewModel>;
 
             if (map != null && newPinsSource != null)
             {
-                //Scope.Add(newPinsSource, map);
-                //
-                //newPinsSource.CollectionChanged += PinsSourceOnCollectionChanged;
                 map.SetPins(newPinsSource);
                 map.UpdatePinsSource(newPinsSource);
             }
         }
 
-        private void PinsSourceOnCollectionChanged1(object sender, NotifyCollectionChangedEventArgs e)
+        private void PinsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             this.UpdatePinsSource(_pins);
-        }
-
-        private static void PinsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            // var pins = sender as UniqueObservableCollection<PinViewModel>;
-            //
-            // if (Scope.ContainsKey(pins))
-            // {
-            //     var map = Scope[pins];
-            //
-            //     map.UpdatePinsSource(pins);
-            // }
         }
         #endregion
 
         #region ---Private Helpers---
-        private void UpdatePinsSource(UniqueObservableCollection<PinViewModel> newSource)
+        private void UpdatePinsSource(ObservableCollection<PinViewModel> newSource)
         {
             Pins.Clear();
 
