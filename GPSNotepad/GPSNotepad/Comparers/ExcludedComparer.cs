@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GPSNotepad.Services.PinService
+namespace GPSNotepad.Comparers
 {
     public abstract class ExcludedComparer<T> : IExcludedComparer<T>
     {

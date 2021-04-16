@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using GPSNotepad.Repositories;
 using GPSNotepad.Model;
 using System.Linq;
@@ -16,27 +16,26 @@ namespace GPSNotepad.Services.PlaceEventsService
 
             await Task.Run(() =>
             {
-                using (var context = new Context())
-                {
-                    context.Events.Add(placeEvent);
-                    context.SaveChanges();
-                }
+                using var context = new Context();
 
+                context.Events.Add(placeEvent);
+                context.SaveChanges();
             });
         }
 
-        public async void CreateOrUpdate(PlaceEvent @event)
+        public async void CreateOrUpdate(PlaceEvent placeEvent)
         {
             await Task.Run(() =>
             {
-                using (var context = new Context())
+                using var context = new Context();
+
+                if (context.Events.Any(e => e.PlaceEventId == placeEvent.PlaceEventId))
                 {
-                    if (context.Events.Any(e => e.PlaceEventId == @event.PlaceEventId))
-                        this.Update(@event);
-                    else
-                    {
-                        this.Create(@event);
-                    }
+                    this.Update(placeEvent);
+                }
+                else
+                {
+                    this.Create(placeEvent);
                 }
             });
 
@@ -45,14 +44,13 @@ namespace GPSNotepad.Services.PlaceEventsService
         public async void Delete(PlaceEvent placeEvent)
         {
             PinState.Instance.DeleteEvent(placeEvent.PinId, placeEvent);
+
             await Task.Run(() =>
             {
-                using (var context = new Context())
-                {
-                    context.Events.Remove(placeEvent);
-                    context.SaveChanges();
-                }
+                using var context = new Context();
 
+                context.Events.Remove(placeEvent);
+                context.SaveChanges();
             });
         }
 
@@ -60,24 +58,22 @@ namespace GPSNotepad.Services.PlaceEventsService
         {
             return await Task.Run(() =>
             {
-                using (var context = new Context())
-                {
-                    return context.Events.Select(e => e).Where(e => e.PinId == pinId).ToList();
-                }
+                using var context = new Context();
+
+                return context.Events.Select(e => e).Where(e => e.PinId == pinId).ToList();
             });
         }
 
         public async void Update(PlaceEvent placeEvent)
         {
             PinState.Instance.UpdateEvent(placeEvent.PinId, placeEvent);
+
             await Task.Run(() =>
             {
-                using (var context = new Context())
-                {
-                    context.Events.Update(placeEvent);
-                    context.SaveChanges();
-                }
+                using var context = new Context();
 
+                context.Events.Update(placeEvent);
+                context.SaveChanges();
             });
         }
     }

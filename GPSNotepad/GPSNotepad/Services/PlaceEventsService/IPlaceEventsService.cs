@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 
 namespace GPSNotepad.Services.PlaceEventsService
 {

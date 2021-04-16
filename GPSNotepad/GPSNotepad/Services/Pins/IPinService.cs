@@ -1,4 +1,4 @@
-﻿using GPSNotepad.Model.Entities;
+﻿using GPSNotepad.Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace GPSNotepad.Model.Entities
+namespace GPSNotepad.Entities
 {
     public class User
     {

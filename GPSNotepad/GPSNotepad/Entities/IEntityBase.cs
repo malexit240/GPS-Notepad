@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GPSNotepad.Model.Entities
+namespace GPSNotepad.Entities
 {
     public interface IEntityBase
     {

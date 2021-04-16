@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using Microsoft.EntityFrameworkCore;
 using Xamarin.Essentials;
 

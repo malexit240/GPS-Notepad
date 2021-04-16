@@ -1,6 +1,6 @@
 ﻿using Prism.Mvvm;
 using System;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 
 namespace GPSNotepad
 {

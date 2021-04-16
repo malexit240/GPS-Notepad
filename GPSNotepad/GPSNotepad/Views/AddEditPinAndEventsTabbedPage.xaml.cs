@@ -1,4 +1,6 @@
-﻿namespace GPSNotepad.Views
+﻿using GPSNotepad.Controls;
+
+namespace GPSNotepad.Views
 {
     public partial class AddEditPinAndEventsTabbedPage : NavigableTabbedPage
     {

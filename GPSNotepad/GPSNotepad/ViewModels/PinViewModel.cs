@@ -7,7 +7,7 @@ using GPSNotepad.Extensions;
 using GPSNotepad.ViewModels;
 using Prism.Navigation;
 using GPSNotepad.Views;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using GPSNotepad.Services.PinService;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;

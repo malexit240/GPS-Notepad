@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 
 namespace GPSNotepad.Model
 {

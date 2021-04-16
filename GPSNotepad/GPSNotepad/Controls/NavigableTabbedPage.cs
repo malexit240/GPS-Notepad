@@ -1,7 +1,6 @@
-﻿using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
-namespace GPSNotepad.Views
+namespace GPSNotepad.Controls
 {
     public class NavigableTabbedPage : TabbedPage
     {

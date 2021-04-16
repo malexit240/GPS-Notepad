@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using GPSNotepad.Controls;
+using Xamarin.Forms;
 
 namespace GPSNotepad.Views
 {

@@ -9,12 +9,12 @@ namespace GPSNotepad
         private static Loger _instance = null;
         public static Loger Instance => _instance ??= new Loger();
 
-        protected INotificationManager notificationManager { get; set; } = null;
+        protected INotificationManager NotificationManager { get; set; } = null;
         protected Notification Notification { get; set; }
 
         public Loger()
         {
-            notificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
+            NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
 
             Notification = new Notification();
             if (DeviceInfo.Platform == DevicePlatform.Android)
@@ -29,7 +29,7 @@ namespace GPSNotepad
             Notification.Message = message;
             Notification.Id = new Random().Next();
 
-            await notificationManager.Send(Notification);
+            await NotificationManager.Send(Notification);
         }
 
     }

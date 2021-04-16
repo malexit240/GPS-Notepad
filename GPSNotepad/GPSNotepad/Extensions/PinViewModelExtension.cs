@@ -5,14 +5,14 @@ namespace GPSNotepad.Extensions
 {
     public static class PinViewModelExtension
     {
-        public static PinViewModel ToViewModel(this GPSNotepad.Model.Entities.Pin pin)
+        public static PinViewModel ToViewModel(this GPSNotepad.Entities.Pin pin)
         {
             return new PinViewModel(pin.PinId, pin.UserId, pin.Name, pin.Description, pin.Favorite, pin.Position,pin.Events);
         }
 
-        public static GPSNotepad.Model.Entities.Pin GetModelPin(this PinViewModel pin)
+        public static GPSNotepad.Entities.Pin GetModelPin(this PinViewModel pin)
         {
-            return new Model.Entities.Pin()
+            return new Entities.Pin()
             {
                 PinId = pin.PinId,
                 UserId = pin.UserId,

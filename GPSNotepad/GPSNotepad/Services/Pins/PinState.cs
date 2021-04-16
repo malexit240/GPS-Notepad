@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using System.Linq;

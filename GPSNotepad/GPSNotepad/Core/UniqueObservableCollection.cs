@@ -6,14 +6,14 @@ namespace GPSNotepad
 {
     public class UniqueObservableCollection<T> : ObservableCollection<T>
     {
-        #region ---Public Properties---
-        public Guid CollectionId { get; private set; }
-        #endregion
-
         #region ---Constructors---
         public UniqueObservableCollection() : base() => SetId();
         public UniqueObservableCollection(IList<T> collection) : base(collection) => SetId();
         public UniqueObservableCollection(IEnumerable<T> enumerable) : base(enumerable) => SetId();
+        #endregion
+
+        #region ---Public Properties---
+        public Guid CollectionId { get; private set; }
         #endregion
 
         #region ---Overrides---
@@ -22,7 +22,7 @@ namespace GPSNotepad
         {
             var pins = (UniqueObservableCollection<PinViewModel>)obj;
 
-            return pins is null ? true : pins.CollectionId == this.CollectionId;
+            return pins != null ? pins.CollectionId == this.CollectionId : false;
         }
         #endregion
 

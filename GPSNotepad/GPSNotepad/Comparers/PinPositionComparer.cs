@@ -1,12 +1,12 @@
 ﻿using Xamarin.Essentials;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using GPSNotepad.Extensions;
 
-namespace GPSNotepad.Services.PinService
+namespace GPSNotepad.Comparers
 {
     public class PinPositionComparer : ExcludedComparer<Pin>
     {
-        Xamarin.Forms.GoogleMaps.Position ethalon;
+        readonly Xamarin.Forms.GoogleMaps.Position ethalon;
         public PinPositionComparer(Xamarin.Forms.GoogleMaps.Position ethalon)
         {
             this.ethalon = ethalon;

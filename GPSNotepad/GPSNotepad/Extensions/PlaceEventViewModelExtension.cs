@@ -2,14 +2,14 @@
 {
     public static class PlaceEventViewModelExtension
     {
-        public static PlaceEventViewModel ToViewModel(this GPSNotepad.Model.Entities.PlaceEvent placeEvent)
+        public static PlaceEventViewModel ToViewModel(this GPSNotepad.Entities.PlaceEvent placeEvent)
         {
             return new PlaceEventViewModel(placeEvent.PlaceEventId, placeEvent.PinId, placeEvent.Time, placeEvent.Description);
         }
 
-        public static GPSNotepad.Model.Entities.PlaceEvent ToModelEntity(this PlaceEventViewModel placeEvent)
+        public static GPSNotepad.Entities.PlaceEvent ToModelEntity(this PlaceEventViewModel placeEvent)
         {
-            return new GPSNotepad.Model.Entities.PlaceEvent()
+            return new GPSNotepad.Entities.PlaceEvent()
             {
                 PlaceEventId = placeEvent.PlaceEventId,
                 PinId = placeEvent.PinId,

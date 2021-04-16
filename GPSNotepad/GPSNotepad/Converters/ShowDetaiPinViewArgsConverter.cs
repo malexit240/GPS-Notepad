@@ -13,7 +13,7 @@ namespace GPSNotepad.Converters
             var pin = value as Pin;
             if (pin == null)
             {
-                throw new ArgumentException("Expected value to be of type PinClickedEventArgs", nameof(value));
+                throw new ArgumentException("Expected value to be of type Pin", nameof(value));
             }
             return pin;
         }

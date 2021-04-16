@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using GPSNotepad.Services.PinService;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using GPSNotepad.Repositories;
 using Xamarin.Essentials;
 using Microsoft.EntityFrameworkCore;
@@ -18,8 +18,8 @@ namespace GPSNotepad
     {
         public static List<FutureNotification> NotificationsShedulde = null;
 
-        protected static INotificationManager notificationManager { get; set; } = null;
-        protected static IJobManager jobManager { get; set; }
+        protected static INotificationManager NotificationManager { get; set; } = null;
+        protected static IJobManager JobManager { get; set; }
         protected static Notification Notification { get; set; }
 
         protected static bool IsInitialize { get; set; } = false;
@@ -29,8 +29,8 @@ namespace GPSNotepad
             bool result = true;
             IsInitialize = true;
 
-            notificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
-            jobManager = ShinyJobManager.Current;
+            NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
+            JobManager = ShinyJobManager.Current;
 
             Notification = new Notification();
             if (DeviceInfo.Platform == DevicePlatform.Android)
@@ -53,19 +53,18 @@ namespace GPSNotepad
             List<Pin> pins;
             List<PlaceEvent> events = new List<PlaceEvent>();
 
-            using (var context = new Context())
-            {
-                user = context.Users.Select(u => u).Where(u => u.SessionToken == token).FirstOrDefault();
-                if (user != null)
-                {
-                    pins = context.Pins.Include(pin => pin.Events).Select(p => p).Where(p => p.UserId == user.UserId).ToList();
+            using var context = new Context();
 
-                    foreach (var pin in pins)
+            user = context.Users.Select(u => u).Where(u => u.SessionToken == token).FirstOrDefault();
+            if (user != null)
+            {
+                pins = context.Pins.Include(pin => pin.Events).Select(p => p).Where(p => p.UserId == user.UserId).ToList();
+
+                foreach (var pin in pins)
+                {
+                    foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
                     {
-                        foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
-                        {
-                            FutureNotification.Create(pin.Name, @event.Description, @event.Time);
-                        }
+                        FutureNotification.Create(pin.Name, @event.Description, @event.Time);
                     }
                 }
             }
@@ -79,8 +78,10 @@ namespace GPSNotepad
 
             var currentTime = DateTime.Now;
 
-            var info = new JobInfo(typeof(NotificationJob));
-            info.RunOnForeground = true;
+            var info = new JobInfo(typeof(NotificationJob))
+            {
+                RunOnForeground = true
+            };
 
             if (NotificationsShedulde.Count != 0)
             {
@@ -91,7 +92,7 @@ namespace GPSNotepad
                 }
             }
 
-            await jobManager.Schedule(info);
+            await JobManager.Schedule(info);
 
             return true;
         }
@@ -103,7 +104,7 @@ namespace GPSNotepad
             Notification.Id = futureNotification.Id;
             futureNotification.IsFired = true;
 
-            await notificationManager.Send(Notification);
+            await NotificationManager.Send(Notification);
         }
     }
 }

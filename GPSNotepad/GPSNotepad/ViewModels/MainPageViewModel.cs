@@ -1,7 +1,7 @@
 ﻿using Prism.Commands;
 using Prism.Navigation;
 using System.Collections.ObjectModel;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using GPSNotepad.Services.PinService;
 using GPSNotepad.Model;
 using Xamarin.Forms;
@@ -14,6 +14,7 @@ using System;
 using GPSNotepad.Services.Authorization;
 using System.Collections.Generic;
 using GPSNotepad.Services.QRCodeService;
+using GPSNotepad.Comparers;
 
 namespace GPSNotepad.ViewModels
 {
@@ -139,8 +140,7 @@ namespace GPSNotepad.ViewModels
         public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetailPinViewCommand => _onShowDetailPinViewCommand ??= new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>(OnShowDetailPinViewHandler);
         private void OnShowDetailPinViewHandler(Xamarin.Forms.GoogleMaps.Pin pin)
         {
-            Guid id;
-            if (!Guid.TryParse(pin.Label, out id))
+            if (!Guid.TryParse(pin.Label, out Guid id))
                 return;
             SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
             MainMapViewModel.ShowDetailView = true;

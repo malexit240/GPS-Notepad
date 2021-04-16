@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GPSNotepad.Model.Entities
+namespace GPSNotepad.Entities
 {
     public class PlaceEvent : IEntityBase
     {

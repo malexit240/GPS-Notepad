@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using GPSNotepad.Model;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using System.Linq;
 using GPSNotepad.Repositories;
 using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using GPSNotepad.Services.PlaceEventsService;
+using GPSNotepad.Comparers;
+using GPSNotepad.Converters;
 
 namespace GPSNotepad.Services.PinService
 {
@@ -47,11 +49,9 @@ namespace GPSNotepad.Services.PinService
             {
                 return await Task.Run(() =>
                 {
-                    using (var context = new Context())
-                    {
+                    using var context = new Context();
 
-                        return context.Pins.Include(p => p.Events).Select(p => p).Where(p => p.UserId == user_id).ToList();
-                    }
+                    return context.Pins.Include(p => p.Events).Select(p => p).Where(p => p.UserId == user_id).ToList();
                 });
             }
         }
@@ -95,18 +95,16 @@ namespace GPSNotepad.Services.PinService
             {
                 await Task.Run(async () =>
                 {
-                    using (var context = new Context())
-                    {
-                        PinState.LoadPins(await this.GetAllPinsForUser(userId));
-                    }
+                    using var context = new Context();
 
+                    PinState.LoadPins(await this.GetAllPinsForUser(userId));
                 });
             }
         }
 
         public async Task<bool> CreateOrUpdatePin(Pin pin)
         {
-            bool result = false;
+            bool result;
 
             if (PinState.ContainsPin(pin.PinId))
             {
@@ -139,7 +137,7 @@ namespace GPSNotepad.Services.PinService
 
         private ExcludedComparer<Pin> GetComparer(string searchField)
         {
-            ExcludedComparer<Pin> result = null;
+            ExcludedComparer<Pin> result;
 
             var position = StringToPositionConverter.GetPosition(searchField);
             if (position != null)

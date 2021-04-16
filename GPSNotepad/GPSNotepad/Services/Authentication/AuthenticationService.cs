@@ -1,5 +1,5 @@
 ﻿using GPSNotepad.Model;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using System;
 using System.Threading.Tasks;
 using GPSNotepad.Repositories;
@@ -26,20 +26,18 @@ namespace GPSNotepad.Services.Authentication
 
             bool result = false;
             User user;
-            using (var context = new Context())
+            using var context = new Context();
+
+            var list = context.Users.Select(u => u.SessionToken).ToList();
+            user = (from u in context.Users where u.SessionToken == token select u).FirstOrDefault();
+
+            if (user != null)
             {
-
-                var list = context.Users.Select(u => u.SessionToken).ToList();
-                user = (from u in context.Users where u.SessionToken == token select u).FirstOrDefault();
-
-                if (user != null)
-                {
-                    AuthorizationService.SetAuthorize(user.UserId);
-                    result = true;
-                }
-
-                return result;
+                AuthorizationService.SetAuthorize(user.UserId);
+                result = true;
             }
+
+            return result;
 
 
         }
@@ -94,11 +92,10 @@ namespace GPSNotepad.Services.Authentication
         {
             user.SessionToken = TokenGenerator.Get();
 
-            using (var context = new Context())
-            {
-                context.Users.Update(user);
-                context.SaveChanges();
-            }
+            using var context = new Context();
+
+            context.Users.Update(user);
+            context.SaveChanges();
         }
         #endregion
     }

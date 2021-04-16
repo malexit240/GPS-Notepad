@@ -15,12 +15,10 @@ namespace GPSNotepad.iOS
     {
         public BindableMapRenderer() : base()
         {
-            this.NativeMap.CoordinateTapped += NativeMap_CoordinateTapped;
-        }
-
-        private void NativeMap_CoordinateTapped(object sender, Google.Maps.GMSCoordEventArgs e)
-        {
 
         }
+
+
+
     }
 }

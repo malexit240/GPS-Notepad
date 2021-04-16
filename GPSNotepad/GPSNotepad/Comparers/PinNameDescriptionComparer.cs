@@ -1,7 +1,7 @@
 ﻿using System;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 
-namespace GPSNotepad.Services.PinService
+namespace GPSNotepad.Comparers
 {
     public class PinNameDescriptionComparer : ExcludedComparer<Pin>
     {

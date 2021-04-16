@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
+using GPSNotepad.Converters;
 using GPSNotepad.Extensions;
 using GPSNotepad.Model;
 using GPSNotepad.Services.Authorization;
@@ -125,7 +126,7 @@ namespace GPSNotepad.ViewModels
 
         }
 
-        private void OnPinsStateChanged(PrismApplicationBase app, PinsStateChangedMessage message)
+        private void OnPinsStateChanged(PrismApplicationBase _, PinsStateChangedMessage message)
         {
             if (message.ChangedType == PinsStateChangedType.UpdateEvents)
             {

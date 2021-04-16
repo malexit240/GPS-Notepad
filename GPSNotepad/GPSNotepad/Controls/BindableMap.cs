@@ -94,7 +94,7 @@ namespace GPSNotepad.Controls
                                                          defaultBindingMode: BindingMode.TwoWay);
 
 
-        private static Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap> Scope = new Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap>();
+        private static readonly Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap> Scope = new Dictionary<UniqueObservableCollection<PinViewModel>, BindableMap>();
         #endregion
 
         #region ---Event Handlers---

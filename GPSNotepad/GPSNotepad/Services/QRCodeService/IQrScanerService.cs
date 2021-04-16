@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ZXing.Mobile;
 using ZXing.QrCode;
-using GPSNotepad.Model.Entities;
+using GPSNotepad.Entities;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using ZXing.Net.Mobile.Forms;
@@ -34,18 +34,16 @@ namespace GPSNotepad.Services.QRCodeService
             {
                 byte[] byteArray = Convert.FromBase64String(source);
 
-                using (var stream = new MemoryStream())
+                using var stream = new MemoryStream();
+
+                for (int i = 0; i < byteArray.Length; i++)
                 {
-
-                    for (int i = 0; i < byteArray.Length; i++)
-                    {
-                        stream.WriteByte(byteArray[i]);
-                    }
-
-                    stream.Seek(0, SeekOrigin.Begin);
-
-                    pin = formatter.Deserialize(stream) as SerializablePin?;
+                    stream.WriteByte(byteArray[i]);
                 }
+
+                stream.Seek(0, SeekOrigin.Begin);
+
+                pin = formatter.Deserialize(stream) as SerializablePin?;
             }
             finally { }
 
