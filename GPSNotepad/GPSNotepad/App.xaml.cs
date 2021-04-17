@@ -10,6 +10,7 @@ using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
 using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Services.PlaceEventsService;
+using GPSNotepad.Services.PermissionManager;
 
 namespace GPSNotepad
 {
@@ -49,6 +50,7 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IAuthenticationService>(Container.Resolve<AuthenticationService>());
             containerRegistry.RegisterInstance<IPlaceEventsService>(Container.Resolve<PlaceEventsService>());
             containerRegistry.RegisterInstance<IPinService>(Container.Resolve<PinService>());
+            containerRegistry.RegisterInstance<IPermissionManager>(Container.Resolve<PermissionManager>());
             containerRegistry.RegisterInstance<IQrScanerService>(Container.Resolve<QrScanerService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();

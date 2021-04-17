@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Xamarin.Forms.GoogleMaps;
+﻿using Xamarin.Forms.GoogleMaps;
 using Xamarin.Essentials;
 using System.Threading.Tasks;
+using GPSNotepad.Services.PermissionManager;
 
 namespace GPSNotepad.Model
 {
@@ -16,17 +14,13 @@ namespace GPSNotepad.Model
         {
             Position position = LastChecked;
 
-            try
+            await App.Current.Container.Resolve<IPermissionManager>().RunWithPermission<Permissions.LocationWhenInUse>(async () =>
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();
                 position = new Position(location.Latitude, location.Longitude);
-            }
-            catch (Exception)
-            {
 
-            }
-
-            LastChecked = position;
+                LastChecked = position;
+            });
 
             return position;
         }

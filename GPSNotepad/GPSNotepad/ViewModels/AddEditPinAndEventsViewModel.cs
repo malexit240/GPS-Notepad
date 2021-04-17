@@ -99,9 +99,10 @@ namespace GPSNotepad.ViewModels
 
             EditPlaceEventContextCommand = new DelegateCommand<PlaceEventViewModel>(async (placeEvent) =>
             {
-                var parameters = new NavigationParameters();
-
-                parameters.Add(nameof(PlaceEventViewModel), placeEvent);
+                var parameters = new NavigationParameters
+                {
+                    { nameof(PlaceEventViewModel), placeEvent }
+                };
 
                 await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
             });
@@ -112,8 +113,6 @@ namespace GPSNotepad.ViewModels
             {
                 SetNewPinPosition((Position)newPosition);
             });
-
-            //MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinsStateChanged);
 
             GoToAddPlaceEventFormCommand = new DelegateCommand(async () =>
             {
