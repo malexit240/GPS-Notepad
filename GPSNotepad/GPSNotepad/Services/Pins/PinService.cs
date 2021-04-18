@@ -5,7 +5,6 @@ using GPSNotepad.Model;
 using GPSNotepad.Entities;
 using System.Linq;
 using GPSNotepad.Repositories;
-using System.Collections;
 using Microsoft.EntityFrameworkCore;
 using GPSNotepad.Services.PlaceEventsService;
 using GPSNotepad.Comparers;
@@ -15,13 +14,20 @@ namespace GPSNotepad.Services.PinService
 {
     public class PinService : IPinService
     {
+        #region ---Protected Static Properties---
         protected static PinState PinState { get; set; } = PinState.Instance;
-        protected IPlaceEventsService PlaceEventService { get; set; }
+        #endregion
 
+        #region ---Constructors---
         public PinService(IPlaceEventsService placeEventService)
         {
             PlaceEventService = placeEventService;
         }
+        #endregion
+
+        #region ---Protected Properties---
+        protected IPlaceEventsService PlaceEventService { get; set; }
+        #endregion
 
         #region ---IPermanentPinService Implementation---
         public async Task<bool> Create(Pin pin)
@@ -41,19 +47,23 @@ namespace GPSNotepad.Services.PinService
 
         public async Task<List<Pin>> GetAllPinsForUser(Guid user_id)
         {
+            List<Pin> result;
+
             if (PinState.IsLoaded == true)
             {
-                return PinState.Pins;
+                result = PinState.Pins;
             }
             else
             {
-                return await Task.Run(() =>
-                {
-                    using var context = new Context();
+                result = await Task.Run(() =>
+                 {
+                     using var context = new Context();
 
-                    return context.Pins.Include(p => p.Events).Select(p => p).Where(p => p.UserId == user_id).ToList();
-                });
+                     return context.Pins.Include(p => p.Events).Select(p => p).Where(p => p.UserId == user_id).ToList();
+                 });
             }
+
+            return result;
         }
 
         public async Task<bool> Update(Pin pin)
@@ -62,44 +72,41 @@ namespace GPSNotepad.Services.PinService
 
             return await Task.Run(() =>
             {
-                using (var context = new Context())
-                {
-                    pin.Events.ForEach(e => PlaceEventService.CreateOrUpdate(e));
-                    context.Pins.Update(pin);
-                    context.SaveChangesAsync();
-                }
+                using var context = new Context();
+
+                pin.Events.ForEach(e => PlaceEventService.CreateOrUpdate(e));
+
+                context.Pins.Update(pin);
+                context.SaveChangesAsync();
+
                 return true;
             });
-
         }
 
         public async Task<bool> Delete(Pin pin)
         {
-
             PinState.Delete(pin);
 
             return await Task.Run(() =>
             {
-                using (var context = new Context())
-                {
-                    context.Pins.Remove(pin);
-                    context.SaveChangesAsync();
-                }
+                using var context = new Context();
+
+                context.Pins.Remove(pin);
+                context.SaveChangesAsync();
+
                 return true;
             });
         }
 
         public async void LoadUserPins(Guid userId)
         {
-            if (PinState.IsLoaded == false)
+            PinState.IsLoaded = false;
+            await Task.Run(async () =>
             {
-                await Task.Run(async () =>
-                {
-                    using var context = new Context();
+                using var context = new Context();
 
-                    PinState.LoadPins(await this.GetAllPinsForUser(userId));
-                });
-            }
+                PinState.LoadPins(await this.GetAllPinsForUser(userId));
+            });
         }
 
         public async Task<bool> CreateOrUpdatePin(Pin pin)
@@ -120,7 +127,6 @@ namespace GPSNotepad.Services.PinService
 
         public IList<Pin> Find(string searchField)
         {
-
             var result = PinState.Pins.ToList();
 
             if (searchField != "")
@@ -134,12 +140,15 @@ namespace GPSNotepad.Services.PinService
 
             return result;
         }
+        #endregion
 
+        #region ---Private Helpers---
         private ExcludedComparer<Pin> GetComparer(string searchField)
         {
             ExcludedComparer<Pin> result;
 
             var position = StringToPositionConverter.GetPosition(searchField);
+
             if (position != null)
             {
                 result = new PinPositionComparer(position.Value);

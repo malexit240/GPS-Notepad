@@ -9,6 +9,5 @@ namespace GPSNotepad.Services.Authentication
         bool ContinueSession(string token);
 
         Task<bool> SignUpAsync(string email, string login, string password);
-
     }
 }

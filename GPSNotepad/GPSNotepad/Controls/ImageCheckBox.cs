@@ -37,6 +37,7 @@ namespace GPSNotepad.Controls
         public static BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked),
             typeof(bool),
             typeof(ImageCheckBox),
+            defaultBindingMode: BindingMode.TwoWay,
             propertyChanged: IsCheckedPropertyChanged);
 
         public static BindableProperty CheckedImageSourceProperty = BindableProperty.Create(nameof(CheckedImageSource),

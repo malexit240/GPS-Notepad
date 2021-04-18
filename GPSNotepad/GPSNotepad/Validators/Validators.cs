@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Linq;
-using GPSNotepad.Services.Authorization;
+using GPSNotepad.Enums;
 
 namespace GPSNotepad.Validators
 {
@@ -34,7 +33,5 @@ namespace GPSNotepad.Validators
             return PasswordValidationStatus.Done;
         }
         #endregion
-
-
     }
 }

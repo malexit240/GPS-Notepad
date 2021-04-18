@@ -5,14 +5,7 @@ namespace GPSNotepad
 {
     public class FutureNotification
     {
-        public int Id { get; set; }
-        public DateTime TimeToNotify { get; set; }
-
-        public string NotificationTitle { get; set; }
-        public string NotificationText { get; set; }
-
-        public bool IsFired { get; set; }
-
+        #region ---Public Static Methods---
         public static FutureNotification Create(string pinName, string notificationText, DateTime TimeToNotify)
         {
             return Create(new FutureNotification()
@@ -31,7 +24,21 @@ namespace GPSNotepad
 
             return note;
         }
+        #endregion
 
+        #region ---Public Properties---
+        public int Id { get; set; }
+
+        public string NotificationTitle { get; set; }
+
+        public string NotificationText { get; set; }
+
+        public DateTime TimeToNotify { get; set; }
+
+        public bool IsFired { get; set; }
+        #endregion
+
+        #region ---Internal Classes---
         class Comparer : IComparer<FutureNotification>
         {
             public int Compare(FutureNotification x, FutureNotification y)
@@ -39,5 +46,6 @@ namespace GPSNotepad
                 return x.TimeToNotify.CompareTo(y.TimeToNotify);
             }
         }
+        #endregion
     }
 }

@@ -6,11 +6,18 @@ namespace GPSNotepad
 {
     public class PlaceEventViewModel : BindableBase, IEntityBase
     {
-
-        public PlaceEventViewModel Self
+        #region ---Constructors---
+        public PlaceEventViewModel(Guid placeEventId, Guid pinId, DateTime time, string description)
         {
-            get => this;
+            PlaceEventId = placeEventId;
+            PinId = pinId;
+            Time = time;
+            Description = description;
         }
+        #endregion
+
+        #region ---Public Properties---
+        public PlaceEventViewModel Self => this;
 
         private Guid _placeEventId;
         public Guid PlaceEventId
@@ -33,27 +40,22 @@ namespace GPSNotepad
             set => SetProperty(ref _time, value);
         }
 
-        public string TimeString => Time.ToShortTimeString();
-        public string DateString => Time.ToShortDateString();
-
         private string _description;
-
-        public PlaceEventViewModel(Guid placeEventId, Guid pinId, DateTime time, string description)
-        {
-            PlaceEventId = placeEventId;
-            PinId = pinId;
-            Time = time;
-            Description = description;
-        }
-
         public string Description
         {
             get => _description;
             set => SetProperty(ref _description, value);
         }
 
-        public Guid Id => _placeEventId;
+        public string TimeString => Time.ToShortTimeString();
+        public string DateString => Time.ToShortDateString();
+        #endregion
 
+        #region ---IEntityBase Implementation---
+        public Guid Id => _placeEventId;
+        #endregion
+
+        #region ---Overrides---
         public override int GetHashCode() => HashCode.Combine(Id);
         public override bool Equals(object obj)
         {
@@ -64,5 +66,6 @@ namespace GPSNotepad
 
             return this.PlaceEventId == pin.Id;
         }
+        #endregion
     }
 }

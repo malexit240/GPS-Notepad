@@ -11,7 +11,6 @@ namespace GPSNotepad.ViewModels
     {
         public PinsViewModel(INavigationService navigationService) : base(navigationService)
         {
-
         }
     }
 }

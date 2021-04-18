@@ -15,6 +15,7 @@ namespace GPSNotepad.Services.PlaceEventsService
         void Update(PlaceEvent placeEvent);
 
         void Delete(PlaceEvent placeEvent);
+
         void CreateOrUpdate(PlaceEvent e);
     }
 }

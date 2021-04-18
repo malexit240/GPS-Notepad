@@ -8,16 +8,8 @@ namespace GPSNotepad.Services.QRCodeService
     [Serializable]
     struct SerializablePin
     {
-        public string Name;
 
-        public string Description;
-
-        public bool Favorite;
-
-        public double Longitude;
-
-        public double Latitude;
-
+        #region ---Public Static Methods---
         public static SerializablePin? CreateFromBase64String(string source)
         {
             BinaryFormatter formatter = new BinaryFormatter();
@@ -41,9 +33,22 @@ namespace GPSNotepad.Services.QRCodeService
             catch (Exception) { }
 
             return pin;
-
         }
+        #endregion
 
+        #region ---Public Fields---
+        public string Name;
+
+        public string Description;
+
+        public bool Favorite;
+
+        public double Longitude;
+
+        public double Latitude;
+        #endregion
+
+        #region ---Public Methods---
         public Pin ToModelPin()
         {
             return new Pin()
@@ -62,21 +67,21 @@ namespace GPSNotepad.Services.QRCodeService
 
             byte[] byteArray;
 
-            using (var stream = new MemoryStream())
+            using var stream = new MemoryStream();
+
+            formatter.Serialize(stream, this);
+
+            stream.Seek(0, SeekOrigin.Begin);
+
+            byteArray = new byte[stream.Length];
+
+            for (int i = 0; i < stream.Length; i++)
             {
-                formatter.Serialize(stream, this);
-
-                stream.Seek(0, SeekOrigin.Begin);
-
-                byteArray = new byte[stream.Length];
-
-                for (int i = 0; i < stream.Length; i++)
-                {
-                    byteArray[i] = Convert.ToByte(stream.ReadByte());
-                }
+                byteArray[i] = Convert.ToByte(stream.ReadByte());
             }
 
             return Convert.ToBase64String(byteArray);
         }
+        #endregion
     }
 }

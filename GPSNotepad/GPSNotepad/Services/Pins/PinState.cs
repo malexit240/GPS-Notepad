@@ -3,48 +3,16 @@ using GPSNotepad.Entities;
 using Prism.Mvvm;
 using Xamarin.Forms;
 using System.Linq;
-using System.Threading.Tasks;
 using System;
+using GPSNotepad.Enums;
 
-namespace GPSNotepad.Model
+namespace GPSNotepad.Services.PinService
 {
     public class PinState : BindableBase
     {
         #region ---Public Static Properties---
         private static PinState _instance;
         public static PinState Instance => _instance ??= new PinState();
-
-
-        private bool _isLoaded = false;
-        public bool IsLoaded => _isLoaded;
-
-        public void LoadPins(List<Pin> pins)
-        {
-            _isLoaded = true;
-
-            Pins = pins;
-
-            MessagingCenter.Send(App.Current, "pins_state_changed", new PinsStateChangedMessage(pins, PinsStateChangedType.Load));
-        }
-
-        internal void DeleteEvent(Guid pinId, PlaceEvent placeEvent)
-        {
-            var pin = Pins.Select(p => p).Where(p => p.PinId == pinId).FirstOrDefault();
-
-            if (pin != null)
-            {
-                var index = pin.Events.IndexOf(placeEvent);
-
-                if (index != -1)
-                {
-                    pin.Events.RemoveAt(index);
-                    MessagingCenter.Send(App.Current, "pins_state_changed",
-                        new PinsStateChangedMessage(new List<Pin>() { pin },
-                        PinsStateChangedType.UpdateEvents));
-                }
-            }
-        }
-
         #endregion
 
         #region ---Constructors---
@@ -56,16 +24,26 @@ namespace GPSNotepad.Model
 
         #region ---Public Properties---
         private List<Pin> _pins;
-
         public List<Pin> Pins
         {
             get => _pins;
-
             set => SetProperty(ref _pins, value);
         }
+
+        public bool IsLoaded { get; set; }
         #endregion
 
         #region ---Public Methods---
+        public void LoadPins(List<Pin> pins)
+        {
+            IsLoaded = true;
+
+            Pins = pins;
+
+            MessagingCenter.Send(App.Current, "pins_state_changed", new PinsStateChangedMessage(pins, PinsStateChangedType.Load));
+        }
+
+
 
         public bool ContainsPin(System.Guid pinId)
         {
@@ -81,6 +59,34 @@ namespace GPSNotepad.Model
                 PinsStateChangedType.Add));
 
         }
+
+
+
+        public void Update(Pin pin)
+        {
+            var index = Pins.IndexOf(pin);
+
+            if (index != -1)
+            {
+                Pins.RemoveAt(index);
+                Pins.Insert(index, pin);
+
+                MessagingCenter.Send(App.Current, "pins_state_changed",
+                    new PinsStateChangedMessage(new List<Pin>() { pin },
+                    PinsStateChangedType.Update));
+            }
+        }
+
+        public void Delete(Pin pin)
+        {
+            if (Pins.Remove(pin))
+            {
+                MessagingCenter.Send(App.Current, "pins_state_changed",
+                    new PinsStateChangedMessage(new List<Pin>() { pin },
+                    PinsStateChangedType.Delete));
+            }
+        }
+
 
         public void UpdateEvent(Guid pinId, PlaceEvent @event)
         {
@@ -106,28 +112,21 @@ namespace GPSNotepad.Model
             }
         }
 
-        public void Update(Pin pin)
+        public void DeleteEvent(Guid pinId, PlaceEvent placeEvent)
         {
-            var index = Pins.IndexOf(pin);
+            var pin = Pins.Select(p => p).Where(p => p.PinId == pinId).FirstOrDefault();
 
-            if (index != -1)
+            if (pin != null)
             {
-                Pins.RemoveAt(index);
-                Pins.Insert(index, pin);
+                var index = pin.Events.IndexOf(placeEvent);
 
-                MessagingCenter.Send(App.Current, "pins_state_changed",
-                    new PinsStateChangedMessage(new List<Pin>() { pin },
-                    PinsStateChangedType.Update));
-            }
-        }
-
-        public void Delete(Pin pin)
-        {
-            if (Pins.Remove(pin))
-            {
-                MessagingCenter.Send(App.Current, "pins_state_changed",
-                    new PinsStateChangedMessage(new List<Pin>() { pin },
-                    PinsStateChangedType.Delete));
+                if (index != -1)
+                {
+                    pin.Events.RemoveAt(index);
+                    MessagingCenter.Send(App.Current, "pins_state_changed",
+                        new PinsStateChangedMessage(new List<Pin>() { pin },
+                        PinsStateChangedType.UpdateEvents));
+                }
             }
         }
         #endregion

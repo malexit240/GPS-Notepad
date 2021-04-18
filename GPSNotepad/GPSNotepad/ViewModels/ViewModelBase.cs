@@ -7,10 +7,6 @@ namespace GPSNotepad.ViewModels
 {
     public class ViewModelBase : BindableBase, IInitialize, INavigationAware, IDestructible
     {
-        protected INavigationService NavigationService { get; private set; }
-
-        public LocalizedResources TextResources { get; private set; }
-
         #region ---Constructors---
         public ViewModelBase(INavigationService navigationService)
         {
@@ -19,25 +15,29 @@ namespace GPSNotepad.ViewModels
         }
         #endregion
 
+        #region ---Public Properties---
+        public LocalizedResources TextResources { get; private set; }
+        #endregion
+
+        #region ---Protected Property---
+        protected INavigationService NavigationService { get; private set; }
+        #endregion
+
         #region ---Overrides---
         public virtual void Initialize(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)
         {
-
         }
 
         public virtual void OnNavigatedTo(INavigationParameters parameters)
         {
-
         }
 
         public virtual void Destroy()
         {
-
         }
         #endregion
     }

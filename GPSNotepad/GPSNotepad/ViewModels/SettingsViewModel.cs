@@ -8,9 +8,13 @@ namespace GPSNotepad.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        #region ---Public Properties---
-        ISettingsManagerService _settingsManager;
+        #region ---Connstructors---
+        public SettingsViewModel(INavigationService navigationService, ISettingsManagerService settingsManager)
+           : base(navigationService) => this.SettingsManager = settingsManager;
+        #endregion
 
+        #region ---Public Properties---
+        protected ISettingsManagerService SettingsManager { get; set; }
 
         private string _themeName = "";
         public string ThemeName
@@ -21,38 +25,28 @@ namespace GPSNotepad.ViewModels
 
         public bool IsLightTheme
         {
-            get => _settingsManager.Theme == Theme.Light;
+            get => SettingsManager.Theme == Theme.Light;
             set
             {
-                _settingsManager.Theme = value ? Theme.Light : Theme.Dark;
+                SettingsManager.Theme = value ? Theme.Light : Theme.Dark;
                 ThemeName = value ? TextResources["LightTheme"] : TextResources["DarkTheme"];
                 RaisePropertyChanged(nameof(IsLightTheme));
             }
         }
 
-        public bool IsEnglish
-        {
-            get => _settingsManager.Language.Name == "en-US";
-        }
+        public bool IsEnglish => SettingsManager.Language.Name == "en-US";
 
-        public bool IsRussian
-        {
-            get => _settingsManager.Language.Name == "ru-RU";
-        }
-
-        public ICommand CheckedEnglish =>
-        new DelegateCommand(() => _settingsManager.Language = new System.Globalization.CultureInfo("en-US"));
-        public ICommand CheckedRussian =>
-        new DelegateCommand(() => _settingsManager.Language = new System.Globalization.CultureInfo("ru-RU"));
+        public bool IsRussian => SettingsManager.Language.Name == "ru-RU";
         #endregion
 
-        #region ---Connstructors---
-        public SettingsViewModel(INavigationService navigationService, ISettingsManagerService settingsManager)
-           : base(navigationService)
-        {
-            this._settingsManager = settingsManager;
+        #region ---Commands---
+        private ICommand _checkedEnglish;
+        public ICommand CheckedEnglish => _checkedEnglish ??=
+        new DelegateCommand(() => SettingsManager.Language = new System.Globalization.CultureInfo("en-US"));
 
-        }
+        private ICommand _checkedRussian;
+        public ICommand CheckedRussian => _checkedRussian ??=
+        new DelegateCommand(() => SettingsManager.Language = new System.Globalization.CultureInfo("ru-RU"));
         #endregion
     }
 }

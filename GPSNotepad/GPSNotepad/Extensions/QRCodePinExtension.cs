@@ -1,6 +1,7 @@
 ﻿using GPSNotepad.Entities;
+using GPSNotepad.Services.QRCodeService;
 
-namespace GPSNotepad.Services.QRCodeService
+namespace GPSNotepad.Extensions
 {
     public static class QRCodePinExtension
     {

@@ -6,6 +6,6 @@ namespace GPSNotepad.Services.PermissionManager
 {
     public interface IPermissionManager
     {
-        Task<bool> RunWithPermission<TPermission>(Func<Task> action) where TPermission : BasePermission, new();
+        Task<bool> RunWithPermission<TPermission>(Func<Task> function) where TPermission : BasePermission, new();
     }
 }

@@ -1,5 +1,4 @@
-﻿using GPSNotepad.Model;
-using GPSNotepad.Entities;
+﻿using GPSNotepad.Entities;
 using System;
 using System.Threading.Tasks;
 using GPSNotepad.Repositories;
@@ -11,24 +10,29 @@ namespace GPSNotepad.Services.Authentication
 {
     public class AuthenticationService : IAuthenticationService
     {
-        protected IAuthorizationService AuthorizationService { get; set; }
-        protected ISecureStorageService SecureStorageService { get; set; }
 
+        #region ---Constructors---
         public AuthenticationService()
         {
             AuthorizationService = App.Current.Container.Resolve<IAuthorizationService>();
             SecureStorageService = App.Current.Container.Resolve<ISecureStorageService>();
         }
+        #endregion
+
+        #region ---Protected Properties---
+        protected IAuthorizationService AuthorizationService { get; set; }
+        protected ISecureStorageService SecureStorageService { get; set; }
+        #endregion
+
 
         #region ---IAuthenticationService Implementation---
         public bool ContinueSession(string token)
         {
-
             bool result = false;
+
             User user;
             using var context = new Context();
 
-            var list = context.Users.Select(u => u.SessionToken).ToList();
             user = (from u in context.Users where u.SessionToken == token select u).FirstOrDefault();
 
             if (user != null)
@@ -38,8 +42,6 @@ namespace GPSNotepad.Services.Authentication
             }
 
             return result;
-
-
         }
 
         public async Task<bool> SignInAsync(string email, string password)
@@ -47,18 +49,21 @@ namespace GPSNotepad.Services.Authentication
             return await Task.Run(() =>
             {
                 bool result = false;
-                using (var context = new Context())
-                {
-                    var u = (from user in context.Users where user.Email == email && user.HashPassword == password select user).FirstOrDefault();
-                    if (u != null)
-                    {
-                        CreateToken(ref u);
-                        AuthorizationService.SetAuthorize(u.UserId);
-                        SecureStorageService.SessionToken = u.SessionToken;
-                        result = true;
-                    }
 
+                using var context = new Context();
+
+                var u = (from user in context.Users where user.Email == email && user.HashPassword == password select user).FirstOrDefault();
+
+                if (u != null)
+                {
+                    CreateToken(ref u);
+
+                    AuthorizationService.SetAuthorize(u.UserId);
+                    SecureStorageService.SessionToken = u.SessionToken;
+
+                    result = true;
                 }
+
                 return result;
             });
         }
@@ -67,7 +72,6 @@ namespace GPSNotepad.Services.Authentication
         {
             return await Task.Run(() =>
             {
-                bool result = false;
                 var user = new User()
                 {
                     UserId = Guid.NewGuid(),
@@ -77,14 +81,12 @@ namespace GPSNotepad.Services.Authentication
                     Pins = new System.Collections.Generic.List<Pin>()
                 };
 
-                using (var context = new Context())
-                {
-                    context.Users.Add(user);
-                    context.SaveChangesAsync();
-                    result = true;
-                }
+                using var context = new Context();
 
-                return result;
+                context.Users.Add(user);
+                context.SaveChangesAsync();
+
+                return true;
             });
         }
 

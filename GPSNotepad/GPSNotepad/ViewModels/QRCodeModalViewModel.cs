@@ -7,18 +7,20 @@ namespace GPSNotepad.ViewModels
 {
     public class QRCodeModalViewModel : ViewModelBase
     {
+        #region ---Constructors---
+        public QRCodeModalViewModel(INavigationService navigationService) : base(navigationService) { }
+        #endregion
+
+        #region ---Public Properties---
         private string _qRCodeValue;
         public string QRCodeValue
         {
             get => _qRCodeValue;
             set => SetProperty(ref _qRCodeValue, value);
         }
+        #endregion
 
-        public QRCodeModalViewModel(INavigationService navigationService) : base(navigationService)
-        {
-
-        }
-
+        #region ---Overrides---
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -28,5 +30,6 @@ namespace GPSNotepad.ViewModels
                 QRCodeValue = (string)parameters[nameof(QRCodeModalViewModel.QRCodeValue)];
             }
         }
+        #endregion
     }
 }

@@ -9,20 +9,14 @@ namespace GPSNotepad.Services.Settings
 {
     public class SettingsManagerService : ISettingsManagerService
     {
-        #region ---Public Properties---
+        #region ---ISettingsManagerService Implementation---
         public Theme Theme
         {
             get => (Theme)Preferences.Get(nameof(Theme), (int)Theme.Light);
             set
             {
                 Preferences.Set(nameof(Theme), (int)value);
-                App.Current.Resources.MergedDictionaries.Clear();
-                if (value == Theme.Light)
-                    App.Current.Resources.MergedDictionaries.Add(new LightTheme());
-                else
-                    App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
-
-                DependencyService.Get<IChangerBarColor>().SetBarColor((Color)App.Current.Resources["PrimaryColor"]);
+                ChangeTheme(value);
             }
         }
 
@@ -50,5 +44,19 @@ namespace GPSNotepad.Services.Settings
             Language = Language;
         }
         #endregion
+
+        #region ---Private Helpers---
+        private void ChangeTheme(Theme theme)
+        {
+            App.Current.Resources.MergedDictionaries.Clear();
+            if (theme == Theme.Light)
+                App.Current.Resources.MergedDictionaries.Add(new LightTheme());
+            else
+                App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
+
+            DependencyService.Get<IChangerBarColor>().SetBarColor((Color)App.Current.Resources["PrimaryColor"]);
+        }
+        #endregion
+
     }
 }

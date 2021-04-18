@@ -7,7 +7,9 @@ namespace GPSNotepad.Model
 {
     public static class CurrentPosition
     {
+        #region ---Public Static Message---
         public static Position LastChecked { get; private set; } = new Position();
+        #endregion
 
         #region ---Public Static Methods---
         public static async Task<Position> GetAsync()

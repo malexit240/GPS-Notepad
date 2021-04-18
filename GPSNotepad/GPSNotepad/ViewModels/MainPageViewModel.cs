@@ -15,11 +15,13 @@ using GPSNotepad.Services.Authorization;
 using System.Collections.Generic;
 using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Comparers;
+using GPSNotepad.Enums;
 
 namespace GPSNotepad.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
+        #region ---Constructors---
         public MainPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
         {
             PinService = pinService;
@@ -34,12 +36,16 @@ namespace GPSNotepad.ViewModels
 
             pinService.LoadUserPins(AuthorizationService.GetCurrenUserId());
         }
+        #endregion
 
+        #region ---Protected Properties---
         protected IPinService PinService { get; set; }
         protected IQrScanerService QrScanerService { get; set; }
         protected IAuthorizationService AuthorizationService { get; set; }
 
+        #endregion
 
+        #region ---Public Properties---
         private ObservableCollection<PinViewModel> _pins;
         public ObservableCollection<PinViewModel> Pins
         {
@@ -76,7 +82,7 @@ namespace GPSNotepad.ViewModels
         }
 
         public MainMapViewModel MainMapViewModel { get; set; }
-
+        #endregion
 
         #region ---Commands---
 
@@ -171,13 +177,14 @@ namespace GPSNotepad.ViewModels
         public ICommand LogoutCommand => _logoutCommand ??= new DelegateCommand(LogoutCommandHandler);
         private void LogoutCommandHandler()
         {
-            AuthorizationService.Unauthorize();
+            AuthorizationService.LogOut();
             this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
         }
 
 
         #endregion
 
+        #region ---Private Helpers---
         private void SortPins(IComparer<Pin> comparer)
         {
             var pins = Pins.Select(p => p.GetModelPin()).ToList();
@@ -212,5 +219,6 @@ namespace GPSNotepad.ViewModels
                 });
 
         }
+        #endregion
     }
 }

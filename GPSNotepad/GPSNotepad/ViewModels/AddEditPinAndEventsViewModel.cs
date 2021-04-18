@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using System.Windows.Input;
 using GPSNotepad.Converters;
+using GPSNotepad.Enums;
 using GPSNotepad.Extensions;
 using GPSNotepad.Model;
 using GPSNotepad.Services.Authorization;
@@ -12,32 +11,44 @@ using GPSNotepad.Views;
 using Prism;
 using Prism.Commands;
 using Prism.Navigation;
-using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 
 namespace GPSNotepad.ViewModels
 {
     public class AddEditPinAndEventsViewModel : ViewModelBase
     {
-        #region ---Public Properties---
+        #region ---Constructors---
+        public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
+        {
+            Pins = new ObservableCollection<PinViewModel>();
+            AuthorizationService = authorizationService;
+            PinService = pinService;
+        }
+        #endregion
 
+
+        #region ---Protected Properties---
         protected IPinService PinService { get; set; }
 
-        private MapSpan _span;
-        private string _textCoordinates = "";
-        private string _name = "";
-        private string _description;
+        protected IAuthorizationService AuthorizationService { get; set; }
+        #endregion
+
+        #region ---Public Properties---
 
         public ObservableCollection<PinViewModel> Pins { get; set; }
+
         public bool IsEdit { get; private set; } = false;
+
         public PinViewModel PinViewModel { get; set; }
 
+        private string _name = "";
         public string Name
         {
             get => _name;
             set => SetProperty(ref _name, value);
         }
 
+        private string _description;
         public string Description
         {
             get => _description;
@@ -51,12 +62,14 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _events, value);
         }
 
+        private MapSpan _span;
         public MapSpan Span
         {
             get => _span;
             set => SetProperty(ref _span, value);
         }
 
+        private string _textCoordinates = "";
         public string TextCoordinates
         {
             get => _textCoordinates;
@@ -73,69 +86,48 @@ namespace GPSNotepad.ViewModels
                 }
             }
         }
-
-        public ICommand AddEditPinCommand { get; set; }
-        public DelegateCommand<object> OnMapClickedCommand { get; set; }
-        public ICommand OnMapLoadedCommand { get; set; }
-        public ICommand GoToAddPlaceEventFormCommand { get; set; }
-        public ICommand EditPlaceEventContextCommand { get; set; }
         #endregion
 
-        protected IAuthorizationService AuthorizationService { get; set; }
-
-        #region ---Constructors---
-        public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
+        #region ---Commands---
+        public ICommand AddEditPinCommand => new DelegateCommand(async () =>
         {
-            Pins = new ObservableCollection<PinViewModel>();
-            AuthorizationService = authorizationService;
-            PinService = pinService;
-            AddEditPinCommand = new DelegateCommand(async () =>
-            {
-                PinViewModel.Name = Name;
-                PinViewModel.Description = Description;
-                await navigationService.GoBackAsync();
-                await pinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
-            });
+            PinViewModel.Name = Name;
+            PinViewModel.Description = Description;
+            await NavigationService.GoBackAsync();
+            await PinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
+        });
 
-            EditPlaceEventContextCommand = new DelegateCommand<PlaceEventViewModel>(async (placeEvent) =>
-            {
-                var parameters = new NavigationParameters
+        public ICommand EditPlaceEventContextCommand =>
+
+        new DelegateCommand<PlaceEventViewModel>(async (placeEvent) =>
+        {
+            var parameters = new NavigationParameters
                 {
                     { nameof(PlaceEventViewModel), placeEvent }
                 };
 
-                await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
-            });
+            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+        });
 
-            OnMapLoadedCommand = new DelegateCommand(OnMapLoadedHelper);
-
-            OnMapClickedCommand = new DelegateCommand<object>((newPosition) =>
+        public DelegateCommand<object> OnMapClickedCommand => new DelegateCommand<object>((newPosition) =>
             {
                 SetNewPinPosition((Position)newPosition);
             });
 
-            GoToAddPlaceEventFormCommand = new DelegateCommand(async () =>
-            {
-                var parameters = new NavigationParameters();
+        public ICommand OnMapLoadedCommand => new DelegateCommand(OnMapLoadedHelper);
 
-                parameters.Add(nameof(PlaceEventViewModel.PinId), this.PinViewModel.PinId);
-
-                await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
-            });
-
-        }
-
-        private void OnPinsStateChanged(PrismApplicationBase _, PinsStateChangedMessage message)
+        public ICommand GoToAddPlaceEventFormCommand => new DelegateCommand(async () =>
         {
-            if (message.ChangedType == PinsStateChangedType.UpdateEvents)
-            {
-                PinViewModel.Events.Clear();
+            var parameters = new NavigationParameters();
 
-                message.ChangedPin.Events.ForEach(e => PinViewModel.Events.Add(e.ToViewModel()));
-            }
-        }
+            parameters.Add(nameof(PlaceEventViewModel.PinId), this.PinViewModel.PinId);
+
+            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+        });
+
         #endregion
 
+        #region ---Overrides---
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -171,6 +163,20 @@ namespace GPSNotepad.ViewModels
             }
 
             Events = PinViewModel.Events;
+        }
+
+        #endregion
+
+        #region ---Private Helpers---
+
+        private void OnPinsStateChanged(PrismApplicationBase _, PinsStateChangedMessage message)
+        {
+            if (message.ChangedType == PinsStateChangedType.UpdateEvents)
+            {
+                PinViewModel.Events.Clear();
+
+                message.ChangedPin.Events.ForEach(e => PinViewModel.Events.Add(e.ToViewModel()));
+            }
         }
 
         private async void OnMapLoadedHelper()
@@ -216,6 +222,6 @@ namespace GPSNotepad.ViewModels
             _textCoordinates = StringToPositionConverter.ToFormatedString(position.Rounded());
             RaisePropertyChanged(nameof(TextCoordinates));
         }
-
+        #endregion
     }
 }

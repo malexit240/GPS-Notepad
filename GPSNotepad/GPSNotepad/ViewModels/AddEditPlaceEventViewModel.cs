@@ -1,18 +1,20 @@
 ﻿using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
-using GPSNotepad.Services.PlaceEventsService;
-using GPSNotepad.Extensions;
 
 namespace GPSNotepad.ViewModels
 {
     public class AddEditPlaceEventViewModel : ViewModelBase
     {
+        #region ---Constructors---
+        public AddEditPlaceEventViewModel(INavigationService navigationService) : base(navigationService)
+        {
 
+        }
+        #endregion
+
+        #region ---Public Properties---
         private TimeSpan _time;
         public TimeSpan Time
         {
@@ -36,21 +38,24 @@ namespace GPSNotepad.ViewModels
 
         public PlaceEventViewModel PlaceEventViewModel { get; set; } = null;
 
-        public ICommand AddEditPlaceEventCommand { get; set; }
-
-
         public bool IsEdit { get; set; }
+        #endregion
 
-        public AddEditPlaceEventViewModel(INavigationService navigationService) : base(navigationService)
+        #region ---Commands---
+        private ICommand _addEditPlaceEventCommand;
+        public ICommand AddEditPlaceEventCommand => _addEditPlaceEventCommand ??=
+        new DelegateCommand(AddEditPlaceEventHandler);
+        private async void AddEditPlaceEventHandler()
         {
-            AddEditPlaceEventCommand = new DelegateCommand(async () =>
-            {
-                PlaceEventViewModel.Time = Date.Add(Time);
-                PlaceEventViewModel.Description = Description;
-                await navigationService.GoBackAsync((nameof(PlaceEventViewModel), this.PlaceEventViewModel));
-            });
+            PlaceEventViewModel.Time = Date.Add(Time);
+            PlaceEventViewModel.Description = Description;
+
+            await NavigationService.GoBackAsync((nameof(PlaceEventViewModel), this.PlaceEventViewModel));
         }
 
+        #endregion
+
+        #region ---Overrides---
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -71,6 +76,6 @@ namespace GPSNotepad.ViewModels
             Date = PlaceEventViewModel.Time.Date;
             Time = PlaceEventViewModel.Time.TimeOfDay;
         }
-
+        #endregion
     }
 }

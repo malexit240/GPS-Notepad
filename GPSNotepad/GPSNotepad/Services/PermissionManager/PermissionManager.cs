@@ -7,9 +7,11 @@ namespace GPSNotepad.Services.PermissionManager
 {
     public class PermissionManager : IPermissionManager
     {
-        public async Task<bool> RunWithPermission<TPermission>(Func<Task> action) where TPermission : BasePermission, new()
+        #region ---IPermissionManager Implementation---
+        public async Task<bool> RunWithPermission<TPermission>(Func<Task> function) where TPermission : BasePermission, new()
         {
             bool result = false;
+
             var status = await CheckStatusAsync<TPermission>();
 
             if (status != PermissionStatus.Granted)
@@ -17,12 +19,12 @@ namespace GPSNotepad.Services.PermissionManager
 
             if (status == PermissionStatus.Granted)
             {
-                await action();
+                await function();
                 result = true;
             }
 
             return result;
-
         }
+        #endregion
     }
 }
