@@ -26,7 +26,9 @@ namespace GPSNotepad.Entities
 
         public List<PlaceEvent> Events { get; set; } = new List<PlaceEvent>();
 
+        #endregion
 
+        #region ---Public Properties---
         [NotMapped]
         public Position Position
         {
@@ -37,9 +39,13 @@ namespace GPSNotepad.Entities
                 Latitude = value.Latitude;
             }
         }
+        #endregion
+
+        #region ---IEntityBase Implementation---
         [NotMapped]
         public Guid Id => PinId;
         #endregion
+
 
         #region ---Overrides---
         public override int GetHashCode() => HashCode.Combine(Id);

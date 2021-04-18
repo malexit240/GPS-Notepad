@@ -5,15 +5,16 @@ namespace GPSNotepad.Comparers
 {
     public class PinNameDescriptionComparer : ExcludedComparer<Pin>
     {
+        #region ---Private Properties
+        private readonly string ethalon;
+        #endregion
+
         #region ---Constructors---
         public PinNameDescriptionComparer(string ethalon)
         {
-            this.Ethalon = ethalon;
+            this.ethalon = ethalon;
         }
         #endregion
-
-        private string Ethalon { get; set; }
-
 
         #region ---Overrides---
         public override double GetComparation(Pin item)
@@ -35,9 +36,9 @@ namespace GPSNotepad.Comparers
         {
             double result = 0;
 
-            if (source.Length != 0 && Ethalon.Length != 0)
+            if (source.Length != 0 && ethalon.Length != 0)
             {
-                string ethalon = Ethalon.ToLower();
+                string ethalon = this.ethalon.ToLower();
                 string compared = source.ToLower();
 
                 result = compared.Contains(ethalon) ? 1 : 0;//absolute comparsion

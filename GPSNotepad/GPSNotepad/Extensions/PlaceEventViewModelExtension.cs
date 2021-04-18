@@ -2,6 +2,7 @@
 {
     public static class PlaceEventViewModelExtension
     {
+        #region ---Extension Methods---
         public static PlaceEventViewModel ToViewModel(this GPSNotepad.Entities.PlaceEvent placeEvent)
         {
             return new PlaceEventViewModel(placeEvent.PlaceEventId, placeEvent.PinId, placeEvent.Time, placeEvent.Description);
@@ -17,5 +18,6 @@
                 Description = placeEvent.Description
             };
         }
+        #endregion
     }
 }

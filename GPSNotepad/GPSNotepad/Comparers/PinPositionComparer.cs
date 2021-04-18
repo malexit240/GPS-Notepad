@@ -7,14 +7,16 @@ namespace GPSNotepad.Comparers
     public class PinPositionComparer : ExcludedComparer<Pin>
     {
 
+        #region ---Private Fields---
+        private readonly Xamarin.Forms.GoogleMaps.Position ethalon;
+        #endregion
+
         #region ---Constructors---
         public PinPositionComparer(Xamarin.Forms.GoogleMaps.Position ethalon)
         {
             this.ethalon = ethalon;
         }
         #endregion
-
-        private readonly Xamarin.Forms.GoogleMaps.Position ethalon;
 
         #region ---Overrides---
         public override int Compare(Pin one, Pin two)

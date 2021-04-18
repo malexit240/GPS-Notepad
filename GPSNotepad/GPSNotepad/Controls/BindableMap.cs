@@ -11,12 +11,18 @@ namespace GPSNotepad.Controls
 {
     public class BindableMap : ClusteredMap
     {
+        #region ---Private Fields---
+        private bool _isMapLoading;
+
+        private bool _isIdle;
+        #endregion
+
         #region ---Constructors---
         public BindableMap()
         {
-            IsMapLoading = true;
+            _isMapLoading = true;
             ShowInfoWindow = false;
-            IsIdle = true;
+            _isIdle = true;
 
             this.CameraMoveStarted += OnCameraMoveStarted;
             this.CameraIdled += OnCameraIdled;
@@ -30,19 +36,6 @@ namespace GPSNotepad.Controls
             this.CameraMoveStarted -= OnCameraMoveStarted;
             this.CameraIdled -= OnCameraIdled;
             this.CameraMoving -= OnCameraMoving;
-        }
-        #endregion
-
-        #region ---Events---
-        public event EventHandler MapLoaded;
-
-        public event EventHandler<PinTappedEventArgs> ShowDetaiPinView;
-        #endregion
-
-        #region ---Public Methods---
-        public void RaiseShowDetaiPinView(Pin pin)
-        {
-            ShowDetaiPinView?.Invoke(this, new PinTappedEventArgs(pin));
         }
         #endregion
 
@@ -66,18 +59,19 @@ namespace GPSNotepad.Controls
         }
         #endregion
 
-        private bool IsMapLoading { get; set; }
+        #region ---Events---
+        public event EventHandler MapLoaded;
 
-        public bool IsIdle { get; private set; }
+        public event EventHandler<PinTappedEventArgs> ShowDetaiPinView;
+        #endregion
 
-        private ObservableCollection<PinViewModel> _pins;
-
-        public void SetPins(ObservableCollection<PinViewModel> pins)
+        #region ---Public Methods---
+        public void RaiseShowDetaiPinView(Pin pin)
         {
-            this._pins = pins;
-            this._pins.CollectionChanged += PinsSourceOnCollectionChanged;
+            ShowDetaiPinView?.Invoke(this, new PinTappedEventArgs(pin));
         }
 
+        #endregion
 
         #region ---Bindable Source Properties---
         public static readonly BindableProperty PinsSourceProperty = BindableProperty.Create(
@@ -103,19 +97,18 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Event Handlers---
-
         private void OnCameraIdled(object sender, CameraIdledEventArgs e)
         {
-            IsIdle = true;
+            _isIdle = true;
 
-            if (IsMapLoading == true)
+            if (_isMapLoading == true)
             {
-                IsMapLoading = false;
+                _isMapLoading = false;
                 MapLoaded?.Invoke(this, new EventArgs());
             }
         }
 
-        private void OnCameraMoveStarted(object sender, CameraMoveStartedEventArgs e) => IsIdle = false;
+        private void OnCameraMoveStarted(object sender, CameraMoveStartedEventArgs e) => _isIdle = false;
 
         private void OnCameraMoving(object sender, CameraMovingEventArgs e)
         {
@@ -129,7 +122,7 @@ namespace GPSNotepad.Controls
             var map = bindable as BindableMap;
             var newMapSpan = newValue as MapSpan;
 
-            if (map.IsIdle == true)
+            if (map._isIdle == true)
             {
                 map?.MoveToRegion(newMapSpan);
             }
@@ -142,14 +135,14 @@ namespace GPSNotepad.Controls
 
             if (map != null && newPinsSource != null)
             {
-                map.SetPins(newPinsSource);
+                newPinsSource.CollectionChanged += map.PinsSourceOnCollectionChanged;
                 map.UpdatePinsSource(newPinsSource);
             }
         }
 
         private void PinsSourceOnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            this.UpdatePinsSource(_pins);
+            this.UpdatePinsSource(PinsSource);
         }
         #endregion
 
@@ -178,6 +171,5 @@ namespace GPSNotepad.Controls
             this.Cluster();
         }
         #endregion
-
     }
 }

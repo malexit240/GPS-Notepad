@@ -5,9 +5,11 @@ namespace GPSNotepad
 {
     public static class GoogleMapsPinExtension
     {
+        #region ---Extension Methods---
         public static Position Rounded(this Position position)
         {
             return new Position(Math.Round(position.Latitude, 7), Math.Round(position.Longitude, 7));
         }
+        #endregion
     }
 }
