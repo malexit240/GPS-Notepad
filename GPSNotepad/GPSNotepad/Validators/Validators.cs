@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Linq;
+using System.Text;
 using GPSNotepad.Enums;
+
+using System.Text.RegularExpressions;
 
 namespace GPSNotepad.Validators
 {
@@ -9,17 +12,9 @@ namespace GPSNotepad.Validators
         #region ---Public Static Methods---
         public static EmailValidationStatus IsEmailValid(string email)
         {
+            var status = Regex.IsMatch(email, @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$") ? EmailValidationStatus.Done : EmailValidationStatus.InvalidFormat;
 
-            try
-            {
-                var adress = new System.Net.Mail.MailAddress(email);
-            }
-            catch
-            {
-                return EmailValidationStatus.InvalidFormat;
-            }
-
-            return EmailValidationStatus.Done;
+            return status;
         }
 
         public static PasswordValidationStatus IsPasswordValid(string password)

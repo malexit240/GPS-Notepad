@@ -81,6 +81,13 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _choosenPage, value);
         }
 
+        public bool _isDropDownPinsVisible = false;
+        public bool IsDropDownPinsVisible
+        {
+            get => _isDropDownPinsVisible;
+            set => SetProperty(ref _isDropDownPinsVisible, value);
+        }
+
         public MainMapViewModel MainMapViewModel { get; set; }
         #endregion
 
@@ -150,13 +157,6 @@ namespace GPSNotepad.ViewModels
                 return;
             SelectedPin = (from p in Pins where p.PinId == id select p).FirstOrDefault();
             MainMapViewModel.ShowDetailView = true;
-        }
-
-        public bool _isDropDownPinsVisible = false;
-        public bool IsDropDownPinsVisible
-        {
-            get => _isDropDownPinsVisible;
-            set => SetProperty(ref _isDropDownPinsVisible, value);
         }
 
         private ICommand _onSearchFieldFocusCommand;
