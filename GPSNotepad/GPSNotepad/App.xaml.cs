@@ -1,5 +1,5 @@
-using GPSNotepad.ViewModels;
-using GPSNotepad.Views;
+using GPSNotepad.Temp.ViewModels;
+using GPSNotepad.Temp.Views;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
@@ -33,12 +33,15 @@ namespace GPSNotepad
 
             if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
             {
-                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+                //  NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
             }
             else
             {
-                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
+                // NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
             }
+
+            NavigationService.NavigateAsync($"/{nameof(NavigationPage)}");
+
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -54,13 +57,6 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IQrScanerService>(Container.Resolve<QrScanerService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
-            containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
-            containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
-            containerRegistry.RegisterForNavigation<MainTabbedPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<SettingsPage, SettingsViewModel>();
-            containerRegistry.RegisterForNavigation<AddEditPinAndEventsTabbedPage, AddEditPinAndEventsViewModel>();
-            containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventViewModel>();
-            containerRegistry.RegisterForNavigation<QRCodeModalPage, QRCodeModalViewModel>();
         }
     }
 }

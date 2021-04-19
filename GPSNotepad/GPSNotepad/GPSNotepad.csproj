@@ -33,31 +33,31 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Views\AddEditPinAndEventsTabbedPage.xaml.cs">
+    <Compile Update="Temp\Views\AddEditPinAndEventsTabbedPage.xaml.cs">
       <DependentUpon>AddEditPinAndEventsTabbedPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\AddEditPinTabPage.xaml.cs">
+    <Compile Update="Temp\Views\AddEditPinTabPage.xaml.cs">
       <DependentUpon>AddEditPinTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\PinEventsListTabPage.xaml.cs">
+    <Compile Update="Temp\Views\PinEventsListTabPage.xaml.cs">
       <DependentUpon>PinEventsListTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\PinsTabPage.xaml.cs">
+    <Compile Update="Temp\Views\PinsTabPage.xaml.cs">
       <DependentUpon>PinsTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainMapTabPage.xaml.cs">
+    <Compile Update="Temp\Views\MainMapTabPage.xaml.cs">
       <DependentUpon>MainMapTabPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MainTabbedPage.xaml.cs">
+    <Compile Update="Temp\Views\MainTabbedPage.xaml.cs">
       <DependentUpon>MainTabbedPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\QRCodeModalPage.xaml.cs">
+    <Compile Update="Temp\Views\QRCodeModalPage.xaml.cs">
       <DependentUpon>QRCodeModalPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SignInPage.xaml.cs">
+    <Compile Update="Temp\Views\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SignUpPage.xaml.cs">
+    <Compile Update="Temp\Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -73,36 +73,40 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddEditPinAndEventsTabbedPage.xaml">
+    <EmbeddedResource Update="Temp\Views\AddEditPinAndEventsTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddEditPlaceEventPage.xaml">
+    <EmbeddedResource Update="Temp\Views\AddEditPlaceEventPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddEditPinTabPage.xaml">
+    <EmbeddedResource Update="Temp\Views\AddEditPinTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\PinsTabPage.xaml">
+    <EmbeddedResource Update="Temp\Views\PinsTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MainMapTabPage.xaml">
+    <EmbeddedResource Update="Temp\Views\MainMapTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\MainTabbedPage.xaml">
+    <EmbeddedResource Update="Temp\Views\MainTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\QRCodeModalPage.xaml">
+    <EmbeddedResource Update="Temp\Views\QRCodeModalPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SettingsPage.xaml">
+    <EmbeddedResource Update="Temp\Views\SettingsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SignInPage.xaml">
+    <EmbeddedResource Update="Temp\Views\SignInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SignUpPage.xaml">
+    <EmbeddedResource Update="Temp\Views\SignUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>

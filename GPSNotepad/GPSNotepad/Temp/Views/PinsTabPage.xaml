@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="False"
+             xmlns:converters="clr-namespace:GPSNotepad.Converters"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             x:Class="GPSNotepad.Temp.Views.PinsTabPage"
+             x:Name="page"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid RowDefinitions="*">
+        <StackLayout Grid.Row="0">
+            <Entry Placeholder="{Binding TextResources[Search]}"
+                   Text="{Binding SearchField}"
+                   Style="{DynamicResource entryStyle}"
+                   ClearButtonVisibility="WhileEditing"/>
+            <ListView  ItemsSource="{Binding Pins}" 
+                       HasUnevenRows="True"
+                       IsPullToRefreshEnabled="False"
+                       SelectionMode="None"
+                       SeparatorVisibility="None">
+                <ListView.Behaviors>
+                    <prism:EventToCommandBehavior EventName="ItemTapped"
+                                              Command="{Binding PinTappedCommand}"
+                                              EventArgsConverter="{x:StaticResource itemTappedEventArgsConverter}"/>
+                </ListView.Behaviors>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
+                                          Source={x:Reference page}}" 
+                                          IconImageSource="icon_qr.png"
+                                          CommandParameter="{Binding Self}"/>
+                                <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand,
+                                          Source={x:Reference page}}"
+                                          CommandParameter="{Binding Self}"
+                                          Text="{Binding Path=BindingContext.TextResources[Edit],
+                                          Source={x:Reference page}}"/>
+                                <MenuItem Command="{Binding DeletePinContextCommand}" 
+                                          Text="{Binding Path=BindingContext.TextResources[Delete],
+                                          Source={x:Reference page}}"/>
+                            </ViewCell.ContextActions>
+                            <StackLayout Padding="5,0,5,15">
+
+                                <Grid ColumnDefinitions="60,*" HeightRequest="60">
+                                    <controls:ImageCheckBox Grid.Column="0"
+                                                        Margin="10"
+                                                        CheckedImageSource="FavoriteChecked.png" 
+                                                        UncheckedImageSource="FavoriteUnchecked.png" 
+                                                        IsChecked="{Binding Favorite}"                                                       />
+                                    <StackLayout Grid.Column="1">
+                                        <Label Text="{Binding Name}"
+                                       Style="{DynamicResource labelStyle}"/>
+                                        <Label Text="{Binding Description}"
+                                       Style="{DynamicResource labelStyle}"/>
+                                    </StackLayout>
+
+                                </Grid>
+                                <BoxView Style="{DynamicResource stripStyle}"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <Button Grid.Row="0" 
+                ImageSource="ic_add3x.png"
+                Style="{DynamicResource floatButtonStyle}"
+                Command="{Binding GoToAddPinFormCommand}"/>
+    </Grid>
+</ContentPage>

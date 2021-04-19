@@ -9,7 +9,7 @@ using GPSNotepad.Services.PinService;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 
-namespace GPSNotepad
+namespace GPSNotepad.ViewModels
 {
     public class PinViewModel : BindableBase, IEntityBase
     {

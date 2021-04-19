@@ -1,4 +1,6 @@
-﻿namespace GPSNotepad.Extensions
+﻿using GPSNotepad.ViewModels;
+
+namespace GPSNotepad.Extensions
 {
     public static class PlaceEventViewModelExtension
     {

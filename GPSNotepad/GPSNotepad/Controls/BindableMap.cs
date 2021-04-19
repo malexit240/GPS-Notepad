@@ -6,6 +6,7 @@ using Xamarin.Forms.GoogleMaps.Clustering;
 using System;
 using GPSNotepad.Extensions;
 using System.Collections.ObjectModel;
+using GPSNotepad.ViewModels;
 
 namespace GPSNotepad.Controls
 {

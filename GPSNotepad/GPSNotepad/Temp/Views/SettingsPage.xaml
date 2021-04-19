@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Temp.Views.SettingsPage"
+             Style="{DynamicResource pageStyle}"
+             Title="{Binding TextResources[SettingsTitle]}">
+    <StackLayout>
+        <Label Text="{Binding TextResources[Theme]}"
+               Style="{DynamicResource labelStyle}"/>
+        <StackLayout Orientation="Horizontal">
+            <Label Text="{Binding ThemeName}"
+                   Style="{DynamicResource labelStyle}"/>
+            <Switch IsToggled="{Binding IsLightTheme}"
+                    Style="{DynamicResource switchStyle}"/>
+
+        </StackLayout>
+
+        <input:RadioButtonGroupView>
+            <input:RadioButton  Text="{Binding TextResources[English]}" 
+                                IsChecked="{Binding IsEnglish}"
+                                ClickCommand="{Binding CheckedEnglish}"
+                                Style="{DynamicResource radioButtonStyle}"/>
+            <input:RadioButton  Text="{Binding TextResources[Russian]}"
+                                IsChecked="{Binding IsRussian}"
+                                ClickCommand="{Binding CheckedRussian}"
+                                Style="{DynamicResource radioButtonStyle}"/>
+        </input:RadioButtonGroupView>
+
+
+    </StackLayout>
+</ContentPage>

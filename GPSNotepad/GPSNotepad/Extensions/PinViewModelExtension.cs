@@ -1,5 +1,6 @@
 ﻿using Prism.Navigation;
 using System.Linq;
+using GPSNotepad.ViewModels;
 
 namespace GPSNotepad.Extensions
 {

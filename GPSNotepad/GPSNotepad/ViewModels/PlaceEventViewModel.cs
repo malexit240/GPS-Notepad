@@ -2,7 +2,7 @@
 using System;
 using GPSNotepad.Entities;
 
-namespace GPSNotepad
+namespace GPSNotepad.ViewModels
 {
     public class PlaceEventViewModel : BindableBase, IEntityBase
     {
