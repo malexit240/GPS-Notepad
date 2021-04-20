@@ -8,7 +8,102 @@
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}" />
         <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}"/>
+        <Setter Property="Padding" Value="16"/>
     </Style>
+
+    <Style x:Key="buttonAccentStyle"
+               TargetType="Button">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource SecondaryTextColor}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PrimaryColor}"/>
+
+    </Style>
+
+    <Style x:Key="buttonSimpleStyle"
+               TargetType="Button">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource AccentTextColor}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="Margin"
+                    Value="0"/>
+        <Setter Property="BorderWidth"
+                    Value="1"/>
+        <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryColor}"/>
+    </Style>
+
+    <Style x:Key="entryStackStyle"
+               TargetType="StackLayout">
+    </Style>
+
+    <Style x:Key="entryLabelStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="Margin"
+                    Value="12,0,0,0"/>
+        <Setter Property="FontSize"
+                    Value="12"/>
+    </Style>
+
+    <Style x:Key="wrongEntryLabelStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource WrongColor}"/>
+        <Setter Property="Margin"
+                    Value="12,0,0,0"/>
+        <Setter Property="FontSize"
+                    Value="12"/>
+    </Style>
+
+    <Style x:Key="entryStyle"
+               TargetType="Entry">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource TertiaryTextColor}"/>
+        <Setter Property="FontSize"
+                    Value="14"/>
+        <Setter Property="Margin"
+                    Value="0"/>
+    </Style>
+
+    <Style x:Key="entryFrameStyle"
+               TargetType="Frame">
+        <Setter Property="BorderColor"
+                    Value="#D7DDE8"/>
+        <Setter Property="Padding"
+                    Value="0"/>
+    </Style>
+
+    <Style x:Key="entryWrongFrameStyle"
+               TargetType="Frame">
+        <Setter Property="BorderColor"
+                    Value="{DynamicResource WrongColor}"/>
+        <Setter Property="Padding"
+                    Value="0"/>
+    </Style>
+
+    <Style x:Key="entryButtonStyle"
+               TargetType="Button">
+        <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        <Setter Property="Margin"
+                    Value="0,0,10,0"/>
+        <Setter Property="HeightRequest"
+                    Value="20"/>
+        <Setter Property="WidthRequest"
+                    Value="20"/>
+    </Style>
+
+
+
+
+
+
+
 
     <Style x:Key="labelStyle"
                TargetType="Label">
@@ -34,21 +129,9 @@
                     Value="Center"/>
     </Style>
 
-    <Style x:Key="buttonStyle"
-               TargetType="Button">
-        <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
-        <Setter Property="BackgroundColor"
-                    Value="{DynamicResource SecondaryColor}"/>
-    </Style>
 
-    <Style x:Key="entryStyle"
-               TargetType="Entry">
-        <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
-        <Setter Property="PlaceholderColor"
-                    Value="{DynamicResource SecondaryTextColor}"/>
-    </Style>
+
+
 
     <Style x:Key="editorStyle"
                TargetType="Entry">

@@ -33,32 +33,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Temp\Views\AddEditPinAndEventsTabbedPage.xaml.cs">
-      <DependentUpon>AddEditPinAndEventsTabbedPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\AddEditPinTabPage.xaml.cs">
-      <DependentUpon>AddEditPinTabPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\PinEventsListTabPage.xaml.cs">
-      <DependentUpon>PinEventsListTabPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\PinsTabPage.xaml.cs">
-      <DependentUpon>PinsTabPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\MainMapTabPage.xaml.cs">
-      <DependentUpon>MainMapTabPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\MainTabbedPage.xaml.cs">
-      <DependentUpon>MainTabbedPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\QRCodeModalPage.xaml.cs">
-      <DependentUpon>QRCodeModalPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Temp\Views\SignInPage.xaml.cs">
+    <Compile Update="Views\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Temp\Views\SignUpPage.xaml.cs">
-      <DependentUpon>SignUpPage.xaml</DependentUpon>
+    <Compile Update="Views\SignUpOnePage.xaml.cs">
+      <DependentUpon>SignUpOnePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -73,40 +52,18 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\AddEditPinAndEventsTabbedPage.xaml">
+    <EmbeddedResource Update="Views\SignInPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\AddEditPlaceEventPage.xaml">
+    <EmbeddedResource Update="Views\SignUpOnePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\AddEditPinTabPage.xaml">
+    <EmbeddedResource Update="Views\SignUpTwoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\PinsTabPage.xaml">
+    <EmbeddedResource Update="Views\StartPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\MainMapTabPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\MainTabbedPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\QRCodeModalPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\SettingsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\SignInPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Temp\Views\SignUpPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>

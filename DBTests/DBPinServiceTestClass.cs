@@ -4,6 +4,8 @@ using GPSNotepad.Model;
 using GPSNotepad.Model.Entities;
 using System.Linq;
 using System;
+using GPSNotepad.Entities;
+using GPSNotepad.Repositories;
 
 namespace DBTests
 {

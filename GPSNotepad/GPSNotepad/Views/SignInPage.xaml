@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.SignInPage"
+             Title="{Binding TextResources[SignInTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <StackLayout>
+        <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
+                           Style="{DynamicResource activityIndicatorStyle}"/>
+
+        <controls:LabeledEntry LabelText="{Binding TextResources[Email]}"
+                               EntryText="{Binding Email}"
+                               EntryPlaceholderText="{Binding TextResources[Email]}"
+                               IsWrong="{Binding IsEmailWrong}"
+                               ButtonImageSource="ic_clear.png"
+                               ButtonCommand="{Binding ClearEmailCommand}"
+                               WrongLabelText="Wrong Email"/>
+
+        <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
+                               EntryText="{Binding Password}"
+                               EntryPlaceholderText="{Binding TextResources[Password]}"
+                               IsWrong="{Binding IsPasswordWrong}"
+                               IsPassword="{Binding IsHidePassword}"
+                               ButtonImageSource="ic_eye_off.png"
+                               ButtonCheckedImageSource="ic_eye.png"
+                               ButtonCommand="{Binding ShowPasswordCommand}"
+                               WrongLabelText="Wrong Password"/>
+
+        <Button Text="{Binding TextResources[SignIn]}"
+                Command="{Binding SignInCommand}"
+                Style="{DynamicResource buttonAccentStyle}"/>
+    </StackLayout>
+</ContentPage>

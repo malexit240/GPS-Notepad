@@ -85,11 +85,9 @@
     <Compile Include="DroidChangerStatusBarColor.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="NotificationService.cs" />
     <Compile Include="OnMarkerClickListener.cs" />
     <Compile Include="SplashActivity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="CustomCheckboxRenderer.cs" />
     <Compile Include="StyledNavigationRenderer.cs" />
     <LinkDescription Include="LinkerSettings.xml" />
   </ItemGroup>
@@ -98,6 +96,31 @@
     <None Include="Assets\AboutAssets.txt" />
   </ItemGroup>
   <ItemGroup>
+    <AndroidResource Include="Resources\drawable\ic_apple.png" />
+    <AndroidResource Include="Resources\drawable\ic_arrow_up_left.png" />
+    <AndroidResource Include="Resources\drawable\ic_clear.png" />
+    <AndroidResource Include="Resources\drawable\ic_clock.png" />
+    <AndroidResource Include="Resources\drawable\ic_delete.png" />
+    <AndroidResource Include="Resources\drawable\ic_down.png" />
+    <AndroidResource Include="Resources\drawable\ic_edit.png" />
+    <AndroidResource Include="Resources\drawable\ic_exid.png" />
+    <AndroidResource Include="Resources\drawable\ic_eye.png" />
+    <AndroidResource Include="Resources\drawable\ic_eye_off.png" />
+    <AndroidResource Include="Resources\drawable\ic_facebook.png" />
+    <AndroidResource Include="Resources\drawable\ic_google.png" />
+    <AndroidResource Include="Resources\drawable\ic_left_blue.png" />
+    <AndroidResource Include="Resources\drawable\ic_left_gray.png" />
+    <AndroidResource Include="Resources\drawable\ic_like_blue.png" />
+    <AndroidResource Include="Resources\drawable\ic_like_gray.png" />
+    <AndroidResource Include="Resources\drawable\ic_location.png" />
+    <AndroidResource Include="Resources\drawable\ic_map.png" />
+    <AndroidResource Include="Resources\drawable\ic_pin.png" />
+    <AndroidResource Include="Resources\drawable\ic_pin_gray.png" />
+    <AndroidResource Include="Resources\drawable\ic_placeholder.png" />
+    <AndroidResource Include="Resources\drawable\ic_plus.png" />
+    <AndroidResource Include="Resources\drawable\ic_save.png" />
+    <AndroidResource Include="Resources\drawable\ic_search.png" />
+    <AndroidResource Include="Resources\drawable\ic_settings.png" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon.xml" />
     <AndroidResource Include="Resources\mipmap-anydpi-v26\icon_round.xml" />
     <AndroidResource Include="Resources\mipmap-hdpi\icon.png" />
@@ -110,11 +133,6 @@
     <AndroidResource Include="Resources\mipmap-xxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-mdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\icon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AndroidManifest.xml" />
@@ -134,11 +152,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_settings.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </AndroidResource>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidAsset Include="Assets\marker_favorite.png" />
   </ItemGroup>
   <ItemGroup>
@@ -154,31 +167,20 @@
     <AndroidAsset Include="Assets\purpleMarkerSmallWithCrown.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_save.png" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\drawable-xxhdpi\" />
+    <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\FavoriteUnchecked.png" />
+    <AndroidResource Include="Resources\drawable\pic_enter_page.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\FavoriteChecked.png" />
+    <AndroidResource Include="Resources\drawable\pic_enter_page_2x.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TargetSmall.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_exit_to_app3x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\ic_add3x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_camera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_qr.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\icon_scan_qr.png" />
+    <AndroidResource Include="Resources\drawable\pic_enter_page_3x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

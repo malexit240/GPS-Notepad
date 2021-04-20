@@ -39,4 +39,4 @@ using Xamarin.Forms.GoogleMaps.Clustering.Android;
 
 
 [assembly: ExportRenderer(typeof(NavigationPage), typeof(StyledNavigationRenderer))]
-[assembly: ExportRenderer(typeof(CheckBox), typeof(CustomCheckboxRenderer))]
+[assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]

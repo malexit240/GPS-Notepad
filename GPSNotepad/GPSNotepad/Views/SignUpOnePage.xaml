@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.SignUpOnePage"
+             Title="{Binding TextResources[SignUpTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_settings.png"
+            Command="{prism:NavigateTo 'SettingsPage'}"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
+            Style="{DynamicResource activityStyle}"/>
+
+        <controls:LabeledEntry LabelText="{Binding TextResources[Name]}" 
+                               EntryPlaceholderText="{Binding TextResources[Name]}"
+                               EntryText="{Binding Name}"
+                               ButtonImageSource="ic_clear.png"
+                               ButtonCommand="{Binding ClearNameCommand}"/>
+        <controls:LabeledEntry LabelText="{Binding TextResources[Email]}" 
+                               EntryPlaceholderText="{Binding TextResources[Email]}"
+                               EntryText="{Binding Email}"
+                               WrongLabelText="Wrong Email Format"
+                               IsWrong="{Binding IsEmailWrong}"
+                               ButtonImageSource="ic_clear.png"
+                               ButtonCommand="{Binding ClearEmailCommand}"/>
+
+
+        <Button Text="Next"
+                Command="{Binding GoToSignUpTwoPageCommand}"
+                Style="{DynamicResource buttonAccentStyle}"/>
+    </StackLayout>
+</ContentPage>

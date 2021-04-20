@@ -33,6 +33,7 @@ namespace GPSNotepad
             JobManager = ShinyJobManager.Current;
 
             Notification = new Notification();
+
             if (DeviceInfo.Platform == DevicePlatform.Android)
             {
                 Notification.Android.ChannelId = "8976";

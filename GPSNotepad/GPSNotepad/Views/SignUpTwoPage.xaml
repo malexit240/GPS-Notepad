@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.SignUpTwoPage"
+             Title="{Binding TextResources[SignUpTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_settings.png"
+            Command="{prism:NavigateTo 'SettingsPage'}"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
+            Style="{DynamicResource activityStyle}"/>
+
+        <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
+                               EntryText="{Binding Password}"
+                               EntryPlaceholderText="{Binding TextResources[Password]}"
+                               IsPassword="{Binding IsHidePassword}"
+                               IsWrong="{Binding IsPasswordWrong}"
+                               ButtonImageSource="ic_eye_off.png"
+                               ButtonCheckedImageSource="ic_eye.png"
+                               ButtonCommand="{Binding ShowPasswordCommand}"
+                               WrongLabelText="{Binding WrongMessage}"/>
+
+        <controls:LabeledEntry LabelText="{Binding TextResources[ConfirmPassword]}"
+                               EntryText="{Binding ConfirmPassword}"
+                               EntryPlaceholderText="{Binding TextResources[ConfirmPassword]}"
+                               IsPassword="{Binding IsHideConfirmPassword}"
+                               ButtonImageSource="ic_eye_off.png"
+                               ButtonCheckedImageSource="ic_eye.png"
+                               ButtonCommand="{Binding ShowConfirmPasswordCommand}"/>
+
+        <Button Text="{Binding TextResources[SignUp]}"
+                Command="{Binding SignUpCommand}"
+                Style="{DynamicResource buttonAccentStyle}"/>
+    </StackLayout>
+</ContentPage>

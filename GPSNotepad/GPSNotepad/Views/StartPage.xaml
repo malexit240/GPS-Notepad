@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.StartPage"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image VerticalOptions="CenterAndExpand" Source="pic_enter_page_3x.png"/>
+
+            <StackLayout VerticalOptions="End">
+                <Button Text="Log in"
+                        TextTransform="None"
+                    Command="{Binding GoToSignInPageCommand}" 
+                    Style="{DynamicResource buttonAccentStyle}"
+                        Margin="0,0,0,16"/>
+                <Button Text="Create account"
+                        TextTransform="None"
+                    Command="{Binding GoToSignUpPageCommand}"
+                    Style="{DynamicResource buttonSimpleStyle}"/>
+            </StackLayout>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

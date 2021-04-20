@@ -19,13 +19,23 @@ namespace GPSNotepad.Validators
 
         public static PasswordValidationStatus IsPasswordValid(string password)
         {
+            PasswordValidationStatus status;
+
             if (password.Length > 16 || password.Length < 4)
-                return PasswordValidationStatus.InvalidLength;
+            {
+                status = PasswordValidationStatus.InvalidLength;
+            }
+            else if (!password.Any(c => Char.IsDigit(c)) || !password.Any(c => Char.IsUpper(c)))
+            {
+                status = PasswordValidationStatus.InvalidContent;
+            }
+            else
+            {
+                status = PasswordValidationStatus.Done;
+            }
 
-            if (password.Any(c => Char.IsDigit(c) && Char.IsUpper(c)))
-                return PasswordValidationStatus.InvalidContent;
 
-            return PasswordValidationStatus.Done;
+            return status;
         }
         #endregion
     }

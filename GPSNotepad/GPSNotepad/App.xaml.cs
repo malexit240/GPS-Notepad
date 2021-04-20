@@ -1,5 +1,5 @@
-using GPSNotepad.Temp.ViewModels;
-using GPSNotepad.Temp.Views;
+using GPSNotepad.ViewModels;
+using GPSNotepad.Views;
 using Prism;
 using Prism.Ioc;
 using Xamarin.Forms;
@@ -23,24 +23,24 @@ namespace GPSNotepad
         {
             InitializeComponent();
 
-            var NotificationJobManager = new NotificationJobManager();
-
+            //var NotificationJobManager = new NotificationJobManager();
+            //
             Container.Resolve<ISettingsManagerService>().Init();
+            //
+            //var authorizationService = Container.Resolve<IAuthorizationService>();
+            //var authenticationService = Container.Resolve<IAuthenticationService>();
+            //var secureStorage = Container.Resolve<ISecureStorageService>();
+            //
+            //if (authorizationService.IsAuthorized && authenticationService.ContinueSession//(secureStorage.SessionToken))
+            //{
+            //    //  NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof//(MainTabbedPage)}");
+            //}
+            //else
+            //{
+            //    // NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof/(SignInPage)}");
+            //}
 
-            var authorizationService = Container.Resolve<IAuthorizationService>();
-            var authenticationService = Container.Resolve<IAuthenticationService>();
-            var secureStorage = Container.Resolve<ISecureStorageService>();
-
-            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
-            {
-                //  NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
-            }
-            else
-            {
-                // NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
-            }
-
-            NavigationService.NavigateAsync($"/{nameof(NavigationPage)}");
+            NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
 
         }
 
@@ -57,6 +57,10 @@ namespace GPSNotepad
             containerRegistry.RegisterInstance<IQrScanerService>(Container.Resolve<QrScanerService>());
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<StartPage, StartPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpOnePage, SignUpOneViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpTwoPage, SignUpTwoViewModel>();
         }
     }
 }
