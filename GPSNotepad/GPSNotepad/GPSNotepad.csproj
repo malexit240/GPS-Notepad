@@ -33,10 +33,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>UIResources.resx</DependentUpon>
     </Compile>
-    <Compile Update="Views\SignInPage.xaml.cs">
+    <Compile Update="Views\Signing\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\SignUpOnePage.xaml.cs">
+    <Compile Update="Views\Signing\SignUpOnePage.xaml.cs">
       <DependentUpon>SignUpOnePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -52,13 +52,22 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>UIResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SignInPage.xaml">
+    <EmbeddedResource Update="Views\Main\MainMapTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SignUpOnePage.xaml">
+    <EmbeddedResource Update="Views\Main\MainTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\SignUpTwoPage.xaml">
+    <EmbeddedResource Update="Views\Main\PinsTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Signing\SignInPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Signing\SignUpOnePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Signing\SignUpTwoPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\StartPage.xaml">

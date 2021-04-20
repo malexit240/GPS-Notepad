@@ -26,21 +26,22 @@ namespace GPSNotepad
             //var NotificationJobManager = new NotificationJobManager();
             //
             Container.Resolve<ISettingsManagerService>().Init();
-            //
-            //var authorizationService = Container.Resolve<IAuthorizationService>();
-            //var authenticationService = Container.Resolve<IAuthenticationService>();
-            //var secureStorage = Container.Resolve<ISecureStorageService>();
-            //
-            //if (authorizationService.IsAuthorized && authenticationService.ContinueSession//(secureStorage.SessionToken))
-            //{
-            //    //  NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof//(MainTabbedPage)}");
-            //}
-            //else
-            //{
-            //    // NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof/(SignInPage)}");
-            //}
 
-            NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+            var authorizationService = Container.Resolve<IAuthorizationService>();
+            var authenticationService = Container.Resolve<IAuthenticationService>();
+            var secureStorage = Container.Resolve<ISecureStorageService>();
+
+            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
+            {
+                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+
+            }
+            else
+            {
+                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+            }
+
+
 
         }
 
@@ -61,6 +62,8 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<SignInPage, SignInViewModel>();
             containerRegistry.RegisterForNavigation<SignUpOnePage, SignUpOneViewModel>();
             containerRegistry.RegisterForNavigation<SignUpTwoPage, SignUpTwoViewModel>();
+
+            containerRegistry.RegisterForNavigation<MainTabbedPage, MainPageViewModel>();
         }
     }
 }

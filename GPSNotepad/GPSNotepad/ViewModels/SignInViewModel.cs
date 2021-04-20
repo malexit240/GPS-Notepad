@@ -83,7 +83,7 @@ namespace GPSNotepad.ViewModels
             }
             else
             {
-                //  await this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+                await this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
             }
         }
         private bool CanExecuteSignInCommand() => Email.Length != 0 && Password.Length != 0;

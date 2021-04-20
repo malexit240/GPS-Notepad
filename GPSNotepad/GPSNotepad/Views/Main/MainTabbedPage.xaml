@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:NavigableTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:GPSNotepad.Views"
+            xmlns:prism="http://prismlibrary.com"
+            xmlns:controls="clr-namespace:GPSNotepad.Controls"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            x:Class="GPSNotepad.Views.MainTabbedPage"
+            Title="{Binding TextResources[MainPageTitle]}"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            Style="{DynamicResource pageStyle}">
+
+    <local:MainMapTabPage Title="Map"/>
+    <local:PinsTabPage Title="Pins"/>
+</controls:NavigableTabbedPage>

@@ -130,7 +130,6 @@ namespace GPSNotepad.ViewModels
             }
             else
             {
-                HasLongActivity = false;
 
                 if (!await AuthenticationService.SignUpAsync(_email, _name, Password))
                 {
@@ -144,6 +143,24 @@ namespace GPSNotepad.ViewModels
         }
         private bool canExecuteSignUpCommand() => Password.Length != 0 && ConfirmPassword.Length != 0 && HasLongActivity != true;
         #endregion
+
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            if (parameters.ContainsKey(nameof(SignUpOneViewModel.Email)))
+            {
+                this._email = (string)parameters[nameof(SignUpOneViewModel.Email)];
+            }
+
+            if (parameters.ContainsKey(nameof(SignUpOneViewModel.Name)))
+            {
+                this._name = (string)parameters[nameof(SignUpOneViewModel.Name)];
+            }
+
+        }
+
     }
 }
 

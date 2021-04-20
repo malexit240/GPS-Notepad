@@ -3,12 +3,15 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
                     x:Class="GPSNotepad.Styles.Styles">
+    <x:Int32 x:Key="indent">
+        16
+    </x:Int32>
+
     <Style x:Key="pageStyle" 
                TargetType="NavigationPage">
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}" />
         <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}"/>
-        <Setter Property="Padding" Value="16"/>
     </Style>
 
     <Style x:Key="buttonAccentStyle"
@@ -155,19 +158,17 @@
         <Setter Property="HorizontalOptions"
                     Value="End"/>
         <Setter Property="WidthRequest"
-                    Value="64"/>
+                    Value="48"/>
         <Setter Property="HeightRequest"
-                    Value="64"/>
+                    Value="48"/>
         <Setter Property="CornerRadius"
                     Value="40"/>
         <Setter Property="Margin"
-                    Value="0,0,32,32"/>
+                    Value="0,0,16,18"/>
         <Setter Property="BorderWidth"
-                    Value="8"/>
+                    Value="0"/>
         <Setter Property="BackgroundColor"
-                    Value="{DynamicResource SecondaryColor}"/>
-        <Setter Property="BorderColor"
-                    Value="{DynamicResource PrimaryColor}"/>
+                    Value="{DynamicResource PageBackgroundColor}"/>
     </Style>
 
 
