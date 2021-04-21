@@ -33,6 +33,9 @@ namespace GPSNotepad
             JobManager = ShinyJobManager.Current;
 
             Notification = new Notification();
+            Notification.Title = "GPS Notepad";
+            Notification.Message = "Lolka";
+            Notification.Id = 2113;
             if (DeviceInfo.Platform == DevicePlatform.Android)
             {
                 Notification.Android.ChannelId = "8976";
@@ -76,7 +79,10 @@ namespace GPSNotepad
                 if (OnStart() != true)
                     return true;
 
+
             var currentTime = DateTime.Now;
+
+            await NotificationManager.Send(Notification);
 
             var info = new JobInfo(typeof(NotificationJob))
             {

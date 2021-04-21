@@ -6,7 +6,6 @@ using Xamarin.Forms;
 using GPSNotepad.Services.Authentication;
 using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.Settings;
-using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
 using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Services.PlaceEventsService;
@@ -25,13 +24,14 @@ namespace GPSNotepad
 
             var NotificationJobManager = new NotificationJobManager();
 
-            Container.Resolve<ISettingsManagerService>().Init();
+            var settingsManager = Container.Resolve<ISettingsManagerService>();
+            settingsManager.Init();
 
             var authorizationService = Container.Resolve<IAuthorizationService>();
             var authenticationService = Container.Resolve<IAuthenticationService>();
-            var secureStorage = Container.Resolve<ISecureStorageService>();
 
-            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
+
+            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(settingsManager.SessionToken))
             {
                 NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
             }
@@ -43,7 +43,7 @@ namespace GPSNotepad
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<ISecureStorageService>(Container.Resolve<SecureStorageService>());
+            //  containerRegistry.RegisterInstance<ISecureStorageService>(Container.Resolve<SecureStorageService>());
             containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
 
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());

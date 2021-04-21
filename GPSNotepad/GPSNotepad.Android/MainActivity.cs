@@ -3,7 +3,6 @@ using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
-using GPSNotepad.Droid.Services;
 using Plugin.CurrentActivity;
 using Prism;
 using Prism.Ioc;

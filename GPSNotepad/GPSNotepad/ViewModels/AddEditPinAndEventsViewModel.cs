@@ -48,21 +48,21 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _name, value);
         }
 
-        private string _description;
+        private string _description = "";
         public string Description
         {
             get => _description;
             set => SetProperty(ref _description, value);
         }
 
-        private ObservableCollection<PlaceEventViewModel> _events;
+        private ObservableCollection<PlaceEventViewModel> _events = new ObservableCollection<PlaceEventViewModel>();
         public ObservableCollection<PlaceEventViewModel> Events
         {
             get => _events;
             set => SetProperty(ref _events, value);
         }
 
-        private MapSpan _span;
+        private MapSpan _span = new MapSpan(new Position(), 1, 1);
         public MapSpan Span
         {
             get => _span;

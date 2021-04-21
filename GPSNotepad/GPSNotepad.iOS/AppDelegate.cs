@@ -1,6 +1,11 @@
 ﻿using Foundation;
+using Microsoft.Extensions.DependencyInjection;
+using ObjCRuntime;
 using Prism;
 using Prism.Ioc;
+using Shiny;
+using Shiny.Jobs;
+using System;
 using UIKit;
 using Xamarin.Forms.PlatformConfiguration;
 
@@ -24,8 +29,15 @@ namespace GPSNotepad.iOS
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyD175Ytn104FswHwZ_W9GdaYHZ8OCVn_Ik");
             LoadApplication(new App(new iOSInitializer()));
+            iOSShinyHost.Init(new YourShinyStartup());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void PerformFetch(UIApplication application, Action<UIBackgroundFetchResult> completionHandler)
+        {
+            base.PerformFetch(application, completionHandler);
+            Shiny.Jobs.JobManager.OnBackgroundFetch(completionHandler);
         }
     }
 
@@ -33,7 +45,17 @@ namespace GPSNotepad.iOS
     {
         public void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            // Register any platform specific implementations
+
+        }
+    }
+
+    public class YourShinyStartup : ShinyStartup
+    {
+        public override void ConfigureServices(IServiceCollection builder)
+        {
+            builder.UseNotifications();
+            builder.RegisterJob(new JobInfo(typeof(GPSNotepad.NotificationJob)) { RunOnForeground = true });
+            builder.UseJobForegroundService(TimeSpan.FromMinutes(1));
         }
     }
 }

@@ -8,6 +8,7 @@ namespace GPSNotepad.Services.Settings
         Theme Theme { get; set; }
         CultureInfo Language { get; set; }
         bool IsAuthorized { get; set; }
+        string SessionToken { get; set; }
         void Init();
     }
 }

@@ -10,7 +10,6 @@ namespace GPSNotepad.iOS
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
         {
             base.OnElementChanged(e);
-
         }
     }
 }

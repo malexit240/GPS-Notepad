@@ -19,7 +19,7 @@ namespace GPSNotepad.Model
             await App.Current.Container.Resolve<IPermissionManager>().RunWithPermission<Permissions.LocationWhenInUse>(async () =>
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();
-                position = new Position(location.Latitude, location.Longitude);
+                position = new Position(location?.Latitude ?? 0, location?.Longitude ?? 0);
 
                 LastChecked = position;
             });
