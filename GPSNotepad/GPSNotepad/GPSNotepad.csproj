@@ -28,6 +28,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Controls\MainPageNavBar.xaml.cs">
+      <DependentUpon>MainPageNavBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Controls\DropDown.xaml.cs">
+      <DependentUpon>DropDown.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Resources\UIResources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -43,6 +49,9 @@
 
   <ItemGroup>
     <EmbeddedResource Update="BindablePinDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\SearchEntry.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DarkTheme.xaml">

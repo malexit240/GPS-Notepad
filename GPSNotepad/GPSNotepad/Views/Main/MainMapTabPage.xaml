@@ -12,80 +12,37 @@
             <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
+        <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}"  Margin="0,17,0,13"/>
 
-    <Grid RowDefinitions="*,2*,6*,2*" HorizontalOptions="FillAndExpand">
-        <Entry Grid.Row="0" 
-               Placeholder="{Binding TextResources[Search]}"
-               Text="{Binding SearchField}"
-               Style="{DynamicResource entryStyle}" 
-               ClearButtonVisibility="WhileEditing">
-            <Entry.Behaviors>
-                <prism:EventToCommandBehavior EventName="Focused" Command="{Binding OnSearchFieldFocusCommand}"/>
-                <prism:EventToCommandBehavior EventName="Unfocused" Command="{Binding OnSearchFieldUnfocusCommand}"/>
-            </Entry.Behaviors>
-        </Entry>
-        <StackLayout Grid.Row="1"
-                     Grid.RowSpan="3" >
-            <controls:BindableMap
+        <Grid RowDefinitions="*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+            <StackLayout Grid.Row="0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <controls:BindableMap
                                 PinsSource="{Binding Pins}"
                                 MapSpan="{Binding Path=MainMapViewModel.Span}">
-                <controls:BindableMap.Behaviors>
-                    <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
+                    <controls:BindableMap.Behaviors>
+                        <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
                                                   Command="{Binding OnShowDetailPinViewCommand}"
                                                   EventArgsConverter="{x:StaticResource showDetailPinViewEventArgsConverter}"/>
-                    <prism:EventToCommandBehavior EventName="MapClicked" 
+                        <prism:EventToCommandBehavior EventName="MapClicked" 
                                                   Command="{Binding HideDetailPinViewCommand}"/>
 
-                </controls:BindableMap.Behaviors>
-            </controls:BindableMap>
-        </StackLayout>
+                    </controls:BindableMap.Behaviors>
+                </controls:BindableMap>
+            </StackLayout>
 
-        <StackLayout Grid.Row="1"
-                     IsVisible="{Binding IsDropDownPinsVisible}"
-                     Style="{DynamicResource dropDownStyle}">
-            <ListView  ItemsSource="{Binding Pins}" 
-                       HasUnevenRows="True"
-                       SelectionMode="None"
-                       SeparatorVisibility="None">
-                <ListView.Behaviors>
-                    <prism:EventToCommandBehavior EventName="ItemTapped"
-                                              Command="{Binding PinTappedCommand}"
-                                              EventArgsConverter="{x:StaticResource itemTappedEventArgsConverter}"/>
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <StackLayout HorizontalOptions="FillAndExpand"
-                                         Padding="0,5,0,0">
-                                <Label Text="{Binding Name}"
-                                   Style="{DynamicResource labelStyle}"/>
-                                <BoxView Style="{DynamicResource stripStyle}"/>
-                            </StackLayout>
 
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+            <controls:DropDown Grid.Row="0" IsVisible="{Binding IsDropDownPinsVisible}"/>
 
-        <StackLayout Grid.Row="3"
-                     IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}"
-                     Style="{DynamicResource detailViewStyle}">
-            <Label Text="{Binding TextResources[Detail]}"
-                   Style="{DynamicResource labelDetailStyle}"/>
-            <Label Text="{Binding Path=SelectedPin.Name}"
-                   Style="{DynamicResource labelDetailStyle}"/>
-            <Label Text="{Binding Path=SelectedPin.Description}"
-                   Style="{DynamicResource labelDetailStyle}"/>
-        </StackLayout>
-        <Button Grid.Row="0" 
-                Grid.RowSpan="4"
+
+            <Button Grid.Row="0"
                 ImageSource="TargetSmall.png"
                 Style="{DynamicResource floatButtonStyle}"
                 IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"
                 Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>
-    </Grid>
+        </Grid>
 
-
+    </StackLayout>
 </ContentPage>

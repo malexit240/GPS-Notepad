@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Comparers;
 using GPSNotepad.Enums;
+using System.ComponentModel;
 
 namespace GPSNotepad.ViewModels
 {
@@ -86,6 +87,15 @@ namespace GPSNotepad.ViewModels
         {
             get => _isDropDownPinsVisible;
             set => SetProperty(ref _isDropDownPinsVisible, value);
+        }
+
+
+
+        public bool _iSearchFieldFoccused = false;
+        public bool IsSearchFieldFoccused
+        {
+            get => _iSearchFieldFoccused;
+            set => SetProperty(ref _iSearchFieldFoccused, value);
         }
 
         public MainMapViewModel MainMapViewModel { get; set; }
@@ -159,20 +169,6 @@ namespace GPSNotepad.ViewModels
             MainMapViewModel.ShowDetailView = true;
         }
 
-        private ICommand _onSearchFieldFocusCommand;
-        public ICommand OnSearchFieldFocusCommand => _onSearchFieldFocusCommand ??= new DelegateCommand<object>(OnSearchFieldFocusHandler);
-        private void OnSearchFieldFocusHandler(object obj)
-        {
-            IsDropDownPinsVisible = true;
-        }
-
-        private ICommand _onSearchFieldUnfocusCommand;
-        public ICommand OnSearchFieldUnfocusCommand => _onSearchFieldUnfocusCommand ??= new DelegateCommand<object>(OnSearchFieldUnfocusHandler);
-        private void OnSearchFieldUnfocusHandler(object obj)
-        {
-            IsDropDownPinsVisible = false;
-        }
-
         private ICommand _logoutCommand;
         public ICommand LogoutCommand => _logoutCommand ??= new DelegateCommand(LogoutCommandHandler);
         private void LogoutCommandHandler()
@@ -183,6 +179,19 @@ namespace GPSNotepad.ViewModels
 
 
         #endregion
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case nameof(IsSearchFieldFoccused):
+
+                    IsDropDownPinsVisible = IsSearchFieldFoccused;
+                    break;
+            }
+
+            base.OnPropertyChanged(args);
+        }
 
         #region ---Private Helpers---
         private void SortPins(IComparer<Pin> comparer)

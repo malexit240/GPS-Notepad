@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="GPSNotepad.Controls.DropDown"
+             Orientation="Vertical"
+             HorizontalOptions="FillAndExpand"
+             VerticalOptions="Start"
+             HeightRequest="{Binding Source={x:Reference listView},Path=RowHeight}" BackgroundColor="White">
+    <ListView x:Name="listView"  VerticalOptions="Start" HasUnevenRows="True">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text="{Binding Text}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</StackLayout>
