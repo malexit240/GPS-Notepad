@@ -29,6 +29,7 @@
                                ButtonCommand="{Binding ShowPasswordCommand}"
                                WrongLabelText="Wrong Password"/>
 
+
         <Button Text="{Binding TextResources[SignIn]}"
                 Command="{Binding SignInCommand}"
                 Style="{DynamicResource buttonAccentStyle}"/>

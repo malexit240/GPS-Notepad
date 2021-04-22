@@ -17,12 +17,6 @@ namespace GPSNotepad.Droid
             {
                 Control.Background = null;
             }
-
-            // Configure Entry properties
-            if (e.NewElement != null)
-            {
-
-            }
         }
     }
 }

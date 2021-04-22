@@ -33,6 +33,7 @@ namespace GPSNotepad.ViewModels
 
             Pins = new ObservableCollection<PinViewModel>();
 
+
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
             pinService.LoadUserPins(AuthorizationService.GetCurrenUserId());
@@ -107,7 +108,7 @@ namespace GPSNotepad.ViewModels
         public ICommand EditPinContextCommand => _editPinContextCommand ??= new DelegateCommand<PinViewModel>(EditPinContextHandler);
         private async void EditPinContextHandler(PinViewModel pin)
         {
-            // await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage), (nameof(PinViewModel), pin));
+            await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage), (nameof(PinViewModel), pin));
         }
 
         private ICommand _showQRCodeCommand;
@@ -135,8 +136,8 @@ namespace GPSNotepad.ViewModels
 
 
         private ICommand _goToAddPinFormCommand = null;
-        //  public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
-        // private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage));
+        public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
+        private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage));
 
 
         private ICommand _hideDetailViewCommand;
@@ -174,9 +175,14 @@ namespace GPSNotepad.ViewModels
         private void LogoutCommandHandler()
         {
             AuthorizationService.LogOut();
-            this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(SignInPage)}");
+            this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
         }
 
+        private ICommand _goToSettingsPageCommand;
+        public ICommand GoToSettingsPageCommand => _goToSettingsPageCommand ??= new DelegateCommand(() =>
+        {
+            // this.NavigationService.NavigateAsync($"{nameof(StartPage)}");
+        });
 
         #endregion
 

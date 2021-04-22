@@ -10,8 +10,9 @@ namespace GPSNotepad.Controls
         public MainPageNavBar()
         {
             InitializeComponent();
-            this.searchField.BindingContext = this;
 
+            this.searchField.BindingContext = this;
+            this.searchField.SetBinding(SearchEntry.SearchTextProperty, new Binding(nameof(SearchText)));
         }
 
         public bool IsFoccused
@@ -37,6 +38,17 @@ namespace GPSNotepad.Controls
             typeof(ICommand),
             typeof(MainPageNavBar));
 
+        public ICommand LogoutButtonCommand
+        {
+            get => (ICommand)GetValue(LogoutButtonCommandProperty);
+            set => SetValue(LogoutButtonCommandProperty, value);
+        }
+
+        public static BindableProperty LogoutButtonCommandProperty = BindableProperty.Create(
+            nameof(LogoutButtonCommand),
+            typeof(ICommand),
+            typeof(MainPageNavBar));
+
         public ICommand OnSearchFieldFocused => new DelegateCommand(() =>
         {
             this.logoutButton.IsVisible = false;
@@ -52,16 +64,33 @@ namespace GPSNotepad.Controls
             IsFoccused = false;
         });
 
+        public string SearchText
+        {
+            get => (string)GetValue(SearchTextProperty);
+            set => SetValue(SearchTextProperty, value);
+        }
+
+        public static BindableProperty SearchTextProperty = BindableProperty.Create(
+            nameof(SearchText),
+            typeof(string),
+            typeof(MainPageNavBar),
+            defaultBindingMode: BindingMode.TwoWay);
+
+
         private void UnfocusSearchField(object sender, EventArgs e)
         {
-            this.searchField.Unfocus();
+            this.searchField.IsVisible = false;
+            this.searchField.IsVisible = true;
         }
+
         private void OnSettingsButtonClicked(object sender, EventArgs e)
         {
             SettingsButtonCommand?.Execute(null);
         }
 
-
-
+        private void OnLogoutButtonClicked(object sender, EventArgs e)
+        {
+            LogoutButtonCommand?.Execute(null);
+        }
     }
 }

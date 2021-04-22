@@ -2,6 +2,7 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+                    xmlns:controls="clr-namespace:GPSNotepad.Controls"
                     x:Class="GPSNotepad.Styles.Styles">
     <x:Int32 x:Key="indent">
         16
@@ -10,14 +11,21 @@
     <Style x:Key="pageStyle" 
                TargetType="NavigationPage">
         <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="tabbedPageStyle" 
+               TargetType="controls:NavigableTabbedPage">
+        <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}" />
-        <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}"/>
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
     </Style>
 
     <Style x:Key="buttonAccentStyle"
                TargetType="Button">
         <Setter Property="TextColor"
-                    Value="{DynamicResource SecondaryTextColor}"/>
+                    Value="{DynamicResource System_White}"/>
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PrimaryColor}"/>
 
@@ -26,7 +34,7 @@
     <Style x:Key="buttonSimpleStyle"
                TargetType="Button">
         <Setter Property="TextColor"
-                    Value="{DynamicResource AccentTextColor}"/>
+                    Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}"/>
         <Setter Property="Margin"

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns:converters="clr-namespace:GPSNotepad.Converters"
+             x:Class="GPSNotepad.Views.AddEditPinTabPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:MapClickedEventArgsConverter x:Key="mapClickedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_save.png" Command="{Binding AddEditPinCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="12,12,12,0">
+        <controls:LabeledEntry LabelText="{Binding TextResources[Name] }"
+                               EntryPlaceholderText="{Binding TextResources[Name]}"
+                               EntryText="{Binding Name}"/>
+
+        <controls:LabeledEntry LabelText="{Binding TextResources[Description] }"
+                               EntryPlaceholderText="{Binding TextResources[Description]}"
+                               EntryText="{Binding Description}"/>
+
+
+        <Grid ColumnDefinitions="1*,1*" HorizontalOptions="FillAndExpand">
+
+
+            <controls:LabeledEntry Grid.Column="0" LabelText="Coordinates"
+                               EntryPlaceholderText="Longitude"
+                               EntryText="{Binding Longitude}"
+                               IsWrong="{Binding IsLongitudeWrong}"
+                               HorizontalOptions="FillAndExpand"
+                               Margin="0,0,4,0"/>
+
+            <controls:LabeledEntry Grid.Column="1" EntryPlaceholderText="Latitude"
+                               EntryText="{Binding Latitude}"
+                               IsWrong="{Binding IsLatitudeWrong}"
+                               HorizontalOptions="FillAndExpand"
+                               Margin="4,0,0,0"/>
+        </Grid>
+
+
+
+        <controls:BindableMap x:Name="map" PinsSource="{Binding Pins}" MapSpan="{Binding Span}" >
+            <controls:BindableMap.Behaviors>
+                <prism:EventToCommandBehavior EventName="MapClicked" 
+                                              Command="{Binding OnMapClickedCommand}" 
+                                              EventArgsConverter="{x:StaticResource mapClickedEventArgsConverter}"/>
+                <prism:EventToCommandBehavior EventName="MapLoaded" Command="{Binding OnMapLoadedCommand}"/>
+            </controls:BindableMap.Behaviors>
+        </controls:BindableMap>
+    </StackLayout>
+
+</ContentPage>

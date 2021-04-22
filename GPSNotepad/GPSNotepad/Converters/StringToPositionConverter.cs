@@ -8,6 +8,38 @@ namespace GPSNotepad.Converters
     {
         #region ---Public Static Methods ---
 
+        public static bool TryParseLatitude(string latitude, out double value)
+        {
+            value = 0;
+            bool result = false;
+
+            if (double.TryParse(latitude, out value))
+            {
+                if (value <= 180 && value >= -180)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
+        public static bool TryParseLongitude(string longitude, out double value)
+        {
+            value = 0;
+            bool result = false;
+
+            if (double.TryParse(longitude, out value))
+            {
+                if (value <= 90 && value >= -90)
+                {
+                    result = true;
+                }
+            }
+
+            return result;
+        }
+
         public static Position? GetPosition(string request)
         {
             var coordinates = Regex.Matches(request, @"([\-\+]?([\,]?(\d))+([Nn]|[Ss]|[Ww]|[Ee]))");

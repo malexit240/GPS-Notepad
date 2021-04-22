@@ -64,6 +64,8 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<SignUpTwoPage, SignUpTwoViewModel>();
 
             containerRegistry.RegisterForNavigation<MainTabbedPage, MainPageViewModel>();
+
+            containerRegistry.RegisterForNavigation<AddEditPinAndEventsTabbedPage, AddEditPinAndEventsViewModel>();
         }
     }
 }

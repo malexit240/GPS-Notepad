@@ -14,10 +14,11 @@
     </ContentPage.Resources>
     <Grid RowDefinitions="*">
         <StackLayout Grid.Row="0">
-            <Entry Placeholder="{Binding TextResources[Search]}"
-                   Text="{Binding SearchField}"
-                   Style="{DynamicResource entryStyle}"
-                   ClearButtonVisibility="WhileEditing"/>
+            <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
+                                 SearchText="{Binding SearchField}" 
+                                 SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
+                                 LogoutButtonCommand="{Binding LogoutCommand}"
+                                 Margin="0,17,0,13"/>
             <ListView  ItemsSource="{Binding Pins}" 
                        HasUnevenRows="True"
                        IsPullToRefreshEnabled="False"
@@ -69,8 +70,9 @@
             </ListView>
         </StackLayout>
         <Button Grid.Row="0" 
-                ImageSource="ic_add3x.png"
+                ImageSource="ic_plus.png"
                 Style="{DynamicResource floatButtonStyle}"
+                BackgroundColor="#596EFB"
                 Command="{Binding GoToAddPinFormCommand}"/>
     </Grid>
 </ContentPage>

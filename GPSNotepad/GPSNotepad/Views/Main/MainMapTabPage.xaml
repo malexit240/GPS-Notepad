@@ -14,7 +14,11 @@
     </ContentPage.Resources>
     <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
-        <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}"  Margin="0,17,0,13"/>
+        <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
+                                 SearchText="{Binding SearchField}" 
+                                 SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
+                                 LogoutButtonCommand="{Binding LogoutCommand}"
+                                 Margin="0,17,0,13"/>
 
         <Grid RowDefinitions="*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
@@ -33,12 +37,15 @@
                 </controls:BindableMap>
             </StackLayout>
 
-
-            <controls:DropDown Grid.Row="0" IsVisible="{Binding IsDropDownPinsVisible}"/>
-
+            <controls:DropDown Grid.Row="0" 
+                               HeightRequest="150" 
+                               IsVisible="{Binding IsDropDownPinsVisible}" 
+                               PinsSource="{Binding Pins}"
+                               PinTappedCommand="{Binding PinTappedCommand}"
+                               BackgroundColor="#FEFEFD"/>
 
             <Button Grid.Row="0"
-                ImageSource="TargetSmall.png"
+                ImageSource="ic_location.png"
                 Style="{DynamicResource floatButtonStyle}"
                 IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"
                 Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>

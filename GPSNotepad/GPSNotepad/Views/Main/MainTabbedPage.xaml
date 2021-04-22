@@ -9,7 +9,7 @@
             Title="{Binding TextResources[MainPageTitle]}"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            Style="{DynamicResource pageStyle}"
+            Style="{DynamicResource tabbedPageStyle}"
             NavigationPage.HasNavigationBar="False">
     <local:MainMapTabPage IconImageSource="ic_map.png" Title="Map"/>
     <local:PinsTabPage IconImageSource="ic_pin.png" Title="Pins"/>

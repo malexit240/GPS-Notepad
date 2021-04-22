@@ -6,8 +6,28 @@
              HorizontalOptions="FillAndExpand"
              Padding="12,0,12,0"
              Orientation="Horizontal">
-    <ImageButton x:Name="CancelButton" Clicked="UnfocusSearchField" Source="ic_left_blue.png" VerticalOptions="CenterAndExpand" Margin="0,0,12,0" BackgroundColor="Transparent"/>
-    <ImageButton x:Name="SettingsButton" Clicked="OnSettingsButtonClicked" Source="ic_settings.png" VerticalOptions="CenterAndExpand" Margin="0,0,12,0" BackgroundColor="Transparent"/>
-    <controls:SearchEntry x:Name="searchField" HorizontalOptions="FillAndExpand"/>
-    <ImageButton x:Name="logoutButton" Source="ic_exid.png" VerticalOptions="CenterAndExpand" Margin="12,0,0,0" BackgroundColor="Transparent"/>
+    <ImageButton x:Name="SettingsButton" 
+                 Source="ic_settings.png" 
+                 VerticalOptions="CenterAndExpand" 
+                 Margin="0,0,12,0"
+                 Clicked="OnSettingsButtonClicked"
+                 BackgroundColor="Transparent"/>
+
+    <ImageButton x:Name="CancelButton" 
+                 Source="ic_left_blue.png"
+                 IsVisible="False"
+                 VerticalOptions="CenterAndExpand" 
+                 Margin="0,0,12,0"
+                 Clicked="UnfocusSearchField" 
+                 BackgroundColor="Transparent"/>
+    
+    <controls:SearchEntry x:Name="searchField" 
+                          HorizontalOptions="FillAndExpand"/>
+    
+    <ImageButton x:Name="logoutButton" 
+                 Source="ic_exid.png"
+                 VerticalOptions="CenterAndExpand"
+                 Margin="12,0,0,0" 
+                 Clicked="OnLogoutButtonClicked"
+                 BackgroundColor="Transparent"/>
 </StackLayout>

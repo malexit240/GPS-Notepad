@@ -2,14 +2,22 @@
 <ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="GPSNotepad.Styles.LightTheme">
-    <Color x:Key="PageBackgroundColor">#FEFEFD</Color>
-    <Color x:Key="NavigationBarColor">#FEFEFD</Color>
     <Color x:Key="PrimaryColor">#596EFB</Color>
-    <Color x:Key="SecondaryColor">#596EFB</Color>
-    <Color x:Key="PrimaryTextColor">#1E242B</Color>
-    <Color x:Key="SecondaryTextColor">#FEFEFD</Color>
-    <Color x:Key="TertiaryTextColor">#3D4E61</Color>
-    <Color x:Key="WrongColor">#F24545</Color>
-    <Color x:Key="AccentTextColor">#596EFB</Color>
-    <Color x:Key="TransparentColor">Transparent</Color>
+    <Color x:Key="DisabledColor">#C7CDF5</Color>
+    <Color x:Key="HoveredColor">#273BC6</Color>
+    <Color x:Key="PressedColor">#192680</Color>
+    <Color x:Key="Variant">#F1F3FD</Color>
+
+    <Color x:Key="System_White">#FEFEFD</Color>
+    <Color x:Key="System_LightGray">#D7DDE8</Color>
+    <Color x:Key="System_Gray">#858E9E</Color>
+    <Color x:Key="System_DarkGray">#3D4E61</Color>
+    <Color x:Key="System_Black">#1E242B</Color>
+
+    <Color x:Key="ErrorColor">#F24545</Color>
+    <Color x:Key="ConfirmColor">#F6EA62</Color>
+    <Color x:Key="SuccsessColor">#32D27F</Color>
+
+    <Color x:Key="PageBackgroundColor">#FEFEFD</Color>
+
 </ResourceDictionary>

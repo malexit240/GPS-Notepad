@@ -20,6 +20,7 @@
              Margin="0" Padding="0"
              CornerRadius="0" 
              ImageSource="ic_clear.png"
-             BackgroundColor="#Transparent"
+             BackgroundColor="Transparent"
+             Clicked="ClearButtonClicked"
              IsVisible="False"/>
 </StackLayout>

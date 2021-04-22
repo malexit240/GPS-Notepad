@@ -3,16 +3,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              x:Class="GPSNotepad.Controls.DropDown"
-             Orientation="Vertical"
              HorizontalOptions="FillAndExpand"
-             VerticalOptions="Start"
-             HeightRequest="{Binding Source={x:Reference listView},Path=RowHeight}" BackgroundColor="White">
-    <ListView x:Name="listView"  VerticalOptions="Start" HasUnevenRows="True">
+             VerticalOptions="Start">
+    <ListView x:Name="listView"
+              VerticalOptions="Start"
+              HasUnevenRows="True"
+              ItemTapped="OnListViewItemTapped"
+              SeparatorVisibility="None">
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout>
-                        <Label Text="{Binding Text}"/>
+                    <StackLayout BackgroundColor="Transparent" Padding="0">
+                        <BoxView HeightRequest="2"  Color="#F1F3FD" HorizontalOptions="FillAndExpand"/>
+                        <Grid ColumnDefinitions="15*,85*" Padding="0,12,0,12" Margin="0">
+                            <Image Grid.Column="0" Margin="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="ic_pin_gray.png"/>
+                            <StackLayout Grid.Column="1" Padding="0" Margin="0">
+                                <Label Text="{Binding Name}" BackgroundColor="Transparent"/>
+                                <Label Text="{Binding Description}" BackgroundColor="Transparent"/>
+                            </StackLayout>
+                        </Grid>
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>

@@ -11,7 +11,7 @@
         <ToolbarItem IconImageSource="icon_settings.png"
             Command="{prism:NavigateTo 'SettingsPage'}"/>
     </ContentPage.ToolbarItems>
-    <StackLayout>
+    <StackLayout Padding="12,0,12,12">
         <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
             Style="{DynamicResource activityStyle}"/>
 
