@@ -23,8 +23,8 @@ namespace GPSNotepad
         {
             InitializeComponent();
 
-            //var NotificationJobManager = new NotificationJobManager();
-            //
+            var NotificationJobManager = new NotificationJobManager();
+
             Container.Resolve<ISettingsManagerService>().Init();
 
             var authorizationService = Container.Resolve<IAuthorizationService>();
@@ -40,8 +40,6 @@ namespace GPSNotepad
             {
                 NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
             }
-
-
 
         }
 
@@ -66,6 +64,8 @@ namespace GPSNotepad
             containerRegistry.RegisterForNavigation<MainTabbedPage, MainPageViewModel>();
 
             containerRegistry.RegisterForNavigation<AddEditPinAndEventsTabbedPage, AddEditPinAndEventsViewModel>();
+            containerRegistry.RegisterForNavigation<QRCodeModalPage, QRCodeModalViewModel>();
+            containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventViewModel>();
         }
     }
 }

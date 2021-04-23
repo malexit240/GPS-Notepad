@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace GPSNotepad.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddEditPlaceEventTabPage : ContentPage
+    public partial class PlaceEventsTabPage : ContentPage
     {
-        public AddEditPlaceEventTabPage()
+        public PlaceEventsTabPage()
         {
             InitializeComponent();
         }

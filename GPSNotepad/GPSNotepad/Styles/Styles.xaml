@@ -15,11 +15,18 @@
         <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
     </Style>
 
+    <Style x:Key="navigationPageStyle" 
+           TargetType="NavigationPage">
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="BarTextColor" Value="{DynamicResource System_Black}"/>
+    </Style>
+
     <Style x:Key="tabbedPageStyle" 
                TargetType="controls:NavigableTabbedPage">
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}" />
         <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+
     </Style>
 
     <Style x:Key="buttonAccentStyle"
@@ -36,7 +43,7 @@
         <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PageBackgroundColor}"/>
+                    Value="Transparent"/>
         <Setter Property="Margin"
                     Value="0"/>
         <Setter Property="BorderWidth"
@@ -52,7 +59,7 @@
     <Style x:Key="entryLabelStyle"
                TargetType="Label">
         <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
+                    Value="{DynamicResource System_Black}"/>
         <Setter Property="Margin"
                     Value="12,0,0,0"/>
         <Setter Property="FontSize"
@@ -62,7 +69,7 @@
     <Style x:Key="wrongEntryLabelStyle"
                TargetType="Label">
         <Setter Property="TextColor"
-                    Value="{DynamicResource WrongColor}"/>
+                    Value="{DynamicResource ErrorColor}"/>
         <Setter Property="Margin"
                     Value="12,0,0,0"/>
         <Setter Property="FontSize"
@@ -72,9 +79,9 @@
     <Style x:Key="entryStyle"
                TargetType="Entry">
         <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
+                    Value="{DynamicResource System_Black}"/>
         <Setter Property="PlaceholderColor"
-                    Value="{DynamicResource TertiaryTextColor}"/>
+                    Value="{DynamicResource System_Gray}"/>
         <Setter Property="FontSize"
                     Value="14"/>
         <Setter Property="Margin"
@@ -84,7 +91,7 @@
     <Style x:Key="entryFrameStyle"
                TargetType="Frame">
         <Setter Property="BorderColor"
-                    Value="#D7DDE8"/>
+                    Value="{DynamicResource System_LightGray}"/>
         <Setter Property="Padding"
                     Value="0"/>
     </Style>
@@ -92,7 +99,7 @@
     <Style x:Key="entryWrongFrameStyle"
                TargetType="Frame">
         <Setter Property="BorderColor"
-                    Value="{DynamicResource WrongColor}"/>
+                    Value="{DynamicResource ErrorColor}"/>
         <Setter Property="Padding"
                     Value="0"/>
     </Style>
@@ -109,13 +116,6 @@
                     Value="20"/>
     </Style>
 
-
-
-
-
-
-
-
     <Style x:Key="labelStyle"
                TargetType="Label">
         <Setter Property="TextColor"
@@ -125,9 +125,7 @@
     <Style x:Key="labelDetailStyle"
                TargetType="Label">
         <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
-        <Setter Property="HorizontalOptions"
-                    Value="CenterAndExpand"/>
+                    Value="{DynamicResource  SecondaryTextColor}"/>
     </Style>
 
     <Style x:Key="labelLinkStyle"
@@ -177,6 +175,26 @@
                     Value="0"/>
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="floatButtonAccentStyle"
+               TargetType="Button">
+        <Setter Property="VerticalOptions"
+                    Value="End"/>
+        <Setter Property="HorizontalOptions"
+                    Value="End"/>
+        <Setter Property="WidthRequest"
+                    Value="48"/>
+        <Setter Property="HeightRequest"
+                    Value="48"/>
+        <Setter Property="CornerRadius"
+                    Value="40"/>
+        <Setter Property="Margin"
+                    Value="0,0,16,18"/>
+        <Setter Property="BorderWidth"
+                    Value="0"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PrimaryColor}"/>
     </Style>
 
 

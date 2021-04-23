@@ -42,6 +42,9 @@
     <Compile Update="Views\AddEditPin\AddEditPinAndEventsTabbedPage.xaml.cs">
       <DependentUpon>AddEditPinAndEventsTabbedPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\AddEditPin\AddEditPlaceEventPage.xaml.cs">
+      <DependentUpon>AddEditPlaceEventPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Signing\SignInPage.xaml.cs">
       <DependentUpon>SignInPage.xaml</DependentUpon>
     </Compile>
@@ -70,7 +73,7 @@
     <EmbeddedResource Update="Views\AddEditPin\AddEditPinAndEventsTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AddEditPin\AddEditPlaceEventTabPage.xaml">
+    <EmbeddedResource Update="Views\AddEditPin\AddEditPlaceEventPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Main\MainMapTabPage.xaml">
@@ -80,6 +83,12 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Main\PinsTabPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\Main\QRCodeModalPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\AddEditPin\PlaceEventsTabPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\Signing\SignInPage.xaml">

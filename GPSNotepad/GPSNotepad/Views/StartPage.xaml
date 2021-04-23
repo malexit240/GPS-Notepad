@@ -5,10 +5,25 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.StartPage"
              Style="{DynamicResource pageStyle}"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             >
     <ContentPage.Content>
         <StackLayout Padding="12,0,12,12">
-            <Image VerticalOptions="CenterAndExpand" Source="pic_enter_page_3x.png"/>
+            <Grid ColumnDefinitions="60,*,60" VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand">
+                <StackLayout  Grid.Column="1">
+                    <Image
+                       HorizontalOptions="CenterAndExpand"
+                   Source="pic_enter_page_3x.png"/>
+                    <Label 
+                        HorizontalOptions="CenterAndExpand"
+                        Text="MapNotepad"
+                        FontSize="30"
+                        TextColor="{DynamicResource PrimaryColor}"/>
+                </StackLayout>
+                
+            </Grid>
+
 
             <StackLayout VerticalOptions="End">
                 <Button Text="Log in"

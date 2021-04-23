@@ -7,7 +7,7 @@
              x:Class="GPSNotepad.Views.SignInPage"
              Title="{Binding TextResources[SignInTitle]}"
              Style="{DynamicResource pageStyle}">
-    <StackLayout>
+    <StackLayout Padding="12,0,12,12">
         <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
                            Style="{DynamicResource activityIndicatorStyle}"/>
 
@@ -29,9 +29,22 @@
                                ButtonCommand="{Binding ShowPasswordCommand}"
                                WrongLabelText="Wrong Password"/>
 
-
         <Button Text="{Binding TextResources[SignIn]}"
                 Command="{Binding SignInCommand}"
                 Style="{DynamicResource buttonAccentStyle}"/>
+        <Grid RowDefinitions="*" 
+              HorizontalOptions="FillAndExpand">
+            <BoxView Grid.Row="0"
+                HeightRequest="1"
+                     VerticalOptions="CenterAndExpand"
+                HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{DynamicResource System_LightGray}"/>
+            <Label Grid.Row="0" 
+                   Text=" or "
+                   TextColor="{DynamicResource System_LightGray}"
+                   BackgroundColor="{DynamicResource PageBackgroundColor}"
+                   HorizontalOptions="CenterAndExpand"/>
+        </Grid>
+
     </StackLayout>
 </ContentPage>

@@ -11,5 +11,5 @@
              android:TabbedPage.ToolbarPlacement="Bottom"
             Style="{DynamicResource tabbedPageStyle}">
     <local:AddEditPinTabPage Title="{Binding TextResources[Pin]}"/>
-    <local:AddEditPlaceEventTabPage Title="{Binding TextResources[Events]}"/>
+    <local:PlaceEventsTabPage Title="{Binding TextResources[Events]}"/>
 </controls:NavigableTabbedPage>

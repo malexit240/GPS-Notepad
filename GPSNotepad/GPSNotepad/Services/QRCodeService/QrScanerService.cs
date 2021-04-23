@@ -22,14 +22,11 @@ namespace GPSNotepad.Services.QRCodeService
         #region ---IQrScanerService Implementation---
         public async Task<Pin> GetPinAsync()
         {
-            return await Task.Run(async () =>
-            {
-                var source = await ScanAsync() ?? string.Empty;
+            var source = await ScanAsync() ?? string.Empty;
 
-                var pin = SerializablePin.CreateFromBase64String(source)?.ToModelPin();
+            var pin = SerializablePin.CreateFromBase64String(source)?.ToModelPin();
 
-                return pin;
-            });
+            return pin;
         }
         #endregion
 

@@ -35,25 +35,24 @@
                             <ViewCell.ContextActions>
                                 <MenuItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
                                           Source={x:Reference page}}" 
-                                          IconImageSource="icon_qr.png"
+                                          IconImageSource="ic_qr.png"
                                           CommandParameter="{Binding Self}"/>
                                 <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand,
                                           Source={x:Reference page}}"
                                           CommandParameter="{Binding Self}"
-                                          Text="{Binding Path=BindingContext.TextResources[Edit],
-                                          Source={x:Reference page}}"/>
+                                          IconImageSource="ic_edit.png"/>
                                 <MenuItem Command="{Binding DeletePinContextCommand}" 
-                                          Text="{Binding Path=BindingContext.TextResources[Delete],
-                                          Source={x:Reference page}}"/>
+                                          IconImageSource="ic_delete"/>
                             </ViewCell.ContextActions>
                             <StackLayout Padding="5,0,5,15">
 
                                 <Grid ColumnDefinitions="60,*" HeightRequest="60">
                                     <controls:ImageCheckBox Grid.Column="0"
-                                                        Margin="10"
-                                                        CheckedImageSource="FavoriteChecked.png" 
-                                                        UncheckedImageSource="FavoriteUnchecked.png" 
-                                                        IsChecked="{Binding Favorite}"                                                       />
+                                                            Margin="10"
+                                                            CheckedImageSource="ic_like_blue.png" 
+                                                            UncheckedImageSource="ic_like_gray.png" 
+                                                            IsChecked="{Binding Favorite}"
+                                                            BackgroundColor="{DynamicResource Variant}"/>
                                     <StackLayout Grid.Column="1">
                                         <Label Text="{Binding Name}"
                                        Style="{DynamicResource labelStyle}"/>

@@ -37,6 +37,7 @@ namespace GPSNotepad.ViewModels
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
             pinService.LoadUserPins(AuthorizationService.GetCurrenUserId());
+
         }
         #endregion
 
@@ -115,23 +116,9 @@ namespace GPSNotepad.ViewModels
         public ICommand ShowQRCodeCommand => _showQRCodeCommand ??= new DelegateCommand<PinViewModel>(ShowQRCodeHandler);
         private void ShowQRCodeHandler(PinViewModel pin)
         {
-            // var parameters = new NavigationParameters();
-            // parameters.Add(nameof(QRCodeModalViewModel.QRCodeValue), pin.GetModelPin().GetPinAsQRCode());
-            // NavigationService.NavigateAsync(nameof(QRCodeModalPage), parameters, useModalNavigation: true, false);
-        }
-
-        private ICommand _scanQRCommand;
-        public ICommand ScanQRCommand => _scanQRCommand ??= new DelegateCommand(ScanQRHandler);
-        private async void ScanQRHandler()
-        {
-            var pin = await QrScanerService.GetPinAsync();
-
-            if (pin != null)
-            {
-                pin.PinId = Guid.NewGuid();
-                pin.UserId = AuthorizationService.GetCurrenUserId();
-                await PinService.Create(pin);
-            }
+            var parameters = new NavigationParameters();
+            parameters.Add(nameof(QRCodeModalViewModel.QRCodeValue), pin.GetModelPin().GetPinAsQRCode());
+            NavigationService.NavigateAsync(nameof(QRCodeModalPage), parameters, useModalNavigation: true, false);
         }
 
 
@@ -147,7 +134,6 @@ namespace GPSNotepad.ViewModels
             SelectedPin = null;
             MainMapViewModel.ShowDetailView = false;
         }
-
 
         private DelegateCommand<PinViewModel> _pinTappedCommand;
         public DelegateCommand<PinViewModel> PinTappedCommand => _pinTappedCommand ??= new DelegateCommand<PinViewModel>(PinTappedHandler);

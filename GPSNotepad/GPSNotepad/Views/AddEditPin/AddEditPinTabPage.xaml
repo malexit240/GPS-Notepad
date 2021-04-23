@@ -10,6 +10,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_save.png" Command="{Binding AddEditPinCommand}"/>
+        <ToolbarItem IconImageSource="ic_scan_qr.png" Command="{Binding ScanQRCommand}"/>
     </ContentPage.ToolbarItems>
 
     <StackLayout Padding="12,12,12,0">

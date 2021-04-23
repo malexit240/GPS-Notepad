@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GPSNotepad.Views.PlaceEventsTabPage"
+             x:Name="page"
+             Style="{DynamicResource pageStyle}">
+    <Grid RowDefinitions="*">
+        <StackLayout Grid.Row="0" Padding="12,0,12,0">
+            <ListView  ItemsSource="{Binding Events}" 
+                       HasUnevenRows="True"
+                       SeparatorVisibility="None"
+                       IsPullToRefreshEnabled="False"
+                       SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions>
+                                <MenuItem Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
+                                          Source={x:Reference page}}"
+                                          CommandParameter="{Binding Self}"
+                                          Text="{Binding Path=BindingContext.TextResources[Edit],
+                                          Source={x:Reference page}}"/>
+                                <MenuItem Command="{Binding DeletePlaceEventContextCommand}" 
+                                          Text="{Binding Path=BindingContext.TextResources[Delete],
+                                          Source={x:Reference page}}"/>
+                            </ViewCell.ContextActions>
+                            <StackLayout HorizontalOptions="FillAndExpand"
+                                         Padding="5,15,5,5">
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Label Text="{Binding Description}"
+                                           FontSize="16"
+                                       HorizontalOptions="StartAndExpand"
+                                       Style="{DynamicResource labelStyle}"/>
+                                    <StackLayout HorizontalOptions="StartAndExpand"
+                                             Orientation="Horizontal">
+                                        <Label Text="{Binding DateString}"
+                                               Style="{DynamicResource labelDetailStyle}"
+                                               FontSize="12"/>
+                                        <Label Text="{Binding TimeString}"
+                                               Style="{DynamicResource labelDetailStyle}"
+                                               FontSize="12"/>
+                                    </StackLayout>
+                                </StackLayout>
+                                <BoxView Style="{DynamicResource stripStyle}"/>
+                            </StackLayout>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+        <Button Grid.Row="0" 
+                ImageSource="ic_plus.png"
+                Style="{DynamicResource floatButtonAccentStyle}"
+                Command="{Binding GoToAddPlaceEventFormCommand}"/>
+    </Grid>
+</ContentPage>

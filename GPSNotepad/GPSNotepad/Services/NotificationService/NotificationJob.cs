@@ -26,6 +26,7 @@ namespace GPSNotepad
 
         protected bool OnStart()
         {
+
             bool result = true;
             IsInitialize = true;
 
@@ -78,6 +79,7 @@ namespace GPSNotepad
                     return true;
 
             var currentTime = DateTime.Now;
+
 
             var info = new JobInfo(typeof(NotificationJob))
             {

@@ -8,6 +8,7 @@ using GPSNotepad.Extensions;
 using GPSNotepad.Model;
 using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.PinService;
+using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Views;
 using Prism;
 using Prism.Commands;
@@ -19,18 +20,19 @@ namespace GPSNotepad.ViewModels
     public class AddEditPinAndEventsViewModel : ViewModelBase
     {
         #region ---Constructors---
-        public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService) : base(navigationService)
+        public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
         {
             Pins = new ObservableCollection<PinViewModel>();
             AuthorizationService = authorizationService;
             PinService = pinService;
+            QrScanerService = qrScanerService;
         }
         #endregion
 
 
         #region ---Protected Properties---
         protected IPinService PinService { get; set; }
-
+        protected IQrScanerService QrScanerService { get; set; }
         protected IAuthorizationService AuthorizationService { get; set; }
         #endregion
 
@@ -118,7 +120,7 @@ namespace GPSNotepad.ViewModels
                     { nameof(PlaceEventViewModel), placeEvent }
                 };
 
-            //   await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
         });
 
         public DelegateCommand<object> OnMapClickedCommand => new DelegateCommand<object>((newPosition) =>
@@ -134,8 +136,23 @@ namespace GPSNotepad.ViewModels
 
             parameters.Add(nameof(PlaceEventViewModel.PinId), this.PinViewModel.PinId);
 
-            // await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
         });
+
+
+        private ICommand _scanQRCommand;
+        public ICommand ScanQRCommand => _scanQRCommand ??= new DelegateCommand(ScanQRHandler);
+        private async void ScanQRHandler()
+        {
+            var pin = await QrScanerService.GetPinAsync();
+
+            if (pin != null)
+            {
+                this.Name = pin.Name;
+                this.Description = pin.Description;
+                SetNewPinPosition(pin.Position);
+            }
+        }
 
         #endregion
 
@@ -195,7 +212,6 @@ namespace GPSNotepad.ViewModels
                         if (latitude != PinViewModel.Position.Latitude)
                         {
                             SetNewPinPosition(new Position(latitude, PinViewModel.Position.Longitude));
-                            Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
                         }
                     }
                     break;
@@ -211,12 +227,10 @@ namespace GPSNotepad.ViewModels
                         if (longitude != PinViewModel.Position.Longitude)
                         {
                             SetNewPinPosition(new Position(PinViewModel.Position.Latitude, longitude));
-                            Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
                         }
                     }
                     break;
             }
-
         }
 
         #endregion
@@ -235,41 +249,39 @@ namespace GPSNotepad.ViewModels
 
         private async void OnMapLoadedHelper()
         {
-
             if (PinViewModel == null)
             {
                 var position = await CurrentPosition.GetAsync();
 
                 PinViewModel = new PinViewModel(Guid.NewGuid(), AuthorizationService.GetCurrenUserId())
                 {
-                    Position = position
+                    Position = new Position()
                 };
 
                 Pins.Add(PinViewModel);
-                Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+                SetNewPinPosition(position);
             }
             else
             {
                 Name = PinViewModel.Name;
                 Description = PinViewModel.Description;
-
                 Pins.Add(PinViewModel);
-
-                Span = new MapSpan(PinViewModel.Position, 0.01, 0.01);
+                SetNewPinPosition(PinViewModel.Position, true);
             }
-
         }
 
-        private void SetNewPinPosition(Position position)
+        private void SetNewPinPosition(Position position, bool setForce = false)
         {
-            if (PinViewModel.Position.Rounded() == position.Rounded())
-                return;
+            if (PinViewModel.Position.Rounded() != position.Rounded() || setForce == true)
+            {
+                PinViewModel.Position = position.Rounded();
+                Pins[0] = PinViewModel;
 
-            PinViewModel.Position = position.Rounded();
-            Pins[0] = PinViewModel;
+                Latitude = PinViewModel.Position.Latitude.ToString();
+                Longitude = PinViewModel.Position.Longitude.ToString();
 
-            Latitude = PinViewModel.Position.Latitude.ToString();
-            Longitude = PinViewModel.Position.Longitude.ToString();
+                Span = new MapSpan(PinViewModel.Position, Span?.LatitudeDegrees ?? 0.01, Span?.LongitudeDegrees ?? 0.01);
+            }
         }
         #endregion
     }

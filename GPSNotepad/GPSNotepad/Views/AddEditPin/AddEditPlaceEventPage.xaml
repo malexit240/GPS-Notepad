@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.AddEditPlaceEventPage"
+             Title="{Binding TextResources[AddEditPlaceEventTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
+    </ContentPage.ToolbarItems>
+
+    <StackLayout Padding="12,0,12,0">
+        <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
+                               EntryPlaceholderText="{Binding TextResources[Description]}"
+                               EntryText="{Binding Description}"/>
+
+        <DatePicker TextColor="{DynamicResource System_Black}" Date="{Binding Date}"/>
+        <TimePicker TextColor="{DynamicResource System_Black}" Time="{Binding Time}"/>
+
+    </StackLayout>
+</ContentPage>
