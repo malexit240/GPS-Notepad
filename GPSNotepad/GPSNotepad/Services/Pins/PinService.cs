@@ -101,12 +101,10 @@ namespace GPSNotepad.Services.PinService
         public async void LoadUserPins(Guid userId)
         {
             PinState.IsLoaded = false;
-            await Task.Run(async () =>
-            {
-                using var context = new Context();
 
-                PinState.LoadPins(await this.GetAllPinsForUser(userId));
-            });
+            using var context = new Context();
+
+            PinState.LoadPins(await this.GetAllPinsForUser(userId));
         }
 
         public async Task<bool> CreateOrUpdatePin(Pin pin)

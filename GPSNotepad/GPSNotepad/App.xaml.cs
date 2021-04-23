@@ -23,6 +23,7 @@ namespace GPSNotepad
             InitializeComponent();
 
             var NotificationJobManager = new NotificationJobManager();
+            Loger.Instance.Log("123");
 
             var settingsManager = Container.Resolve<ISettingsManagerService>();
             settingsManager.Init();
