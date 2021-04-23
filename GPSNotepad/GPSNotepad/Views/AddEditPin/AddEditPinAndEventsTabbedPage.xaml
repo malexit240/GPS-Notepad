@@ -10,6 +10,6 @@
              Title="{Binding TextResources[AddEditPinTitle]}"
              android:TabbedPage.ToolbarPlacement="Bottom"
             Style="{DynamicResource tabbedPageStyle}">
-    <local:AddEditPinTabPage Title="{Binding TextResources[Pin]}"/>
-    <local:PlaceEventsTabPage Title="{Binding TextResources[Events]}"/>
+    <local:AddEditPinTabPage IconImageSource="ic_pin.png" Title="{Binding TextResources[Pin]}"/>
+    <local:PlaceEventsTabPage IconImageSource="ic_clock.png" Title="{Binding TextResources[Events]}"/>
 </controls:NavigableTabbedPage>

@@ -15,18 +15,19 @@
         <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
     </Style>
 
+    <Style x:Key="tabbedPageStyle" 
+               TargetType="controls:NavigableTabbedPage">
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="SelectedTabColor" Value="{DynamicResource PressedColor}"/>
+        <Setter Property="UnselectedTabColor" Value="{DynamicResource PrimaryColor}"/>
+    </Style>
+
     <Style x:Key="navigationPageStyle" 
            TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
         <Setter Property="BarTextColor" Value="{DynamicResource System_Black}"/>
-    </Style>
-
-    <Style x:Key="tabbedPageStyle" 
-               TargetType="controls:NavigableTabbedPage">
-        <Setter Property="BackgroundColor"
-                    Value="{DynamicResource PageBackgroundColor}" />
-        <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
-
     </Style>
 
     <Style x:Key="buttonAccentStyle"

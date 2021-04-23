@@ -8,6 +8,7 @@ using GPSNotepad.Entities;
 using GPSNotepad.Services.PinService;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using GPSNotepad.Converters;
 
 namespace GPSNotepad.ViewModels
 {
@@ -71,6 +72,11 @@ namespace GPSNotepad.ViewModels
         {
             get => _position.Rounded();
             set => SetProperty(ref _position, value.Rounded());
+        }
+
+        public string FormatedPosition
+        {
+            get => Position.ToFormatedString();
         }
 
         private bool _favorite = false;
