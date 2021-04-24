@@ -7,9 +7,8 @@
              x:Class="GPSNotepad.Views.SignInPage"
              Title="{Binding TextResources[SignInTitle]}"
              Style="{DynamicResource pageStyle}">
-    <StackLayout Padding="12,0,12,12">
-        <ActivityIndicator IsEnabled="{Binding HasLongActivity}"
-                           Style="{DynamicResource activityIndicatorStyle}"/>
+    <StackLayout Padding="{DynamicResource FullIndent}">
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[Email]}"
                                EntryText="{Binding Email}"
@@ -17,7 +16,8 @@
                                IsWrong="{Binding IsEmailWrong}"
                                ButtonImageSource="ic_clear.png"
                                ButtonCommand="{Binding ClearEmailCommand}"
-                               WrongLabelText="Wrong Email"/>
+                               WrongLabelText="Wrong Email"
+                               Margin="0,4,0,0"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
                                EntryText="{Binding Password}"
@@ -38,10 +38,10 @@
                 HeightRequest="1"
                      VerticalOptions="CenterAndExpand"
                 HorizontalOptions="FillAndExpand"
-                     BackgroundColor="{DynamicResource System_LightGray}"/>
+                     BackgroundColor="{DynamicResource System_Gray}"/>
             <Label Grid.Row="0" 
                    Text=" or "
-                   TextColor="{DynamicResource System_LightGray}"
+                   TextColor="{DynamicResource System_Gray}"
                    BackgroundColor="{DynamicResource PageBackgroundColor}"
                    HorizontalOptions="CenterAndExpand"/>
         </Grid>

@@ -4,12 +4,11 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.StartPage"
-             Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False"
-             >
+             Style="{DynamicResource pageStyle}">
     <ContentPage.Content>
-        <StackLayout Padding="12,0,12,12">
-            <Grid ColumnDefinitions="60,*,60" VerticalOptions="CenterAndExpand" 
+        <StackLayout Padding="{DynamicResource FullIndent}">
+            <Grid ColumnDefinitions="20*,60*,20*" VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand">
                 <StackLayout  Grid.Column="1">
                     <Image
@@ -21,18 +20,16 @@
                         FontSize="30"
                         TextColor="{DynamicResource PrimaryColor}"/>
                 </StackLayout>
-                
-            </Grid>
 
+            </Grid>
 
             <StackLayout VerticalOptions="End">
                 <Button Text="Log in"
-                        TextTransform="None"
                     Command="{Binding GoToSignInPageCommand}" 
                     Style="{DynamicResource buttonAccentStyle}"
                         Margin="0,0,0,16"/>
+
                 <Button Text="Create account"
-                        TextTransform="None"
                     Command="{Binding GoToSignUpPageCommand}"
                     Style="{DynamicResource buttonSimpleStyle}"/>
             </StackLayout>

@@ -168,13 +168,13 @@ namespace GPSNotepad.Controls
 
                 Pins.Add(pinView);
             }
+
             try
             {
                 this.Cluster();
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
             }
         }
         #endregion

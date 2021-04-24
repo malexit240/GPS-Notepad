@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,7 @@ namespace GPSNotepad.Controls
             searchEntry.Focused += SearchEntry_Focused;
             searchEntry.Unfocused += SearchEntry_Unfocused;
             searchEntry.TextChanged += SearchEntry_TextChanged;
+
         }
 
         public string SearchText
@@ -37,6 +39,8 @@ namespace GPSNotepad.Controls
             (bindable as SearchEntry).searchEntry.Text = newValue as string;
         }
 
+
+
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
             SearchText = e.NewTextValue;
@@ -51,6 +55,7 @@ namespace GPSNotepad.Controls
         {
             clearButton.IsVisible = true;
         }
+
 
         private void ClearButtonClicked(object sender, EventArgs e)
         {

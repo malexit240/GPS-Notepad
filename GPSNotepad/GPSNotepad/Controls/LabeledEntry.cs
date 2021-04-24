@@ -41,6 +41,7 @@ namespace GPSNotepad.Controls
 
             Frame.Content = stack;
 
+
             this.Children.Add(Label);
             this.Children.Add(Frame);
             this.Children.Add(WrongLabel);

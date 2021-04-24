@@ -4,15 +4,75 @@
                     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
                     xmlns:controls="clr-namespace:GPSNotepad.Controls"
                     x:Class="GPSNotepad.Styles.Styles">
-    <x:Int32 x:Key="indent">
+    <x:Int32 x:Key="Indent">
+        12
+    </x:Int32>
+
+    <Thickness x:Key="FullIndent">
+        <Thickness.Left>
+            12
+        </Thickness.Left>
+        <Thickness.Top>
+            0
+        </Thickness.Top>
+        <Thickness.Right>
+            12
+        </Thickness.Right>
+        <Thickness.Bottom>
+            12
+        </Thickness.Bottom>
+    </Thickness>
+
+    <Thickness x:Key="HorizontalIndent">
+        <Thickness.Left>
+            12
+        </Thickness.Left>
+        <Thickness.Top>
+            0
+        </Thickness.Top>
+        <Thickness.Right>
+            12
+        </Thickness.Right>
+        <Thickness.Bottom>
+            0
+        </Thickness.Bottom>
+    </Thickness>
+
+    <Thickness x:Key="VerticalIndent">
+        <Thickness.Left>
+            0
+        </Thickness.Left>
+        <Thickness.Top>
+            12
+        </Thickness.Top>
+        <Thickness.Right>
+            0
+        </Thickness.Right>
+        <Thickness.Bottom>
+            12
+        </Thickness.Bottom>
+    </Thickness>
+
+    <x:Int32 x:Key="LargeFontSize">
         16
+    </x:Int32>
+    <x:Int32 x:Key="NormalFontSize">
+        14
+    </x:Int32>
+    <x:Int32 x:Key="SmallFontSize">
+        12
     </x:Int32>
 
     <Style x:Key="pageStyle" 
-               TargetType="NavigationPage">
+               TargetType="ContentPage">
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="navigationPageStyle" 
+           TargetType="NavigationPage">
         <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="BarTextColor" Value="{DynamicResource PrimaryTextColor}"/>
     </Style>
 
     <Style x:Key="tabbedPageStyle" 
@@ -24,16 +84,14 @@
         <Setter Property="UnselectedTabColor" Value="{DynamicResource PrimaryColor}"/>
     </Style>
 
-    <Style x:Key="navigationPageStyle" 
-           TargetType="NavigationPage">
-        <Setter Property="BarBackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
-        <Setter Property="BarTextColor" Value="{DynamicResource System_Black}"/>
-    </Style>
-
     <Style x:Key="buttonAccentStyle"
                TargetType="Button">
         <Setter Property="TextColor"
                     Value="{DynamicResource System_White}"/>
+        <Setter Property="FontSize"
+                    Value="{StaticResource NormalFontSize}"/>
+        <Setter Property="TextTransform"
+                    Value="None"/>
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PrimaryColor}"/>
 
@@ -43,6 +101,10 @@
                TargetType="Button">
         <Setter Property="TextColor"
                     Value="{DynamicResource PrimaryColor}"/>
+        <Setter Property="FontSize"
+                    Value="{StaticResource NormalFontSize}"/>
+        <Setter Property="TextTransform"
+                    Value="None"/>
         <Setter Property="BackgroundColor"
                     Value="Transparent"/>
         <Setter Property="Margin"
@@ -53,18 +115,14 @@
                     Value="{DynamicResource PrimaryColor}"/>
     </Style>
 
-    <Style x:Key="entryStackStyle"
-               TargetType="StackLayout">
-    </Style>
-
     <Style x:Key="entryLabelStyle"
                TargetType="Label">
         <Setter Property="TextColor"
-                    Value="{DynamicResource System_Black}"/>
+                    Value="{DynamicResource PrimaryTextColor}"/>
         <Setter Property="Margin"
                     Value="12,0,0,0"/>
         <Setter Property="FontSize"
-                    Value="12"/>
+                    Value="{StaticResource SmallFontSize}"/>
     </Style>
 
     <Style x:Key="wrongEntryLabelStyle"
@@ -74,17 +132,19 @@
         <Setter Property="Margin"
                     Value="12,0,0,0"/>
         <Setter Property="FontSize"
-                    Value="12"/>
+                    Value="{StaticResource SmallFontSize}"/>
     </Style>
 
     <Style x:Key="entryStyle"
                TargetType="Entry">
+        <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
         <Setter Property="TextColor"
-                    Value="{DynamicResource System_Black}"/>
+                    Value="{DynamicResource PrimaryTextColor}"/>
         <Setter Property="PlaceholderColor"
                     Value="{DynamicResource System_Gray}"/>
         <Setter Property="FontSize"
-                    Value="14"/>
+                    Value="{StaticResource NormalFontSize}"/>
         <Setter Property="Margin"
                     Value="0"/>
     </Style>
@@ -93,6 +153,8 @@
                TargetType="Frame">
         <Setter Property="BorderColor"
                     Value="{DynamicResource System_LightGray}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource Transparent}"/>
         <Setter Property="Padding"
                     Value="0"/>
     </Style>
@@ -101,6 +163,8 @@
                TargetType="Frame">
         <Setter Property="BorderColor"
                     Value="{DynamicResource ErrorColor}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource Transparent}"/>
         <Setter Property="Padding"
                     Value="0"/>
     </Style>
@@ -115,6 +179,13 @@
                     Value="20"/>
         <Setter Property="WidthRequest"
                     Value="20"/>
+    </Style>
+
+    <Style x:Key="normalLabelStyle"
+               TargetType="Label">
+        <Setter Property="FontSize" Value="{StaticResource NormalFontSize}"/>
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
     </Style>
 
     <Style x:Key="labelStyle"
@@ -137,18 +208,6 @@
                     Value="Underline"/>
         <Setter Property="HorizontalOptions"
                     Value="Center"/>
-    </Style>
-
-
-
-
-
-    <Style x:Key="editorStyle"
-               TargetType="Entry">
-        <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
-        <Setter Property="PlaceholderColor"
-                    Value="{DynamicResource SecondaryTextColor}"/>
     </Style>
 
     <Style x:Key="radioButtonStyle" TargetType="input:RadioButton">
@@ -203,6 +262,13 @@
         <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}"/>
         <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}"/>
     </Style>
+
+    <Style x:Key="boxSeparatorStyle" TargetType="BoxView">
+        <Setter Property="HeightRequest" Value="1"/>
+        <Setter Property="Color" Value="{DynamicResource Variant}"/>
+    </Style>
+
+
 
     <Style x:Key="activityIndicatorStyle" TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>

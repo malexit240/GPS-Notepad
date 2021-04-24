@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.SettingsPage"
+             Title="{Binding TextResources[SettingsPageTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <StackLayout>
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="{StaticResource FullIndent}">
+            <Label Text="Dark theme"
+                   HorizontalOptions="StartAndExpand"
+                   Style="{DynamicResource normalLabelStyle}"/>
+            <Switch HorizontalOptions="End" 
+                    IsToggled="{Binding IsDarkTheme}"                  
+                    Style="{DynamicResource switchStyle}"/>
+        </StackLayout>
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="{StaticResource Indent}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding OnLanguageTabTapped}"/>
+            </StackLayout.GestureRecognizers>
+            <Label Text="Language"
+                   HorizontalOptions="StartAndExpand"
+                   Style="{DynamicResource normalLabelStyle}"/>
+            <Image Source="ic_left_gray.png" HorizontalOptions="End"/>
+        </StackLayout>
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+    </StackLayout>
+</ContentPage>

@@ -167,7 +167,7 @@ namespace GPSNotepad.ViewModels
         private ICommand _goToSettingsPageCommand;
         public ICommand GoToSettingsPageCommand => _goToSettingsPageCommand ??= new DelegateCommand(() =>
         {
-            // this.NavigationService.NavigateAsync($"{nameof(StartPage)}");
+            this.NavigationService.NavigateAsync($"{nameof(SettingsPage)}");
         });
 
         #endregion

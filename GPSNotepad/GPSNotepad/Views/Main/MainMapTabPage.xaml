@@ -18,7 +18,9 @@
                                  SearchText="{Binding SearchField}" 
                                  SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
                                  LogoutButtonCommand="{Binding LogoutCommand}"
-                                 Margin="0,17,0,13"/>
+                                 Margin="0,16,0,12"/>
+
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
         <Grid RowDefinitions="75*,25*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
