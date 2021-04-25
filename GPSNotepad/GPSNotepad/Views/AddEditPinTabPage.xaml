@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             xmlns:converters="clr-namespace:GPSNotepad.Converters"
+             prism:ViewModelLocator.AutowireViewModel="False"
+             x:Class="GPSNotepad.Views.AddEditPinTabPage"
+             Style="{DynamicResource pageStyle}"
+             Title="{Binding TextResources[AddEditPinTitle]}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:MapClickedEventArgsConverter x:Key="mapClickedEventArgsConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="icon_save.png" Command="{Binding AddEditPinCommand}"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <controls:BindableMap x:Name="map" PinsSource="{Binding Pins}" MapSpan="{Binding Span}" >
+            <controls:BindableMap.Behaviors>
+                <prism:EventToCommandBehavior EventName="MapClicked" 
+                                              Command="{Binding OnMapClickedCommand}" 
+                                              EventArgsConverter="{x:StaticResource mapClickedEventArgsConverter}"/>
+                <prism:EventToCommandBehavior EventName="MapLoaded" Command="{Binding OnMapLoadedCommand}"/>
+            </controls:BindableMap.Behaviors>
+        </controls:BindableMap>
+        <Entry Placeholder="{Binding TextResources[Name]}" 
+               Text="{Binding Name}" 
+               Style="{DynamicResource entryStyle}"/>
+        <Entry Placeholder="{Binding TextResources[Description]}"
+               Text="{Binding Description}" 
+               Style="{DynamicResource entryStyle}"/>
+        <Entry Placeholder="0,0N 0,0E or 0S 0W"
+               Text="{Binding TextCoordinates}"
+               Style="{DynamicResource entryStyle}"/>
+    </StackLayout>
+</ContentPage>

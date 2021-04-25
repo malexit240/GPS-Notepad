@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+                    x:Class="GPSNotepad.Styles.Styles">
+    <Style x:Key="pageStyle" 
+               TargetType="NavigationPage">
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}" />
+        <Setter Property="BarBackgroundColor" Value="{DynamicResource NavigationBarColor}"/>
+    </Style>
+
+    <Style x:Key="labelStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="labelDetailStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="HorizontalOptions"
+                    Value="CenterAndExpand"/>
+    </Style>
+
+    <Style x:Key="labelLinkStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="TextDecorations"
+                    Value="Underline"/>
+        <Setter Property="HorizontalOptions"
+                    Value="Center"/>
+    </Style>
+
+    <Style x:Key="buttonStyle"
+               TargetType="Button">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+    <Style x:Key="entryStyle"
+               TargetType="Entry">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="editorStyle"
+               TargetType="Entry">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource SecondaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="radioButtonStyle" TargetType="input:RadioButton">
+        <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="TextFontSize" Value="14"/>
+        <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="CircleColor" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+    <Style x:Key="floatButtonStyle"
+               TargetType="Button">
+        <Setter Property="VerticalOptions"
+                    Value="End"/>
+        <Setter Property="HorizontalOptions"
+                    Value="End"/>
+        <Setter Property="WidthRequest"
+                    Value="64"/>
+        <Setter Property="HeightRequest"
+                    Value="64"/>
+        <Setter Property="CornerRadius"
+                    Value="40"/>
+        <Setter Property="Margin"
+                    Value="0,0,32,32"/>
+        <Setter Property="BorderWidth"
+                    Value="8"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="BorderColor"
+                    Value="{DynamicResource PrimaryColor}"/>
+    </Style>
+
+
+    <Style x:Key="switchStyle" TargetType="Switch">
+        <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+    <Style x:Key="activityIndicatorStyle" TargetType="ActivityIndicator">
+        <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+    <Style x:Key="detailViewStyle" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="dropDownStyle" TargetType="StackLayout">
+        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
+    </Style>
+
+    <Style x:Key="stripStyle" TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="Opacity" Value="0.3"/>
+        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+        <Setter Property="HeightRequest" Value="1"/>
+    </Style>
+
+</ResourceDictionary>

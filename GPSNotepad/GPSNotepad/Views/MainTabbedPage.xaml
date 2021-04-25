@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:NavigableTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:local="clr-namespace:GPSNotepad.Views"
+            xmlns:prism="http://prismlibrary.com"
+            xmlns:controls="clr-namespace:GPSNotepad.Controls"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            x:Class="GPSNotepad.Views.MainTabbedPage"
+            Title="{Binding TextResources[MainPageTitle]}"
+            Style="{DynamicResource pageStyle}">
+    <controls:NavigableTabbedPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_exit_to_app3x.png"
+            Command="{Binding LogoutCommand}"/>
+        <ToolbarItem IconImageSource="icon_scan_qr.png"
+            Command="{Binding ScanQRCommand}"/>
+        <ToolbarItem IconImageSource="icon_settings.png"
+            Command="{prism:NavigateTo 'SettingsPage'}"/>
+    </controls:NavigableTabbedPage.ToolbarItems>
+
+    <local:MainMapTabPage Title="{Binding TextResources[MainMapPageTitle]}"/>
+    <local:PinsTabPage Title="{Binding TextResources[ListOfPinsPageTitle]}"/>
+</controls:NavigableTabbedPage>

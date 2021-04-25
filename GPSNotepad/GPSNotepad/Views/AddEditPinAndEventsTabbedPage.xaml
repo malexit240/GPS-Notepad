@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<controls:NavigableTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GPSNotepad.Views"
+             xmlns:controls="clr-namespace:GPSNotepad.Controls"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="GPSNotepad.Views.AddEditPinAndEventsTabbedPage"
+             Title="{Binding TextResources[AddEditPinTitle]}"
+             Style="{DynamicResource pageStyle}">
+    <local:AddEditPinTabPage Title="{Binding TextResources[Pin]}"/>
+    <local:PinEventsListTabPage Title="{Binding TextResources[Events]}"/>
+</controls:NavigableTabbedPage>
