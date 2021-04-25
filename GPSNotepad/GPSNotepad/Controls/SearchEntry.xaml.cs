@@ -46,14 +46,16 @@ namespace GPSNotepad.Controls
             SearchText = e.NewTextValue;
         }
 
-        private void SearchEntry_Unfocused(object sender, FocusEventArgs e)
+        private async void SearchEntry_Unfocused(object sender, FocusEventArgs e)
         {
+            await clearButton.ScaleTo(0);
             clearButton.IsVisible = false;
         }
 
-        private void SearchEntry_Focused(object sender, FocusEventArgs e)
+        private async void SearchEntry_Focused(object sender, FocusEventArgs e)
         {
             clearButton.IsVisible = true;
+            await clearButton.ScaleTo(1);
         }
 
 

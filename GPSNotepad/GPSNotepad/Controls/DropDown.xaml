@@ -2,17 +2,11 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             x:Class="GPSNotepad.Controls.DropDown"
-             HorizontalOptions="FillAndExpand"
-             VerticalOptions="Start">
-    <ListView x:Name="listView"
-              VerticalOptions="Start"
-              HasUnevenRows="True"
-              ItemTapped="OnListViewItemTapped"
-              SeparatorVisibility="None">
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
+             x:Class="GPSNotepad.Controls.DropDown">
+    <ScrollView x:Name="scrollView">
+        <StackLayout x:Name="stackLayout">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
                     <StackLayout BackgroundColor="Transparent" Padding="0">
                         <BoxView HeightRequest="2"  Color="#F1F3FD" HorizontalOptions="FillAndExpand"/>
                         <Grid ColumnDefinitions="15*,85*" Padding="0,12,0,12" Margin="0">
@@ -23,8 +17,8 @@
                             </StackLayout>
                         </Grid>
                     </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>
+    </ScrollView>
 </StackLayout>

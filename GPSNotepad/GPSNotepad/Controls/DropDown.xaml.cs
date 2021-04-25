@@ -11,6 +11,58 @@ namespace GPSNotepad.Controls
         public DropDown()
         {
             InitializeComponent();
+            this.PropertyChanged += DropDown_PropertyChanged;
+        }
+
+        private void DropDown_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(IsVisible) && IsVisible)
+            {
+
+            }
+        }
+
+        public new bool IsVisible
+        {
+            get => (bool)GetValue(IsVisibleProperty);
+            set => SetValue(IsVisibleProperty, value);
+        }
+
+        public static new BindableProperty IsVisibleProperty = BindableProperty.Create(nameof(IsVisible),
+            typeof(bool),
+            typeof(DropDown),
+            coerceValue: OnCoerceValue);
+
+        private static object OnCoerceValue(BindableObject bindable, object value)
+        {
+            var view = bindable as DropDown;
+
+            view.AnimateVisibility((bool)value);
+
+            return value;
+        }
+
+        private async void AnimateVisibility(bool visibility)
+        {
+            if (visibility == true)
+            {
+                base.IsVisible = visibility;
+                await this.TranslateTo(0, 0);
+                double height = 0;
+
+                for (int i = 0; i < 2 && i < stackLayout.Children.Count; i++)
+                {
+                    height += stackLayout.Children[i].Height;
+                }
+
+                scrollView.HeightRequest = height > 0 ? height : 200;
+            }
+            else
+            {
+                await this.TranslateTo(0, -Height);
+                base.IsVisible = visibility;
+            }
+
         }
 
         public ObservableCollection<PinViewModel> PinsSource
@@ -43,7 +95,7 @@ namespace GPSNotepad.Controls
 
             if (dropDown != null && source != null)
             {
-                dropDown.listView.ItemsSource = source;
+                BindableLayout.SetItemsSource(dropDown.stackLayout, source);
             }
         }
 

@@ -5,20 +5,20 @@
              x:Class="GPSNotepad.Controls.SearchEntry"
              Orientation="Horizontal" BackgroundColor="{DynamicResource Variant}">
     <Entry x:Name="searchEntry"
-           HorizontalOptions="FillAndExpand"
            Placeholder="Search" 
-           Style="{DynamicResource entryStyle}">
+           Style="{DynamicResource entryStyle}"
+           HorizontalOptions="FillAndExpand"
+           Margin="0">
         <Entry.Behaviors>
             <prism:EventToCommandBehavior EventName="Focused" Command="{Binding OnSearchFieldFocused}"/>
             <prism:EventToCommandBehavior EventName="Unfocused" Command="{Binding OnSearchFieldUnfocused}"/>
         </Entry.Behaviors>
     </Entry>
-    <Button  x:Name="clearButton"
+    <ImageButton  x:Name="clearButton"
              HorizontalOptions="End"
-             VerticalOptions="Center"
-             Margin="0" Padding="0"
+             Margin="0"
              CornerRadius="0" 
-             ImageSource="ic_clear.png"
+             Source="ic_clear.png"
              BackgroundColor="Transparent"
              Clicked="ClearButtonClicked"
              IsVisible="False"/>

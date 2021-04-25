@@ -12,17 +12,8 @@
             <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-
-        <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
-                                 SearchText="{Binding SearchField}" 
-                                 SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
-                                 LogoutButtonCommand="{Binding LogoutCommand}"
-                                 Margin="0,16,0,12"/>
-
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-
-        <Grid RowDefinitions="75*,25*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+    <Grid RowDefinitions="Auto,*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <Grid Grid.Row="1" RowDefinitions="75*,25*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
             <StackLayout Grid.Row="0" Grid.RowSpan="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                 <controls:BindableMap
@@ -39,8 +30,9 @@
                 </controls:BindableMap>
             </StackLayout>
 
-            <controls:DropDown Grid.Row="0" 
-                               HeightRequest="150" 
+            <controls:DropDown Grid.Row="0" Grid.RowSpan="2"
+                               VerticalOptions="Start"
+                               HorizontalOptions="FillAndExpand"
                                IsVisible="{Binding IsDropDownPinsVisible}" 
                                PinsSource="{Binding Pins}"
                                PinTappedCommand="{Binding PinTappedCommand}"
@@ -50,7 +42,7 @@
                          VerticalOptions="End"
                          HorizontalOptions="FillAndExpand"
                          IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}"
-                         BackgroundColor="White"
+                         BackgroundColor="#FEFEFD"
                          Padding="12">
                 <Label FontSize="20" TextColor="{DynamicResource System_Black}" Text="{Binding Path=SelectedPin.Name}"/>
                 <Label  FontSize="16" TextColor="{DynamicResource System_DarkGray}" Text="{Binding Path=SelectedPin.FormatedPosition}"/>
@@ -65,5 +57,16 @@
                 Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>
         </Grid>
 
-    </StackLayout>
+        <StackLayout Grid.Row="0" BackgroundColor="{DynamicResource PageBackgroundColor}">
+            <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
+                                 SearchText="{Binding SearchField}" 
+                                 SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
+                                 LogoutButtonCommand="{Binding LogoutCommand}"
+                                 Margin="0,16,0,12"/>
+            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+        </StackLayout>
+
+
+
+    </Grid>
 </ContentPage>

@@ -49,20 +49,29 @@ namespace GPSNotepad.Controls
             typeof(ICommand),
             typeof(MainPageNavBar));
 
-        public ICommand OnSearchFieldFocused => new DelegateCommand(() =>
+
+
+        public ICommand OnSearchFieldFocused => new DelegateCommand(async () =>
         {
-            this.logoutButton.IsVisible = false;
             this.CancelButton.IsVisible = true;
             this.SettingsButton.IsVisible = false;
             IsFoccused = true;
+            searchField.LayoutTo(new Rectangle(searchField.X, searchField.Y, searchField.Width + logoutButton.Width * 1.05, searchField.Height));
+            await logoutButton.ScaleTo(0);
         });
-        public ICommand OnSearchFieldUnfocused => new DelegateCommand(() =>
-        {
-            this.logoutButton.IsVisible = true;
-            this.CancelButton.IsVisible = false;
-            this.SettingsButton.IsVisible = true;
-            IsFoccused = false;
-        });
+
+
+
+        public ICommand OnSearchFieldUnfocused => new DelegateCommand(async () =>
+       {
+           this.CancelButton.IsVisible = false;
+           this.SettingsButton.IsVisible = true;
+
+           IsFoccused = false;
+           logoutButton.ScaleTo(1);
+           await searchField.LayoutTo(new Rectangle(searchField.X, searchField.Y, searchField.Width - logoutButton.Width * 1.05, searchField.Height));
+
+       });
 
         public string SearchText
         {

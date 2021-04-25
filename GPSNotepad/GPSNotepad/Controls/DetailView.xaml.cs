@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace GPSNotepad.Controls
 {
@@ -13,7 +6,6 @@ namespace GPSNotepad.Controls
     {
         public DetailView()
         {
-            //InitializeComponent();
         }
 
         public new bool IsVisible
@@ -25,20 +17,28 @@ namespace GPSNotepad.Controls
         public static new BindableProperty IsVisibleProperty = BindableProperty.Create(nameof(IsVisible),
             typeof(bool),
             typeof(DetailView),
-            propertyChanged: OnIsVisiblePropertyChanged);
+            coerceValue: OnCoerceValue);
 
-        private static void OnIsVisiblePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        private static object OnCoerceValue(BindableObject bindable, object value)
         {
             var view = bindable as DetailView;
-            var value = (bool)newValue;
 
-            if (value)
+            view.AnimateVisibility((bool)value);
+
+            return value;
+        }
+
+        private async void AnimateVisibility(bool visibility)
+        {
+            if (visibility == true)
             {
-                view.ScaleYTo(1, 100);
+                base.IsVisible = visibility;
+                await this.TranslateTo(0, 0);
             }
             else
             {
-                view.ScaleYTo(0, 100);
+                await this.TranslateTo(0, Height);
+                base.IsVisible = visibility;
             }
 
 
