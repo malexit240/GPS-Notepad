@@ -25,25 +25,37 @@
                                           Source={x:Reference page}}"/>
                             </ViewCell.ContextActions>
                             <StackLayout HorizontalOptions="FillAndExpand"
-                                         Padding="5,15,5,5">
-                                <StackLayout HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding Description}"
-                                           FontSize="16"
-                                       HorizontalOptions="StartAndExpand"
-                                       Style="{DynamicResource labelStyle}"/>
-                                    <StackLayout HorizontalOptions="StartAndExpand"
-                                             Orientation="Horizontal">
-                                        <Label Text="{Binding DateString}"
-                                               Style="{DynamicResource labelDetailStyle}"
-                                               FontSize="12"/>
-                                        <Label Text="{Binding TimeString}"
-                                               Style="{DynamicResource labelDetailStyle}"
-                                               FontSize="12"/>
-                                    </StackLayout>
-                                </StackLayout>
-                                <BoxView Style="{DynamicResource stripStyle}"/>
-                            </StackLayout>
+                                         Padding="12,0,12,0">
+                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+                                <Grid ColumnDefinitions="*,40"
+                                      Padding="0,12,0,12">
 
+                                    <StackLayout Grid.Column="0" 
+                                                 HorizontalOptions="FillAndExpand"
+                                                 VerticalOptions="CenterAndExpand">
+                                        
+                                        <Label Text="{Binding Description}"
+                                               FontSize="16"
+                                               HorizontalOptions="StartAndExpand"
+                                               Style="{DynamicResource labelStyle}"/>
+                                        
+                                        <StackLayout HorizontalOptions="StartAndExpand"
+                                             Orientation="Horizontal">
+                                            <Label Text="{Binding DateString}"
+                                               Style="{DynamicResource labelDetailStyle}"
+                                               FontSize="12"/>
+                                            <Label Text="{Binding TimeString}"
+                                               Style="{DynamicResource labelDetailStyle}"
+                                               FontSize="12"/>
+                                        </StackLayout>
+                                    </StackLayout>
+                                    <Image Grid.Column="1"
+                                           Source="ic_left_gray.png"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="FillAndExpand"/>
+                                </Grid>
+                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

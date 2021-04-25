@@ -44,24 +44,37 @@
                                 <MenuItem Command="{Binding DeletePinContextCommand}" 
                                           IconImageSource="ic_delete"/>
                             </ViewCell.ContextActions>
-                            <StackLayout Padding="5,0,5,15">
-
-                                <Grid ColumnDefinitions="60,*" HeightRequest="60">
+                            <StackLayout Padding="12,0,12,0">
+                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+                                <Grid ColumnDefinitions="50,*,40"
+                                      Padding="0,12,0,12">
                                     <controls:ImageCheckBox Grid.Column="0"
-                                                            Margin="10"
                                                             CheckedImageSource="ic_like_blue.png" 
                                                             UncheckedImageSource="ic_like_gray.png" 
                                                             IsChecked="{Binding Favorite}"
-                                                            BackgroundColor="{DynamicResource Variant}"/>
-                                    <StackLayout Grid.Column="1">
+                                                            BackgroundColor="{DynamicResource Variant}"
+                                                            VerticalOptions="CenterAndExpand"
+                                                            HorizontalOptions="CenterAndExpand"
+                                                            HeightRequest="40"
+                                                            WidthRequest="40"
+                                                            Padding="2"
+                                                            CornerRadius="6"/>
+
+                                    <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                         <Label Text="{Binding Name}"
                                        Style="{DynamicResource labelStyle}"/>
-                                        <Label Text="{Binding Description}"
+                                        <Label Text="{Binding FormatedPosition}"
                                        Style="{DynamicResource labelStyle}"/>
                                     </StackLayout>
 
+                                    <Image Grid.Column="2" 
+                                           BackgroundColor="Transparent"
+                                           Source="ic_left_gray.png"
+                                           VerticalOptions="Center"
+                                           HorizontalOptions="FillAndExpand"/>
+
                                 </Grid>
-                                <BoxView Style="{DynamicResource stripStyle}"/>
+                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
@@ -70,8 +83,7 @@
         </StackLayout>
         <Button Grid.Row="0" 
                 ImageSource="ic_plus.png"
-                Style="{DynamicResource floatButtonStyle}"
-                BackgroundColor="#596EFB"
+                Style="{DynamicResource floatButtonAccentStyle}"
                 Command="{Binding GoToAddPinFormCommand}"/>
     </Grid>
 </ContentPage>
