@@ -10,7 +10,8 @@ namespace GPSNotepad.ViewModels
         #region ---Constructors---
         public AddEditPlaceEventViewModel(INavigationService navigationService) : base(navigationService)
         {
-
+            _time = DateTime.Now.TimeOfDay;
+            _date = DateTime.Now.Date;
         }
         #endregion
 
@@ -29,7 +30,7 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _date, value);
         }
 
-        private string _description;
+        private string _description = "";
         public string Description
         {
             get => _description;

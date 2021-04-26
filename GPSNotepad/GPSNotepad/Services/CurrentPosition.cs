@@ -7,7 +7,7 @@ namespace GPSNotepad.Model
 {
     public static class CurrentPosition
     {
-        #region ---Public Static Message---
+        #region ---Public Static Properties---
         public static Position LastChecked { get; private set; } = new Position();
         #endregion
 
@@ -19,7 +19,10 @@ namespace GPSNotepad.Model
             await App.Current.Container.Resolve<IPermissionManager>().RunWithPermission<Permissions.LocationWhenInUse>(async () =>
             {
                 var location = await Geolocation.GetLastKnownLocationAsync();
-                position = new Position(location.Latitude, location.Longitude);
+                if (location != null)
+                {
+                    position = new Position(location.Latitude, location.Longitude);
+                }
 
                 LastChecked = position;
             });

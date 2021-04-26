@@ -6,11 +6,12 @@ using Xamarin.Forms;
 using GPSNotepad.Services.Authentication;
 using GPSNotepad.Services.Authorization;
 using GPSNotepad.Services.Settings;
-using GPSNotepad.Services.SecureStorageService;
 using GPSNotepad.Services.PinService;
 using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Services.PlaceEventsService;
 using GPSNotepad.Services.PermissionManager;
+using GPSNotepad.Services.NotificationService;
+using Xamarin.Essentials;
 
 namespace GPSNotepad
 {
@@ -19,33 +20,34 @@ namespace GPSNotepad
         public App(IPlatformInitializer initializer) : base(initializer)
         { }
 
-        protected override void OnInitialized()
+        protected override async void OnInitialized()
         {
             InitializeComponent();
 
             var NotificationJobManager = new NotificationJobManager();
 
-            Container.Resolve<ISettingsManagerService>().Init();
+            var settingsManger = Container.Resolve<ISettingsManagerService>();
+
+            settingsManger.Init();
 
             var authorizationService = Container.Resolve<IAuthorizationService>();
             var authenticationService = Container.Resolve<IAuthenticationService>();
-            var secureStorage = Container.Resolve<ISecureStorageService>();
 
-            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(secureStorage.SessionToken))
+
+            if (authorizationService.IsAuthorized && authenticationService.ContinueSession(settingsManger.SessionToken))
             {
-                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
 
             }
             else
             {
-                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
             }
 
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterInstance<ISecureStorageService>(Container.Resolve<SecureStorageService>());
             containerRegistry.RegisterInstance<ISettingsManagerService>(Container.Resolve<SettingsManagerService>());
 
             containerRegistry.RegisterInstance<IAuthorizationService>(Container.Resolve<AuthorizationService>());

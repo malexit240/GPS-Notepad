@@ -10,10 +10,12 @@ namespace GPSNotepad.Droid
     public class SplashActivity : AppCompatActivity
     {
         // Launches the startup task
+        #region ---Overrides---
         protected override void OnResume()
         {
             base.OnResume();
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
+        #endregion
     }
 }

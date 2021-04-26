@@ -8,11 +8,12 @@ namespace GPSNotepad.Droid
 {
     public class GPSShinyStartup : ShinyStartup
     {
-        public override void ConfigureServices(IServiceCollection builder)
+
+        public override void ConfigureServices(IServiceCollection services, IPlatform platform)
         {
-            builder.UseNotifications();
-            builder.RegisterJob(new JobInfo(typeof(GPSNotepad.NotificationJob)) { RunOnForeground = true });
-            builder.UseJobForegroundService(TimeSpan.FromMinutes(1));
+            services.UseNotifications();
+            services.RegisterJob(new JobInfo(typeof(GPSNotepad.NotificationJob)) { RunOnForeground = true });
+            services.UseJobForegroundService(TimeSpan.FromMinutes(1));
         }
     }
 

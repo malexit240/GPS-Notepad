@@ -11,6 +11,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             Style="{DynamicResource tabbedPageStyle}"
             NavigationPage.HasNavigationBar="False">
+    
     <local:MainMapTabPage IconImageSource="ic_map.png" Title="Map"/>
     <local:PinsTabPage IconImageSource="ic_pin.png" Title="Pins"/>
 </controls:NavigableTabbedPage>

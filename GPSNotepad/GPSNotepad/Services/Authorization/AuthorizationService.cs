@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GPSNotepad.Repositories;
-using GPSNotepad.Services.SecureStorageService;
+using GPSNotepad.Services.Settings;
 
 namespace GPSNotepad.Services.Authorization
 {
@@ -15,16 +15,16 @@ namespace GPSNotepad.Services.Authorization
         #region ---Constructors---
         public AuthorizationService()
         {
-            this.SecureStorageService = App.Current.Container.Resolve<ISecureStorageService>();
+            this.SettingsManager = App.Current.Container.Resolve<ISettingsManagerService>();
         }
         #endregion
 
         #region ---Protected Properties---
-        protected ISecureStorageService SecureStorageService { get; set; }
+        protected ISettingsManagerService SettingsManager { get; set; }
         #endregion
 
         #region ---Public Properties---
-        public bool IsAuthorized => SecureStorageService.SessionToken != Guid.Empty.ToString();
+        public bool IsAuthorized => SettingsManager.SessionToken != Guid.Empty.ToString();
         #endregion
 
         #region ---IAuthorizatorService Implementation---
@@ -44,7 +44,7 @@ namespace GPSNotepad.Services.Authorization
         public void LogOut()
         {
             _userId = Guid.Empty;
-            SecureStorageService.SessionToken = Guid.Empty.ToString();
+            SettingsManager.SessionToken = Guid.Empty.ToString();
         }
         #endregion
     }

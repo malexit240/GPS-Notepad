@@ -29,7 +29,7 @@ namespace GPSNotepad.Services.PinService
         protected IPlaceEventsService PlaceEventService { get; set; }
         #endregion
 
-        #region ---IPermanentPinService Implementation---
+        #region ---IPinService Implementation---
         public async Task<bool> Create(Pin pin)
         {
             PinState.Create(pin);

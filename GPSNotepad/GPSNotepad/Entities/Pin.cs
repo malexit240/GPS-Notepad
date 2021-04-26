@@ -7,7 +7,7 @@ namespace GPSNotepad.Entities
 {
     public class Pin : IEntityBase
     {
-        #region ---Model Fileds---
+        #region ---Public Properties---
         public Guid PinId { get; set; }
 
         public Guid UserId { get; set; }
@@ -51,12 +51,9 @@ namespace GPSNotepad.Entities
         public override int GetHashCode() => HashCode.Combine(Id);
         public override bool Equals(object obj)
         {
-            if (!(obj is IEntityBase))
-                return false;
-
             var pin = (IEntityBase)obj;
 
-            return this.PinId == pin.Id;
+            return this.PinId == pin?.Id;
         }
         #endregion
 

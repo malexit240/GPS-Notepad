@@ -12,12 +12,6 @@ namespace GPSNotepad.Controls
 {
     public class BindableMap : ClusteredMap
     {
-        #region ---Private Fields---
-        private bool _isMapLoading;
-
-        private bool _isIdle;
-        #endregion
-
         #region ---Constructors---
         public BindableMap()
         {
@@ -38,6 +32,12 @@ namespace GPSNotepad.Controls
             this.CameraIdled -= OnCameraIdled;
             this.CameraMoving -= OnCameraMoving;
         }
+        #endregion
+
+        #region ---Private Fields---
+        private bool _isMapLoading;
+
+        private bool _isIdle;
         #endregion
 
         #region ---Source Properties---

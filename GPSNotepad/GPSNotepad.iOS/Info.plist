@@ -10,8 +10,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -36,5 +34,29 @@
 	<string>1.0</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1</string>
+  <key>UIBackgroundModes</key>
+  <array>
+    <string>audio</string>
+    <string>location</string>
+    <string>external-accessory</string>
+    <string>bluetooth-central</string>
+    <string>bluetooth-peripheral</string>
+    <string>fetch</string>
+    <string>remote-notification</string>
+    <string>processing</string>
+  </array>
+  <key>BGTaskSchedulerPermittedIdentifiers</key>
+  <array>
+    <string>com.shiny.job</string>
+    <string>com.shiny.jobpower</string>
+    <string>com.shiny.jobnet</string>
+    <string>com.shiny.jobpowernet</string>
+  </array>
+  <key>NSLocationAlwaysUsageDescription</key>
+  <string>The beacons or geofences or GPS always have you!</string>
+  <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+  <string>The beacons or geofences or GPS always have you!</string>
+  <key>NSLocationWhenInUseUsageDescription</key>
+  <string>The beacons or geofences or GPS always have you!</string>
 </dict>
 </plist>

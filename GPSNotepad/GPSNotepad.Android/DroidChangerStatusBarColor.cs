@@ -20,11 +20,15 @@ namespace GPSNotepad.Droid
 
     class DroidChangerStatusBarColor : IChangerBarColor
     {
+        #region ---Public Methods---
         public void SetBarColor(Color color)
         {
-            CrossCurrentActivity.Current?.Activity?.Window?.SetStatusBarColor(Android.Graphics.Color.ParseColor(color.ToHex()));
-            CrossCurrentActivity.Current?.Activity?.Window?.SetNavigationBarColor(Android.Graphics.Color.ParseColor(color.ToHex()));
+            var newColor = Android.Graphics.Color.ParseColor(color.ToHex());
+
+            CrossCurrentActivity.Current?.Activity?.Window?.SetStatusBarColor(newColor);
+            CrossCurrentActivity.Current?.Activity?.Window?.SetNavigationBarColor(newColor);
         }
+        #endregion
 
     }
 }

@@ -8,21 +8,13 @@ namespace GPSNotepad
         #region ---Public Static Methods---
         public static FutureNotification Create(string pinName, string notificationText, DateTime TimeToNotify)
         {
-            return Create(new FutureNotification()
+            return new FutureNotification()
             {
                 Id = new Random().Next(),
                 NotificationTitle = pinName,
                 NotificationText = notificationText,
                 TimeToNotify = TimeToNotify
-            });
-        }
-
-        public static FutureNotification Create(FutureNotification note)
-        {
-            NotificationJob.NotificationsShedulde.Add(note);
-            NotificationJob.NotificationsShedulde.Sort(new Comparer());
-
-            return note;
+            };
         }
         #endregion
 
@@ -39,7 +31,7 @@ namespace GPSNotepad
         #endregion
 
         #region ---Internal Classes---
-        class Comparer : IComparer<FutureNotification>
+        public class Comparer : IComparer<FutureNotification>
         {
             public int Compare(FutureNotification x, FutureNotification y)
             {

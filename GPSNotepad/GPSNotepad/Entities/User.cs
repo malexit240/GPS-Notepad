@@ -5,7 +5,7 @@ namespace GPSNotepad.Entities
 {
     public class User
     {
-        #region ---Model Fields---
+        #region ---Public Properties---
         public Guid UserId { get; set; }
 
         public string Email { get; set; }

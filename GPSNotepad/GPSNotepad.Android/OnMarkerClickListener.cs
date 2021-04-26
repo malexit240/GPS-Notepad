@@ -10,27 +10,35 @@ namespace GPSNotepad.Droid
 {
     public class OnMarkerClickListener : Java.Lang.Object, IOnMarkerClickListener
     {
-        GoogleMap NativeMap { get; set; }
-        BindableMap Map { get; set; }
+        #region ---Private Fields---
+        private GoogleMap NativeMap;
+        private BindableMap Map;
+        #endregion
 
+        #region ---Constructors---
         public OnMarkerClickListener(GoogleMap nativeMap, BindableMap map) : base()
         {
             NativeMap = nativeMap;
             Map = map;
         }
+        #endregion
 
+        #region ---IOnMarkerClickListnerImpleentation---
         public bool OnMarkerClick(Marker marker)
         {
-            if (Map.ShowInfoWindow)
-                return false;
-
-            Map.RaiseShowDetaiPinView(new Pin()
+            bool result = false;
+            if (!Map.ShowInfoWindow)
             {
-                Label = marker.Title
-            });
+                Map.RaiseShowDetaiPinView(new Pin()
+                {
+                    Label = marker.Title
+                });
+                result = true;
+            }
 
-            return true;
+            return result;
         }
+        #endregion
     }
 }
 

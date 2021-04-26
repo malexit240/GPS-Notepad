@@ -1,6 +1,7 @@
 ﻿using GPSNotepad.PlatformDependencyInterfaces;
 using GPSNotepad.Resources;
 using GPSNotepad.Styles;
+using System;
 using System.Globalization;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -34,6 +35,12 @@ namespace GPSNotepad.Services.Settings
         {
             get => Preferences.Get(nameof(IsAuthorized), false);
             set => Preferences.Set(nameof(IsAuthorized), value);
+        }
+
+        public string SessionToken
+        {
+            get => Preferences.Get(nameof(SessionToken), Guid.Empty.ToString());
+            set => Preferences.Set(nameof(SessionToken), value);
         }
         #endregion
 

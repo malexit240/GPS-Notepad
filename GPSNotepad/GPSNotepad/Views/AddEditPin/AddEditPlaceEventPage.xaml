@@ -7,6 +7,14 @@
              x:Class="GPSNotepad.Views.AddEditPlaceEventPage"
              Title="{Binding TextResources[AddEditPlaceEventTitle]}"
              Style="{DynamicResource pageStyle}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
+            </OnPlatform.iOS>
+        </OnPlatform>
+    </ContentPage.Padding>
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
     </ContentPage.ToolbarItems>

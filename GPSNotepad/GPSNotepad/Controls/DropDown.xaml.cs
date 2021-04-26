@@ -11,15 +11,6 @@ namespace GPSNotepad.Controls
         public DropDown()
         {
             InitializeComponent();
-            this.PropertyChanged += DropDown_PropertyChanged;
-        }
-
-        private void DropDown_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == nameof(IsVisible) && IsVisible)
-            {
-
-            }
         }
 
         public new bool IsVisible
@@ -99,9 +90,9 @@ namespace GPSNotepad.Controls
             }
         }
 
-        private void OnListViewItemTapped(object sender, ItemTappedEventArgs e)
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            PinTappedCommand?.Execute(e.Item);
+            PinTappedCommand?.Execute((sender as Grid).BindingContext);
         }
     }
 }

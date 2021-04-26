@@ -65,7 +65,7 @@ namespace GPSNotepad.Converters
             latitude *= Regex.IsMatch(coordinates[0].Value, @"[Ss]") ? -1 : 1;
             longitude *= Regex.IsMatch(coordinates[1].Value, @"[Ww]") ? -1 : 1;
 
-            return new Position(latitude, longitude).Rounded();
+            return new Position(latitude, longitude).Round();
         }
         #endregion
 

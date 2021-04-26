@@ -7,6 +7,13 @@
              x:Class="GPSNotepad.Views.PinsTabPage"
              x:Name="page"
              Style="{DynamicResource pageStyle}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
+            </OnPlatform.iOS>
+        </OnPlatform>
+    </ContentPage.Padding>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
@@ -81,7 +88,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
-        <Button Grid.Row="0" 
+        <Button Grid.Row="0"
                 ImageSource="ic_plus.png"
                 Style="{DynamicResource floatButtonAccentStyle}"
                 Command="{Binding GoToAddPinFormCommand}"/>

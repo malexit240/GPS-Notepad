@@ -70,8 +70,8 @@ namespace GPSNotepad.ViewModels
         private Position _position = new Position();
         public Position Position
         {
-            get => _position.Rounded();
-            set => SetProperty(ref _position, value.Rounded());
+            get => _position.Round();
+            set => SetProperty(ref _position, value.Round());
         }
 
         public string FormatedPosition

@@ -8,21 +8,36 @@ namespace GPSNotepad.Droid
 {
     public sealed class CachingNativeBitmapDescriptorFactory : IBitmapDescriptorFactory
     {
-        private readonly ConcurrentDictionary<string, AndroidBitmapDescriptor> _cache
-            = new ConcurrentDictionary<string, AndroidBitmapDescriptor>();
+        #region ---Constructors---
+        public CachingNativeBitmapDescriptorFactory()
+        {
+            _cache = new ConcurrentDictionary<string, AndroidBitmapDescriptor>();
+        }
+        #endregion
 
+        #region ---Private Files---
+        private readonly ConcurrentDictionary<string, AndroidBitmapDescriptor> _cache;
+        #endregion
+
+        #region ---Public Methods---
         public AndroidBitmapDescriptor ToNative(BitmapDescriptor descriptor)
         {
             var defaultFactory = DefaultBitmapDescriptorFactory.Instance;
+            AndroidBitmapDescriptor result;
 
             if (!string.IsNullOrEmpty(descriptor.Id))
             {
-                var cacheEntry = _cache.GetOrAdd(descriptor.Id, _ => defaultFactory.ToNative(descriptor));
-                return cacheEntry;
+                result = _cache.GetOrAdd(descriptor.Id, _ => defaultFactory.ToNative(descriptor));
+
+            }
+            else
+            {
+                result = defaultFactory.ToNative(descriptor);
             }
 
-            return defaultFactory.ToNative(descriptor);
+            return result;
         }
+        #endregion
     }
 }
 

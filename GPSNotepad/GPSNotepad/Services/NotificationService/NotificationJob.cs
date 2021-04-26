@@ -14,6 +14,29 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GPSNotepad
 {
+    public static class NotificationLoader
+    {
+        public static List<Pin> GetAllPins()
+        {
+            var token = Preferences.Get("SessionToken", Guid.Empty.ToString());
+
+            User user;
+            List<Pin> pins = null;
+            List<PlaceEvent> events = new List<PlaceEvent>();
+
+            using var context = new Context();
+
+            user = context.Users.Select(u => u).Where(u => u.SessionToken == token).FirstOrDefault();
+
+            if (user != null)
+            {
+                pins = context.Pins.Include(pin => pin.Events).Select(p => p).Where(p => p.UserId == user.UserId).ToList();
+            }
+
+            return pins;
+        }
+    }
+
     public class NotificationJob : IJob
     {
         public static List<FutureNotification> NotificationsShedulde = null;
@@ -22,22 +45,21 @@ namespace GPSNotepad
         protected static IJobManager JobManager { get; set; }
         protected static Notification Notification { get; set; }
 
-        protected static bool IsInitialize { get; set; } = false;
+        protected static bool IsInitialized { get; set; } = false;
 
         protected bool OnStart()
         {
-
             bool result = true;
-            IsInitialize = true;
+            IsInitialized = true;
 
             NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
-            JobManager = ShinyJobManager.Current;
+            JobManager = ShinyHost.Resolve<IJobManager>();
 
             Notification = new Notification();
 
             if (DeviceInfo.Platform == DevicePlatform.Android)
             {
-                Notification.Android.ChannelId = "8976";
+                Notification.Android.Category = "8976";
             }
 
             ReloadShedule();
@@ -49,37 +71,26 @@ namespace GPSNotepad
         {
             NotificationsShedulde = new List<FutureNotification>();
 
-            var token = SecureStorage.GetAsync("SessionToken").Result ?? Guid.Empty.ToString();
+            var pins = NotificationLoader.GetAllPins();
 
-            User user;
-            List<Pin> pins;
-            List<PlaceEvent> events = new List<PlaceEvent>();
-
-            using var context = new Context();
-
-            user = context.Users.Select(u => u).Where(u => u.SessionToken == token).FirstOrDefault();
-            if (user != null)
+            foreach (var pin in pins)
             {
-                pins = context.Pins.Include(pin => pin.Events).Select(p => p).Where(p => p.UserId == user.UserId).ToList();
-
-                foreach (var pin in pins)
+                foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
                 {
-                    foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
-                    {
-                        FutureNotification.Create(pin.Name, @event.Description, @event.Time);
-                    }
+                    NotificationsShedulde.Add(FutureNotification.Create(pin.Name, @event.Description, @event.Time));
                 }
+
+                NotificationsShedulde.Sort(new FutureNotification.Comparer());
             }
         }
 
-        public async Task<bool> Run(JobInfo jobInfo, CancellationToken cancelToken)
+        public async Task Run(JobInfo jobInfo, CancellationToken cancelToken)
         {
-            if (IsInitialize == false)
+            if (IsInitialized == false)
                 if (OnStart() != true)
-                    return true;
+                    return;
 
             var currentTime = DateTime.Now;
-
 
             var info = new JobInfo(typeof(NotificationJob))
             {
@@ -95,9 +106,7 @@ namespace GPSNotepad
                 }
             }
 
-            await JobManager.Schedule(info);
-
-            return true;
+            await JobManager.Register(info);
         }
 
         private async void FireNotification(FutureNotification futureNotification)

@@ -15,7 +15,7 @@ namespace GPSNotepad.Converters
             {
                 throw new ArgumentException("Expected value to be of type MapClickedEventArgs", nameof(value));
             }
-            return mapClickedEventArgs.Point.Rounded();
+            return mapClickedEventArgs.Point.Round();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

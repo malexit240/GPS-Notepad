@@ -84,6 +84,7 @@
     <Compile Include="CachingNativeBitmapDescriptorFactory.cs" />
     <Compile Include="CustomEntryRenderer.cs" />
     <Compile Include="DroidChangerStatusBarColor.cs" />
+    <Compile Include="GPSShinyStartup.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="OnMarkerClickListener.cs" />

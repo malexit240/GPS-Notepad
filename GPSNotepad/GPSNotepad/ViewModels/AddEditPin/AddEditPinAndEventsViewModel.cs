@@ -51,49 +51,49 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _name, value);
         }
 
-        private string _description;
+        private string _description = "";
         public string Description
         {
             get => _description;
             set => SetProperty(ref _description, value);
         }
 
-        private ObservableCollection<PlaceEventViewModel> _events;
+        private ObservableCollection<PlaceEventViewModel> _events = new ObservableCollection<PlaceEventViewModel>();
         public ObservableCollection<PlaceEventViewModel> Events
         {
             get => _events;
             set => SetProperty(ref _events, value);
         }
 
-        private MapSpan _span;
+        private MapSpan _span = new MapSpan(new Position(), 0.01, 0.01);
         public MapSpan Span
         {
             get => _span;
             set => SetProperty(ref _span, value);
         }
 
-        private string _latitude;
+        private string _latitude = "";
         public string Latitude
         {
             get => _latitude;
             set => SetProperty(ref _latitude, value);
         }
 
-        private string _longitude;
+        private string _longitude = "";
         public string Longitude
         {
             get => _longitude;
             set => SetProperty(ref _longitude, value);
         }
 
-        private bool _isLongitudeWrong;
+        private bool _isLongitudeWrong = false;
         public bool IsLongitudeWrong
         {
             get => _isLongitudeWrong;
             set => SetProperty(ref _isLongitudeWrong, value);
         }
 
-        private bool _isLatitudeWrong;
+        private bool _isLatitudeWrong = false;
         public bool IsLatitudeWrong
         {
             get => _isLatitudeWrong;
@@ -272,9 +272,9 @@ namespace GPSNotepad.ViewModels
 
         private void SetNewPinPosition(Position position, bool setForce = false)
         {
-            if (PinViewModel.Position.Rounded() != position.Rounded() || setForce == true)
+            if (PinViewModel.Position.Round() != position.Round() || setForce == true)
             {
-                PinViewModel.Position = position.Rounded();
+                PinViewModel.Position = position.Round();
                 Pins[0] = PinViewModel;
 
                 Latitude = PinViewModel.Position.Latitude.ToString();

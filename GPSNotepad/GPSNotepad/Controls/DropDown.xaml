@@ -2,18 +2,22 @@
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
-             x:Class="GPSNotepad.Controls.DropDown">
+             x:Class="GPSNotepad.Controls.DropDown"
+             x:Name="dropDown">
     <ScrollView x:Name="scrollView">
         <StackLayout x:Name="stackLayout">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
                     <StackLayout BackgroundColor="Transparent" Padding="0">
-                        <BoxView HeightRequest="2"  Color="#F1F3FD" HorizontalOptions="FillAndExpand"/>
+                        <BoxView Style="{DynamicResource boxSeparatorStyle}" HorizontalOptions="FillAndExpand"/>
                         <Grid ColumnDefinitions="15*,85*" Padding="0,12,0,12" Margin="0">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+                            </Grid.GestureRecognizers>
                             <Image Grid.Column="0" Margin="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="ic_pin_gray.png"/>
                             <StackLayout Grid.Column="1" Padding="0" Margin="0">
-                                <Label Text="{Binding Name}" BackgroundColor="Transparent"/>
-                                <Label Text="{Binding Description}" BackgroundColor="Transparent"/>
+                                <Label Style="{DynamicResource normalLabelStyle}" Text="{Binding Name}" BackgroundColor="Transparent"/>
+                                <Label Style="{DynamicResource normalLabelStyle}" Text="{Binding FormatedPosition}" BackgroundColor="Transparent"/>
                             </StackLayout>
                         </Grid>
                     </StackLayout>

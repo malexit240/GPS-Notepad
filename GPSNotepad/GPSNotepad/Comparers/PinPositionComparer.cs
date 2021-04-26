@@ -8,13 +8,13 @@ namespace GPSNotepad.Comparers
     {
 
         #region ---Private Fields---
-        private readonly Xamarin.Forms.GoogleMaps.Position ethalon;
+        private readonly Xamarin.Forms.GoogleMaps.Position _ethalon;
         #endregion
 
         #region ---Constructors---
         public PinPositionComparer(Xamarin.Forms.GoogleMaps.Position ethalon)
         {
-            this.ethalon = ethalon;
+            this._ethalon = ethalon;
         }
         #endregion
 
@@ -29,7 +29,7 @@ namespace GPSNotepad.Comparers
 
         public override double GetComparation(Pin item)
         {
-            return item.Position.CalculateDistance(ethalon);
+            return item.Position.CalculateDistance(_ethalon);
         }
         #endregion
     }

@@ -4,7 +4,7 @@
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
              x:Class="GPSNotepad.Controls.MainPageNavBar"
              HorizontalOptions="FillAndExpand"
-             Padding="12,0,12,0"
+             Margin="12,0,12,0"
              Orientation="Horizontal">
     <ImageButton x:Name="SettingsButton" 
                  Source="ic_settings.png" 

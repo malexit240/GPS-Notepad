@@ -228,7 +228,7 @@
         <Setter Property="HeightRequest"
                     Value="48"/>
         <Setter Property="CornerRadius"
-                    Value="40"/>
+                    Value="24"/>
         <Setter Property="Margin"
                     Value="0,0,16,18"/>
         <Setter Property="BorderWidth"
@@ -248,7 +248,7 @@
         <Setter Property="HeightRequest"
                     Value="48"/>
         <Setter Property="CornerRadius"
-                    Value="40"/>
+                    Value="24"/>
         <Setter Property="Margin"
                     Value="0,0,16,18"/>
         <Setter Property="BorderWidth"
@@ -265,6 +265,7 @@
 
     <Style x:Key="boxSeparatorStyle" TargetType="BoxView">
         <Setter Property="HeightRequest" Value="1"/>
+        <Setter Property="Margin" Value="0"/>
         <Setter Property="Color" Value="{DynamicResource Variant}"/>
     </Style>
 

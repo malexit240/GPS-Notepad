@@ -6,6 +6,14 @@
              x:Class="GPSNotepad.Views.StartPage"
              NavigationPage.HasNavigationBar="False"
              Style="{DynamicResource pageStyle}">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.iOS>
+                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
+            </OnPlatform.iOS>
+        </OnPlatform>
+    </ContentPage.Padding>
+    
     <ContentPage.Content>
         <StackLayout Padding="{DynamicResource FullIndent}">
             <Grid ColumnDefinitions="20*,60*,20*" VerticalOptions="CenterAndExpand" 

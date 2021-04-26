@@ -6,24 +6,33 @@ namespace GPSNotepad
 {
     public class Loger
     {
+        #region ---Public Static Properties---
         private static Loger _instance = null;
         public static Loger Instance => _instance ??= new Loger();
+        #endregion
 
-        protected INotificationManager NotificationManager { get; set; } = null;
-        protected Notification Notification { get; set; }
-
-        public Loger()
+        #region ---Constructors---
+        private Loger()
         {
             NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
 
             Notification = new Notification();
+            //Notification.Channel = Channel.Create();
             if (DeviceInfo.Platform == DevicePlatform.Android)
             {
-                Notification.Android.ChannelId = "8977";
+                Notification.Android.Category = "8977";
+
             }
         }
+        #endregion
 
-        public async void Log(string message)
+        #region ---Protected Fields---
+        protected INotificationManager NotificationManager;
+        protected Notification Notification;
+        #endregion
+
+        #region ---Public Methods---
+        public async void LogAsync(string message)
         {
             Notification.Title = "Loger";
             Notification.Message = message;
@@ -31,6 +40,7 @@ namespace GPSNotepad
 
             await NotificationManager.Send(Notification);
         }
+        #endregion
 
     }
 }
