@@ -1,13 +1,6 @@
 ﻿using Foundation;
-using Microsoft.Extensions.DependencyInjection;
-using ObjCRuntime;
-using Prism;
-using Prism.Ioc;
-using Shiny;
-using Shiny.Jobs;
 using System;
 using UIKit;
-using UserNotifications;
 
 namespace GPSNotepad.iOS
 {
@@ -16,8 +9,11 @@ namespace GPSNotepad.iOS
     {
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
+
             global::Xamarin.Forms.Forms.Init();
             Xamarin.FormsGoogleMaps.Init("AIzaSyD175Ytn104FswHwZ_W9GdaYHZ8OCVn_Ik");
+            ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
             LoadApplication(new App(new iOSInitializer()));
 

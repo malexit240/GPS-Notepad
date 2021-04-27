@@ -17,6 +17,7 @@ using GPSNotepad.Services.QRCodeService;
 using GPSNotepad.Comparers;
 using GPSNotepad.Enums;
 using System.ComponentModel;
+using Acr.UserDialogs;
 
 namespace GPSNotepad.ViewModels
 {
@@ -121,6 +122,12 @@ namespace GPSNotepad.ViewModels
             NavigationService.NavigateAsync(nameof(QRCodeModalPage), parameters, useModalNavigation: true, false);
         }
 
+        private ICommand _scanQrCommand;
+        public ICommand ScanQrCommand => _scanQrCommand ??= new DelegateCommand<string>((result) =>
+        {
+
+        });
+
 
         private ICommand _goToAddPinFormCommand = null;
         public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
@@ -160,8 +167,21 @@ namespace GPSNotepad.ViewModels
         public ICommand LogoutCommand => _logoutCommand ??= new DelegateCommand(LogoutCommandHandler);
         private void LogoutCommandHandler()
         {
-            AuthorizationService.LogOut();
-            this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+            UserDialogs.Instance.Confirm(new ConfirmConfig()
+            {
+                Message = "Logout?",
+                OkText = "Ok",
+                CancelText = "Cancel",
+                OnAction = async (confirm) =>
+                {
+                    if (confirm)
+                    {
+                        AuthorizationService.LogOut();
+                        await this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+                    }
+                }
+            });
+
         }
 
         private ICommand _goToSettingsPageCommand;

@@ -9,13 +9,17 @@ using Shiny;
 
 namespace GPSNotepad.Droid
 {
-    [Activity(Theme = "@style/MainTheme",
-              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
+    [Activity(Theme = "@style/MainTheme.Splash",
+              MainLauncher = true,
+              ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         #region ---Overrides---
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            this.SetTheme(Resource.Style.MainTheme);
+            Xamarin.Forms.Forms.SetFlags("SwipeView_Experimental");
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -38,6 +42,7 @@ namespace GPSNotepad.Droid
             this.ShinyOnCreate();
 
             LoadApplication(new App(null));
+
         }
 
         protected override void OnNewIntent(Intent intent)

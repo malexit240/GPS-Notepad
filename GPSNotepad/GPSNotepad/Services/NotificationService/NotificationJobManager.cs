@@ -20,32 +20,15 @@ namespace GPSNotepad.Services.NotificationService
         #endregion
 
         #region ---Public Methods---
-        public async void Reload()
+        public void Reload()
         {
-
             if (DeviceInfo.Platform == DevicePlatform.Android)
             {
                 NotificationJob.ReloadShedule();
             }
             else if (DeviceInfo.Platform == DevicePlatform.iOS)
             {
-                var id = App.Current.Container.Resolve<IAuthorizationService>().GetCurrenUserId();
-                var pins = await App.Current.Container.Resolve<IPinService>().GetAllPinsForUser(id);
-
-                var now = DateTime.Now;
-
-                var notification = new List<FutureNotification>();
-                foreach (var pin in pins)
-                {
-                    foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
-                    {
-                        notification.Add(FutureNotification.Create(pin.Name, @event.Description, @event.Time));
-                    }
-
-                    notification.Sort(new FutureNotification.Comparer());
-                }
-
-                DependencyService.Get<ILocalNotificationManager>().ScheduleLocalNotifications(notification);
+                Device.BeginInvokeOnMainThread(AddiOSNotifications);
             }
 
         }
@@ -64,5 +47,28 @@ namespace GPSNotepad.Services.NotificationService
             }
         }
         #endregion
+
+
+        private async void AddiOSNotifications()
+        {
+            var id = App.Current.Container.Resolve<IAuthorizationService>().GetCurrenUserId();
+            var pins = await App.Current.Container.Resolve<IPinService>().GetAllPinsForUser(id);
+
+            var now = DateTime.Now;
+
+            var notification = new List<FutureNotification>();
+            foreach (var pin in pins)
+            {
+                foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
+                {
+                    notification.Add(FutureNotification.Create(pin.Name, @event.Description, @event.Time));
+                }
+
+                notification.Sort(new FutureNotification.Comparer());
+            }
+
+            DependencyService.Get<ILocalNotificationManager>().ScheduleLocalNotifications(notification);
+        }
+
     }
 }

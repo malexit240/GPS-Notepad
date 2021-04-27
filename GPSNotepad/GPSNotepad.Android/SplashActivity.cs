@@ -4,18 +4,18 @@ using AndroidX.AppCompat.App;
 
 namespace GPSNotepad.Droid
 {
-    [Activity(Theme = "@style/MainTheme.Splash",
-              MainLauncher = true,
-              NoHistory = true)]
-    public class SplashActivity : AppCompatActivity
-    {
-        // Launches the startup task
-        #region ---Overrides---
-        protected override void OnResume()
-        {
-            base.OnResume();
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-        }
-        #endregion
-    }
+    //  [Activity(Theme = "@style/MainTheme.Splash",
+    //            MainLauncher = true,
+    //            NoHistory = true)]
+    //  public class SplashActivity : AppCompatActivity
+    //  {
+    //      // Launches the startup task
+    //      #region ---Overrides---
+    //      protected override void OnResume()
+    //      {
+    //          base.OnResume();
+    //          StartActivity(new Intent(Application.Context, typeof(MainActivity)));
+    //      }
+    //      #endregion
+    //  }
 }

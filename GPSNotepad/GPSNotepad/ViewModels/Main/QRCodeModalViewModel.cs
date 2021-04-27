@@ -1,13 +1,16 @@
-﻿using Prism.Navigation;
+﻿using Prism.Commands;
+using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace GPSNotepad.ViewModels
 {
     public class QRCodeModalViewModel : ViewModelBase
     {
         #region ---Constructors---
+
         public QRCodeModalViewModel(INavigationService navigationService) : base(navigationService) { }
         #endregion
 
@@ -18,7 +21,14 @@ namespace GPSNotepad.ViewModels
             get => _qRCodeValue;
             set => SetProperty(ref _qRCodeValue, value);
         }
+
         #endregion
+
+        private DelegateCommand _goBackCommand;
+        public ICommand GoBackCommand => _goBackCommand ??= new DelegateCommand(async () =>
+        {
+            await NavigationService.GoBackAsync(null, true, false);
+        });
 
         #region ---Overrides---
         public override void OnNavigatedTo(INavigationParameters parameters)

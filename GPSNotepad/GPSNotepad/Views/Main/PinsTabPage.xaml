@@ -26,31 +26,25 @@
                                  SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
                                  LogoutButtonCommand="{Binding LogoutCommand}"
                                  Margin="0,17,0,13"/>
-            <ListView  ItemsSource="{Binding Pins}" 
-                       HasUnevenRows="True"
-                       IsPullToRefreshEnabled="False"
-                       SelectionMode="None"
-                       SeparatorVisibility="None">
-                <ListView.Behaviors>
-                    <prism:EventToCommandBehavior EventName="ItemTapped"
-                                              Command="{Binding PinTappedCommand}"
-                                              EventArgsConverter="{x:StaticResource itemTappedEventArgsConverter}"/>
-                </ListView.Behaviors>
-                <ListView.ItemTemplate>
+            <StackLayout  BindableLayout.ItemsSource="{Binding Pins}">
+                <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
+                        <SwipeView>
+                            <SwipeView.RightItems>
+                                <SwipeItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
                                           Source={x:Reference page}}" 
                                           IconImageSource="ic_qr.png"
-                                          CommandParameter="{Binding Self}"/>
-                                <MenuItem Command="{Binding Path=BindingContext.EditPinContextCommand,
+                                          CommandParameter="{Binding Self}"
+                                           BackgroundColor="{DynamicResource SuccsessColor}"/>
+                                <SwipeItem Command="{Binding Path=BindingContext.EditPinContextCommand,
                                           Source={x:Reference page}}"
                                           CommandParameter="{Binding Self}"
-                                          IconImageSource="ic_edit.png"/>
-                                <MenuItem Command="{Binding DeletePinContextCommand}" 
+                                          IconImageSource="ic_edit.png"
+                                           BackgroundColor="{DynamicResource PrimaryColor}"/>
+                                <SwipeItem Command="{Binding DeletePinContextCommand}" 
+                                           BackgroundColor="{DynamicResource ErrorColor}"
                                           IconImageSource="ic_delete"/>
-                            </ViewCell.ContextActions>
+                            </SwipeView.RightItems>
                             <StackLayout Padding="12,0,12,0">
                                 <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
                                 <Grid ColumnDefinitions="50,*,40"
@@ -68,25 +62,35 @@
                                                             CornerRadius="6"/>
 
                                     <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Path=BindingContext.PinTappedCommand, Source={x:Reference page}}" CommandParameter="{Binding Self}"/>
+                                        </StackLayout.GestureRecognizers>
                                         <Label Text="{Binding Name}"
                                        Style="{DynamicResource labelStyle}"/>
                                         <Label Text="{Binding FormatedPosition}"
                                        Style="{DynamicResource labelStyle}"/>
                                     </StackLayout>
 
-                                    <Image Grid.Column="2" 
+                                    <ImageButton Grid.Column="2" 
                                            BackgroundColor="Transparent"
                                            Source="ic_left_gray.png"
+                                           Command="{Binding Path=BindingContext.EditPinContextCommand,
+                                           Source={x:Reference page}}"
+                                           CommandParameter="{Binding Self}"
                                            VerticalOptions="Center"
                                            HorizontalOptions="FillAndExpand"/>
 
                                 </Grid>
                                 <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
                             </StackLayout>
-                        </ViewCell>
+                        </SwipeView>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+
+            
+
         </StackLayout>
         <Button Grid.Row="0"
                 ImageSource="ic_plus.png"

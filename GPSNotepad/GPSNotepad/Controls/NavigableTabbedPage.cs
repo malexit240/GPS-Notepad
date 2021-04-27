@@ -1,4 +1,5 @@
 ﻿using Xamarin.Forms;
+using static Xamarin.Forms.PlatformConfiguration.AndroidSpecific.TabbedPage;
 
 namespace GPSNotepad.Controls
 {
@@ -8,6 +9,8 @@ namespace GPSNotepad.Controls
         public NavigableTabbedPage()
         {
             this.CurrentPageChanged += OnCurrentPageChanged;
+
+            this.On<Xamarin.Forms.PlatformConfiguration.Android>().SetIsSwipePagingEnabled(false);
         }
         #endregion
 

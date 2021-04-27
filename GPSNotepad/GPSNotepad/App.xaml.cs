@@ -67,6 +67,7 @@ namespace GPSNotepad
 
             containerRegistry.RegisterForNavigation<AddEditPinAndEventsTabbedPage, AddEditPinAndEventsViewModel>();
             containerRegistry.RegisterForNavigation<QRCodeModalPage, QRCodeModalViewModel>();
+            containerRegistry.RegisterForNavigation<ScanQRModalPage, ScanQRViewModel>();
             containerRegistry.RegisterForNavigation<AddEditPlaceEventPage, AddEditPlaceEventViewModel>();
 
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();

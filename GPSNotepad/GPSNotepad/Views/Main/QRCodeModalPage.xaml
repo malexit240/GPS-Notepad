@@ -6,15 +6,24 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:zxcm="clr-namespace:ZXing.Common;assembly=zxing"
              x:Class="GPSNotepad.Views.QRCodeModalPage">
-    <zx:ZXingBarcodeImageView 
+    <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout.GestureRecognizers>
+            <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+        </StackLayout.GestureRecognizers>
+
+        <zx:ZXingBarcodeImageView
+        HorizontalOptions="CenterAndExpand"
+        VerticalOptions="CenterAndExpand"
         IsVisible="True"
         BarcodeFormat="QR_CODE" 
         HeightRequest="300"
         WidthRequest="300"
         BarcodeValue="{Binding QRCodeValue}">
-        <zx:ZXingBarcodeImageView.BarcodeOptions>
-            <zxcm:EncodingOptions Width="300" Height="300" />
-        </zx:ZXingBarcodeImageView.BarcodeOptions>
-    </zx:ZXingBarcodeImageView>
+            <zx:ZXingBarcodeImageView.BarcodeOptions>
+                <zxcm:EncodingOptions Width="300" Height="300" />
+            </zx:ZXingBarcodeImageView.BarcodeOptions>
+
+        </zx:ZXingBarcodeImageView>
+    </StackLayout>
 
 </ContentPage>

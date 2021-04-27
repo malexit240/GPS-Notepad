@@ -5,6 +5,6 @@ namespace GPSNotepad.Services.QRCodeService
 {
     public interface IQrScanerService
     {
-        Task<Pin> GetPinAsync();
+        Pin GetPinFromString(string result);
     }
 }

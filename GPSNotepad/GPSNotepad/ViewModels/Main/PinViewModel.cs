@@ -9,6 +9,7 @@ using GPSNotepad.Services.PinService;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using GPSNotepad.Converters;
+using Acr.UserDialogs;
 
 namespace GPSNotepad.ViewModels
 {
@@ -104,7 +105,17 @@ namespace GPSNotepad.ViewModels
         private ICommand _deletePinContextCommand;
         public ICommand DeletePinContextCommand => _deletePinContextCommand ??= new DelegateCommand(() =>
         {
-            PinService.Delete(this.GetModelPin());
+            UserDialogs.Instance.Confirm(new ConfirmConfig()
+            {
+                Message = "Delete",
+                OkText = "Ok",
+                CancelText = "Cancel",
+                OnAction = (confirm) =>
+                {
+                    if (confirm)
+                        PinService.Delete(this.GetModelPin());
+                }
+            });
         });
         #endregion
 

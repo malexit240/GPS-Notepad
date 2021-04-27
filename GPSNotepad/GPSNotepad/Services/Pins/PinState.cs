@@ -123,6 +123,7 @@ namespace GPSNotepad.Services.PinService
                 if (index != -1)
                 {
                     pin.Events.RemoveAt(index);
+
                     MessagingCenter.Send(App.Current, "pins_state_changed",
                         new PinsStateChangedMessage(new List<Pin>() { pin },
                         PinsStateChangedType.UpdateEvents));
@@ -130,5 +131,9 @@ namespace GPSNotepad.Services.PinService
             }
         }
         #endregion
+
+      
+            
+        
     }
 }

@@ -144,19 +144,13 @@ namespace GPSNotepad.ViewModels
         public ICommand ScanQRCommand => _scanQRCommand ??= new DelegateCommand(ScanQRHandler);
         private async void ScanQRHandler()
         {
-            var pin = await QrScanerService.GetPinAsync();
-
-            if (pin != null)
-            {
-                this.Name = pin.Name;
-                this.Description = pin.Description;
-                SetNewPinPosition(pin.Position);
-            }
+            await NavigationService.NavigateAsync(nameof(ScanQRModalPage), null, true, false);
         }
 
         #endregion
 
         #region ---Overrides---
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -191,9 +185,20 @@ namespace GPSNotepad.ViewModels
                 PinViewModel = (PinViewModel)parameters[nameof(GPSNotepad.ViewModels.PinViewModel)];
             }
 
+            if (parameters.ContainsKey(nameof(GPSNotepad.Entities.Pin)))
+            {
+                var pin = (GPSNotepad.Entities.Pin)parameters[nameof(GPSNotepad.Entities.Pin)];
+
+                if (pin != null)
+                {
+                    this.Name = pin.Name;
+                    this.Description = pin.Description;
+                    SetNewPinPosition(pin.Position);
+                }
+            }
+
             Events = PinViewModel.Events;
         }
-
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs args)
         {
