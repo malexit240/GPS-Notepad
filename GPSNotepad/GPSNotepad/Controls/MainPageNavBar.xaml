@@ -4,8 +4,8 @@
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
              x:Class="GPSNotepad.Controls.MainPageNavBar"
              HorizontalOptions="FillAndExpand"
-             Margin="12,0,12,0"
-             Orientation="Horizontal">
+             Orientation="Horizontal"
+             Padding="12,0,12,0">
     <ImageButton x:Name="SettingsButton" 
                  Source="ic_settings.png" 
                  VerticalOptions="CenterAndExpand" 
@@ -20,10 +20,10 @@
                  Margin="0,0,12,0"
                  Clicked="UnfocusSearchField" 
                  BackgroundColor="Transparent"/>
-    
+
     <controls:SearchEntry x:Name="searchField" 
                           HorizontalOptions="FillAndExpand"/>
-    
+
     <ImageButton x:Name="logoutButton" 
                  Source="ic_exid.png"
                  VerticalOptions="CenterAndExpand"

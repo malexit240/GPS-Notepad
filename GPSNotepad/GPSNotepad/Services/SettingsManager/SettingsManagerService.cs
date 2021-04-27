@@ -61,7 +61,7 @@ namespace GPSNotepad.Services.Settings
             else
                 App.Current.Resources.MergedDictionaries.Add(new DarkTheme());
 
-            DependencyService.Get<IChangerBarColor>().SetBarColor((Color)App.Current.Resources["PrimaryColor"]);
+            DependencyService.Get<IChangerBarColor>().SetBarColor((Color)App.Current.Resources["HoveredColor"]);
         }
         #endregion
 

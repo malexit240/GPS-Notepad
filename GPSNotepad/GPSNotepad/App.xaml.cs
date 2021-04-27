@@ -20,7 +20,7 @@ namespace GPSNotepad
         public App(IPlatformInitializer initializer) : base(initializer)
         { }
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
             InitializeComponent();
 
@@ -36,12 +36,12 @@ namespace GPSNotepad
 
             if (authorizationService.IsAuthorized && authenticationService.ContinueSession(settingsManger.SessionToken))
             {
-                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
+                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(MainTabbedPage)}");
 
             }
             else
             {
-                await NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+                NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
             }
 
         }

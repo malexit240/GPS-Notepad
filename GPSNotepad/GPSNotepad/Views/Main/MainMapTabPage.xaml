@@ -68,7 +68,8 @@
             <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
                                  SearchText="{Binding SearchField}" 
                                  SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
-                                 LogoutButtonCommand="{Binding LogoutCommand}"/>
+                                 LogoutButtonCommand="{Binding LogoutCommand}"
+                                 Margin="0,17,0,13"/>
         </StackLayout>
     </Grid>
 </ContentPage>

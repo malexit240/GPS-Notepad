@@ -98,48 +98,40 @@ namespace GPSNotepad.ViewModels
         public ICommand SignUpCommand => _signUpCommand ??= new DelegateCommand(SignUpCommandHandler, canExecuteSignUpCommand);
         private async void SignUpCommandHandler()
         {
-            bool done = true;
             HasLongActivity = true;
 
             if (Password != ConfirmPassword)
             {
-                done = false;
                 IsPasswordWrong = true;
                 WrongMessage = "Passwords dont matches";
-            }
-
-            var passwordValidationResult = Validators.Validators.IsPasswordValid(Password);
-
-            switch (passwordValidationResult)
-            {
-                case PasswordValidationStatus.InvalidContent:
-                    IsPasswordWrong = true;
-                    WrongMessage = TextResources["InvalidPasswordContent"];
-                    break;
-                case PasswordValidationStatus.InvalidLength:
-                    IsPasswordWrong = true;
-                    WrongMessage = TextResources["InvalidPasswordLength"];
-                    break;
-            }
-
-            done = passwordValidationResult == PasswordValidationStatus.Done;
-
-            if (!done)
-            {
-                HasLongActivity = false;
             }
             else
             {
 
-                if (!await AuthenticationService.SignUpAsync(_email, _name, Password))
+                var passwordValidationResult = Validators.Validators.IsPasswordValid(Password);
+
+                switch (passwordValidationResult)
                 {
-                    HasLongActivity = false;
+                    case PasswordValidationStatus.InvalidContent:
+                        IsPasswordWrong = true;
+                        WrongMessage = TextResources["InvalidPasswordContent"];
+                        break;
+                    case PasswordValidationStatus.InvalidLength:
+                        IsPasswordWrong = true;
+                        WrongMessage = TextResources["InvalidPasswordLength"];
+                        break;
                 }
-                else
+
+                if (passwordValidationResult == PasswordValidationStatus.Done)
                 {
-                    await this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}");
+                    if (await AuthenticationService.SignUpAsync(_email, _name, Password))
+                    {
+                        await this.NavigationService.NavigateAsync($"/{nameof(NavigationPage)}/{nameof(StartPage)}/{nameof(SignInPage)}");
+                    }
                 }
             }
+
+            HasLongActivity = false;
         }
         private bool canExecuteSignUpCommand() => Password.Length != 0 && ConfirmPassword.Length != 0 && HasLongActivity != true;
         #endregion

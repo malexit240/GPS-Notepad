@@ -24,7 +24,7 @@
         <controls:LabeledEntry LabelText="{Binding TextResources[Email]}" 
                                EntryPlaceholderText="{Binding TextResources[Email]}"
                                EntryText="{Binding Email}"
-                               WrongLabelText="Wrong Email Format"
+                               WrongLabelText="{Binding WrongText}"
                                IsWrong="{Binding IsEmailWrong}"
                                ButtonImageSource="ic_clear.png"
                                ButtonCommand="{Binding ClearEmailCommand}"/>

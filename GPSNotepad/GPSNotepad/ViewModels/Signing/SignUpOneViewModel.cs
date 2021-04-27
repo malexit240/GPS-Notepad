@@ -41,6 +41,13 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _name, value);
         }
 
+        private string _wrongText = "";
+        public string WrongText
+        {
+            get => _wrongText;
+            set => SetProperty(ref _wrongText, value);
+        }
+
         private bool _isEmailWrong = false;
         public bool IsEmailWrong
         {
@@ -64,9 +71,14 @@ namespace GPSNotepad.ViewModels
         {
             var emailValidationResult = Validators.Validators.IsEmailValid(_email);
 
-            if (await AuthorizationService.IsUserExist(Email) ||
-                emailValidationResult != EmailValidationStatus.Done)
+            if (emailValidationResult != EmailValidationStatus.Done)
             {
+                WrongText = "Wrong Email";
+                IsEmailWrong = true;
+            }
+            else if (await AuthorizationService.IsUserExist(Email))
+            {
+                WrongText = "User already exist";
                 IsEmailWrong = true;
             }
             else

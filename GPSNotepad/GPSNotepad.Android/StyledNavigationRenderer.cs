@@ -15,7 +15,11 @@ namespace GPSNotepad.Droid
         protected override void OnElementChanged(ElementChangedEventArgs<NavigationPage> e)
         {
             base.OnElementChanged(e);
-            e.NewElement.Style = App.Current.Resources["navigationPageStyle"] as Style;
+
+            if (e.NewElement != null)
+            {
+                e.NewElement.Style = App.Current.Resources["navigationPageStyle"] as Style;
+            }
         }
         #endregion
     }
