@@ -6,7 +6,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.AddEditPlaceEventPage"
              Title="{Binding TextResources[AddEditPlaceEventTitle]}"
-             Style="{DynamicResource pageStyle}">
+             Style="{DynamicResource pageStyle}"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Padding>
         <OnPlatform x:TypeArguments="Thickness">
             <OnPlatform.iOS>
@@ -14,12 +15,12 @@
             </OnPlatform.iOS>
         </OnPlatform>
     </ContentPage.Padding>
-    
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
-    </ContentPage.ToolbarItems>
 
     <StackLayout Padding="12,0,12,0">
+        <controls:PageNavbar Title="Place events">
+            <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
+        </controls:PageNavbar>
+
         <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
                                EntryPlaceholderText="{Binding TextResources[Description]}"
                                EntryText="{Binding Description}"/>

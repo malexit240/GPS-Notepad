@@ -103,12 +103,14 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="BindableMapRenderer.cs" />
+    <Compile Include="CustomFrameRenderer.cs" />
     <Compile Include="IOSChangerStatusBarColor.cs" />
     <Compile Include="iOSInitializer.cs" />
     <Compile Include="iOSLocalNotificationManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="StyledNavigationRenderer.cs" />
+    <Compile Include="CustomEntryRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <LinkDescription Include="LinkerSettings.xml" />

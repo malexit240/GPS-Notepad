@@ -41,7 +41,6 @@ namespace GPSNotepad.Controls
 
             Frame.Content = stack;
 
-
             this.Children.Add(Label);
             this.Children.Add(Frame);
             this.Children.Add(WrongLabel);
@@ -81,6 +80,7 @@ namespace GPSNotepad.Controls
             nameof(LabelText),
             typeof(string),
             typeof(LabeledEntry),
+            defaultValue: string.Empty,
             propertyChanged: OnLabelTextPropertyChanged);
 
         private static void OnLabelTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -105,6 +105,7 @@ namespace GPSNotepad.Controls
             nameof(WrongLabelText),
             typeof(string),
             typeof(LabeledEntry),
+            defaultValue: string.Empty,
             propertyChanged: OnWrongLabelTextPropertyChanged);
 
         private static void OnWrongLabelTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -129,6 +130,7 @@ namespace GPSNotepad.Controls
             nameof(EntryText),
             typeof(string),
             typeof(LabeledEntry),
+            defaultValue: string.Empty,
             defaultBindingMode: BindingMode.TwoWay,
             propertyChanged: OnEntyTextTextPropertyChanged);
 

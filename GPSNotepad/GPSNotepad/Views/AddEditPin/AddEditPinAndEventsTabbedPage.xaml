@@ -9,7 +9,8 @@
              x:Class="GPSNotepad.Views.AddEditPinAndEventsTabbedPage"
              Title="{Binding TextResources[AddEditPinTitle]}"
              android:TabbedPage.ToolbarPlacement="Bottom"
-            Style="{DynamicResource tabbedPageStyle}">
+             Style="{DynamicResource tabbedPageStyle}"
+             NavigationPage.HasNavigationBar="False">
     <local:AddEditPinTabPage IconImageSource="ic_pin.png" Title="{Binding TextResources[Pin]}"/>
     <local:PlaceEventsTabPage IconImageSource="ic_clock.png" Title="{Binding TextResources[Events]}"/>
 </controls:NavigableTabbedPage>

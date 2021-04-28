@@ -1,18 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:GPSNotepad.Controls"
              x:Class="GPSNotepad.Views.PlaceEventsTabPage"
              x:Name="page"
              Style="{DynamicResource pageStyle}">
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <OnPlatform.iOS>
-                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
-            </OnPlatform.iOS>
-        </OnPlatform>
-    </ContentPage.Padding>
     <Grid RowDefinitions="*">
         <StackLayout Grid.Row="0" Padding="12,0,12,0">
+            <controls:PageNavbar Title="Events" Padding="0,24,0,24"/>
             <ListView  ItemsSource="{Binding Events}" 
                        HasUnevenRows="True"
                        SeparatorVisibility="None"
@@ -40,12 +34,12 @@
                                     <StackLayout Grid.Column="0" 
                                                  HorizontalOptions="FillAndExpand"
                                                  VerticalOptions="CenterAndExpand">
-                                        
+
                                         <Label Text="{Binding Description}"
                                                FontSize="16"
                                                HorizontalOptions="StartAndExpand"
                                                Style="{DynamicResource labelStyle}"/>
-                                        
+
                                         <StackLayout HorizontalOptions="StartAndExpand"
                                              Orientation="Horizontal">
                                             <Label Text="{Binding DateString}"

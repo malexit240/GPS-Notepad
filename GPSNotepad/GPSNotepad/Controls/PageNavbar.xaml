@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Grid xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="GPSNotepad.Controls.PageNavbar"
+      ColumnDefinitions="35,70,*,35,35,35">
+
+    <ImageButton Grid.Column="0" BackgroundColor="Transparent" Source="ic_left_blue.png" Command="{prism:GoBack}"/>
+    <Label x:Name="titleLabel"  HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"  Grid.Column="2" />
+
+</Grid>

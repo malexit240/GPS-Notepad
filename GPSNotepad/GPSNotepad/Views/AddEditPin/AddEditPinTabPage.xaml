@@ -9,7 +9,7 @@
             </OnPlatform.iOS>
         </OnPlatform>
     </ContentPage.Padding>
-    
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:MapClickedEventArgsConverter x:Key="mapClickedEventArgsConverter"/>
@@ -21,13 +21,19 @@
         <ToolbarItem IconImageSource="ic_scan_qr.png" Command="{Binding ScanQRCommand}"/>
     </ContentPage.ToolbarItems>
 
-    <StackLayout Padding="12,12,12,0">
+    <StackLayout Padding="12,0,12,0">
+        <controls:PageNavbar Title="Edit pin">
+            <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding}"/>
+        </controls:PageNavbar>
+
         <controls:LabeledEntry LabelText="{Binding TextResources[Name] }"
                                EntryPlaceholderText="{Binding TextResources[Name]}"
+                               WrongLabelText=" "
                                EntryText="{Binding Name}"/>
 
-        <controls:LabeledEntry LabelText="{Binding TextResources[Description] }"
+        <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
                                EntryPlaceholderText="{Binding TextResources[Description]}"
+                               WrongLabelText=" "
                                EntryText="{Binding Description}"/>
 
 
@@ -35,17 +41,21 @@
 
 
             <controls:LabeledEntry Grid.Column="0" LabelText="Coordinates"
-                               EntryPlaceholderText="Longitude"
-                               EntryText="{Binding Longitude}"
-                               IsWrong="{Binding IsLongitudeWrong}"
-                               HorizontalOptions="FillAndExpand"
-                               Margin="0,0,4,0"/>
+                                   EntryPlaceholderText="Longitude"
+                                   EntryText="{Binding Longitude}"
+                                   IsWrong="{Binding IsLongitudeWrong}"
+                                   WrongLabelText=" "
+                                   HorizontalOptions="FillAndExpand"
+                                   Margin="0,0,4,0"/>
 
-            <controls:LabeledEntry Grid.Column="1" EntryPlaceholderText="Latitude"
-                               EntryText="{Binding Latitude}"
-                               IsWrong="{Binding IsLatitudeWrong}"
-                               HorizontalOptions="FillAndExpand"
-                               Margin="4,0,0,0"/>
+            <controls:LabeledEntry Grid.Column="1"
+                                   LabelText=" "
+                                   EntryPlaceholderText="Latitude"
+                                   EntryText="{Binding Latitude}"
+                                   IsWrong="{Binding IsLatitudeWrong}"
+                                   WrongLabelText=" "
+                                   HorizontalOptions="FillAndExpand"
+                                   Margin="4,0,0,0"/>
         </Grid>
 
 

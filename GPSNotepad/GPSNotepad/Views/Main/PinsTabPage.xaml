@@ -88,8 +88,10 @@
                 </BindableLayout.ItemTemplate>
             </StackLayout>
 
-
-            
+            <controls:LabeledEntry LabelText="123"
+                               EntryPlaceholderText="123"
+                               WrongLabelText="321"
+                               EntryText="{Binding Name}"/>
 
         </StackLayout>
         <Button Grid.Row="0"
