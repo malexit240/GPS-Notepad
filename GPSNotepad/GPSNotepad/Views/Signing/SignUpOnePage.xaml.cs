@@ -2,7 +2,7 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class SignUpOnePage : ContentPage
+    public partial class SignUpOnePage : GPSNotepad.Controls.BasePage
     {
         public SignUpOnePage()
         {

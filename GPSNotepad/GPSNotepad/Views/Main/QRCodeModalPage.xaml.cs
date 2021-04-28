@@ -2,9 +2,9 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class QRCodeModalPage : ContentPage
+    public partial class QRCodeModalPage : GPSNotepad.Controls.BasePage
     {
-        public QRCodeModalPage()
+        public QRCodeModalPage() : base()
         {
             InitializeComponent();
         }

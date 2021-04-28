@@ -1,11 +1,4 @@
-﻿using Foundation;
-using Google.Maps;
-using MapKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using UIKit;
+﻿using Google.Maps;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.GoogleMaps.Clustering.iOS;
@@ -41,7 +34,5 @@ namespace GPSNotepad.iOS
 
             return result;
         }
-
-
     }
 }

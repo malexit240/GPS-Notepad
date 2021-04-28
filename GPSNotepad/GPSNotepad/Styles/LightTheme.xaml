@@ -3,6 +3,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     x:Class="GPSNotepad.Styles.LightTheme">
 
+
+    <x:Boolean x:Key="IsLight">True</x:Boolean>
+
     <Color x:Key="PrimaryColor">#596EFB</Color>
     <Color x:Key="DisabledColor">#C7CDF5</Color>
     <Color x:Key="HoveredColor">#273BC6</Color>

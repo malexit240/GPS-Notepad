@@ -46,14 +46,13 @@ namespace GPSNotepad.Controls
                     height += stackLayout.Children[i].Height;
                 }
 
-                scrollView.HeightRequest = height > 0 ? height : 200;
+                scrollView.HeightRequest = height >= 0 ? height : 0;
             }
             else
             {
                 await this.TranslateTo(0, -Height);
                 base.IsVisible = visibility;
             }
-
         }
 
         public ObservableCollection<PinViewModel> PinsSource

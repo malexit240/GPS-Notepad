@@ -1,47 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage  xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.StartPage"
              NavigationPage.HasNavigationBar="False"
              Style="{DynamicResource pageStyle}">
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <OnPlatform.iOS>
-                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
-            </OnPlatform.iOS>
-        </OnPlatform>
-    </ContentPage.Padding>
-    
-    <ContentPage.Content>
-        <StackLayout Padding="{DynamicResource FullIndent}">
-            <Grid ColumnDefinitions="20*,60*,20*" VerticalOptions="CenterAndExpand" 
+
+    <StackLayout Padding="{DynamicResource FullIndent}">
+        <Grid ColumnDefinitions="20*,60*,20*" VerticalOptions="CenterAndExpand" 
                    HorizontalOptions="CenterAndExpand">
-                <StackLayout  Grid.Column="1">
-                    <Image
+            <StackLayout  Grid.Column="1">
+                <Image
                        HorizontalOptions="CenterAndExpand"
-                   Source="pic_enter_page_3x.png"/>
-                    <Label 
+                   Source="pic_enter_page.png"/>
+                <Label 
                         HorizontalOptions="CenterAndExpand"
                         Text="MapNotepad"
-                        FontSize="30"
+                        FontSize="24"
+                        FontFamily="Montserrat_Bold"
                         TextColor="{DynamicResource PrimaryColor}"/>
-                </StackLayout>
+            </StackLayout>
 
-            </Grid>
+        </Grid>
 
-            <StackLayout VerticalOptions="End">
-                <Button Text="Log in"
-                    Command="{Binding GoToSignInPageCommand}" 
+        <StackLayout VerticalOptions="End">
+            <Button Text="Log in"
+                    Command="{Binding GoToSignInPageCommand}"
+                    FontFamily="Montserrat_Medium"
+                    FontSize="16"
                     Style="{DynamicResource buttonAccentStyle}"
                         Margin="0,0,0,16"/>
 
-                <Button Text="Create account"
+            <Button Text="Create account"
                     Command="{Binding GoToSignUpPageCommand}"
+                    FontFamily="Montserrat_Medium"
+                    FontSize="16"
                     Style="{DynamicResource buttonSimpleStyle}"/>
-            </StackLayout>
-
         </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+
+    </StackLayout>
+</controls:BasePage>

@@ -5,6 +5,48 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\Montserrat-Black.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-BlackItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Bold.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-BoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-ExtraBold.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-ExtraBoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-ExtraLight.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-ExtraLightItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Italic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Light.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-LightItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Medium.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-MediumItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Regular.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-SemiBold.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-SemiBoldItalic.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-Thin.ttf" />
+    <None Remove="Resources\Fonts\Montserrat-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Black.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-BlackItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Bold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-BoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-ExtraBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-ExtraBoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-ExtraLight.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-ExtraLightItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Italic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Light.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-LightItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Medium.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-MediumItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Regular.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-SemiBold.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-SemiBoldItalic.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-Thin.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\Montserrat-ThinItalic.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.483" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="5.0.4" />
@@ -33,6 +75,11 @@
     </Compile>
     <Compile Update="Controls\DropDown.xaml.cs">
       <DependentUpon>DropDown.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="MapStyles.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>MapStyles.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\UIResources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -68,6 +115,10 @@
     </EmbeddedResource>
     <EmbeddedResource Update="DarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="MapStyles.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>MapStyles.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Update="Resources\UIResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

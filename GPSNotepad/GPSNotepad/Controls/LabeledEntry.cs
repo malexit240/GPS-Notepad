@@ -27,7 +27,7 @@ namespace GPSNotepad.Controls
 
             Label.SetDynamicResource(StyleProperty, "entryLabelStyle");
             WrongLabel.SetDynamicResource(StyleProperty, "wrongEntryLabelStyle");
-            Entry.SetDynamicResource(StyleProperty, "entryStyle");
+            Entry.SetDynamicResource(StyleProperty, "labeledEntryStyle");
             Button.SetDynamicResource(StyleProperty, "entryButtonStyle");
             Frame.SetDynamicResource(StyleProperty, "entryFrameStyle");
 

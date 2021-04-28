@@ -16,7 +16,8 @@ namespace GPSNotepad.Controls
             get => (string)GetValue(TitleProperty);
             set => SetValue(TitleProperty, value);
         }
-        public BindableProperty TitleProperty = BindableProperty.Create(
+
+        public static BindableProperty TitleProperty = BindableProperty.Create(
             nameof(Title),
             typeof(string),
             typeof(PageNavbar),

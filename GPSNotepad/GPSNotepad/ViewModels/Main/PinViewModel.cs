@@ -10,6 +10,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using GPSNotepad.Converters;
 using Acr.UserDialogs;
+using Xamarin.Essentials;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel;
+using Xamarin.Forms;
 
 namespace GPSNotepad.ViewModels
 {
@@ -23,7 +28,7 @@ namespace GPSNotepad.ViewModels
             _name = name;
             _description = description;
             _favorite = favorite;
-            _position = position ?? new Xamarin.Forms.GoogleMaps.Position();
+            Position = position ?? new Xamarin.Forms.GoogleMaps.Position();
 
             Events = new ObservableCollection<PlaceEventViewModel>();
 
@@ -39,6 +44,14 @@ namespace GPSNotepad.ViewModels
 
         #region ---Public Properties---
         public PinViewModel Self => this;
+
+
+        private string _adress = "";
+        public string Address
+        {
+            get => _adress;
+            set => SetProperty(ref _adress, value);
+        }
 
         public bool HideInfoWindow { get; set; } = true;
 
@@ -118,6 +131,35 @@ namespace GPSNotepad.ViewModels
             });
         });
         #endregion
+
+        protected override async void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            switch (args.PropertyName)
+            {
+                case nameof(Position):
+                    Address = await GetAddress() ?? FormatedPosition;
+                    break;
+            }
+        }
+
+        private async Task<string> GetAddress()
+        {
+            var geocoder = new Geocoder();
+            List<string> addresses = null;
+
+            try
+            {
+                addresses = new List<string>(await geocoder.GetAddressesForPositionAsync(Position));
+            }
+            catch (Exception)
+            {
+
+            }
+
+            return addresses?.FirstOrDefault();
+        }
 
         #region ---IEntityBase Implementation---
         public Guid Id => _pinId;

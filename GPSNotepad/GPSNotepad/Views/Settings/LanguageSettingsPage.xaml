@@ -1,31 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage  xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.LanguageSettingsPage"
-             Title="{Binding TextResources[ChooseLanguageTitle]}"
-             Style="{DynamicResource pageStyle}">
+             Style="{DynamicResource pageStyle}"
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout>
+        <controls:PageNavbar Title="{Binding TextResources[ChooseLanguageTitle]}"/>
 
-    <input:RadioButtonGroupView>
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+        <input:RadioButtonGroupView>
+            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
-        <input:RadioButton  Text="{Binding TextResources[English]}" 
+            <input:RadioButton  Text="{Binding TextResources[English]}" 
                                 IsChecked="{Binding IsEnglish}"
                                 ClickCommand="{Binding CheckedEnglish}"
                                 Style="{DynamicResource radioButtonStyle}"
                             Padding="{DynamicResource FullIndent}"/>
 
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
-        <input:RadioButton  Text="{Binding TextResources[Russian]}"
+            <input:RadioButton  Text="{Binding TextResources[Russian]}"
                                 IsChecked="{Binding IsRussian}"
                                 ClickCommand="{Binding CheckedRussian}"
                                 Style="{DynamicResource radioButtonStyle}"
                             Padding="{DynamicResource FullIndent}"/>
 
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-    </input:RadioButtonGroupView>
-
-</ContentPage>
+            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+        </input:RadioButtonGroupView>
+    </StackLayout>
+</controls:BasePage>

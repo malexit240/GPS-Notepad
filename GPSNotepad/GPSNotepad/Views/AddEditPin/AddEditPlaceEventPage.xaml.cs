@@ -2,9 +2,9 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class AddEditPlaceEventPage : ContentPage
+    public partial class AddEditPlaceEventPage : GPSNotepad.Controls.BasePage
     {
-        public AddEditPlaceEventPage()
+        public AddEditPlaceEventPage() : base()
         {
             InitializeComponent();
         }

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
 
@@ -19,7 +18,6 @@ namespace GPSNotepad.iOS
             {
                 Control.Layer.BorderWidth = 0;
                 Control.BorderStyle = UIKit.UITextBorderStyle.None;
-
             }
         }
     }

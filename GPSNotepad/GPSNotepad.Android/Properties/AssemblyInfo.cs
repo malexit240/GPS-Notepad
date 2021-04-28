@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Android.App;
+using GPSNotepad.Controls;
 using GPSNotepad.Droid;
 using Xamarin.Forms;
 using Xamarin.Forms.GoogleMaps.Clustering;
@@ -37,6 +38,7 @@ using Xamarin.Forms.GoogleMaps.Clustering.Android;
 [assembly: UsesPermission(Android.Manifest.Permission.Internet)]
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
 
-
 [assembly: ExportRenderer(typeof(NavigationPage), typeof(StyledNavigationRenderer))]
 [assembly: ExportRenderer(typeof(Entry), typeof(CustomEntryRenderer))]
+[assembly: ExportRenderer(typeof(BindableMap), typeof(BindableMapRenderer))]
+[assembly: ExportRenderer(typeof(Button), typeof(CustomButtonRenderer))]

@@ -2,7 +2,7 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class SignInPage : ContentPage
+    public partial class SignInPage : GPSNotepad.Controls.BasePage
     {
         public SignInPage()
         {

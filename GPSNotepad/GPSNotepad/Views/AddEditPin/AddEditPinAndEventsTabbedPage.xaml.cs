@@ -4,7 +4,7 @@ namespace GPSNotepad.Views
 {
     public partial class AddEditPinAndEventsTabbedPage : NavigableTabbedPage
     {
-        public AddEditPinAndEventsTabbedPage()
+        public AddEditPinAndEventsTabbedPage() : base()
         {
             InitializeComponent();
         }

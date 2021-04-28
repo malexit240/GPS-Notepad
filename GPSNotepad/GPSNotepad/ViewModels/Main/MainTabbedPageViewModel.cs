@@ -18,6 +18,7 @@ using GPSNotepad.Comparers;
 using GPSNotepad.Enums;
 using System.ComponentModel;
 using Acr.UserDialogs;
+using GPSNotepad.Services.Settings;
 
 namespace GPSNotepad.ViewModels
 {
@@ -33,7 +34,6 @@ namespace GPSNotepad.ViewModels
             MainMapViewModel = new MainMapViewModel(navigationService);
 
             Pins = new ObservableCollection<PinViewModel>();
-
 
             MessagingCenter.Subscribe<Prism.PrismApplicationBase, PinsStateChangedMessage>(App.Current, "pins_state_changed", OnPinStateChanged);
 
@@ -91,8 +91,6 @@ namespace GPSNotepad.ViewModels
             get => _isDropDownPinsVisible;
             set => SetProperty(ref _isDropDownPinsVisible, value);
         }
-
-
 
         public bool _iSearchFieldFoccused = false;
         public bool IsSearchFieldFoccused

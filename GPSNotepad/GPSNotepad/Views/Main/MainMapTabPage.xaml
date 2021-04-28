@@ -1,18 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              x:Class="GPSNotepad.Views.MainMapTabPage"
              Style="{DynamicResource pageStyle}">
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <OnPlatform.iOS>
-                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
-            </OnPlatform.iOS>
-        </OnPlatform>
-    </ContentPage.Padding>
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:PinTappedEventArgsConverter x:Key="showDetailPinViewEventArgsConverter"/>
@@ -26,7 +19,8 @@
                 <controls:BindableMap
                     VerticalOptions="FillAndExpand"
                                 PinsSource="{Binding Pins}"
-                                MapSpan="{Binding Path=MainMapViewModel.Span}">
+                                MapSpan="{Binding Path=MainMapViewModel.Span}"
+                                IsLightStyle="{DynamicResource IsLight}">
                     <controls:BindableMap.Behaviors>
                         <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
                                                   Command="{Binding OnShowDetailPinViewCommand}"
@@ -51,10 +45,18 @@
                          HorizontalOptions="FillAndExpand"
                          IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}"
                          BackgroundColor="{DynamicResource PageBackgroundColor}">
-                <Label Style="{DynamicResource normalLabelStyle}" Text="{Binding Path=SelectedPin.Name}"/>
-                <Label  Style="{DynamicResource normalLabelStyle}" Text="{Binding Path=SelectedPin.FormatedPosition}"/>
-                <BoxView HeightRequest="1" Color="{DynamicResource Variant}" HorizontalOptions="FillAndExpand"/>
-                <Label Style="{DynamicResource normalLabelStyle}" Text="{Binding Path=SelectedPin.Description}"/>
+
+                <Label Style="{DynamicResource headerLabelStyle}" 
+                       Text="{Binding Path=SelectedPin.Name}"/>
+
+                <Label  Style="{DynamicResource detailLabelStyle}"
+                        Text="{Binding Path=SelectedPin.FormatedPosition}"/>
+
+                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+                <Label Style="{DynamicResource detailLabelStyle}"
+                       TextColor="{DynamicResource PrimaryTextColor}"
+                       Text="{Binding Path=SelectedPin.Description}"/>
             </controls:DetailView>
 
             <Button Grid.Row="0" Grid.RowSpan="2"
@@ -72,4 +74,4 @@
                                  Margin="0,17,0,13"/>
         </StackLayout>
     </Grid>
-</ContentPage>
+</controls:BasePage>

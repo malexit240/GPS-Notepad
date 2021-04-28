@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace GPSNotepad.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ScanQRModalPage : ContentPage
+    public partial class ScanQRModalPage : GPSNotepad.Controls.BasePage
     {
-        public ScanQRModalPage()
+        public ScanQRModalPage() : base()
         {
             InitializeComponent();
         }

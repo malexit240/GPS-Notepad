@@ -7,6 +7,8 @@ using System;
 using GPSNotepad.Extensions;
 using System.Collections.ObjectModel;
 using GPSNotepad.ViewModels;
+using System.Linq;
+using System.IO;
 
 namespace GPSNotepad.Controls
 {
@@ -18,6 +20,8 @@ namespace GPSNotepad.Controls
             _isMapLoading = true;
             ShowInfoWindow = false;
             _isIdle = true;
+
+            this.UiSettings.ZoomControlsEnabled = false;
 
             this.CameraMoveStarted += OnCameraMoveStarted;
             this.CameraIdled += OnCameraIdled;
@@ -58,6 +62,13 @@ namespace GPSNotepad.Controls
             get => (MapSpan)GetValue(MapSpanProperty);
             set => SetValue(MapSpanProperty, value);
         }
+
+        public bool IsLightStyle
+        {
+            get => (bool)GetValue(IsLightStyleProperty);
+            set => SetValue(IsLightStyleProperty, value);
+        }
+
         #endregion
 
         #region ---Events---
@@ -94,6 +105,22 @@ namespace GPSNotepad.Controls
                                                          returnType: typeof(bool),
                                                          declaringType: typeof(BindableMap),
                                                          defaultBindingMode: BindingMode.TwoWay);
+
+        public static readonly BindableProperty IsLightStyleProperty = BindableProperty.Create(
+                                                        propertyName: nameof(IsLightStyle),
+                                                        returnType: typeof(bool),
+                                                        declaringType: typeof(BindableMap),
+                                                        defaultValue: true,
+                                                        coerceValue: OnIsLightStylePropertyCoerceValue);
+
+        private static object OnIsLightStylePropertyCoerceValue(BindableObject bindable, object value)
+        {
+            var isLightStyle = (bool)value;
+
+            (bindable as BindableMap).MapStyle = MapStyle.FromJson(isLightStyle ? MapStyles.LightTheme : MapStyles.DarkTheme);
+
+            return value;
+        }
 
         #endregion
 
@@ -148,7 +175,7 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Private Helpers---
-        private void UpdatePinsSource(ObservableCollection<PinViewModel> newSource)
+        private async void UpdatePinsSource(ObservableCollection<PinViewModel> newSource)
         {
             Pins.Clear();
 
@@ -161,6 +188,7 @@ namespace GPSNotepad.Controls
                 {
                     pinView.Label = pin.PinId.ToString();
                 }
+
 
                 pinView.Icon = pin.Favorite == true ?
                     BitmapDescriptorFactory.FromBundle("purpleMarkerSmallWithCrown.png") : //Favorite

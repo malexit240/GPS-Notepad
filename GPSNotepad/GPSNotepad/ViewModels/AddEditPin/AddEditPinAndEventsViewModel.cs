@@ -147,6 +147,14 @@ namespace GPSNotepad.ViewModels
             await NavigationService.NavigateAsync(nameof(ScanQRModalPage), null, true, false);
         }
 
+
+        private ICommand _moveToMyLocationCommand;
+        public ICommand MoveToMyLocationCommand => _moveToMyLocationCommand ??= new DelegateCommand(MoveToMyLocationHandler);
+        private void MoveToMyLocationHandler()
+        {
+            CurrentPosition.GetAsync().ContinueWith(result => Span = new MapSpan(result.Result, 0.01, 0.01));
+        }
+
         #endregion
 
         #region ---Overrides---

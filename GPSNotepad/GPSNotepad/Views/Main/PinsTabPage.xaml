@@ -1,54 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             xmlns:converters="clr-namespace:GPSNotepad.Converters"
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
              x:Class="GPSNotepad.Views.PinsTabPage"
              x:Name="page"
              Style="{DynamicResource pageStyle}">
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <OnPlatform.iOS>
-                <Thickness Left="0" Top="20" Right="0" Bottom="0" />
-            </OnPlatform.iOS>
-        </OnPlatform>
-    </ContentPage.Padding>
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+
+    <!--PAGE CONTENT-->
     <Grid RowDefinitions="*">
+
+        <!--NAVIGATION BAR-->
         <StackLayout Grid.Row="0">
             <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
                                  SearchText="{Binding SearchField}" 
                                  SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
                                  LogoutButtonCommand="{Binding LogoutCommand}"
                                  Margin="0,17,0,13"/>
+
+            <!--LIST OF PINS-->
             <StackLayout  BindableLayout.ItemsSource="{Binding Pins}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <SwipeView>
+                        <SwipeView BackgroundColor="{DynamicResource PageBackgroundColor}">
                             <SwipeView.RightItems>
-                                <SwipeItem Command="{Binding Path=BindingContext.ShowQRCodeCommand,
-                                          Source={x:Reference page}}" 
-                                          IconImageSource="ic_qr.png"
-                                          CommandParameter="{Binding Self}"
-                                           BackgroundColor="{DynamicResource SuccsessColor}"/>
-                                <SwipeItem Command="{Binding Path=BindingContext.EditPinContextCommand,
+                                <SwipeItemView Command="{Binding Path=BindingContext.ShowQRCodeCommand,
                                           Source={x:Reference page}}"
                                           CommandParameter="{Binding Self}"
-                                          IconImageSource="ic_edit.png"
-                                           BackgroundColor="{DynamicResource PrimaryColor}"/>
-                                <SwipeItem Command="{Binding DeletePinContextCommand}" 
+                                           BackgroundColor="{DynamicResource SuccsessColor}">
+                                    <Image HeightRequest="15" WidthRequest="15"  Source="ic_qr.png"/>
+                                </SwipeItemView>
+
+                                <SwipeItemView Command="{Binding Path=BindingContext.EditPinContextCommand,
+                                          Source={x:Reference page}}"
+                                          CommandParameter="{Binding Self}"
+                                           BackgroundColor="{DynamicResource PrimaryColor}"
+                                           Padding="15,0,15,0">
+                                    <Image  HeightRequest="15" WidthRequest="15" Source="ic_edit.png"/>
+                                </SwipeItemView>
+
+                                <SwipeItemView Command="{Binding DeletePinContextCommand}" 
                                            BackgroundColor="{DynamicResource ErrorColor}"
-                                          IconImageSource="ic_delete"/>
+                                           Padding="15,0,15,0">
+                                    <Image HeightRequest="15" WidthRequest="15" Source="ic_delete.png"/>
+                                </SwipeItemView>
+
                             </SwipeView.RightItems>
+
+                            <!--PIN ITEM-->
                             <StackLayout Padding="12,0,12,0">
-                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
                                 <Grid ColumnDefinitions="50,*,40"
                                       Padding="0,12,0,12">
+
+                                    <!--CHECK FAVORITE BUTTON-->
                                     <controls:ImageCheckBox Grid.Column="0"
                                                             CheckedImageSource="ic_like_blue.png" 
                                                             UncheckedImageSource="ic_like_gray.png" 
@@ -60,17 +64,21 @@
                                                             WidthRequest="40"
                                                             Padding="2"
                                                             CornerRadius="6"/>
-
+                                    <!--PIN`S LABELS-->
                                     <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Path=BindingContext.PinTappedCommand, Source={x:Reference page}}" CommandParameter="{Binding Self}"/>
                                         </StackLayout.GestureRecognizers>
+
                                         <Label Text="{Binding Name}"
-                                       Style="{DynamicResource labelStyle}"/>
+                                               Style="{DynamicResource normalLabelStyle}"/>
+
                                         <Label Text="{Binding FormatedPosition}"
-                                       Style="{DynamicResource labelStyle}"/>
+                                       Style="{DynamicResource detailLabelStyle}"/>
+
                                     </StackLayout>
 
+                                    <!--GO TO DETAIL VIEW BUTTON-->
                                     <ImageButton Grid.Column="2" 
                                            BackgroundColor="Transparent"
                                            Source="ic_left_gray.png"
@@ -87,16 +95,12 @@
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
-
-            <controls:LabeledEntry LabelText="123"
-                               EntryPlaceholderText="123"
-                               WrongLabelText="321"
-                               EntryText="{Binding Name}"/>
-
         </StackLayout>
+
+        <!--ADD NEW PIN BUTTON-->
         <Button Grid.Row="0"
                 ImageSource="ic_plus.png"
                 Style="{DynamicResource floatButtonAccentStyle}"
                 Command="{Binding GoToAddPinFormCommand}"/>
     </Grid>
-</ContentPage>
+</controls:BasePage>

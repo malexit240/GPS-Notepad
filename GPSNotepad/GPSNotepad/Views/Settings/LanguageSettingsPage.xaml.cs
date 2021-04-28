@@ -9,10 +9,9 @@ using Xamarin.Forms.Xaml;
 
 namespace GPSNotepad.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class LanguageSettingsPage : ContentPage
+    public partial class LanguageSettingsPage : GPSNotepad.Controls.BasePage
     {
-        public LanguageSettingsPage()
+        public LanguageSettingsPage() : base()
         {
             InitializeComponent();
         }

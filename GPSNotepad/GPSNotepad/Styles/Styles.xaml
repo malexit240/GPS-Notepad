@@ -54,13 +54,13 @@
     </Thickness>
 
     <x:Int32 x:Key="LargeFontSize">
-        16
+        18
     </x:Int32>
     <x:Int32 x:Key="NormalFontSize">
-        14
+        16
     </x:Int32>
     <x:Int32 x:Key="SmallFontSize">
-        12
+        14
     </x:Int32>
 
     <Style x:Key="pageStyle" 
@@ -88,6 +88,8 @@
                TargetType="Button">
         <Setter Property="TextColor"
                     Value="{DynamicResource System_White}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_SemiBold"/>
         <Setter Property="FontSize"
                     Value="{StaticResource NormalFontSize}"/>
         <Setter Property="TextTransform"
@@ -103,6 +105,8 @@
                     Value="{DynamicResource PrimaryColor}"/>
         <Setter Property="FontSize"
                     Value="{StaticResource NormalFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_SemiBold"/>
         <Setter Property="TextTransform"
                     Value="None"/>
         <Setter Property="BackgroundColor"
@@ -117,12 +121,14 @@
 
     <Style x:Key="entryLabelStyle"
                TargetType="Label">
-        <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
         <Setter Property="Margin"
                     Value="12,0,0,0"/>
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
         <Setter Property="FontSize"
                     Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Medium"/>
     </Style>
 
     <Style x:Key="wrongEntryLabelStyle"
@@ -133,6 +139,30 @@
                     Value="12,0,0,0"/>
         <Setter Property="FontSize"
                     Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_SemiBold"/>
+    </Style>
+
+    <Style x:Key="labeledEntryStyle"
+               TargetType="Entry">
+        <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource System_Gray}"/>
+        <Setter Property="FontSize"
+                    Value="{StaticResource NormalFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Medium"/>
+        <Setter Property="Margin">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.iOS>8,8,0,8</OnPlatform.iOS>
+                    <OnPlatform.Android>8,0,0,0</OnPlatform.Android>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="entryStyle"
@@ -144,12 +174,30 @@
         <Setter Property="PlaceholderColor"
                     Value="{DynamicResource System_Gray}"/>
         <Setter Property="FontSize"
-                    Value="{StaticResource NormalFontSize}"/>
-        <Setter Property="Margin"
-                    Value="0"/>
+                    Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Medium"/>
+        <Setter Property="Margin">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.iOS>12,8,0,8</OnPlatform.iOS>
+                    <OnPlatform.Android>12,0,0,0</OnPlatform.Android>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <Style x:Key="entryFrameStyle"
+               TargetType="Frame">
+        <Setter Property="BorderColor"
+                    Value="{DynamicResource System_LightGray}"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource Transparent}"/>
+        <Setter Property="Padding"
+                    Value="0"/>
+    </Style>
+
+    <Style x:Key="frameStyle"
                TargetType="Frame">
         <Setter Property="BorderColor"
                     Value="{DynamicResource System_LightGray}"/>
@@ -181,12 +229,6 @@
                     Value="20"/>
     </Style>
 
-    <Style x:Key="normalLabelStyle"
-               TargetType="Label">
-        <Setter Property="FontSize" Value="{StaticResource NormalFontSize}"/>
-        <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
-    </Style>
 
     <Style x:Key="labelStyle"
                TargetType="Label">
@@ -194,25 +236,56 @@
                     Value="{DynamicResource PrimaryTextColor}"/>
     </Style>
 
-    <Style x:Key="labelDetailStyle"
+    <Style x:Key="headerLabelStyle"
+               TargetType="Label">
+        <Setter Property="FontSize" 
+                    Value="{StaticResource LargeFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_SemiBold"/>
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="normalLabelStyle"
+               TargetType="Label">
+        <Setter Property="FontSize" 
+                    Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Medium"/>
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+    </Style>
+
+    <Style x:Key="detailLabelStyle"
                TargetType="Label">
         <Setter Property="TextColor"
                     Value="{DynamicResource  SecondaryTextColor}"/>
+        <Setter Property="FontSize" 
+                    Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Regular"/>
     </Style>
 
-    <Style x:Key="labelLinkStyle"
-               TargetType="Label">
-        <Setter Property="TextColor"
-                    Value="{DynamicResource SecondaryColor}"/>
-        <Setter Property="TextDecorations"
-                    Value="Underline"/>
+
+    <Style x:Key="titleLabelStyle" 
+           BasedOn="{StaticResource labelStyle}"
+           TargetType="Label">
+        <Setter Property="FontSize"
+                Value="{StaticResource LargeFontSize}"/>
         <Setter Property="HorizontalOptions"
-                    Value="Center"/>
+                Value="CenterAndExpand"/>
+        <Setter Property="VerticalOptions"
+                Value="CenterAndExpand"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_SemiBold"/>
     </Style>
+
 
     <Style x:Key="radioButtonStyle" TargetType="input:RadioButton">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
         <Setter Property="TextFontSize" Value="14"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Medium"/>
         <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
         <Setter Property="CircleColor" Value="{DynamicResource SecondaryColor}"/>
     </Style>
@@ -238,29 +311,18 @@
     </Style>
 
     <Style x:Key="floatButtonAccentStyle"
+           BasedOn="{StaticResource floatButtonStyle}"
                TargetType="Button">
-        <Setter Property="VerticalOptions"
-                    Value="End"/>
-        <Setter Property="HorizontalOptions"
-                    Value="End"/>
-        <Setter Property="WidthRequest"
-                    Value="48"/>
-        <Setter Property="HeightRequest"
-                    Value="48"/>
-        <Setter Property="CornerRadius"
-                    Value="24"/>
-        <Setter Property="Margin"
-                    Value="0,0,16,18"/>
-        <Setter Property="BorderWidth"
-                    Value="0"/>
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PrimaryColor}"/>
     </Style>
 
 
     <Style x:Key="switchStyle" TargetType="Switch">
-        <Setter Property="OnColor" Value="{DynamicResource SecondaryColor}"/>
-        <Setter Property="ThumbColor" Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="OnColor" 
+                    Value="{DynamicResource SecondaryColor}"/>
+        <Setter Property="ThumbColor" 
+                    Value="{DynamicResource SecondaryColor}"/>
     </Style>
 
     <Style x:Key="boxSeparatorStyle" TargetType="BoxView">
@@ -269,25 +331,5 @@
         <Setter Property="Color" Value="{DynamicResource Variant}"/>
     </Style>
 
-
-
-    <Style x:Key="activityIndicatorStyle" TargetType="ActivityIndicator">
-        <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
-    </Style>
-
-    <Style x:Key="detailViewStyle" TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
-    </Style>
-
-    <Style x:Key="dropDownStyle" TargetType="StackLayout">
-        <Setter Property="BackgroundColor" Value="{DynamicResource PageBackgroundColor}"/>
-    </Style>
-
-    <Style x:Key="stripStyle" TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryColor}"/>
-        <Setter Property="Opacity" Value="0.3"/>
-        <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
-        <Setter Property="HeightRequest" Value="1"/>
-    </Style>
 
 </ResourceDictionary>

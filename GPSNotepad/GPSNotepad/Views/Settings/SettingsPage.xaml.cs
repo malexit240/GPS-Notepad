@@ -2,9 +2,9 @@
 
 namespace GPSNotepad.Views
 {
-    public partial class SettingsPage : ContentPage
+    public partial class SettingsPage : GPSNotepad.Controls.BasePage
     {
-        public SettingsPage()
+        public SettingsPage() : base()
         {
             InitializeComponent();
         }

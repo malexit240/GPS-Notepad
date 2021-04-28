@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:GPSNotepad.Controls"
              x:Class="GPSNotepad.Views.PlaceEventsTabPage"
              x:Name="page"
@@ -36,24 +36,24 @@
                                                  VerticalOptions="CenterAndExpand">
 
                                         <Label Text="{Binding Description}"
-                                               FontSize="16"
+                                               FontSize="{StaticResource NormalFontSize}"
                                                HorizontalOptions="StartAndExpand"
-                                               Style="{DynamicResource labelStyle}"/>
+                                               Style="{DynamicResource normalLabelStyle}"/>
 
                                         <StackLayout HorizontalOptions="StartAndExpand"
                                              Orientation="Horizontal">
                                             <Label Text="{Binding DateString}"
-                                               Style="{DynamicResource labelDetailStyle}"
-                                               FontSize="12"/>
+                                               Style="{DynamicResource detailLabelStyle}"/>
                                             <Label Text="{Binding TimeString}"
-                                               Style="{DynamicResource labelDetailStyle}"
-                                               FontSize="12"/>
+                                               Style="{DynamicResource detailLabelStyle}"/>
                                         </StackLayout>
                                     </StackLayout>
-                                    <Image Grid.Column="1"
+                                    <ImageButton Grid.Column="1"
                                            Source="ic_left_gray.png"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="FillAndExpand"/>
+                                           HorizontalOptions="FillAndExpand"
+                                           Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
+                                               Source={x:Reference page}}"/>
                                 </Grid>
                                 <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
                             </StackLayout>
@@ -67,4 +67,4 @@
                 Style="{DynamicResource floatButtonAccentStyle}"
                 Command="{Binding GoToAddPlaceEventFormCommand}"/>
     </Grid>
-</ContentPage>
+</controls:BasePage>

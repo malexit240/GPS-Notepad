@@ -6,7 +6,7 @@ using Xamarin.Forms.GoogleMaps;
 using Xamarin.Forms.GoogleMaps.Clustering.Android;
 using static Android.Gms.Maps.GoogleMap;
 
-[assembly: ExportRenderer(typeof(GPSNotepad.Controls.BindableMap), typeof(GPSNotepad.Droid.BindableMapRenderer))]
+
 namespace GPSNotepad.Droid
 {
     public class BindableMapRenderer : ClusteredMapRenderer

@@ -1,17 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com" 
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignUpTwoPage"
-             Title="{Binding TextResources[SignUpTitle]}"
-             Style="{DynamicResource pageStyle}">
+             Style="{DynamicResource pageStyle}"
+             NavigationPage.HasNavigationBar="False">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="icon_settings.png"
             Command="{prism:NavigateTo 'SettingsPage'}"/>
     </ContentPage.ToolbarItems>
     <StackLayout Padding="{StaticResource FullIndent}">
+        <controls:PageNavbar Title="{Binding TextResources[SignUpTitle]}"/>
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
@@ -37,4 +39,4 @@
                 Command="{Binding SignUpCommand}"
                 Style="{DynamicResource buttonAccentStyle}"/>
     </StackLayout>
-</ContentPage>
+</controls:BasePage>

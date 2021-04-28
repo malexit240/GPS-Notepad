@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage  xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SettingsPage"
-             Title="{Binding TextResources[SettingsPageTitle]}"
-             Style="{DynamicResource pageStyle}">
+             Style="{DynamicResource pageStyle}"
+             NavigationPage.HasNavigationBar="False">
     <StackLayout>
+        <controls:PageNavbar Title="{Binding TextResources[SettingsPageTitle]}"/>
+
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="{StaticResource FullIndent}">
             <Label Text="Dark theme"
@@ -29,4 +31,4 @@
         </StackLayout>
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
     </StackLayout>
-</ContentPage>
+</controls:BasePage>

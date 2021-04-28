@@ -1,17 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:GPSNotepad.Controls"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignUpOnePage"
-             Title="{Binding TextResources[SignUpTitle]}"
-             Style="{DynamicResource pageStyle}">
+             Style="{DynamicResource pageStyle}"
+                   NavigationPage.HasNavigationBar="False">
     <ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="icon_settings.png"
             Command="{prism:NavigateTo 'SettingsPage'}"/>
     </ContentPage.ToolbarItems>
     <StackLayout Padding="{StaticResource FullIndent}">
+        <controls:PageNavbar Title="{Binding TextResources[SignUpTitle]}"/>
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[Name]}" 
@@ -32,5 +33,31 @@
         <Button Text="Next"
                 Command="{Binding GoToSignUpTwoPageCommand}"
                 Style="{DynamicResource buttonAccentStyle}"/>
+
+        <Grid RowDefinitions="*" 
+              HorizontalOptions="FillAndExpand">
+            <BoxView Grid.Row="0"
+                HeightRequest="1"
+                     VerticalOptions="CenterAndExpand"
+                HorizontalOptions="FillAndExpand"
+                     BackgroundColor="{DynamicResource System_Gray}"/>
+            <Label Grid.Row="0" 
+                   Text=" or "
+                   TextColor="{DynamicResource System_Gray}"
+                   BackgroundColor="{DynamicResource PageBackgroundColor}"
+                   HorizontalOptions="CenterAndExpand"/>
+        </Grid>
+
+        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            <Frame Margin="0" Padding="15,0,15,0" HorizontalOptions="Start" Style="{DynamicResource frameStyle}">
+                <Button BackgroundColor="Transparent" ImageSource="ic_google.png"/>
+            </Frame>
+            <Frame  Margin="0" Padding="15,0,15,0" HorizontalOptions="CenterAndExpand" Style="{DynamicResource frameStyle}">
+                <Button BackgroundColor="Transparent" ImageSource="ic_facebook.png"/>
+            </Frame>
+            <Frame  Margin="0" Padding="15,0,15,0" HorizontalOptions="End" Style="{DynamicResource frameStyle}">
+                <Button BackgroundColor="Transparent" ImageSource="ic_apple.png"/>
+            </Frame>
+        </StackLayout>
     </StackLayout>
-</ContentPage>
+</controls:BasePage>
