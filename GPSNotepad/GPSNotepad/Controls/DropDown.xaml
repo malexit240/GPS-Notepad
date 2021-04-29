@@ -17,10 +17,12 @@
                             <Image Grid.Column="0" Margin="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="ic_pin_gray.png"/>
                             <StackLayout Grid.Column="1" Padding="0" Margin="0">
                                 <Label Style="{DynamicResource normalLabelStyle}"
+                                       FontSize="{DynamicResource SmallFontSize}"
                                        Text="{Binding Name}"
                                        MaxLines="1"
                                        BackgroundColor="Transparent"/>
                                 <Label Style="{DynamicResource detailLabelStyle}"
+                                       FontSize="{DynamicResource SmallFontSize}"
                                        Text="{Binding Address}"
                                        MaxLines="1"
                                        BackgroundColor="Transparent"/>

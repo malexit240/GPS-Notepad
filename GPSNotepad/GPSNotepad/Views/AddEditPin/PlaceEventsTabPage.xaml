@@ -36,16 +36,17 @@
                                                  VerticalOptions="CenterAndExpand">
 
                                         <Label Text="{Binding Description}"
-                                               FontSize="{StaticResource NormalFontSize}"
                                                HorizontalOptions="StartAndExpand"
                                                Style="{DynamicResource normalLabelStyle}"/>
 
                                         <StackLayout HorizontalOptions="StartAndExpand"
                                              Orientation="Horizontal">
                                             <Label Text="{Binding DateString}"
-                                               Style="{DynamicResource detailLabelStyle}"/>
+                                                   Style="{DynamicResource detailLabelStyle}"
+                                                   FontSize="{DynamicResource SmallFontSize}"/>
                                             <Label Text="{Binding TimeString}"
-                                               Style="{DynamicResource detailLabelStyle}"/>
+                                                   Style="{DynamicResource detailLabelStyle}"
+                                                   FontSize="{DynamicResource SmallFontSize}"/>
                                         </StackLayout>
                                     </StackLayout>
                                     <ImageButton Grid.Column="1"

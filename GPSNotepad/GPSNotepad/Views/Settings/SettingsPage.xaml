@@ -13,9 +13,9 @@
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="{StaticResource FullIndent}">
             <Label Text="Dark theme"
                    HorizontalOptions="StartAndExpand"
-                   Style="{DynamicResource normalLabelStyle}"/>
+                   Style="{DynamicResource settingsLabelStyle}"/>
             <Switch HorizontalOptions="End" 
-                    IsToggled="{Binding IsDarkTheme}"                  
+                    IsToggled="{Binding IsDarkTheme}"
                     Style="{DynamicResource switchStyle}"/>
         </StackLayout>
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
@@ -26,7 +26,7 @@
             </StackLayout.GestureRecognizers>
             <Label Text="Language"
                    HorizontalOptions="StartAndExpand"
-                   Style="{DynamicResource normalLabelStyle}"/>
+                   Style="{DynamicResource settingsLabelStyle}"/>
             <Image Source="ic_left_gray.png" HorizontalOptions="End"/>
         </StackLayout>
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>

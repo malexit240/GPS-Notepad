@@ -71,10 +71,12 @@
                                         </StackLayout.GestureRecognizers>
 
                                         <Label Text="{Binding Name}"
-                                               Style="{DynamicResource normalLabelStyle}"/>
+                                               Style="{DynamicResource normalLabelStyle}"
+                                               />
 
                                         <Label Text="{Binding FormatedPosition}"
-                                       Style="{DynamicResource detailLabelStyle}"/>
+                                               Style="{DynamicResource detailLabelStyle}"
+                                               FontSize="{DynamicResource SmallFontSize}"/>
 
                                     </StackLayout>
 

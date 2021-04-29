@@ -7,7 +7,7 @@
     <Entry x:Name="searchEntry"
            Placeholder="Search" 
            Style="{DynamicResource entryStyle}"
-          
+           FontSize="{DynamicResource SmallFontSize}"
            HorizontalOptions="FillAndExpand">
         <Entry.Behaviors>
             <prism:EventToCommandBehavior EventName="Focused" Command="{Binding OnSearchFieldFocused}"/>

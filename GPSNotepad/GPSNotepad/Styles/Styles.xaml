@@ -249,7 +249,7 @@
     <Style x:Key="normalLabelStyle"
                TargetType="Label">
         <Setter Property="FontSize" 
-                    Value="{StaticResource SmallFontSize}"/>
+                    Value="{StaticResource NormalFontSize}"/>
         <Setter Property="FontFamily"
                     Value="Montserrat_Medium"/>
         <Setter Property="TextColor"
@@ -262,6 +262,16 @@
                     Value="{DynamicResource  SecondaryTextColor}"/>
         <Setter Property="FontSize" 
                     Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Regular"/>
+    </Style>
+
+    <Style x:Key="settingsLabelStyle"
+               TargetType="Label">
+        <Setter Property="TextColor"
+                    Value="{DynamicResource  PrimaryTextColor}"/>
+        <Setter Property="FontSize" 
+                    Value="{StaticResource NormalFontSize}"/>
         <Setter Property="FontFamily"
                     Value="Montserrat_Regular"/>
     </Style>
@@ -283,9 +293,9 @@
 
     <Style x:Key="radioButtonStyle" TargetType="input:RadioButton">
         <Setter Property="TextColor" Value="{DynamicResource PrimaryTextColor}"/>
-        <Setter Property="TextFontSize" Value="14"/>
+        <Setter Property="TextFontSize" Value="{StaticResource NormalFontSize}"/>
         <Setter Property="FontFamily"
-                    Value="Montserrat_Medium"/>
+                    Value="Montserrat_Regular"/>
         <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
         <Setter Property="CircleColor" Value="{DynamicResource SecondaryColor}"/>
     </Style>

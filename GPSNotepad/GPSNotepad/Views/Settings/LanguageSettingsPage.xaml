@@ -17,7 +17,7 @@
                                 IsChecked="{Binding IsEnglish}"
                                 ClickCommand="{Binding CheckedEnglish}"
                                 Style="{DynamicResource radioButtonStyle}"
-                            Padding="{DynamicResource FullIndent}"/>
+                                Padding="{DynamicResource FullIndent}"/>
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
@@ -25,7 +25,7 @@
                                 IsChecked="{Binding IsRussian}"
                                 ClickCommand="{Binding CheckedRussian}"
                                 Style="{DynamicResource radioButtonStyle}"
-                            Padding="{DynamicResource FullIndent}"/>
+                                Padding="{DynamicResource FullIndent}"/>
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
         </input:RadioButtonGroupView>
