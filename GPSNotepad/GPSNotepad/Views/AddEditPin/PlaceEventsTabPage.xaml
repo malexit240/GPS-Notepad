@@ -7,7 +7,6 @@
     <Grid RowDefinitions="*">
         <StackLayout Grid.Row="0">
             <controls:PageNavbar Title="Events"
-                                 Padding="0,24,0,24"
                                  IsBackButtonEnabled="False"/>
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
@@ -29,9 +28,9 @@
                             </SwipeView.RightItems>
 
                             <SwipeView.Content>
-                                <StackLayout HorizontalOptions="FillAndExpand">
+                                <StackLayout HorizontalOptions="FillAndExpand" Padding="14,0,14,0">
                                     <Grid ColumnDefinitions="*,40"
-                                      Padding="0,14,0,14">
+                                      Padding="0,16,0,16">
 
                                         <StackLayout Grid.Column="0" 
                                                  HorizontalOptions="FillAndExpand"

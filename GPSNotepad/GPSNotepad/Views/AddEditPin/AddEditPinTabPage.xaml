@@ -38,7 +38,6 @@
                                        EntryPlaceholderText="Longitude"
                                        EntryText="{Binding Longitude}"
                                        IsWrong="{Binding IsLongitudeWrong}"
-                                       WrongLabelText=" "
                                        HorizontalOptions="FillAndExpand"
                                        Margin="0,0,4,0"/>
 
@@ -47,13 +46,12 @@
                                        EntryPlaceholderText="Latitude"
                                        EntryText="{Binding Latitude}"
                                        IsWrong="{Binding IsLatitudeWrong}"
-                                       WrongLabelText=" "
                                        HorizontalOptions="FillAndExpand"
                                        Margin="4,0,0,0"/>
             </Grid>
 
 
-            <Grid RowDefinitions="*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Red">
+            <Grid RowDefinitions="*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <controls:BindableMap x:Name="map" 
                                       Grid.Row="0" 
                                       PinsSource="{Binding Pins}"

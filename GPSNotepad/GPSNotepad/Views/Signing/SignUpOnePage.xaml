@@ -50,17 +50,17 @@
                    HorizontalOptions="CenterAndExpand"/>
         </Grid>
 
-        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-            <Frame Margin="0" Padding="15,0,15,0" HorizontalOptions="Start" Style="{DynamicResource frameStyle}">
-                <Button BackgroundColor="Transparent" ImageSource="ic_google.png"/>
-            </Frame>
-            <Frame  Margin="0" Padding="15,0,15,0" HorizontalOptions="CenterAndExpand" Style="{DynamicResource frameStyle}">
-                <Button BackgroundColor="Transparent" ImageSource="ic_facebook.png"/>
-            </Frame>
-            <Frame  Margin="0" Padding="15,0,15,0" HorizontalOptions="End" Style="{DynamicResource frameStyle}">
-                <Button BackgroundColor="Transparent" ImageSource="ic_apple.png"/>
-            </Frame>
-        </StackLayout>
+            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <Frame Margin="0" Padding="22,0,22,0"  HorizontalOptions="StartAndExpand" Style="{DynamicResource frameStyle}">
+                    <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_google.png"/>
+                </Frame>
+                <Frame  Margin="0" Padding="22,0,22,0" HorizontalOptions="CenterAndExpand" Style="{DynamicResource frameStyle}">
+                    <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_facebook.png"/>
+                </Frame>
+                <Frame  Margin="0" Padding="22,0,22,0"  HorizontalOptions="EndAndExpand" Style="{DynamicResource frameStyle}">
+                    <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_apple.png"/>
+                </Frame>
+            </StackLayout>
         </StackLayout>
     </StackLayout>
 </controls:BasePage>

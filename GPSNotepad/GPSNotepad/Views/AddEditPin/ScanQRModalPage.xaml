@@ -7,7 +7,11 @@
              x:Class="GPSNotepad.Views.ScanQRModalPage">
     <Grid RowDefinitions="*,Auto,*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
         <StackLayout Grid.Row="0">
-            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="{Binding ErrorMessage}"/>
+            <Label HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand" 
+                   Text="{Binding ErrorMessage}" 
+                   FontFamily="Montserrat_SemiBold"
+                   FontSize="30"/>
         </StackLayout>
 
         <zxing:ZXingScannerView  Grid.Row="1" HorizontalOptions="Center" VerticalOptions="Center"  ScanResultCommand="{Binding OnScanQRResultCommand}" IsScanning="True"
@@ -17,7 +21,9 @@
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
             </StackLayout.GestureRecognizers>
-            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Tap to exit"/>
+            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Text="Tap to exit"
+                   FontFamily="Montserrat_SemiBold"
+                   FontSize="30"/>
         </StackLayout>
     </Grid>
 </controls:BasePage>
