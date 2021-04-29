@@ -103,16 +103,15 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BindableMapRenderer.cs" />
-    <Compile Include="CustomButtonRenderer.cs" />
-    <Compile Include="CustomFrameRenderer.cs" />
-    <Compile Include="CustomTabbedPageRenderer.cs" />
-    <Compile Include="IOSChangerStatusBarColor.cs" />
-    <Compile Include="iOSInitializer.cs" />
-    <Compile Include="iOSLocalNotificationManager.cs" />
+    <Compile Include="Renderers\BindableMapRenderer.cs" />
+    <Compile Include="Renderers\CustomButtonRenderer.cs" />
+    <Compile Include="Renderers\CustomFrameRenderer.cs" />
+    <Compile Include="Renderers\CustomTabbedPageRenderer.cs" />
+    <Compile Include="Initializators\iOSInitializer.cs" />
+    <Compile Include="DependencyImplementation\iOSLocalNotificationManager.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="CustomEntryRenderer.cs" />
+    <Compile Include="Renderers\CustomEntryRenderer.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <LinkDescription Include="LinkerSettings.xml" />
@@ -463,5 +462,6 @@
   <ItemGroup>
     <BundleResource Include="Resources\purpleMarkerSmallWithCrown.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

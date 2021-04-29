@@ -80,18 +80,17 @@
     <PackageReference Include="Prism.Unity.Forms" Version="8.0.0.1909" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BindableMapRenderer.cs" />
-    <Compile Include="CachingNativeBitmapDescriptorFactory.cs" />
-    <Compile Include="CustomButtonRenderer.cs" />
-    <Compile Include="CustomEntryRenderer.cs" />
-    <Compile Include="DroidChangerStatusBarColor.cs" />
-    <Compile Include="GPSShinyStartup.cs" />
+    <Compile Include="Renderers\BindableMapRenderer.cs" />
+    <Compile Include="Initializators\CachingNativeBitmapDescriptorFactory.cs" />
+    <Compile Include="Renderers\CustomButtonRenderer.cs" />
+    <Compile Include="Renderers\CustomEntryRenderer.cs" />
+    <Compile Include="DependencyImplementation\DroidChangerStatusBarColor.cs" />
+    <Compile Include="Initializators\GPSShinyStartup.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
-    <Compile Include="OnMarkerClickListener.cs" />
-    <Compile Include="SplashActivity.cs" />
+    <Compile Include="Renderers\OnMarkerClickListener.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StyledNavigationRenderer.cs" />
+    <Compile Include="Renderers\StyledNavigationRenderer.cs" />
     <LinkDescription Include="LinkerSettings.xml" />
   </ItemGroup>
   <ItemGroup>
