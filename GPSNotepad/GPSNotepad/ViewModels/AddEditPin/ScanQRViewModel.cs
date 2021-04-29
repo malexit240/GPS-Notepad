@@ -48,7 +48,7 @@ namespace GPSNotepad.ViewModels
             }
             else
             {
-                ErrorMessage = "Error";
+                ErrorMessage = TextResources["ErrorScaning"];
             }
         }
 

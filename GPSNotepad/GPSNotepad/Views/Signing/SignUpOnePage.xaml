@@ -10,31 +10,47 @@
 
     <!--#region CONTENT -->
     <StackLayout>
-        <controls:PageNavbar Title="{Binding TextResources[SignUpTitle]}"/>
+
+        <!--#region NAVIGATION BAR -->
+        <controls:PageNavbar Title="{Binding TextResources[CreateAccount]}"/>
+        <!--#endregion-->
 
         <StackLayout Padding="{DynamicResource FullIndent}">
 
 
+            <!--#region NAME -->
+
             <controls:LabeledEntry LabelText="{Binding TextResources[Name]}" 
-                               EntryPlaceholderText="{Binding TextResources[Name]}"
-                               EntryText="{Binding Name}"
-                               WrongLabelText="   "
-                               ButtonImageSource="ic_clear.png"
-                               ButtonCommand="{Binding ClearNameCommand}"
-                               Margin="0,8,0,0"/>
+                                   EntryPlaceholderText="{Binding TextResources[EnterNamePlaceholder]}"
+                                   EntryText="{Binding Name}"
+                                   ButtonImageSource="ic_clear.png"
+                                   ButtonCommand="{Binding ClearNameCommand}"
+                                   Margin="0,8,0,0"/>
+
+            <!--#endregion-->
+
+            <!--#region EMAIL -->
 
             <controls:LabeledEntry LabelText="{Binding TextResources[Email]}" 
-                               EntryPlaceholderText="{Binding TextResources[Email]}"
-                               EntryText="{Binding Email}"
-                               WrongLabelText="{Binding WrongText}"
-                               IsWrong="{Binding IsEmailWrong}"
-                               ButtonImageSource="ic_clear.png"
-                               ButtonCommand="{Binding ClearEmailCommand}"/>
+                                   EntryPlaceholderText="{Binding TextResources[EnterEmailPlaceholder]}"
+                                   EntryText="{Binding Email}"
+                                   WrongLabelText="{Binding WrongText}"
+                                   IsWrong="{Binding IsEmailWrong}"
+                                   ButtonImageSource="ic_clear.png"
+                                   ButtonCommand="{Binding ClearEmailCommand}"/>
 
-            <Button Text="Next"
+            <!--#endregion-->
+
+            <!--#region NEXT -->
+
+            <Button Text="{Binding TextResources[Next]}"
                     Command="{Binding GoToSignUpTwoPageCommand}"
                     Style="{DynamicResource buttonAccentStyle}"
                     Margin="0,8,0,0"/>
+
+            <!--#endregion-->
+
+            <!--#region OR SEPARATOR -->
 
             <Grid RowDefinitions="*" 
                   HorizontalOptions="FillAndExpand"
@@ -47,7 +63,7 @@
                          BackgroundColor="{DynamicResource System_LightGray}"/>
 
                 <Label Grid.Row="0" 
-                   Text=" or "
+                   Text="{Binding TextResources[OR]}"
                    FontSize="{DynamicResource SmallFontSize}"
                    FontFamily="Montserrat_Medium"
                    TextColor="{DynamicResource System_LightGray}"
@@ -55,6 +71,9 @@
                    HorizontalOptions="CenterAndExpand"/>
             </Grid>
 
+            <!--#endregion-->
+
+            <!--#region OTHER WAYS -->
             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                 <StackLayout.HeightRequest>
                     <OnPlatform x:TypeArguments="x:Double">
@@ -71,6 +90,8 @@
                     <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_apple.png"/>
                 </Frame>
             </StackLayout>
+            <!--#endregion-->
+
         </StackLayout>
     </StackLayout>
     <!--#endregion-->

@@ -6,8 +6,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignInPage"
              Style="{DynamicResource pageStyle}"
-             NavigationPage.HasNavigationBar="False"
-             BackgroundColor="{DynamicResource Cocolor}">
+             NavigationPage.HasNavigationBar="False">
 
     <!--#region CONTENT -->
     <StackLayout>
@@ -23,56 +22,56 @@
             <!--#region EMAIL -->
 
             <controls:LabeledEntry LabelText="{Binding TextResources[Email]}"
-                               EntryText="{Binding Email}"
-                               EntryPlaceholderText="{Binding TextResources[EnterEmailPlaceholder]}"
-                               IsWrong="{Binding IsEmailWrong}"
-                               ButtonImageSource="ic_clear.png"
-                               ButtonCommand="{Binding ClearEmailCommand}"
-                               WrongLabelText="{Binding TextResources[WrongEmail]}"
-                               Margin="0,8,0,0"/>
+                                   EntryText="{Binding Email}"
+                                   EntryPlaceholderText="{Binding TextResources[EnterEmailPlaceholder]}"
+                                   IsWrong="{Binding IsEmailWrong}"
+                                   ButtonImageSource="ic_clear.png"
+                                   ButtonCommand="{Binding ClearEmailCommand}"
+                                   WrongLabelText="{Binding TextResources[WrongEmail]}"
+                                   Margin="0,8,0,0"/>
 
             <!--#endregion-->
 
             <!--#region PASSWORD -->
 
             <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
-                               EntryText="{Binding Password}"
-                               EntryPlaceholderText="{Binding TextResources[EnterPasswordPlaceholder]}"
-                               IsWrong="{Binding IsPasswordWrong}"
-                               IsPassword="{Binding IsHidePassword}"
-                               ButtonImageSource="ic_eye_off.png"
-                               ButtonCheckedImageSource="ic_eye.png"
-                               ButtonCommand="{Binding ShowPasswordCommand}"
-                               WrongLabelText="{Binding TextResources[WrongPassword]}"/>
+                                   EntryText="{Binding Password}"
+                                   EntryPlaceholderText="{Binding TextResources[EnterPasswordPlaceholder]}"
+                                   IsWrong="{Binding IsPasswordWrong}"
+                                   IsPassword="{Binding IsHidePassword}"
+                                   ButtonImageSource="ic_eye_off.png"
+                                   ButtonCheckedImageSource="ic_eye.png"
+                                   ButtonCommand="{Binding ShowPasswordCommand}"
+                                   WrongLabelText="{Binding TextResources[WrongPassword]}"/>
 
             <!--#endregion-->
 
             <!--#region LOGIN BUTTON -->
 
             <Button Text="{Binding TextResources[ButtonLogIn]}"
-                Command="{Binding SignInCommand}"
-                Style="{DynamicResource buttonAccentStyle}"
-                Margin="0,8,0,0"/>
+                    Command="{Binding SignInCommand}"
+                    Style="{DynamicResource buttonAccentStyle}"
+                    Margin="0,8,0,0"/>
 
             <!--#endregion-->
 
             <!--#region SEPARATOR OR -->
 
             <Grid RowDefinitions="*" 
-              HorizontalOptions="FillAndExpand"
-              Margin="0,12,0,12">
+                  HorizontalOptions="FillAndExpand"
+                  Margin="0,12,0,12">
                 <BoxView Grid.Row="0"
-                HeightRequest="1"
-                     VerticalOptions="CenterAndExpand"
-                HorizontalOptions="FillAndExpand"
-                     BackgroundColor="{DynamicResource System_LightGray}"/>
+                         HeightRequest="1"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{DynamicResource System_LightGray}"/>
                 <Label Grid.Row="0" 
-                   Text="{Binding TextResources[OR]}"
-                   FontSize="{DynamicResource SmallFontSize}"
-                   FontFamily="Montserrat_Medium"
-                   TextColor="{DynamicResource System_LightGray}"
-                   BackgroundColor="{DynamicResource PageBackgroundColor}"
-                   HorizontalOptions="CenterAndExpand"/>
+                       Text="{Binding TextResources[OR]}"
+                       FontSize="{DynamicResource SmallFontSize}"
+                       FontFamily="Montserrat_Medium"
+                       TextColor="{DynamicResource System_LightGray}"
+                       BackgroundColor="{DynamicResource PageBackgroundColor}"
+                       HorizontalOptions="CenterAndExpand"/>
             </Grid>
 
             <!--#endregion-->

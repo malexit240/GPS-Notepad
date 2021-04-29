@@ -1,26 +1,36 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             xmlns:controls="clr-namespace:GPSNotepad.Controls"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.AddEditPlaceEventPage"
-             Title="{Binding TextResources[AddEditPlaceEventTitle]}"
-             Style="{DynamicResource pageStyle}"
-             NavigationPage.HasNavigationBar="False">
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:prism="http://prismlibrary.com"
+                   xmlns:controls="clr-namespace:GPSNotepad.Controls"
+                   prism:ViewModelLocator.AutowireViewModel="True"
+                   x:Class="GPSNotepad.Views.AddEditPlaceEventPage"
+                   Title="{Binding TextResources[AddEvent]}"
+                   Style="{DynamicResource pageStyle}"
+                   NavigationPage.HasNavigationBar="False">
+    <!--#region CONTENT -->
+    
     <StackLayout>
 
-        <controls:PageNavbar Title="Place events">
+        <!--#region NAVIGATION BAR -->
+
+        <controls:PageNavbar Title="{Binding TextResources[AddEvent]}">
             <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
         </controls:PageNavbar>
+        
+        <!--#endregion-->
 
+        <!--#region SEPARATOR -->
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+        <!--#endregion-->
 
         <StackLayout Padding="{DynamicResource HorizontalIndent}">
 
+            <!--#region DESCRIPTION -->
             <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
-                                   EntryPlaceholderText="{Binding TextResources[Description]}"
+                                   EntryPlaceholderText="{Binding TextResources[WriteDescriptionPlaceholder]}"
                                    EntryText="{Binding Description}"/>
+            <!--#endregion-->
 
             <DatePicker TextColor="{DynamicResource PrimaryTextColor}" 
                         FontFamily="Montserrat_Medium"
@@ -37,4 +47,6 @@
         </StackLayout>
 
     </StackLayout>
+    
+    <!--#endregion-->
 </controls:BasePage>

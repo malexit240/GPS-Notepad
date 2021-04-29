@@ -1,35 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:BasePage  xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.LanguageSettingsPage"
-             Style="{DynamicResource pageStyle}"
-             NavigationPage.HasNavigationBar="False">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:prism="http://prismlibrary.com"
+                    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+                    prism:ViewModelLocator.AutowireViewModel="True"
+                    x:Class="GPSNotepad.Views.LanguageSettingsPage"
+                    Style="{DynamicResource pageStyle}"
+                    NavigationPage.HasNavigationBar="False">
+
+    <!--#region CONTENT -->
     <StackLayout>
-        
-        <controls:PageNavbar Title="{Binding TextResources[ChooseLanguageTitle]}"/>
-        
+
+        <!--#region NAVIGATION BAR -->
+
+        <controls:PageNavbar Title="{Binding TextResources[Language]}"/>
+
+        <!--#endregion-->
+
+        <!--#region SEPARATOR -->
+
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
+        <!--#endregion-->
+
+        <!--#region OPTIONS -->
         <input:RadioButtonGroupView>
 
+            <!--#region ENGLISH -->
             <input:RadioButton  Text="{Binding TextResources[English]}" 
                                 IsChecked="{Binding IsEnglish}"
                                 ClickCommand="{Binding CheckedEnglish}"
                                 Style="{DynamicResource radioButtonStyle}"
                                 Margin="0" Padding="14,16,14,16"/>
+            <!--#endregion-->
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
+            <!--#region RUSSIAN -->
             <input:RadioButton  Text="{Binding TextResources[Russian]}"
                                 IsChecked="{Binding IsRussian}"
                                 ClickCommand="{Binding CheckedRussian}"
                                 Style="{DynamicResource radioButtonStyle}"
                                 Margin="0" Padding="14,16,14,16"/>
+            <!--#endregion-->
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
         </input:RadioButtonGroupView>
+        <!--#endregion-->
     </StackLayout>
+    <!--#endregion-->
 </controls:BasePage>

@@ -117,4 +117,157 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddEvent" xml:space="preserve">
+    <value>Создать событие</value>
+  </data>
+  <data name="AddPin" xml:space="preserve">
+    <value>Создать пин</value>
+  </data>
+  <data name="ButtonLogIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="CancelScaning" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="ConfirmDeleteEvent" xml:space="preserve">
+    <value>Вы хотите удалить пин?</value>
+  </data>
+  <data name="ConfirmDeletePin" xml:space="preserve">
+    <value>Вы хотите удалить пин?</value>
+  </data>
+  <data name="ConfirmLogout" xml:space="preserve">
+    <value>Вы хотите выйти?</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Подтвердите пароль</value>
+  </data>
+  <data name="ConfirmTitle" xml:space="preserve">
+    <value>Внимание</value>
+  </data>
+  <data name="Coordinates" xml:space="preserve">
+    <value>Координаты</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Создать аккаунт</value>
+  </data>
+  <data name="CreateAnAccount" xml:space="preserve">
+    <value>Создать аккаунт</value>
+  </data>
+  <data name="CreatePasswordPlaceholder" xml:space="preserve">
+    <value>Создайте пароль</value>
+  </data>
+  <data name="DarkTheme" xml:space="preserve">
+    <value>Темная тема</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="EditPin" xml:space="preserve">
+    <value>Изменение пина</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Емаил</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Английский</value>
+  </data>
+  <data name="EnterEmailPlaceholder" xml:space="preserve">
+    <value>Введите емаил</value>
+  </data>
+  <data name="EnterLabel" xml:space="preserve">
+    <value>Подпишите</value>
+  </data>
+  <data name="EnterLabelPlaceholder" xml:space="preserve">
+    <value>Подпишите</value>
+  </data>
+  <data name="EnterNamePlaceholder" xml:space="preserve">
+    <value>Введите свое имя</value>
+  </data>
+  <data name="EnterPasswordPlaceholder" xml:space="preserve">
+    <value>Введите пароль</value>
+  </data>
+  <data name="ErrorScaning" xml:space="preserve">
+    <value>Неверный QR-код</value>
+  </data>
+  <data name="Events" xml:space="preserve">
+    <value>События</value>
+  </data>
+  <data name="IncorrectPasswordContent" xml:space="preserve">
+    <value>Неправильный пароль</value>
+  </data>
+  <data name="IncorrectPasswordLength" xml:space="preserve">
+    <value>Неправильная длина пароля</value>
+  </data>
+  <data name="Label" xml:space="preserve">
+    <value>Подпись</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Latitude" xml:space="preserve">
+    <value>Широта</value>
+  </data>
+  <data name="LogInTitle" xml:space="preserve">
+    <value>Вход</value>
+  </data>
+  <data name="Longitude" xml:space="preserve">
+    <value>Долгота</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Карта</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="OR" xml:space="preserve">
+    <value> или </value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="PasswordMismatch" xml:space="preserve">
+    <value>Пароли не совпадают</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Пин</value>
+  </data>
+  <data name="Pins" xml:space="preserve">
+    <value>Пины</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="UserAlreadyExist" xml:space="preserve">
+    <value>Пользователь уже существует</value>
+  </data>
+  <data name="WriteDescriptionPlaceholder" xml:space="preserve">
+    <value>Напишите описание</value>
+  </data>
+  <data name="WrongEmail" xml:space="preserve">
+    <value>Неправильный емаил</value>
+  </data>
+  <data name="WrongEmailFormat" xml:space="preserve">
+    <value>Неправильный формат емаила</value>
+  </data>
+  <data name="WrongPassword" xml:space="preserve">
+    <value>Неправильный пароль</value>
+  </data>
 </root>

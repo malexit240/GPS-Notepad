@@ -50,6 +50,19 @@ namespace GPSNotepad.Controls
             typeof(MainPageNavBar));
 
 
+        public string SearchPlaceholderText
+        {
+            get => (string)GetValue(SearchPlaceholderTextProperty);
+            set => SetValue(SearchPlaceholderTextProperty, value);
+        }
+
+        public static BindableProperty SearchPlaceholderTextProperty = BindableProperty.Create(
+            nameof(SearchPlaceholderText),
+            typeof(string),
+            typeof(MainPageNavBar),
+            defaultBindingMode: BindingMode.TwoWay);
+
+
 
         public ICommand OnSearchFieldFocused => new DelegateCommand(async () =>
         {

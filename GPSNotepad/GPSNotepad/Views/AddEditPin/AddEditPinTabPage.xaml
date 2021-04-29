@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns:converters="clr-namespace:GPSNotepad.Converters"
-             x:Class="GPSNotepad.Views.AddEditPinTabPage"
-             Style="{DynamicResource pageStyle}">
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                   xmlns:prism="http://prismlibrary.com" 
+                   xmlns:controls="clr-namespace:GPSNotepad.Controls" 
+                   xmlns:converters="clr-namespace:GPSNotepad.Converters"
+                   x:Class="GPSNotepad.Views.AddEditPinTabPage"
+                   Style="{DynamicResource pageStyle}">
+
+    <!--#region PAGE RESOURCES -->
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -10,33 +15,51 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <!--#endregion-->
+
+    <!--#region CONTENT -->
+
     <StackLayout VerticalOptions="FillAndExpand">
 
-        <controls:PageNavbar Title="Edit pin">
+        <!--#region NAVIGATION BAR -->
+
+        <controls:PageNavbar Title="{Binding TextResources[EditPin]}">
             <ImageButton BackgroundColor="Transparent" Grid.Column="4" HeightRequest="20"  Source="ic_scan_qr.png" Command="{Binding ScanQRCommand}"/>
             <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPinCommand}"/>
         </controls:PageNavbar>
 
+        <!--#endregion-->
+
+        <!--#region SEPARATOR -->
+
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+        <!--#endregion-->
 
         <StackLayout Padding="{DynamicResource HorizontalIndent}" VerticalOptions="FillAndExpand">
 
-            <controls:LabeledEntry LabelText="{Binding TextResources[Name] }"
-                               EntryPlaceholderText="{Binding TextResources[Name]}"
-                               WrongLabelText=" "
-                               EntryText="{Binding Name}"/>
+            <!--#region NAME -->
 
+            <controls:LabeledEntry LabelText="{Binding TextResources[Label]}"
+                                   EntryPlaceholderText="{Binding TextResources[EnterLabel]}"
+                                   EntryText="{Binding Name}"/>
+
+            <!--#endregion-->
+
+            <!--#region DESCRIPTION -->
             <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
-                               EntryPlaceholderText="{Binding TextResources[Description]}"
+                               EntryPlaceholderText="{Binding TextResources[WriteDescriptionPlaceholder]}"
                                WrongLabelText=" "
                                EntryText="{Binding Description}"/>
+            <!--#endregion-->
 
 
+            <!--#region COORDINATES -->
             <Grid ColumnDefinitions="1*,1*" HorizontalOptions="FillAndExpand">
 
                 <controls:LabeledEntry Grid.Column="0" 
-                                       LabelText="Coordinates"
-                                       EntryPlaceholderText="Longitude"
+                                       LabelText="{Binding TextResources[Coordinates]}"
+                                       EntryPlaceholderText="{Binding TextResources[Longitude]}"
                                        EntryText="{Binding Longitude}"
                                        IsWrong="{Binding IsLongitudeWrong}"
                                        HorizontalOptions="FillAndExpand"
@@ -44,15 +67,18 @@
 
                 <controls:LabeledEntry Grid.Column="1"
                                        LabelText=" "
-                                       EntryPlaceholderText="Latitude"
+                                       EntryPlaceholderText="{Binding TextResources[Latitude]}"
                                        EntryText="{Binding Latitude}"
                                        IsWrong="{Binding IsLatitudeWrong}"
                                        HorizontalOptions="FillAndExpand"
                                        Margin="4,0,0,0"/>
             </Grid>
+            <!--#endregion-->
 
 
             <Grid RowDefinitions="*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <!--#region MAP -->
+
                 <controls:BindableMap x:Name="map" 
                                       Grid.Row="0" 
                                       PinsSource="{Binding Pins}"
@@ -67,14 +93,19 @@
                     </controls:BindableMap.Behaviors>
                 </controls:BindableMap>
 
+                <!--#endregion-->
+
+                <!--#region MOVE TO MY LOCATION BUTTON -->
                 <Frame Grid.Row="0" 
                        Style="{DynamicResource shadowFloatFrameStyle}"/>
                 <Button Grid.Row="0" 
                         ImageSource="ic_location.png"
                         Style="{DynamicResource floatButtonStyle}"
                         Command="{Binding MoveToMyLocationCommand}"/>
+                <!--#endregion-->
             </Grid>
         </StackLayout>
     </StackLayout>
+    <!--#endregion-->
 
 </controls:BasePage>

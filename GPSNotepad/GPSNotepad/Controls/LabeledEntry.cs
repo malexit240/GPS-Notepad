@@ -16,6 +16,8 @@ namespace GPSNotepad.Controls
             Button = new ImageCheckBox();
             Frame = new Frame();
 
+            WrongLabel.Text = "   ";
+
             Entry.Focused += OnEntryFocused;
             Entry.Unfocused += OnEntryUnfocused;
             Entry.TextChanged += OnEntryTextChanged;
@@ -105,7 +107,7 @@ namespace GPSNotepad.Controls
             nameof(WrongLabelText),
             typeof(string),
             typeof(LabeledEntry),
-            defaultValue: string.Empty,
+            defaultValue: "    ",
             propertyChanged: OnWrongLabelTextPropertyChanged);
 
         private static void OnWrongLabelTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
@@ -115,7 +117,10 @@ namespace GPSNotepad.Controls
 
             if (labeledEntry != null && text != null)
             {
-                labeledEntry.WrongLabel.Text = text;
+                if (labeledEntry.IsWrong)
+                {
+                    labeledEntry.WrongLabel.Text = text;
+                }
             }
         }
 

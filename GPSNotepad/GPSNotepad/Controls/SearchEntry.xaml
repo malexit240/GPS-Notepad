@@ -4,8 +4,9 @@
              xmlns:prism="http://prismlibrary.com"
              x:Class="GPSNotepad.Controls.SearchEntry"
              Orientation="Horizontal" BackgroundColor="{DynamicResource Variant}">
+
     <Entry x:Name="searchEntry"
-           Placeholder="Search" 
+           Placeholder="{Binding SearchPlaceholderText}" 
            Style="{DynamicResource searchEntryStyle}"
            HorizontalOptions="FillAndExpand">
         <Entry.Behaviors>
@@ -13,6 +14,7 @@
             <prism:EventToCommandBehavior EventName="Unfocused" Command="{Binding OnSearchFieldUnfocused}"/>
         </Entry.Behaviors>
     </Entry>
+
     <ImageButton  x:Name="clearButton"
              HorizontalOptions="End"
              Margin="0"

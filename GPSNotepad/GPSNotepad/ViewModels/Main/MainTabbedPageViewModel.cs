@@ -167,9 +167,11 @@ namespace GPSNotepad.ViewModels
         {
             UserDialogs.Instance.Confirm(new ConfirmConfig()
             {
-                Message = "Logout?",
-                OkText = "Ok",
-                CancelText = "Cancel",
+                Title = TextResources["ConfirmTitle"],
+
+                Message = TextResources["ConfirmLogout"],
+                OkText = TextResources["Ok"],
+                CancelText = TextResources["Cancel"],
                 OnAction = async (confirm) =>
                 {
                     if (confirm)

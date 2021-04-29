@@ -1,18 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:NavigableTabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:GPSNotepad.Views"
-             xmlns:controls="clr-namespace:GPSNotepad.Controls"
-             xmlns:prism="http://prismlibrary.com"
-             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.AddEditPinAndEventsTabbedPage"
-             Title="{Binding TextResources[AddEditPinTitle]}"
-             android:TabbedPage.ToolbarPlacement="Bottom"
-             Style="{DynamicResource tabbedPageStyle}"
-             SelectedColor="{DynamicResource Variant}"
-             UnSelectedColor="{DynamicResource PageBackgroundColor}"
-             NavigationPage.HasNavigationBar="False">
+                              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                              xmlns:local="clr-namespace:GPSNotepad.Views"
+                              xmlns:controls="clr-namespace:GPSNotepad.Controls"
+                              xmlns:prism="http://prismlibrary.com"
+                              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+                              prism:ViewModelLocator.AutowireViewModel="True"
+                              x:Class="GPSNotepad.Views.AddEditPinAndEventsTabbedPage"
+                              android:TabbedPage.ToolbarPlacement="Bottom"
+                              Style="{DynamicResource tabbedPageStyle}"
+                              SelectedColor="{DynamicResource Variant}"
+                              UnSelectedColor="{DynamicResource PageBackgroundColor}"
+                              NavigationPage.HasNavigationBar="False">
+
+    <!--#region PAGES -->
+
     <local:AddEditPinTabPage IconImageSource="ic_pin.png" Title="{Binding TextResources[Pin]}"/>
+
     <local:PlaceEventsTabPage IconImageSource="ic_clock.png" Title="{Binding TextResources[Events]}"/>
+
+    <!--#endregion-->
 </controls:NavigableTabbedPage>

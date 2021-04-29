@@ -73,12 +73,12 @@ namespace GPSNotepad.ViewModels
 
             if (emailValidationResult != EmailValidationStatus.Done)
             {
-                WrongText = "Wrong Email";
+                WrongText = TextResources["WrongEmailFormat"];
                 IsEmailWrong = true;
             }
             else if (await AuthorizationService.IsUserExist(Email))
             {
-                WrongText = "User already exist";
+                WrongText = TextResources["UserAlreadyExist"];
                 IsEmailWrong = true;
             }
             else

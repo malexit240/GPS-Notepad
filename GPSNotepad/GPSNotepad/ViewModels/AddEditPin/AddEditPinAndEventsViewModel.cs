@@ -141,6 +141,45 @@ namespace GPSNotepad.ViewModels
         });
 
 
+        private ICommand _deletePlaceEventCommand;
+        public ICommand DeletePlaceEventCommand => _deletePlaceEventCommand ??= new DelegateCommand<PlaceEventViewModel>(DeletePlaceEventHandler);
+        private async void DeletePlaceEventHandler(PlaceEventViewModel placeEvent)
+        {
+            Acr.UserDialogs.UserDialogs.Instance.Confirm(new Acr.UserDialogs.ConfirmConfig()
+            {
+
+                Title = TextResources["ConfirmTitle"],
+
+                Message = TextResources["ConfirmDeleteEvent"],
+                OkText = TextResources["Ok"],
+                CancelText = TextResources["Cancel"],
+
+                OnAction = async result =>
+                {
+                    if (result == true)
+                    {
+
+                        var index = PinViewModel.Events.IndexOf(placeEvent);
+
+                        if (index != -1)
+                        {
+                            PinViewModel.Events.RemoveAt(index);
+
+                            if (IsEdit == true)
+                            {
+                                await PinService.Update(PinViewModel.GetModelPin());
+                            }
+                        }
+
+                    }
+
+                }
+            });
+
+
+
+        }
+
         private ICommand _scanQRCommand;
         public ICommand ScanQRCommand => _scanQRCommand ??= new DelegateCommand(ScanQRHandler);
         private async void ScanQRHandler()

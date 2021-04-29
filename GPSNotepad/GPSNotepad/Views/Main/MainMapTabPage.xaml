@@ -6,33 +6,42 @@
              xmlns:converters="clr-namespace:GPSNotepad.Converters"
              x:Class="GPSNotepad.Views.MainMapTabPage"
              Style="{DynamicResource pageStyle}">
+    <!--#region PAGE RESOURCES  -->
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:PinTappedEventArgsConverter x:Key="showDetailPinViewEventArgsConverter"/>
-            <converters:ItemTappedEventArgsConverter x:Key="itemTappedEventArgsConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
 
+    <!--#endregion-->
+
+    <!--#region CONTENT -->
     <Grid RowDefinitions="Auto,*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
         <Grid Grid.Row="1" RowDefinitions="75*,25*" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
 
+            <!--#region MAP -->
             <StackLayout Grid.Row="0" Grid.RowSpan="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-                <controls:BindableMap
-                    VerticalOptions="FillAndExpand"
-                                PinsSource="{Binding Pins}"
-                                MapSpan="{Binding Path=MainMapViewModel.Span}"
-                                IsLightStyle="{DynamicResource IsLight}">
+                <controls:BindableMap VerticalOptions="FillAndExpand"
+                                      PinsSource="{Binding Pins}"
+                                      MapSpan="{Binding Path=MainMapViewModel.Span}"
+                                      IsLightStyle="{DynamicResource IsLight}">
+
                     <controls:BindableMap.Behaviors>
                         <prism:EventToCommandBehavior EventName="ShowDetaiPinView" 
                                                   Command="{Binding OnShowDetailPinViewCommand}"
                                                   EventArgsConverter="{x:StaticResource showDetailPinViewEventArgsConverter}"/>
+
                         <prism:EventToCommandBehavior EventName="MapClicked" 
                                                   Command="{Binding HideDetailPinViewCommand}"/>
-
                     </controls:BindableMap.Behaviors>
+
                 </controls:BindableMap>
             </StackLayout>
+            <!--#endregion-->
 
+            <!--#region DROPDOWN -->
             <controls:DropDown Grid.Row="0" Grid.RowSpan="2"
                                VerticalOptions="Start"
                                HorizontalOptions="FillAndExpand"
@@ -40,13 +49,16 @@
                                PinsSource="{Binding Pins}"
                                PinTappedCommand="{Binding PinTappedCommand}"
                                BackgroundColor="{DynamicResource PageBackgroundColor}"/>
+            <!--#endregion-->
+
+            <!--#region DETAIL VIEW -->
 
             <controls:DetailView Grid.Row="0" Grid.RowSpan="2"
-                         VerticalOptions="End"
-                         HorizontalOptions="FillAndExpand"
-                         IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}"
-                         BackgroundColor="{DynamicResource PageBackgroundColor}"
-                         Padding="14,18,14,20">
+                                 VerticalOptions="End"
+                                 HorizontalOptions="FillAndExpand"
+                                 IsVisible="{Binding Path=MainMapViewModel.ShowDetailView}"
+                                 BackgroundColor="{DynamicResource PageBackgroundColor}"
+                                 Padding="14,18,14,20">
 
                 <Label Style="{DynamicResource headerLabelStyle}" 
                        Text="{Binding Path=SelectedPin.Name}"
@@ -66,22 +78,33 @@
                        Text="{Binding Path=SelectedPin.Description}"/>
             </controls:DetailView>
 
+            <!--#endregion-->
+
+
+            <!--#region TO MY LOCATION BUTTON -->
 
             <Frame Grid.Row="0" Grid.RowSpan="2"
-               Style="{DynamicResource shadowFloatFrameStyle}"/>
+                   Style="{DynamicResource shadowFloatFrameStyle}"/>
 
             <Button Grid.Row="0" Grid.RowSpan="2"
-                ImageSource="ic_location.png"
-                Style="{DynamicResource floatButtonStyle}"
-                IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"
-                Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>
+                    ImageSource="ic_location.png"
+                    Style="{DynamicResource floatButtonStyle}"
+                    IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"
+                    Command="{Binding Path=MainMapViewModel.MoveToMyLocationCommand}"/>
+
+            <!--#endregion-->
         </Grid>
 
+        <!--#region SEARCH BAR -->
         <StackLayout Grid.Row="0" BackgroundColor="{DynamicResource PageBackgroundColor}">
+
             <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
-                                 SearchText="{Binding SearchField}" 
-                                 SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
-                                 LogoutButtonCommand="{Binding LogoutCommand}"/>
+                                     SearchText="{Binding SearchField}" 
+                                     SearchPlaceholderText="{Binding TextResources[Search]}"
+                                     SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
+                                     LogoutButtonCommand="{Binding LogoutCommand}"/>
         </StackLayout>
+        <!--#endregion-->
     </Grid>
+    <!--#endregion-->
 </controls:BasePage>

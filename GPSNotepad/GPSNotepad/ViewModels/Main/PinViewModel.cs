@@ -120,9 +120,11 @@ namespace GPSNotepad.ViewModels
         {
             UserDialogs.Instance.Confirm(new ConfirmConfig()
             {
-                Message = "Delete",
-                OkText = "Ok",
-                CancelText = "Cancel",
+                Title = GPSNotepad.Resources.UIResources.ConfirmTitle,
+
+                Message = GPSNotepad.Resources.UIResources.ConfirmDeletePin,
+                OkText = GPSNotepad.Resources.UIResources.Ok,
+                CancelText = GPSNotepad.Resources.UIResources.Cancel,
                 OnAction = (confirm) =>
                 {
                     if (confirm)

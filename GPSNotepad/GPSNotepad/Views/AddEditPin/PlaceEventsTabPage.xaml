@@ -1,89 +1,125 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:controls="clr-namespace:GPSNotepad.Controls"
-             x:Class="GPSNotepad.Views.PlaceEventsTabPage"
-             x:Name="page"
-             Style="{DynamicResource pageStyle}">
+                   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                   xmlns:controls="clr-namespace:GPSNotepad.Controls"
+                   x:Class="GPSNotepad.Views.PlaceEventsTabPage"
+                   x:Name="page"
+                   Style="{DynamicResource pageStyle}">
+
+    <!--#region CONTENT -->
     <Grid RowDefinitions="*">
         <StackLayout Grid.Row="0">
-            <controls:PageNavbar Title="Events"
+            <!--#region NAVIGATION BAR -->
+            <controls:PageNavbar Title="{Binding TextResources[Events]}"
                                  IsBackButtonEnabled="False"/>
+            <!--#endregion-->
 
+            <!--#region SEPARATOR -->
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+            <!--#endregion-->
 
             <StackLayout BindableLayout.ItemsSource="{Binding Events}"
                          Padding="{DynamicResource FullIndent}">
+
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
+
+                        <!--#region EVENT -->
+
                         <SwipeView BackgroundColor="{DynamicResource PageBackgroundColor}">
                             <SwipeView.RightItems>
+                                <!--#region EDIT EVENT -->
                                 <SwipeItem Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
                                            Source={x:Reference page}}"
                                            CommandParameter="{Binding Self}"
                                            BackgroundColor="{DynamicResource PrimaryColor}"
                                            IconImageSource="ic_edit.png"/>
-                                <SwipeItem Command="{Binding DeletePlaceEventContextCommand}"
+                                <!--#endregion-->
+
+                                <!--#region DELETE EVENT -->
+                                <SwipeItem Command="{Binding Path=BindingContext.DeletePlaceEventCommand,
+                                           Source={x:Reference page}}"
+                                           CommandParameter="{Binding Self}"
                                            BackgroundColor="{DynamicResource ErrorColor}"
                                            IconImageSource="ic_delete.png"/>
+                                <!--#endregion-->
                             </SwipeView.RightItems>
 
                             <SwipeView.Content>
                                 <StackLayout HorizontalOptions="FillAndExpand" Padding="14,0,14,0">
                                     <Grid ColumnDefinitions="*,40"
-                                      Padding="0,16,0,16">
+                                          Padding="0,16,0,16">
 
                                         <StackLayout Grid.Column="0" 
-                                                 HorizontalOptions="FillAndExpand"
-                                                 VerticalOptions="CenterAndExpand">
+                                                     HorizontalOptions="FillAndExpand"
+                                                     VerticalOptions="CenterAndExpand">
 
+                                            <!--#region DESCRIPTION -->
                                             <Label Text="{Binding Description}"
-                                               HorizontalOptions="StartAndExpand"
-                                               Style="{DynamicResource normalLabelStyle}"/>
+                                                   HorizontalOptions="StartAndExpand"
+                                                   Style="{DynamicResource normalLabelStyle}"/>
+                                            <!--#endregion-->
 
+                                            <!--#region EVENT TIME TO NOTIFY -->
                                             <StackLayout HorizontalOptions="StartAndExpand"
                                              Orientation="Horizontal">
+
                                                 <Label Text="{Binding DateString}"
                                                    Style="{DynamicResource detailLabelStyle}"
                                                    FontSize="{DynamicResource SmallFontSize}"/>
+
                                                 <Label Text="{Binding TimeString}"
                                                    Style="{DynamicResource detailLabelStyle}"
                                                    FontSize="{DynamicResource SmallFontSize}"/>
+
                                             </StackLayout>
+                                            <!--#endregion-->
                                         </StackLayout>
 
                                         <ImageButton Grid.Column="1" 
-                                           BackgroundColor="Transparent"
-                                           Source="ic_left_gray.png"
-                                            Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
-                                               Source={x:Reference page}}"
-                                           CommandParameter="{Binding Self}"
-                                           VerticalOptions="Center"
-                                           HorizontalOptions="FillAndExpand">
+                                                     BackgroundColor="Transparent"
+                                                     Source="ic_left_gray.png"
+                                                     Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
+                                                        Source={x:Reference page}}"
+                                                     CommandParameter="{Binding Self}"
+                                                     VerticalOptions="Center"
+                                                     HorizontalOptions="FillAndExpand">
+
                                             <ImageButton.WidthRequest>
                                                 <OnPlatform x:TypeArguments="x:Double">
                                                     <On Platform="iOS" Value="12"/>
                                                     <On Platform="Android" Value="26"/>
                                                 </OnPlatform>
                                             </ImageButton.WidthRequest>
+
                                         </ImageButton>
 
                                     </Grid>
+                                    <!--#region SEPARATOR -->
                                     <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+                                    <!--#endregion-->
+
                                 </StackLayout>
 
                             </SwipeView.Content>
                         </SwipeView>
+
+                        <!--#endregion-->
+
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </StackLayout>
 
         </StackLayout>
 
+        <!--#region ADD EVENT BUTTON -->
         <Frame Grid.Row="0" 
                Style="{DynamicResource shadowFloatFrameStyle}"/>
         <Button Grid.Row="0" 
                 ImageSource="ic_plus.png"
                 Style="{DynamicResource floatButtonAccentStyle}"
                 Command="{Binding GoToAddPlaceEventFormCommand}"/>
+        <!--#endregion-->
     </Grid>
+    <!--#endregion-->
 </controls:BasePage>

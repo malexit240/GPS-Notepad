@@ -1,41 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:BasePage  xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
-             prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="GPSNotepad.Views.SettingsPage"
-             Style="{DynamicResource pageStyle}"
-             NavigationPage.HasNavigationBar="False">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:prism="http://prismlibrary.com"
+                    prism:ViewModelLocator.AutowireViewModel="True"
+                    x:Class="GPSNotepad.Views.SettingsPage"
+                    Style="{DynamicResource pageStyle}"
+                    NavigationPage.HasNavigationBar="False">
+
+    <!--#region CONTENT -->
+
     <StackLayout>
-        <controls:PageNavbar Title="{Binding TextResources[SettingsPageTitle]}"/>
+
+
+        <!--#region NAVIGATION BAR -->
+
+        <controls:PageNavbar Title="{Binding TextResources[Settings]}"/>
+
+        <!--#endregion-->
+
+        <!--#region SEPARATOR -->
 
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-        
+
+        <!--#endregion-->
+
+        <!--#region DARK THEME OPTION -->
+
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="14,16,14,16">
-            <Label Text="Dark theme"
+
+            <Label Text="{Binding TextResources[DarkTheme]}"
                    HorizontalOptions="StartAndExpand"
                    VerticalOptions="CenterAndExpand"
                    Style="{DynamicResource settingsLabelStyle}"/>
+
             <Switch HorizontalOptions="End" 
                     IsToggled="{Binding IsDarkTheme}"
                     VerticalOptions="CenterAndExpand"
                     Style="{DynamicResource switchStyle}"/>
         </StackLayout>
-        
+
+        <!--#endregion-->
+
+        <!--#region SEPARATOR -->
+
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+        <!--#endregion-->
+
+        <!--#region LANGUAGE OPTION -->
 
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="14,16,14,16">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding OnLanguageTabTapped}"/>
             </StackLayout.GestureRecognizers>
-            <Label Text="Language"
+
+            <Label Text="{Binding TextResources[Language]}"
                    HorizontalOptions="StartAndExpand"
                    VerticalOptions="CenterAndExpand"
                    Style="{DynamicResource settingsLabelStyle}"/>
+
             <Image Source="ic_left_gray.png" HorizontalOptions="End"
                    VerticalOptions="CenterAndExpand"/>
+
         </StackLayout>
-        
+
+        <!--#endregion-->
+
+        <!--#region SEPARATOR -->
+
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+        <!--#endregion-->
     </StackLayout>
+
+    <!--#endregion-->
 </controls:BasePage>

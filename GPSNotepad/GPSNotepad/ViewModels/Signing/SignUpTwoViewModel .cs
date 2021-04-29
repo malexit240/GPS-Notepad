@@ -20,7 +20,6 @@ namespace GPSNotepad.ViewModels
             var signUpCommand = SignUpCommand as DelegateCommand;
             signUpCommand.ObservesProperty(() => ConfirmPassword);
             signUpCommand.ObservesProperty(() => Password);
-            signUpCommand.ObservesProperty(() => HasLongActivity);
         }
         #endregion
 
@@ -47,12 +46,6 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _confirmPassword, value);
         }
 
-        private bool _hasLongActivity = false;
-        public bool HasLongActivity
-        {
-            get => _hasLongActivity;
-            set => SetProperty(ref _hasLongActivity, value);
-        }
 
         private bool _isHidePassword = true;
         public bool IsHidePassword
@@ -75,8 +68,6 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _wrongMessage, value);
         }
 
-
-
         private bool _isPasswordWrong = false;
         public bool IsPasswordWrong
         {
@@ -89,36 +80,42 @@ namespace GPSNotepad.ViewModels
         #region ---Commands---
 
         private ICommand _showPasswordCommand;
-        public ICommand ShowPasswordCommand => _showPasswordCommand ??= new DelegateCommand(() => { IsHidePassword = !IsHidePassword; });
+        public ICommand ShowPasswordCommand => _showPasswordCommand ??= new DelegateCommand(() =>
+        {
+            IsHidePassword = !IsHidePassword;
+        });
+
 
         private ICommand _showConfirmPasswordCommand;
-        public ICommand ShowConfirmPasswordCommand => _showConfirmPasswordCommand ??= new DelegateCommand(() => { IsHideConfirmPassword = !IsHideConfirmPassword; });
+        public ICommand ShowConfirmPasswordCommand => _showConfirmPasswordCommand ??= new DelegateCommand(() =>
+        {
+            IsHideConfirmPassword = !IsHideConfirmPassword;
+        });
+
 
         private ICommand _signUpCommand;
         public ICommand SignUpCommand => _signUpCommand ??= new DelegateCommand(SignUpCommandHandler, canExecuteSignUpCommand);
         private async void SignUpCommandHandler()
         {
-            HasLongActivity = true;
 
             if (Password != ConfirmPassword)
             {
                 IsPasswordWrong = true;
-                WrongMessage = "Passwords dont matches";
+                WrongMessage = TextResources["PasswordMismatch"];
             }
             else
             {
-
                 var passwordValidationResult = Validators.Validators.IsPasswordValid(Password);
 
                 switch (passwordValidationResult)
                 {
                     case PasswordValidationStatus.InvalidContent:
                         IsPasswordWrong = true;
-                        WrongMessage = TextResources["InvalidPasswordContent"];
+                        WrongMessage = TextResources["IncorrectPasswordContent"];
                         break;
                     case PasswordValidationStatus.InvalidLength:
                         IsPasswordWrong = true;
-                        WrongMessage = TextResources["InvalidPasswordLength"];
+                        WrongMessage = TextResources["IncorrectPasswordLength"];
                         break;
                 }
 
@@ -131,9 +128,8 @@ namespace GPSNotepad.ViewModels
                 }
             }
 
-            HasLongActivity = false;
         }
-        private bool canExecuteSignUpCommand() => Password.Length != 0 && ConfirmPassword.Length != 0 && HasLongActivity != true;
+        private bool canExecuteSignUpCommand() => Password.Length != 0 && ConfirmPassword.Length != 0;
         #endregion
 
 
