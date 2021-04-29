@@ -53,18 +53,25 @@
         </Thickness.Bottom>
     </Thickness>
 
-    <x:Int32 x:Key="LargeFontSize">
-        20
-    </x:Int32>
-    <x:Int32 x:Key="NormalFontSize">
-        18
-    </x:Int32>
-    <x:Int32 x:Key="SmallFontSize">
-        16
-    </x:Int32>
-    <x:Int32 x:Key="TiniFontSize">
-        12
-    </x:Int32>
+    <OnPlatform x:TypeArguments="x:Double" x:Key="LargeFontSize">
+        <On Platform="iOS" Value="20"/>
+        <On Platform="Android" Value="18"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:Double" x:Key="NormalFontSize">
+        <On Platform="iOS" Value="18"/>
+        <On Platform="Android" Value="16"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:Double" x:Key="SmallFontSize">
+        <On Platform="iOS" Value="16"/>
+        <On Platform="Android" Value="14"/>
+    </OnPlatform>
+
+    <OnPlatform x:TypeArguments="x:Double" x:Key="TiniFontSize">
+        <On Platform="iOS" Value="12"/>
+        <On Platform="Android" Value="12"/>
+    </OnPlatform>
 
     <Style x:Key="pageStyle" 
                TargetType="ContentPage">
@@ -324,6 +331,26 @@
                     Value="Montserrat_Regular"/>
         <Setter Property="Color" Value="{DynamicResource SecondaryColor}"/>
         <Setter Property="CircleColor" Value="{DynamicResource SecondaryColor}"/>
+    </Style>
+
+
+    <Style x:Key="shadowFloatFrameStyle"
+               TargetType="Frame">
+        <Setter Property="VerticalOptions"
+                    Value="End"/>
+        <Setter Property="HorizontalOptions"
+                    Value="End"/>
+        <Setter Property="WidthRequest"
+                    Value="9"/>
+        <Setter Property="HeightRequest"
+                    Value="9"/>
+        <Setter Property="CornerRadius"
+                    Value="48"/>
+        <Setter Property="Margin"
+                    Value="0,0,16,18"/>
+        <Setter Property="BackgroundColor"
+                    Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="HasShadow" Value="True"/>
     </Style>
 
     <Style x:Key="floatButtonStyle"

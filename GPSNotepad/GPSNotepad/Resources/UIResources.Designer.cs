@@ -61,20 +61,29 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Edit pin.
+        ///   Ищет локализованную строку, похожую на Add event.
         /// </summary>
-        internal static string AddEditPinTitle {
+        internal static string AddEvent {
             get {
-                return ResourceManager.GetString("AddEditPinTitle", resourceCulture);
+                return ResourceManager.GetString("AddEvent", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Edit event.
+        ///   Ищет локализованную строку, похожую на Add pin.
         /// </summary>
-        internal static string AddEditPlaceEventTitle {
+        internal static string AddPin {
             get {
-                return ResourceManager.GetString("AddEditPlaceEventTitle", resourceCulture);
+                return ResourceManager.GetString("AddPin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Log in.
+        /// </summary>
+        internal static string ButtonLogIn {
+            get {
+                return ResourceManager.GetString("ButtonLogIn", resourceCulture);
             }
         }
         
@@ -88,7 +97,43 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Dark.
+        ///   Ищет локализованную строку, похожую на Coordinates.
+        /// </summary>
+        internal static string Coordinates {
+            get {
+                return ResourceManager.GetString("Coordinates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Create account.
+        /// </summary>
+        internal static string CreateAccount {
+            get {
+                return ResourceManager.GetString("CreateAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Create an account.
+        /// </summary>
+        internal static string CreateAnAccount {
+            get {
+                return ResourceManager.GetString("CreateAnAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Create password.
+        /// </summary>
+        internal static string CreatePasswordPlaceholder {
+            get {
+                return ResourceManager.GetString("CreatePasswordPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Dark theme.
         /// </summary>
         internal static string DarkTheme {
             get {
@@ -97,16 +142,7 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Delete.
-        /// </summary>
-        internal static string Delete {
-            get {
-                return ResourceManager.GetString("Delete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Description.
+        ///   Ищет локализованную строку, похожую на Decription.
         /// </summary>
         internal static string Description {
             get {
@@ -115,20 +151,11 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Detail.
+        ///   Ищет локализованную строку, похожую на Edit pin.
         /// </summary>
-        internal static string Detail {
+        internal static string EditPin {
             get {
-                return ResourceManager.GetString("Detail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Edit.
-        /// </summary>
-        internal static string Edit {
-            get {
-                return ResourceManager.GetString("Edit", resourceCulture);
+                return ResourceManager.GetString("EditPin", resourceCulture);
             }
         }
         
@@ -151,110 +178,110 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Events.
+        ///   Ищет локализованную строку, похожую на Enter email.
         /// </summary>
-        internal static string Events {
+        internal static string EnterEmailPlaceholder {
             get {
-                return ResourceManager.GetString("Events", resourceCulture);
+                return ResourceManager.GetString("EnterEmailPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid format.
+        ///   Ищет локализованную строку, похожую на Enter the label.
         /// </summary>
-        internal static string InvalidEmailFormat {
+        internal static string EnterLabelPlaceholder {
             get {
-                return ResourceManager.GetString("InvalidEmailFormat", resourceCulture);
+                return ResourceManager.GetString("EnterLabelPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid email.
+        ///   Ищет локализованную строку, похожую на Enter your name.
         /// </summary>
-        internal static string InvalidEmailFormatMessage {
+        internal static string EnterNamePlaceholder {
             get {
-                return ResourceManager.GetString("InvalidEmailFormatMessage", resourceCulture);
+                return ResourceManager.GetString("EnterNamePlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid password format.
+        ///   Ищет локализованную строку, похожую на Enter password.
         /// </summary>
-        internal static string InvalidPasswordContent {
+        internal static string EnterPasswordPlaceholder {
             get {
-                return ResourceManager.GetString("InvalidPasswordContent", resourceCulture);
+                return ResourceManager.GetString("EnterPasswordPlaceholder", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Password must contains minimum one digit and letter in UPPER case.
+        ///   Ищет локализованную строку, похожую на Wrong password content.
         /// </summary>
-        internal static string InvalidPasswordContentMessage {
+        internal static string IncorrectPasswordContent {
             get {
-                return ResourceManager.GetString("InvalidPasswordContentMessage", resourceCulture);
+                return ResourceManager.GetString("IncorrectPasswordContent", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Invalid length.
+        ///   Ищет локализованную строку, похожую на Wrong password length.
         /// </summary>
-        internal static string InvalidPasswordLength {
+        internal static string IncorrectPasswordLength {
             get {
-                return ResourceManager.GetString("InvalidPasswordLength", resourceCulture);
+                return ResourceManager.GetString("IncorrectPasswordLength", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Password length must be greater than 8 and lower than 16.
+        ///   Ищет локализованную строку, похожую на Label.
         /// </summary>
-        internal static string InvalidPasswordLengthMessage {
+        internal static string Label {
             get {
-                return ResourceManager.GetString("InvalidPasswordLengthMessage", resourceCulture);
+                return ResourceManager.GetString("Label", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Light.
+        ///   Ищет локализованную строку, похожую на Language.
         /// </summary>
-        internal static string LightTheme {
+        internal static string Language {
             get {
-                return ResourceManager.GetString("LightTheme", resourceCulture);
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Pins.
+        ///   Ищет локализованную строку, похожую на Latitude.
         /// </summary>
-        internal static string ListOfPinsPageTitle {
+        internal static string Latitude {
             get {
-                return ResourceManager.GetString("ListOfPinsPageTitle", resourceCulture);
+                return ResourceManager.GetString("Latitude", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Login.
+        ///   Ищет локализованную строку, похожую на Log in.
         /// </summary>
-        internal static string Login {
+        internal static string LogInTitle {
             get {
-                return ResourceManager.GetString("Login", resourceCulture);
+                return ResourceManager.GetString("LogInTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Longitude.
+        /// </summary>
+        internal static string Longitude {
+            get {
+                return ResourceManager.GetString("Longitude", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Ищет локализованную строку, похожую на Map.
         /// </summary>
-        internal static string MainMapPageTitle {
+        internal static string Map {
             get {
-                return ResourceManager.GetString("MainMapPageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на GPS Notepad.
-        /// </summary>
-        internal static string MainPageTitle {
-            get {
-                return ResourceManager.GetString("MainPageTitle", resourceCulture);
+                return ResourceManager.GetString("Map", resourceCulture);
             }
         }
         
@@ -268,6 +295,24 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
+        ///   Ищет локализованную строку, похожую на Next.
+        /// </summary>
+        internal static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на  or .
+        /// </summary>
+        internal static string OR {
+            get {
+                return ResourceManager.GetString("OR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Ищет локализованную строку, похожую на Password.
         /// </summary>
         internal static string Password {
@@ -277,11 +322,29 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на Pin.
+        ///   Ищет локализованную строку, похожую на Password mismatch.
         /// </summary>
-        internal static string Pin {
+        internal static string PasswordMismatch {
             get {
-                return ResourceManager.GetString("Pin", resourceCulture);
+                return ResourceManager.GetString("PasswordMismatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Pins.
+        /// </summary>
+        internal static string Pins {
+            get {
+                return ResourceManager.GetString("Pins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Repeat password.
+        /// </summary>
+        internal static string RepeatPassword {
+            get {
+                return ResourceManager.GetString("RepeatPassword", resourceCulture);
             }
         }
         
@@ -306,54 +369,9 @@ namespace GPSNotepad.Resources {
         /// <summary>
         ///   Ищет локализованную строку, похожую на Settings.
         /// </summary>
-        internal static string SettingsTitle {
+        internal static string Settings {
             get {
-                return ResourceManager.GetString("SettingsTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Sign In.
-        /// </summary>
-        internal static string SignIn {
-            get {
-                return ResourceManager.GetString("SignIn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Sign In.
-        /// </summary>
-        internal static string SignInTitle {
-            get {
-                return ResourceManager.GetString("SignInTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Sign Up.
-        /// </summary>
-        internal static string SignUp {
-            get {
-                return ResourceManager.GetString("SignUp", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Sign Up.
-        /// </summary>
-        internal static string SignUpTitle {
-            get {
-                return ResourceManager.GetString("SignUpTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Ищет локализованную строку, похожую на Theme.
-        /// </summary>
-        internal static string Theme {
-            get {
-                return ResourceManager.GetString("Theme", resourceCulture);
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         
@@ -367,11 +385,38 @@ namespace GPSNotepad.Resources {
         }
         
         /// <summary>
-        ///   Ищет локализованную строку, похожую на User with inputed email already registred.
+        ///   Ищет локализованную строку, похожую на Write a description.
         /// </summary>
-        internal static string UserAlreadyExistMessage {
+        internal static string WriteDescriptionPlaceholder {
             get {
-                return ResourceManager.GetString("UserAlreadyExistMessage", resourceCulture);
+                return ResourceManager.GetString("WriteDescriptionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Wrong email.
+        /// </summary>
+        internal static string WrongEmail {
+            get {
+                return ResourceManager.GetString("WrongEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Wrong email format.
+        /// </summary>
+        internal static string WrongEmailFormat {
+            get {
+                return ResourceManager.GetString("WrongEmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Ищет локализованную строку, похожую на Wrong password.
+        /// </summary>
+        internal static string WrongPassword {
+            get {
+                return ResourceManager.GetString("WrongPassword", resourceCulture);
             }
         }
     }

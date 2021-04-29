@@ -65,7 +65,7 @@
                                                             Padding="8"
                                                             CornerRadius="6"/>
                                     <!--PIN`S LABELS-->
-                                    <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <StackLayout Grid.Column="1" Margin="4,0,0,0" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                         <StackLayout.GestureRecognizers>
                                             <TapGestureRecognizer Command="{Binding Path=BindingContext.PinTappedCommand, Source={x:Reference page}}" CommandParameter="{Binding Self}"/>
                                         </StackLayout.GestureRecognizers>
@@ -85,9 +85,15 @@
                                            Command="{Binding Path=BindingContext.EditPinContextCommand,
                                            Source={x:Reference page}}"
                                            CommandParameter="{Binding Self}"
-                                           WidthRequest="12"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="FillAndExpand"/>
+                                           HorizontalOptions="FillAndExpand">
+                                        <ImageButton.WidthRequest>
+                                            <OnPlatform x:TypeArguments="x:Double">
+                                                <On Platform="iOS" Value="12"/>
+                                                <On Platform="Android" Value="26"/>
+                                            </OnPlatform>
+                                        </ImageButton.WidthRequest>
+                                    </ImageButton>
 
                                 </Grid>
                                 <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
@@ -99,9 +105,13 @@
         </StackLayout>
 
         <!--ADD NEW PIN BUTTON-->
+        <Frame Grid.Row="0" 
+               Style="{DynamicResource shadowFloatFrameStyle}"/>
+
         <Button Grid.Row="0"
                 ImageSource="ic_plus.png"
                 Style="{DynamicResource floatButtonAccentStyle}"
                 Command="{Binding GoToAddPinFormCommand}"/>
+
     </Grid>
 </controls:BasePage>

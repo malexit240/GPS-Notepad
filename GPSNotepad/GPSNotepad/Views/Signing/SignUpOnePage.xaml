@@ -7,14 +7,15 @@
              x:Class="GPSNotepad.Views.SignUpOnePage"
              Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False">
-    
-    <StackLayout >
+
+    <!--#region CONTENT -->
+    <StackLayout>
         <controls:PageNavbar Title="{Binding TextResources[SignUpTitle]}"/>
-        
+
         <StackLayout Padding="{DynamicResource FullIndent}">
-            
-            
-        <controls:LabeledEntry LabelText="{Binding TextResources[Name]}" 
+
+
+            <controls:LabeledEntry LabelText="{Binding TextResources[Name]}" 
                                EntryPlaceholderText="{Binding TextResources[Name]}"
                                EntryText="{Binding Name}"
                                WrongLabelText="   "
@@ -22,7 +23,7 @@
                                ButtonCommand="{Binding ClearNameCommand}"
                                Margin="0,8,0,0"/>
 
-        <controls:LabeledEntry LabelText="{Binding TextResources[Email]}" 
+            <controls:LabeledEntry LabelText="{Binding TextResources[Email]}" 
                                EntryPlaceholderText="{Binding TextResources[Email]}"
                                EntryText="{Binding Email}"
                                WrongLabelText="{Binding WrongText}"
@@ -30,27 +31,36 @@
                                ButtonImageSource="ic_clear.png"
                                ButtonCommand="{Binding ClearEmailCommand}"/>
 
-        <Button Text="Next"
-                Command="{Binding GoToSignUpTwoPageCommand}"
-                Style="{DynamicResource buttonAccentStyle}"
-                Margin="0,8,0,0"/>
+            <Button Text="Next"
+                    Command="{Binding GoToSignUpTwoPageCommand}"
+                    Style="{DynamicResource buttonAccentStyle}"
+                    Margin="0,8,0,0"/>
 
-        <Grid RowDefinitions="*" 
-              HorizontalOptions="FillAndExpand"
-              Margin="0,12,0,12">
-            <BoxView Grid.Row="0"
-                HeightRequest="1"
-                     VerticalOptions="CenterAndExpand"
-                HorizontalOptions="FillAndExpand"
-                     BackgroundColor="{DynamicResource System_LightGray}"/>
-            <Label Grid.Row="0" 
+            <Grid RowDefinitions="*" 
+                  HorizontalOptions="FillAndExpand"
+                  Margin="0,12,0,12">
+
+                <BoxView Grid.Row="0"
+                         HeightRequest="1"
+                         VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         BackgroundColor="{DynamicResource System_LightGray}"/>
+
+                <Label Grid.Row="0" 
                    Text=" or "
+                   FontSize="{DynamicResource SmallFontSize}"
+                   FontFamily="Montserrat_Medium"
                    TextColor="{DynamicResource System_LightGray}"
                    BackgroundColor="{DynamicResource PageBackgroundColor}"
                    HorizontalOptions="CenterAndExpand"/>
-        </Grid>
+            </Grid>
 
             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <StackLayout.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="50"/>
+                    </OnPlatform>
+                </StackLayout.HeightRequest>
                 <Frame Margin="0" Padding="22,0,22,0"  HorizontalOptions="StartAndExpand" Style="{DynamicResource frameStyle}">
                     <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_google.png"/>
                 </Frame>
@@ -63,4 +73,5 @@
             </StackLayout>
         </StackLayout>
     </StackLayout>
+    <!--#endregion-->
 </controls:BasePage>

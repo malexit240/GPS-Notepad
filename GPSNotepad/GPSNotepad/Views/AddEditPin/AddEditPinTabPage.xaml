@@ -13,6 +13,7 @@
     <StackLayout VerticalOptions="FillAndExpand">
 
         <controls:PageNavbar Title="Edit pin">
+            <ImageButton BackgroundColor="Transparent" Grid.Column="4" HeightRequest="20"  Source="ic_scan_qr.png" Command="{Binding ScanQRCommand}"/>
             <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPinCommand}"/>
         </controls:PageNavbar>
 
@@ -66,6 +67,8 @@
                     </controls:BindableMap.Behaviors>
                 </controls:BindableMap>
 
+                <Frame Grid.Row="0" 
+                       Style="{DynamicResource shadowFloatFrameStyle}"/>
                 <Button Grid.Row="0" 
                         ImageSource="ic_location.png"
                         Style="{DynamicResource floatButtonStyle}"

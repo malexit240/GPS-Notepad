@@ -111,17 +111,18 @@ namespace GPSNotepad.ViewModels
             await PinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
         });
 
-        public ICommand EditPlaceEventContextCommand =>
 
-        new DelegateCommand<PlaceEventViewModel>(async (placeEvent) =>
-        {
-            var parameters = new NavigationParameters
-                {
+
+        private ICommand _editPlaceEventContextCommand;
+        public ICommand EditPlaceEventContextCommand => _editPlaceEventContextCommand ??= new DelegateCommand<PlaceEventViewModel>(async (placeEvent) =>
+         {
+             var parameters = new NavigationParameters
+                 {
                     { nameof(PlaceEventViewModel), placeEvent }
-                };
+                 };
 
-            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
-        });
+             await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+         });
 
         public DelegateCommand<object> OnMapClickedCommand => new DelegateCommand<object>((newPosition) =>
         {

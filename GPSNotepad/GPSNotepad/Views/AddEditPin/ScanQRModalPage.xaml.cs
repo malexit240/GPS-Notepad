@@ -7,6 +7,7 @@ namespace GPSNotepad.Views
         public ScanQRModalPage() : base()
         {
             InitializeComponent();
+
         }
     }
 }

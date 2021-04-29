@@ -6,63 +6,100 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignInPage"
              Style="{DynamicResource pageStyle}"
-             NavigationPage.HasNavigationBar="False">
-    
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="{DynamicResource Cocolor}">
+
+    <!--#region CONTENT -->
     <StackLayout>
-        <controls:PageNavbar Title="{Binding TextResources[SignInTitle]}"/>
+
+        <!--#region NAVIGATION BAR -->
+
+        <controls:PageNavbar Title="{Binding TextResources[LogInTitle]}"/>
+
+        <!--#endregion-->
 
         <StackLayout Padding="{DynamicResource HorizontalIndent}">
-            
-      
-        <controls:LabeledEntry LabelText="{Binding TextResources[Email]}"
+
+            <!--#region EMAIL -->
+
+            <controls:LabeledEntry LabelText="{Binding TextResources[Email]}"
                                EntryText="{Binding Email}"
-                               EntryPlaceholderText="{Binding TextResources[Email]}"
+                               EntryPlaceholderText="{Binding TextResources[EnterEmailPlaceholder]}"
                                IsWrong="{Binding IsEmailWrong}"
                                ButtonImageSource="ic_clear.png"
                                ButtonCommand="{Binding ClearEmailCommand}"
-                               WrongLabelText="Wrong Email"
+                               WrongLabelText="{Binding TextResources[WrongEmail]}"
                                Margin="0,8,0,0"/>
 
-        <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
+            <!--#endregion-->
+
+            <!--#region PASSWORD -->
+
+            <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
                                EntryText="{Binding Password}"
-                               EntryPlaceholderText="{Binding TextResources[Password]}"
+                               EntryPlaceholderText="{Binding TextResources[EnterPasswordPlaceholder]}"
                                IsWrong="{Binding IsPasswordWrong}"
                                IsPassword="{Binding IsHidePassword}"
                                ButtonImageSource="ic_eye_off.png"
                                ButtonCheckedImageSource="ic_eye.png"
                                ButtonCommand="{Binding ShowPasswordCommand}"
-                               WrongLabelText="Wrong Password"/>
+                               WrongLabelText="{Binding TextResources[WrongPassword]}"/>
 
-        <Button Text="{Binding TextResources[SignIn]}"
+            <!--#endregion-->
+
+            <!--#region LOGIN BUTTON -->
+
+            <Button Text="{Binding TextResources[ButtonLogIn]}"
                 Command="{Binding SignInCommand}"
                 Style="{DynamicResource buttonAccentStyle}"
                 Margin="0,8,0,0"/>
-        <Grid RowDefinitions="*" 
+
+            <!--#endregion-->
+
+            <!--#region SEPARATOR OR -->
+
+            <Grid RowDefinitions="*" 
               HorizontalOptions="FillAndExpand"
               Margin="0,12,0,12">
-            <BoxView Grid.Row="0"
+                <BoxView Grid.Row="0"
                 HeightRequest="1"
                      VerticalOptions="CenterAndExpand"
                 HorizontalOptions="FillAndExpand"
                      BackgroundColor="{DynamicResource System_LightGray}"/>
-            <Label Grid.Row="0" 
-                   Text=" or "
+                <Label Grid.Row="0" 
+                   Text="{Binding TextResources[OR]}"
+                   FontSize="{DynamicResource SmallFontSize}"
+                   FontFamily="Montserrat_Medium"
                    TextColor="{DynamicResource System_LightGray}"
                    BackgroundColor="{DynamicResource PageBackgroundColor}"
                    HorizontalOptions="CenterAndExpand"/>
-        </Grid>
-        <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+            </Grid>
+
+            <!--#endregion-->
+
+            <!--#region BUTTONS FOR OTHER WAYS -->
+
+            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                <StackLayout.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double">
+                        <On Platform="Android" Value="50"/>
+                    </OnPlatform>
+                </StackLayout.HeightRequest>
                 <Frame Margin="0" Padding="22,0,22,0"  HorizontalOptions="StartAndExpand" Style="{DynamicResource frameStyle}">
                     <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_google.png"/>
-            </Frame>
+                </Frame>
                 <Frame  Margin="0" Padding="22,0,22,0" HorizontalOptions="CenterAndExpand" Style="{DynamicResource frameStyle}">
                     <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_facebook.png"/>
-            </Frame>
+                </Frame>
                 <Frame  Margin="0" Padding="22,0,22,0"  HorizontalOptions="EndAndExpand" Style="{DynamicResource frameStyle}">
                     <ImageButton Margin="22,0,22,0" BackgroundColor="Transparent" Source="ic_apple.png"/>
-            </Frame>
-        </StackLayout>
+                </Frame>
+            </StackLayout>
+
+            <!--#endregion-->
+
         </StackLayout>
 
     </StackLayout>
+    <!--#endregion-->
 </controls:BasePage>

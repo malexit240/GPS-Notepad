@@ -66,6 +66,10 @@
                        Text="{Binding Path=SelectedPin.Description}"/>
             </controls:DetailView>
 
+
+            <Frame Grid.Row="0" Grid.RowSpan="2"
+               Style="{DynamicResource shadowFloatFrameStyle}"/>
+
             <Button Grid.Row="0" Grid.RowSpan="2"
                 ImageSource="ic_location.png"
                 Style="{DynamicResource floatButtonStyle}"

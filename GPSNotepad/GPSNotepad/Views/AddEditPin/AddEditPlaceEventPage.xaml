@@ -8,18 +8,33 @@
              Title="{Binding TextResources[AddEditPlaceEventTitle]}"
              Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False">
-
     <StackLayout>
+
         <controls:PageNavbar Title="Place events">
             <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
         </controls:PageNavbar>
 
-        <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
-                               EntryPlaceholderText="{Binding TextResources[Description]}"
-                               EntryText="{Binding Description}"/>
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
-        <DatePicker TextColor="{DynamicResource System_Black}" Date="{Binding Date}"/>
-        <TimePicker TextColor="{DynamicResource System_Black}" Time="{Binding Time}"/>
+        <StackLayout Padding="{DynamicResource HorizontalIndent}">
+
+            <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
+                                   EntryPlaceholderText="{Binding TextResources[Description]}"
+                                   EntryText="{Binding Description}"/>
+
+            <DatePicker TextColor="{DynamicResource PrimaryTextColor}" 
+                        FontFamily="Montserrat_Medium"
+                        FontSize="{DynamicResource NormalFontSize}"
+                        BackgroundColor="Transparent"
+                        Date="{Binding Date}"/>
+
+
+            <TimePicker TextColor="{DynamicResource PrimaryTextColor}" 
+                        FontFamily="Montserrat_Medium"
+                        FontSize="{DynamicResource NormalFontSize}"
+                        BackgroundColor="Transparent" Time="{Binding Time}"/>
+
+        </StackLayout>
 
     </StackLayout>
 </controls:BasePage>

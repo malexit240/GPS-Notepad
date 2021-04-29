@@ -50,12 +50,23 @@
                                                    FontSize="{DynamicResource SmallFontSize}"/>
                                             </StackLayout>
                                         </StackLayout>
-                                        <ImageButton Grid.Column="1"
+
+                                        <ImageButton Grid.Column="1" 
+                                           BackgroundColor="Transparent"
                                            Source="ic_left_gray.png"
+                                            Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
+                                               Source={x:Reference page}}"
+                                           CommandParameter="{Binding Self}"
                                            VerticalOptions="Center"
-                                           HorizontalOptions="FillAndExpand"
-                                           Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
-                                               Source={x:Reference page}}"/>
+                                           HorizontalOptions="FillAndExpand">
+                                            <ImageButton.WidthRequest>
+                                                <OnPlatform x:TypeArguments="x:Double">
+                                                    <On Platform="iOS" Value="12"/>
+                                                    <On Platform="Android" Value="26"/>
+                                                </OnPlatform>
+                                            </ImageButton.WidthRequest>
+                                        </ImageButton>
+
                                     </Grid>
                                     <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
                                 </StackLayout>
@@ -67,6 +78,9 @@
             </StackLayout>
 
         </StackLayout>
+
+        <Frame Grid.Row="0" 
+               Style="{DynamicResource shadowFloatFrameStyle}"/>
         <Button Grid.Row="0" 
                 ImageSource="ic_plus.png"
                 Style="{DynamicResource floatButtonAccentStyle}"
