@@ -6,21 +6,21 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="GPSNotepad.Views.SignUpOnePage"
              Style="{DynamicResource pageStyle}"
-                   NavigationPage.HasNavigationBar="False">
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="icon_settings.png"
-            Command="{prism:NavigateTo 'SettingsPage'}"/>
-    </ContentPage.ToolbarItems>
-    <StackLayout Padding="{StaticResource FullIndent}">
+             NavigationPage.HasNavigationBar="False">
+    
+    <StackLayout >
         <controls:PageNavbar Title="{Binding TextResources[SignUpTitle]}"/>
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-
+        
+        <StackLayout Padding="{DynamicResource FullIndent}">
+            
+            
         <controls:LabeledEntry LabelText="{Binding TextResources[Name]}" 
                                EntryPlaceholderText="{Binding TextResources[Name]}"
                                EntryText="{Binding Name}"
+                               WrongLabelText="   "
                                ButtonImageSource="ic_clear.png"
                                ButtonCommand="{Binding ClearNameCommand}"
-                               Margin="0,4,0,0"/>
+                               Margin="0,8,0,0"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[Email]}" 
                                EntryPlaceholderText="{Binding TextResources[Email]}"
@@ -32,18 +32,20 @@
 
         <Button Text="Next"
                 Command="{Binding GoToSignUpTwoPageCommand}"
-                Style="{DynamicResource buttonAccentStyle}"/>
+                Style="{DynamicResource buttonAccentStyle}"
+                Margin="0,8,0,0"/>
 
         <Grid RowDefinitions="*" 
-              HorizontalOptions="FillAndExpand">
+              HorizontalOptions="FillAndExpand"
+              Margin="0,12,0,12">
             <BoxView Grid.Row="0"
                 HeightRequest="1"
                      VerticalOptions="CenterAndExpand"
                 HorizontalOptions="FillAndExpand"
-                     BackgroundColor="{DynamicResource System_Gray}"/>
+                     BackgroundColor="{DynamicResource System_LightGray}"/>
             <Label Grid.Row="0" 
                    Text=" or "
-                   TextColor="{DynamicResource System_Gray}"
+                   TextColor="{DynamicResource System_LightGray}"
                    BackgroundColor="{DynamicResource PageBackgroundColor}"
                    HorizontalOptions="CenterAndExpand"/>
         </Grid>
@@ -58,6 +60,7 @@
             <Frame  Margin="0" Padding="15,0,15,0" HorizontalOptions="End" Style="{DynamicResource frameStyle}">
                 <Button BackgroundColor="Transparent" ImageSource="ic_apple.png"/>
             </Frame>
+        </StackLayout>
         </StackLayout>
     </StackLayout>
 </controls:BasePage>

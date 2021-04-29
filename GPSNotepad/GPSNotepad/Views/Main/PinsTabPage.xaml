@@ -12,10 +12,10 @@
         <!--NAVIGATION BAR-->
         <StackLayout Grid.Row="0">
             <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
-                                 SearchText="{Binding SearchField}" 
-                                 SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
-                                 LogoutButtonCommand="{Binding LogoutCommand}"
-                                 Margin="0,17,0,13"/>
+                                     SearchText="{Binding SearchField}" 
+                                     SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
+                                     LogoutButtonCommand="{Binding LogoutCommand}"/>
+            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
             <!--LIST OF PINS-->
             <StackLayout  BindableLayout.ItemsSource="{Binding Pins}">
@@ -26,7 +26,8 @@
                                 <SwipeItemView Command="{Binding Path=BindingContext.ShowQRCodeCommand,
                                           Source={x:Reference page}}"
                                           CommandParameter="{Binding Self}"
-                                           BackgroundColor="{DynamicResource SuccsessColor}">
+                                           BackgroundColor="{DynamicResource SuccsessColor}"
+                                           Padding="15,0,15,0">
                                     <Image HeightRequest="15" WidthRequest="15"  Source="ic_qr.png"/>
                                 </SwipeItemView>
 
@@ -47,11 +48,10 @@
                             </SwipeView.RightItems>
 
                             <!--PIN ITEM-->
-                            <StackLayout Padding="12,0,12,0">
+                            <StackLayout Padding="14,0,14,0">
 
                                 <Grid ColumnDefinitions="50,*,40"
-                                      Padding="0,12,0,12">
-
+                                      Padding="0,16,0,16">
                                     <!--CHECK FAVORITE BUTTON-->
                                     <controls:ImageCheckBox Grid.Column="0"
                                                             CheckedImageSource="ic_like_blue.png" 
@@ -60,9 +60,9 @@
                                                             BackgroundColor="{DynamicResource Variant}"
                                                             VerticalOptions="CenterAndExpand"
                                                             HorizontalOptions="CenterAndExpand"
-                                                            HeightRequest="40"
-                                                            WidthRequest="40"
-                                                            Padding="2"
+                                                            HeightRequest="44"
+                                                            WidthRequest="44"
+                                                            Padding="8"
                                                             CornerRadius="6"/>
                                     <!--PIN`S LABELS-->
                                     <StackLayout Grid.Column="1" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
@@ -71,12 +71,10 @@
                                         </StackLayout.GestureRecognizers>
 
                                         <Label Text="{Binding Name}"
-                                               Style="{DynamicResource normalLabelStyle}"
-                                               />
+                                               Style="{DynamicResource normalLabelStyle}"/>
 
                                         <Label Text="{Binding FormatedPosition}"
-                                               Style="{DynamicResource detailLabelStyle}"
-                                               FontSize="{DynamicResource SmallFontSize}"/>
+                                               Style="{DynamicResource detailLabelStyle}"/>
 
                                     </StackLayout>
 
@@ -87,6 +85,7 @@
                                            Command="{Binding Path=BindingContext.EditPinContextCommand,
                                            Source={x:Reference page}}"
                                            CommandParameter="{Binding Self}"
+                                           WidthRequest="12"
                                            VerticalOptions="Center"
                                            HorizontalOptions="FillAndExpand"/>
 

@@ -9,7 +9,7 @@
              Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False">
 
-    <StackLayout Padding="12,0,12,0">
+    <StackLayout>
         <controls:PageNavbar Title="Place events">
             <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPlaceEventCommand}"/>
         </controls:PageNavbar>

@@ -5,11 +5,12 @@
              x:Class="GPSNotepad.Controls.MainPageNavBar"
              HorizontalOptions="FillAndExpand"
              Orientation="Horizontal"
-             Padding="12,0,12,0">
+             Padding="14,0,14,0"
+             Margin="0,6,0,4">
     <ImageButton x:Name="SettingsButton" 
                  Source="ic_settings.png" 
-                 VerticalOptions="CenterAndExpand" 
-                 Margin="0,0,12,0"
+                 VerticalOptions="FillAndExpand" 
+                 Margin="0,0,14,0"
                  Clicked="OnSettingsButtonClicked"
                  BackgroundColor="Transparent"/>
 
@@ -17,7 +18,7 @@
                  Source="ic_left_blue.png"
                  IsVisible="False"
                  VerticalOptions="CenterAndExpand" 
-                 Margin="0,0,12,0"
+                 Margin="0,0,14,0"
                  Clicked="UnfocusSearchField" 
                  BackgroundColor="Transparent"/>
 
@@ -26,7 +27,7 @@
 
     <ImageButton x:Name="logoutButton" 
                  Source="ic_exid.png"
-                 VerticalOptions="CenterAndExpand"
+                 VerticalOptions="FillAndExpand"
                  Margin="12,0,0,0" 
                  Clicked="OnLogoutButtonClicked"
                  BackgroundColor="Transparent"/>

@@ -8,14 +8,11 @@
              Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="icon_settings.png"
-            Command="{prism:NavigateTo 'SettingsPage'}"/>
-    </ContentPage.ToolbarItems>
-    <StackLayout Padding="{StaticResource FullIndent}">
+    <StackLayout>
         <controls:PageNavbar Title="{Binding TextResources[SignUpTitle]}"/>
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
+        <StackLayout Padding="{StaticResource FullIndent}">
+        
         <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
                                EntryText="{Binding Password}"
                                EntryPlaceholderText="{Binding TextResources[Password]}"
@@ -25,11 +22,12 @@
                                ButtonCheckedImageSource="ic_eye.png"
                                ButtonCommand="{Binding ShowPasswordCommand}"
                                WrongLabelText="{Binding WrongMessage}"
-                               Margin="0,4,0,0"/>
+                               Margin="0,8,0,0"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[ConfirmPassword]}"
                                EntryText="{Binding ConfirmPassword}"
                                EntryPlaceholderText="{Binding TextResources[ConfirmPassword]}"
+                               WrongLabelText="   "
                                IsPassword="{Binding IsHideConfirmPassword}"
                                ButtonImageSource="ic_eye_off.png"
                                ButtonCheckedImageSource="ic_eye.png"
@@ -37,6 +35,9 @@
 
         <Button Text="{Binding TextResources[SignUp]}"
                 Command="{Binding SignUpCommand}"
-                Style="{DynamicResource buttonAccentStyle}"/>
+                Style="{DynamicResource buttonAccentStyle}"
+                Margin="0,8,0,0"/>
+        </StackLayout>
+
     </StackLayout>
 </controls:BasePage>

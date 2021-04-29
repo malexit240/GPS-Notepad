@@ -23,12 +23,39 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Public Static Properties---
-        public BindableProperty ChoosenPageProperty = BindableProperty.Create(nameof(ChoosenPage),
+        public static BindableProperty ChoosenPageProperty = BindableProperty.Create(nameof(ChoosenPage),
             typeof(int),
             typeof(NavigableTabbedPage),
             defaultValue: 0,
             defaultBindingMode: BindingMode.TwoWay,
             propertyChanged: OnChoosenPagePropertyChange);
+
+        public Color SelectedColor
+        {
+            get => (Color)GetValue(SelectedColorProperty);
+            set => SetValue(SelectedColorProperty, value);
+        }
+        #endregion
+
+        #region ---Public Static Properties---
+        public static BindableProperty SelectedColorProperty = BindableProperty.Create(nameof(SelectedColor),
+            typeof(Color),
+            typeof(NavigableTabbedPage));
+
+
+        public  Color UnSelectedColor
+        {
+            get => (Color)GetValue(UnSelectedColorProperty);
+            set => SetValue(UnSelectedColorProperty, value);
+        }
+        #endregion
+
+        #region ---Public Static Properties---
+        public static BindableProperty UnSelectedColorProperty = BindableProperty.Create(nameof(UnSelectedColor),
+            typeof(Color),
+            typeof(NavigableTabbedPage));
+
+
         #endregion
 
         #region ---Event Handlers---

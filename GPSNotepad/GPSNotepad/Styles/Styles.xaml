@@ -5,18 +5,18 @@
                     xmlns:controls="clr-namespace:GPSNotepad.Controls"
                     x:Class="GPSNotepad.Styles.Styles">
     <x:Int32 x:Key="Indent">
-        12
+        14
     </x:Int32>
 
     <Thickness x:Key="FullIndent">
         <Thickness.Left>
-            12
+            14
         </Thickness.Left>
         <Thickness.Top>
             0
         </Thickness.Top>
         <Thickness.Right>
-            12
+            14
         </Thickness.Right>
         <Thickness.Bottom>
             12
@@ -25,13 +25,13 @@
 
     <Thickness x:Key="HorizontalIndent">
         <Thickness.Left>
-            12
+            14
         </Thickness.Left>
         <Thickness.Top>
             0
         </Thickness.Top>
         <Thickness.Right>
-            12
+            14
         </Thickness.Right>
         <Thickness.Bottom>
             0
@@ -54,13 +54,16 @@
     </Thickness>
 
     <x:Int32 x:Key="LargeFontSize">
-        18
+        20
     </x:Int32>
     <x:Int32 x:Key="NormalFontSize">
-        16
+        18
     </x:Int32>
     <x:Int32 x:Key="SmallFontSize">
-        14
+        16
+    </x:Int32>
+    <x:Int32 x:Key="TiniFontSize">
+        12
     </x:Int32>
 
     <Style x:Key="pageStyle" 
@@ -124,7 +127,7 @@
         <Setter Property="Margin"
                     Value="12,0,0,0"/>
         <Setter Property="TextColor"
-                    Value="{DynamicResource PrimaryTextColor}"/>
+                    Value="{DynamicResource SecondaryTextColor}"/>
         <Setter Property="FontSize"
                     Value="{StaticResource SmallFontSize}"/>
         <Setter Property="FontFamily"
@@ -136,9 +139,9 @@
         <Setter Property="TextColor"
                     Value="{DynamicResource ErrorColor}"/>
         <Setter Property="Margin"
-                    Value="12,0,0,0"/>
+                    Value="12,0,0,12"/>
         <Setter Property="FontSize"
-                    Value="{StaticResource SmallFontSize}"/>
+                    Value="{StaticResource TiniFontSize}"/>
         <Setter Property="FontFamily"
                     Value="Montserrat_SemiBold"/>
     </Style>
@@ -158,7 +161,7 @@
         <Setter Property="Margin">
             <Setter.Value>
                 <OnPlatform x:TypeArguments="Thickness">
-                    <OnPlatform.iOS>8,8,0,8</OnPlatform.iOS>
+                    <OnPlatform.iOS>12,13,0,13</OnPlatform.iOS>
                     <OnPlatform.Android>8,0,0,0</OnPlatform.Android>
                 </OnPlatform>
             </Setter.Value>
@@ -181,6 +184,29 @@
             <Setter.Value>
                 <OnPlatform x:TypeArguments="Thickness">
                     <OnPlatform.iOS>12,8,0,8</OnPlatform.iOS>
+                    <OnPlatform.Android>12,0,0,0</OnPlatform.Android>
+                </OnPlatform>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="searchEntryStyle"
+               TargetType="Entry">
+        <Setter Property="BackgroundColor"
+                    Value="Transparent"/>
+        <Setter Property="TextColor"
+                    Value="{DynamicResource PrimaryTextColor}"/>
+        <Setter Property="PlaceholderColor"
+                    Value="{DynamicResource System_Gray}"/>
+        <Setter Property="FontSize"
+                    Value="{StaticResource SmallFontSize}"/>
+        <Setter Property="FontFamily"
+                    Value="Montserrat_Medium"/>
+        <Setter Property="Margin">
+            <Setter.Value>
+                <OnPlatform x:TypeArguments="Thickness">
+                    <OnPlatform.iOS>14,8,0,8</OnPlatform.iOS>
                     <OnPlatform.Android>12,0,0,0</OnPlatform.Android>
                 </OnPlatform>
             </Setter.Value>
@@ -318,6 +344,7 @@
                     Value="0"/>
         <Setter Property="BackgroundColor"
                     Value="{DynamicResource PageBackgroundColor}"/>
+        <Setter Property="Visual" Value="Material"/>
     </Style>
 
     <Style x:Key="floatButtonAccentStyle"

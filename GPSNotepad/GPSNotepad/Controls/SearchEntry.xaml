@@ -6,8 +6,7 @@
              Orientation="Horizontal" BackgroundColor="{DynamicResource Variant}">
     <Entry x:Name="searchEntry"
            Placeholder="Search" 
-           Style="{DynamicResource entryStyle}"
-           FontSize="{DynamicResource SmallFontSize}"
+           Style="{DynamicResource searchEntryStyle}"
            HorizontalOptions="FillAndExpand">
         <Entry.Behaviors>
             <prism:EventToCommandBehavior EventName="Focused" Command="{Binding OnSearchFieldFocused}"/>

@@ -8,16 +8,18 @@
              Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False">
     <StackLayout>
+        
         <controls:PageNavbar Title="{Binding TextResources[ChooseLanguageTitle]}"/>
+        
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
         <input:RadioButtonGroupView>
-            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
             <input:RadioButton  Text="{Binding TextResources[English]}" 
                                 IsChecked="{Binding IsEnglish}"
                                 ClickCommand="{Binding CheckedEnglish}"
                                 Style="{DynamicResource radioButtonStyle}"
-                                Padding="{DynamicResource FullIndent}"/>
+                                Margin="0" Padding="14,16,14,16"/>
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
@@ -25,7 +27,7 @@
                                 IsChecked="{Binding IsRussian}"
                                 ClickCommand="{Binding CheckedRussian}"
                                 Style="{DynamicResource radioButtonStyle}"
-                                Padding="{DynamicResource FullIndent}"/>
+                                Margin="0" Padding="14,16,14,16"/>
 
             <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
         </input:RadioButtonGroupView>

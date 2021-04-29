@@ -10,25 +10,32 @@
         <controls:PageNavbar Title="{Binding TextResources[SettingsPageTitle]}"/>
 
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="{StaticResource FullIndent}">
+        
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="14,16,14,16">
             <Label Text="Dark theme"
                    HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Style="{DynamicResource settingsLabelStyle}"/>
             <Switch HorizontalOptions="End" 
                     IsToggled="{Binding IsDarkTheme}"
+                    VerticalOptions="CenterAndExpand"
                     Style="{DynamicResource switchStyle}"/>
         </StackLayout>
+        
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
 
-        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="{StaticResource Indent}">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Margin="0" Padding="14,16,14,16">
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding OnLanguageTabTapped}"/>
             </StackLayout.GestureRecognizers>
             <Label Text="Language"
                    HorizontalOptions="StartAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Style="{DynamicResource settingsLabelStyle}"/>
-            <Image Source="ic_left_gray.png" HorizontalOptions="End"/>
+            <Image Source="ic_left_gray.png" HorizontalOptions="End"
+                   VerticalOptions="CenterAndExpand"/>
         </StackLayout>
+        
         <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
     </StackLayout>
 </controls:BasePage>

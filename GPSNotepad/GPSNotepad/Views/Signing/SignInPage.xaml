@@ -7,11 +7,13 @@
              x:Class="GPSNotepad.Views.SignInPage"
              Style="{DynamicResource pageStyle}"
              NavigationPage.HasNavigationBar="False">
-    <StackLayout Padding="{DynamicResource FullIndent}">
+    
+    <StackLayout>
         <controls:PageNavbar Title="{Binding TextResources[SignInTitle]}"/>
 
-        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-
+        <StackLayout Padding="{DynamicResource HorizontalIndent}">
+            
+      
         <controls:LabeledEntry LabelText="{Binding TextResources[Email]}"
                                EntryText="{Binding Email}"
                                EntryPlaceholderText="{Binding TextResources[Email]}"
@@ -19,7 +21,7 @@
                                ButtonImageSource="ic_clear.png"
                                ButtonCommand="{Binding ClearEmailCommand}"
                                WrongLabelText="Wrong Email"
-                               Margin="0,4,0,0"/>
+                               Margin="0,8,0,0"/>
 
         <controls:LabeledEntry LabelText="{Binding TextResources[Password]}"
                                EntryText="{Binding Password}"
@@ -33,17 +35,19 @@
 
         <Button Text="{Binding TextResources[SignIn]}"
                 Command="{Binding SignInCommand}"
-                Style="{DynamicResource buttonAccentStyle}"/>
+                Style="{DynamicResource buttonAccentStyle}"
+                Margin="0,8,0,0"/>
         <Grid RowDefinitions="*" 
-              HorizontalOptions="FillAndExpand">
+              HorizontalOptions="FillAndExpand"
+              Margin="0,12,0,12">
             <BoxView Grid.Row="0"
                 HeightRequest="1"
                      VerticalOptions="CenterAndExpand"
                 HorizontalOptions="FillAndExpand"
-                     BackgroundColor="{DynamicResource System_Gray}"/>
+                     BackgroundColor="{DynamicResource System_LightGray}"/>
             <Label Grid.Row="0" 
                    Text=" or "
-                   TextColor="{DynamicResource System_Gray}"
+                   TextColor="{DynamicResource System_LightGray}"
                    BackgroundColor="{DynamicResource PageBackgroundColor}"
                    HorizontalOptions="CenterAndExpand"/>
         </Grid>
@@ -57,6 +61,7 @@
             <Frame  Margin="0" Padding="15,0,15,0" HorizontalOptions="End" Style="{DynamicResource frameStyle}">
                 <Button BackgroundColor="Transparent" ImageSource="ic_apple.png"/>
             </Frame>
+        </StackLayout>
         </StackLayout>
 
     </StackLayout>

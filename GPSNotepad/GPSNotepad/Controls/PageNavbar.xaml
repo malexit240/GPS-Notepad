@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              x:Class="GPSNotepad.Controls.PageNavbar"
-      Padding="0,20,20,0"
+      Padding="8,0,0,8"
       ColumnDefinitions="35,70,*,35,35,35">
 
-    <ImageButton Grid.Column="0" BackgroundColor="Transparent" Source="ic_left_blue.png" Command="{prism:GoBack}"/>
+    <ImageButton x:Name="backButton"
+                 Grid.Column="0"
+                 BackgroundColor="Transparent"
+                 Source="ic_left_blue.png"
+                 Command="{prism:GoBack}"/>
     <Label x:Name="titleLabel"
            Style="{DynamicResource titleLabelStyle}"
            Grid.Column="2"/>

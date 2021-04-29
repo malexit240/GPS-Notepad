@@ -223,7 +223,7 @@ namespace GPSNotepad.Controls
                 else
                 {
                     LabeledEntry.Frame.SetDynamicResource(StyleProperty, "entryFrameStyle");
-                    LabeledEntry.WrongLabel.Text = "";
+                    LabeledEntry.WrongLabel.Text = "     ";
                 }
 
             }

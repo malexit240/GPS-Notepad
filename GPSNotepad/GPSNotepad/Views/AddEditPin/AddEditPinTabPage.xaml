@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <controls:BasePage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:GPSNotepad.Controls" xmlns:converters="clr-namespace:GPSNotepad.Converters"
-             x:Class="GPSNotepad.Views.AddEditPinTabPage">
+             x:Class="GPSNotepad.Views.AddEditPinTabPage"
+             Style="{DynamicResource pageStyle}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -9,69 +10,70 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_save.png" Command="{Binding AddEditPinCommand}"/>
-        <ToolbarItem IconImageSource="ic_scan_qr.png" Command="{Binding ScanQRCommand}"/>
-    </ContentPage.ToolbarItems>
+    <StackLayout VerticalOptions="FillAndExpand">
 
-    <StackLayout Padding="12,0,12,0">
         <controls:PageNavbar Title="Edit pin">
-            <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding}"/>
+            <ImageButton BackgroundColor="Transparent" Grid.Column="5" Source="ic_save.png" Command="{Binding AddEditPinCommand}"/>
         </controls:PageNavbar>
 
-        <controls:LabeledEntry LabelText="{Binding TextResources[Name] }"
+        <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+        <StackLayout Padding="{DynamicResource HorizontalIndent}" VerticalOptions="FillAndExpand">
+
+            <controls:LabeledEntry LabelText="{Binding TextResources[Name] }"
                                EntryPlaceholderText="{Binding TextResources[Name]}"
                                WrongLabelText=" "
                                EntryText="{Binding Name}"/>
 
-        <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
+            <controls:LabeledEntry LabelText="{Binding TextResources[Description]}"
                                EntryPlaceholderText="{Binding TextResources[Description]}"
                                WrongLabelText=" "
                                EntryText="{Binding Description}"/>
 
 
-        <Grid ColumnDefinitions="1*,1*" HorizontalOptions="FillAndExpand">
+            <Grid ColumnDefinitions="1*,1*" HorizontalOptions="FillAndExpand">
+
+                <controls:LabeledEntry Grid.Column="0" 
+                                       LabelText="Coordinates"
+                                       EntryPlaceholderText="Longitude"
+                                       EntryText="{Binding Longitude}"
+                                       IsWrong="{Binding IsLongitudeWrong}"
+                                       WrongLabelText=" "
+                                       HorizontalOptions="FillAndExpand"
+                                       Margin="0,0,4,0"/>
+
+                <controls:LabeledEntry Grid.Column="1"
+                                       LabelText=" "
+                                       EntryPlaceholderText="Latitude"
+                                       EntryText="{Binding Latitude}"
+                                       IsWrong="{Binding IsLatitudeWrong}"
+                                       WrongLabelText=" "
+                                       HorizontalOptions="FillAndExpand"
+                                       Margin="4,0,0,0"/>
+            </Grid>
 
 
-            <controls:LabeledEntry Grid.Column="0" LabelText="Coordinates"
-                                   EntryPlaceholderText="Longitude"
-                                   EntryText="{Binding Longitude}"
-                                   IsWrong="{Binding IsLongitudeWrong}"
-                                   WrongLabelText=" "
-                                   HorizontalOptions="FillAndExpand"
-                                   Margin="0,0,4,0"/>
-
-            <controls:LabeledEntry Grid.Column="1"
-                                   LabelText=" "
-                                   EntryPlaceholderText="Latitude"
-                                   EntryText="{Binding Latitude}"
-                                   IsWrong="{Binding IsLatitudeWrong}"
-                                   WrongLabelText=" "
-                                   HorizontalOptions="FillAndExpand"
-                                   Margin="4,0,0,0"/>
-        </Grid>
-
-
-        <Grid RowDefinitions="*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <controls:BindableMap x:Name="map" 
-                                  Grid.Row="0"
-                                  PinsSource="{Binding Pins}"
-                                  MapSpan="{Binding Span}" 
-                                  IsLightStyle="{DynamicResource IsLight}"
-                                  VerticalOptions="FillAndExpand">
-                <controls:BindableMap.Behaviors>
-                    <prism:EventToCommandBehavior EventName="MapClicked" 
+            <Grid RowDefinitions="*" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Red">
+                <controls:BindableMap x:Name="map" 
+                                      Grid.Row="0" 
+                                      PinsSource="{Binding Pins}"
+                                      MapSpan="{Binding Span}" 
+                                      IsLightStyle="{DynamicResource IsLight}"
+                                      VerticalOptions="FillAndExpand">
+                    <controls:BindableMap.Behaviors>
+                        <prism:EventToCommandBehavior EventName="MapClicked" 
                                               Command="{Binding OnMapClickedCommand}" 
                                               EventArgsConverter="{x:StaticResource mapClickedEventArgsConverter}"/>
-                    <prism:EventToCommandBehavior EventName="MapLoaded" Command="{Binding OnMapLoadedCommand}"/>
-                </controls:BindableMap.Behaviors>
-            </controls:BindableMap>
-            
-            <Button Grid.Row="0" Grid.RowSpan="2"
-                ImageSource="ic_location.png"
-                Style="{DynamicResource floatButtonStyle}"
-                Command="{Binding MoveToMyLocationCommand}"/>
-        </Grid>
+                        <prism:EventToCommandBehavior EventName="MapLoaded" Command="{Binding OnMapLoadedCommand}"/>
+                    </controls:BindableMap.Behaviors>
+                </controls:BindableMap>
+
+                <Button Grid.Row="0" 
+                        ImageSource="ic_location.png"
+                        Style="{DynamicResource floatButtonStyle}"
+                        Command="{Binding MoveToMyLocationCommand}"/>
+            </Grid>
+        </StackLayout>
     </StackLayout>
 
 </controls:BasePage>

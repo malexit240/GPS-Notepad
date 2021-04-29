@@ -5,63 +5,68 @@
              x:Name="page"
              Style="{DynamicResource pageStyle}">
     <Grid RowDefinitions="*">
-        <StackLayout Grid.Row="0" Padding="12,0,12,0">
-            <controls:PageNavbar Title="Events" Padding="0,24,0,24"/>
-            <ListView  ItemsSource="{Binding Events}" 
-                       HasUnevenRows="True"
-                       SeparatorVisibility="None"
-                       IsPullToRefreshEnabled="False"
-                       SelectionMode="None">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
-                                          Source={x:Reference page}}"
-                                          CommandParameter="{Binding Self}"
-                                          Text="{Binding Path=BindingContext.TextResources[Edit],
-                                          Source={x:Reference page}}"/>
-                                <MenuItem Command="{Binding DeletePlaceEventContextCommand}" 
-                                          Text="{Binding Path=BindingContext.TextResources[Delete],
-                                          Source={x:Reference page}}"/>
-                            </ViewCell.ContextActions>
-                            <StackLayout HorizontalOptions="FillAndExpand"
-                                         Padding="12,0,12,0">
-                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-                                <Grid ColumnDefinitions="*,40"
-                                      Padding="0,12,0,12">
+        <StackLayout Grid.Row="0">
+            <controls:PageNavbar Title="Events"
+                                 Padding="0,24,0,24"
+                                 IsBackButtonEnabled="False"/>
 
-                                    <StackLayout Grid.Column="0" 
+            <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+
+            <StackLayout BindableLayout.ItemsSource="{Binding Events}"
+                         Padding="{DynamicResource FullIndent}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <SwipeView BackgroundColor="{DynamicResource PageBackgroundColor}">
+                            <SwipeView.RightItems>
+                                <SwipeItem Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
+                                           Source={x:Reference page}}"
+                                           CommandParameter="{Binding Self}"
+                                           BackgroundColor="{DynamicResource PrimaryColor}"
+                                           IconImageSource="ic_edit.png"/>
+                                <SwipeItem Command="{Binding DeletePlaceEventContextCommand}"
+                                           BackgroundColor="{DynamicResource ErrorColor}"
+                                           IconImageSource="ic_delete.png"/>
+                            </SwipeView.RightItems>
+
+                            <SwipeView.Content>
+                                <StackLayout HorizontalOptions="FillAndExpand">
+                                    <Grid ColumnDefinitions="*,40"
+                                      Padding="0,14,0,14">
+
+                                        <StackLayout Grid.Column="0" 
                                                  HorizontalOptions="FillAndExpand"
                                                  VerticalOptions="CenterAndExpand">
 
-                                        <Label Text="{Binding Description}"
+                                            <Label Text="{Binding Description}"
                                                HorizontalOptions="StartAndExpand"
                                                Style="{DynamicResource normalLabelStyle}"/>
 
-                                        <StackLayout HorizontalOptions="StartAndExpand"
+                                            <StackLayout HorizontalOptions="StartAndExpand"
                                              Orientation="Horizontal">
-                                            <Label Text="{Binding DateString}"
+                                                <Label Text="{Binding DateString}"
                                                    Style="{DynamicResource detailLabelStyle}"
                                                    FontSize="{DynamicResource SmallFontSize}"/>
-                                            <Label Text="{Binding TimeString}"
+                                                <Label Text="{Binding TimeString}"
                                                    Style="{DynamicResource detailLabelStyle}"
                                                    FontSize="{DynamicResource SmallFontSize}"/>
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                                    <ImageButton Grid.Column="1"
+                                        <ImageButton Grid.Column="1"
                                            Source="ic_left_gray.png"
                                            VerticalOptions="Center"
                                            HorizontalOptions="FillAndExpand"
                                            Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
                                                Source={x:Reference page}}"/>
-                                </Grid>
-                                <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
-                            </StackLayout>
-                        </ViewCell>
+                                    </Grid>
+                                    <BoxView Style="{DynamicResource boxSeparatorStyle}"/>
+                                </StackLayout>
+
+                            </SwipeView.Content>
+                        </SwipeView>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
         </StackLayout>
         <Button Grid.Row="0" 
                 ImageSource="ic_plus.png"

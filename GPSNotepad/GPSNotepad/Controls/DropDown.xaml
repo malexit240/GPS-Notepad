@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com"
              x:Class="GPSNotepad.Controls.DropDown"
              x:Name="dropDown">
     <ScrollView x:Name="scrollView">
@@ -10,11 +9,16 @@
                 <DataTemplate>
                     <StackLayout BackgroundColor="Transparent" Padding="0">
                         <BoxView Style="{DynamicResource boxSeparatorStyle}" HorizontalOptions="FillAndExpand"/>
-                        <Grid ColumnDefinitions="15*,85*" Padding="0,12,0,12" Margin="0">
+                        <Grid ColumnDefinitions="15*,85*" Padding="0,16,0,16" Margin="0">
                             <Grid.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
                             </Grid.GestureRecognizers>
-                            <Image Grid.Column="0" Margin="0" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Source="ic_pin_gray.png"/>
+                            <Image Grid.Column="0"
+                                   Margin="6,0,0,0"
+                                   HorizontalOptions="CenterAndExpand"
+                                   VerticalOptions="CenterAndExpand" 
+                                   Source="ic_pin_gray.png"/>
+                            
                             <StackLayout Grid.Column="1" Padding="0" Margin="0">
                                 <Label Style="{DynamicResource normalLabelStyle}"
                                        FontSize="{DynamicResource SmallFontSize}"
