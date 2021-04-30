@@ -12,6 +12,7 @@ namespace GPSNotepad.ViewModels
     public class SignUpTwoViewModel : ViewModelBase
     {
         #region ---Constructors---
+
         public SignUpTwoViewModel(INavigationService navigationService, IAuthenticationService authenticationService, IAuthorizationService authorizationService) : base(navigationService)
         {
             AuthorizationService = authorizationService;
@@ -21,14 +22,18 @@ namespace GPSNotepad.ViewModels
             signUpCommand.ObservesProperty(() => ConfirmPassword);
             signUpCommand.ObservesProperty(() => Password);
         }
+
         #endregion
 
         #region ---Protected Properties---
+
         protected IAuthorizationService AuthorizationService { get; set; }
         protected IAuthenticationService AuthenticationService { get; set; }
+
         #endregion
 
         #region ---Public Properties---
+
         private string _email = "";
         private string _name = "";
 
@@ -45,7 +50,6 @@ namespace GPSNotepad.ViewModels
             get => _confirmPassword;
             set => SetProperty(ref _confirmPassword, value);
         }
-
 
         private bool _isHidePassword = true;
         public bool IsHidePassword
@@ -95,6 +99,32 @@ namespace GPSNotepad.ViewModels
 
         private ICommand _signUpCommand;
         public ICommand SignUpCommand => _signUpCommand ??= new DelegateCommand(SignUpCommandHandler, canExecuteSignUpCommand);
+
+        #endregion
+
+
+        #region ---Overrides---
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            if (parameters.ContainsKey(nameof(SignUpOneViewModel.Email)))
+            {
+                this._email = (string)parameters[nameof(SignUpOneViewModel.Email)];
+            }
+
+            if (parameters.ContainsKey(nameof(SignUpOneViewModel.Name)))
+            {
+                this._name = (string)parameters[nameof(SignUpOneViewModel.Name)];
+            }
+
+        }
+
+        #endregion
+
+        #region ---Private Helpers---
+
         private async void SignUpCommandHandler()
         {
 
@@ -130,24 +160,8 @@ namespace GPSNotepad.ViewModels
 
         }
         private bool canExecuteSignUpCommand() => Password.Length != 0 && ConfirmPassword.Length != 0;
+
         #endregion
-
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
-            if (parameters.ContainsKey(nameof(SignUpOneViewModel.Email)))
-            {
-                this._email = (string)parameters[nameof(SignUpOneViewModel.Email)];
-            }
-
-            if (parameters.ContainsKey(nameof(SignUpOneViewModel.Name)))
-            {
-                this._name = (string)parameters[nameof(SignUpOneViewModel.Name)];
-            }
-
-        }
 
     }
 }

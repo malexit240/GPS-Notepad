@@ -20,6 +20,7 @@ namespace GPSNotepad.ViewModels
     public class AddEditPinAndEventsViewModel : ViewModelBase
     {
         #region ---Constructors---
+
         public AddEditPinAndEventsViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
         {
             Pins = new ObservableCollection<PinViewModel>();
@@ -27,13 +28,15 @@ namespace GPSNotepad.ViewModels
             PinService = pinService;
             QrScanerService = qrScanerService;
         }
+
         #endregion
 
-
         #region ---Protected Properties---
+
         protected IPinService PinService { get; set; }
         protected IQrScanerService QrScanerService { get; set; }
         protected IAuthorizationService AuthorizationService { get; set; }
+
         #endregion
 
         #region ---Public Properties---
@@ -43,6 +46,7 @@ namespace GPSNotepad.ViewModels
         public bool IsEdit { get; private set; } = false;
 
         public PinViewModel PinViewModel { get; set; }
+
 
         private string _name = "";
         public string Name
@@ -103,26 +107,15 @@ namespace GPSNotepad.ViewModels
         #endregion
 
         #region ---Commands---
-        public ICommand AddEditPinCommand => new DelegateCommand(async () =>
-        {
-            PinViewModel.Name = Name;
-            PinViewModel.Description = Description;
-            await NavigationService.GoBackAsync();
-            await PinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
-        });
 
+        private ICommand _addEditPinCommand;
+        public ICommand AddEditPinCommand => _addEditPinCommand ??= new DelegateCommand(AddEditPinHandler);
 
 
         private ICommand _editPlaceEventContextCommand;
-        public ICommand EditPlaceEventContextCommand => _editPlaceEventContextCommand ??= new DelegateCommand<PlaceEventViewModel>(async (placeEvent) =>
-         {
-             var parameters = new NavigationParameters
-                 {
-                    { nameof(PlaceEventViewModel), placeEvent }
-                 };
+        public ICommand EditPlaceEventContextCommand => _editPlaceEventContextCommand ??= new DelegateCommand<PlaceEventViewModel>(EditPlaceEventContexthandler);
 
-             await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
-         });
+
 
         public DelegateCommand<object> OnMapClickedCommand => new DelegateCommand<object>((newPosition) =>
         {
@@ -131,69 +124,18 @@ namespace GPSNotepad.ViewModels
 
         public ICommand OnMapLoadedCommand => new DelegateCommand(OnMapLoadedHelper);
 
-        public ICommand GoToAddPlaceEventFormCommand => new DelegateCommand(async () =>
-        {
-            var parameters = new NavigationParameters();
-
-            parameters.Add(nameof(PlaceEventViewModel.PinId), this.PinViewModel.PinId);
-
-            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
-        });
-
+        public ICommand GoToAddPlaceEventFormCommand => new DelegateCommand(GoToAddPlaceEventFormhandler);
 
         private ICommand _deletePlaceEventCommand;
         public ICommand DeletePlaceEventCommand => _deletePlaceEventCommand ??= new DelegateCommand<PlaceEventViewModel>(DeletePlaceEventHandler);
-        private async void DeletePlaceEventHandler(PlaceEventViewModel placeEvent)
-        {
-            Acr.UserDialogs.UserDialogs.Instance.Confirm(new Acr.UserDialogs.ConfirmConfig()
-            {
 
-                Title = TextResources["ConfirmTitle"],
-
-                Message = TextResources["ConfirmDeleteEvent"],
-                OkText = TextResources["Ok"],
-                CancelText = TextResources["Cancel"],
-
-                OnAction = async result =>
-                {
-                    if (result == true)
-                    {
-
-                        var index = PinViewModel.Events.IndexOf(placeEvent);
-
-                        if (index != -1)
-                        {
-                            PinViewModel.Events.RemoveAt(index);
-
-                            if (IsEdit == true)
-                            {
-                                await PinService.Update(PinViewModel.GetModelPin());
-                            }
-                        }
-
-                    }
-
-                }
-            });
-
-
-
-        }
 
         private ICommand _scanQRCommand;
         public ICommand ScanQRCommand => _scanQRCommand ??= new DelegateCommand(ScanQRHandler);
-        private async void ScanQRHandler()
-        {
-            await NavigationService.NavigateAsync(nameof(ScanQRModalPage), null, true, false);
-        }
 
 
         private ICommand _moveToMyLocationCommand;
         public ICommand MoveToMyLocationCommand => _moveToMyLocationCommand ??= new DelegateCommand(MoveToMyLocationHandler);
-        private void MoveToMyLocationHandler()
-        {
-            CurrentPosition.GetAsync().ContinueWith(result => Span = new MapSpan(result.Result, 0.01, 0.01));
-        }
 
         #endregion
 
@@ -203,7 +145,7 @@ namespace GPSNotepad.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            if (parameters.ContainsKey(nameof(PlaceEventViewModel)))
+            if (parameters.ContainsKey(nameof(PlaceEventViewModel))) //On returns event
             {
                 if (PinViewModel != null)
                 {
@@ -227,13 +169,13 @@ namespace GPSNotepad.ViewModels
                 }
             }
 
-            if (parameters.ContainsKey(nameof(GPSNotepad.ViewModels.PinViewModel)))
+            if (parameters.ContainsKey(nameof(GPSNotepad.ViewModels.PinViewModel))) //On edit pin
             {
                 IsEdit = true;
                 PinViewModel = (PinViewModel)parameters[nameof(GPSNotepad.ViewModels.PinViewModel)];
             }
 
-            if (parameters.ContainsKey(nameof(GPSNotepad.Entities.Pin)))
+            if (parameters.ContainsKey(nameof(GPSNotepad.Entities.Pin))) //On scaning pin
             {
                 var pin = (GPSNotepad.Entities.Pin)parameters[nameof(GPSNotepad.Entities.Pin)];
 
@@ -289,6 +231,76 @@ namespace GPSNotepad.ViewModels
         #endregion
 
         #region ---Private Helpers---
+
+        private async void GoToAddPlaceEventFormhandler()
+        {
+            var parameters = new NavigationParameters();
+
+            parameters.Add(nameof(PlaceEventViewModel.PinId), this.PinViewModel.PinId);
+
+            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+        }
+
+        private void DeletePlaceEventHandler(PlaceEventViewModel placeEvent)
+        {
+            Acr.UserDialogs.UserDialogs.Instance.Confirm(new Acr.UserDialogs.ConfirmConfig()
+            {
+
+                Title = TextResources["ConfirmTitle"],
+
+                Message = TextResources["ConfirmDeleteEvent"],
+                OkText = TextResources["Ok"],
+                CancelText = TextResources["Cancel"],
+
+                OnAction = async result =>
+                {
+                    if (result == true)
+                    {
+                        var index = PinViewModel.Events.IndexOf(placeEvent);
+
+                        if (index != -1)
+                        {
+                            PinViewModel.Events.RemoveAt(index);
+
+                            if (IsEdit == true)
+                            {
+                                await PinService.Update(PinViewModel.GetModelPin());
+                            }
+                        }
+
+                    }
+
+                }
+            });
+        }
+
+        private void MoveToMyLocationHandler()
+        {
+            CurrentPosition.GetAsync().ContinueWith(result => Span = new MapSpan(result.Result, 0.01, 0.01));
+        }
+
+        private async void ScanQRHandler()
+        {
+            await NavigationService.NavigateAsync(nameof(ScanQRModalPage), null, true, false);
+        }
+
+        private async void AddEditPinHandler()
+        {
+            PinViewModel.Name = Name;
+            PinViewModel.Description = Description;
+            await NavigationService.GoBackAsync();
+            await PinService.CreateOrUpdatePin(PinViewModel.GetModelPin());
+        }
+
+        private async void EditPlaceEventContexthandler(PlaceEventViewModel placeEvent)
+        {
+            var parameters = new NavigationParameters
+                 {
+                    { nameof(PlaceEventViewModel), placeEvent }
+                 };
+
+            await NavigationService.NavigateAsync(nameof(AddEditPlaceEventPage), parameters);
+        }
 
         private void OnPinsStateChanged(PrismApplicationBase _, PinsStateChangedMessage message)
         {

@@ -13,20 +13,23 @@ namespace GPSNotepad.ViewModels
         #region ---Constructors---
         public SignUpOneViewModel(INavigationService navigationService, IAuthorizationService authorizationService) : base(navigationService)
         {
-
             AuthorizationService = authorizationService;
 
             var goToSignUpTwoPageCommand = GoToSignUpTwoPageCommand as DelegateCommand;
             goToSignUpTwoPageCommand.ObservesProperty(() => Email);
             goToSignUpTwoPageCommand.ObservesProperty(() => Name);
         }
+
         #endregion
 
         #region ---Protected Properties---
+
         protected IAuthorizationService AuthorizationService { get; set; }
+
         #endregion
 
         #region ---Public Properties---
+
         private string _email = "";
         public string Email
         {
@@ -54,6 +57,7 @@ namespace GPSNotepad.ViewModels
             get => _isEmailWrong;
             set => SetProperty(ref _isEmailWrong, value);
         }
+
         #endregion
 
         #region ---Commands---
@@ -61,12 +65,19 @@ namespace GPSNotepad.ViewModels
         private ICommand _clearNameCommand;
         public ICommand ClearNameCommand => _clearNameCommand ??= new DelegateCommand(() => { Name = string.Empty; });
 
+
         private ICommand _clearEmailCommand;
         public ICommand ClearEmailCommand => _clearEmailCommand ??= new DelegateCommand(() => { Email = string.Empty; });
 
 
         private ICommand _goToSignUpTwoPageCommand;
         public ICommand GoToSignUpTwoPageCommand => _goToSignUpTwoPageCommand ??= new DelegateCommand(GoToSignUpTwoPage, canExecuteGoToSignUpTwoPage);
+
+        #endregion
+
+
+        #region ---Private Helpers---
+
         private async void GoToSignUpTwoPage()
         {
             var emailValidationResult = Validators.Validators.IsEmailValid(_email);
@@ -94,7 +105,11 @@ namespace GPSNotepad.ViewModels
                 await NavigationService.NavigateAsync(nameof(SignUpTwoPage), parameters);
             }
         }
+
+
         private bool canExecuteGoToSignUpTwoPage() => Email.Length != 0 && Name.Length != 0;
+
+
         #endregion
     }
 }

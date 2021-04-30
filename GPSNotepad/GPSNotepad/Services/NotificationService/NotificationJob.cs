@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
-using GPSNotepad.Services.PinService;
 using Xamarin.Essentials;
 
 namespace GPSNotepad
@@ -14,33 +13,25 @@ namespace GPSNotepad
 
     public class NotificationJob : IJob
     {
+        #region ---Public Static Fields---
+
         public static List<FutureNotification> NotificationsShedulde = null;
 
+        #endregion
+
+        #region ---Protected Static Properties---
+
         protected static INotificationManager NotificationManager { get; set; } = null;
+
         protected static IJobManager JobManager { get; set; }
+
         protected static Notification Notification { get; set; }
 
         protected static bool IsInitialized { get; set; } = false;
 
-        protected bool OnStart()
-        {
-            bool result = true;
-            IsInitialized = true;
+        #endregion
 
-            NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
-            JobManager = ShinyHost.Resolve<IJobManager>();
-
-            Notification = new Notification();
-
-            if (DeviceInfo.Platform == DevicePlatform.Android)
-            {
-                Notification.Android.Category = "8976";
-            }
-
-            ReloadShedule();
-
-            return result;
-        }
+        #region ---Public Static Methods---
 
         public static void ReloadShedule()
         {
@@ -60,6 +51,10 @@ namespace GPSNotepad
             }
             NotificationsShedulde.Sort(new FutureNotification.Comparer());
         }
+
+        #endregion
+
+        #region ---IJob Implementation---
 
         public async Task Run(JobInfo jobInfo, CancellationToken cancelToken)
         {
@@ -88,6 +83,10 @@ namespace GPSNotepad
             await JobManager.Register(info);
         }
 
+        #endregion
+
+        #region ---Private Helpers---
+
         private async void FireNotification(FutureNotification futureNotification)
         {
             Notification.Title = "GPS Notepad";
@@ -97,5 +96,27 @@ namespace GPSNotepad
 
             await NotificationManager.Send(Notification);
         }
+
+        private bool OnStart()
+        {
+            bool result = true;
+            IsInitialized = true;
+
+            NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
+            JobManager = ShinyHost.Resolve<IJobManager>();
+
+            Notification = new Notification();
+
+            if (DeviceInfo.Platform == DevicePlatform.Android)
+            {
+                Notification.Android.Category = "8976";
+            }
+
+            ReloadShedule();
+
+            return result;
+        }
+
+        #endregion
     }
 }

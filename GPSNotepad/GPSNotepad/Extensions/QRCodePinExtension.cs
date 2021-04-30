@@ -5,6 +5,7 @@ namespace GPSNotepad.Extensions
 {
     public static class QRCodePinExtension
     {
+        #region ---Extension Methods---
         public static string GetPinAsQRCode(this Pin pin)
         {
             return new SerializablePin()
@@ -15,6 +16,7 @@ namespace GPSNotepad.Extensions
                 Longitude = pin.Longitude,
                 Latitude = pin.Latitude
             }.GetBase64Form();
-        }
+        } 
+        #endregion
     }
 }

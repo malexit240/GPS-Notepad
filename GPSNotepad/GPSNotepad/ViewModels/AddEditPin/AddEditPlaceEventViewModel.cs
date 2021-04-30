@@ -8,14 +8,17 @@ namespace GPSNotepad.ViewModels
     public class AddEditPlaceEventViewModel : ViewModelBase
     {
         #region ---Constructors---
+
         public AddEditPlaceEventViewModel(INavigationService navigationService) : base(navigationService)
         {
             _time = DateTime.Now.TimeOfDay;
             _date = DateTime.Now.Date;
         }
+
         #endregion
 
         #region ---Public Properties---
+
         private TimeSpan _time;
         public TimeSpan Time
         {
@@ -40,33 +43,30 @@ namespace GPSNotepad.ViewModels
         public PlaceEventViewModel PlaceEventViewModel { get; set; } = null;
 
         public bool IsEdit { get; set; }
+
         #endregion
 
         #region ---Commands---
+
         private ICommand _addEditPlaceEventCommand;
         public ICommand AddEditPlaceEventCommand => _addEditPlaceEventCommand ??=
         new DelegateCommand(AddEditPlaceEventHandler);
-        private async void AddEditPlaceEventHandler()
-        {
-            PlaceEventViewModel.Time = Date.Add(Time);
-            PlaceEventViewModel.Description = Description;
-
-            await NavigationService.GoBackAsync((nameof(PlaceEventViewModel), this.PlaceEventViewModel));
-        }
 
         #endregion
 
+
         #region ---Overrides---
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
-            if (parameters.ContainsKey(nameof(PlaceEventViewModel)))
+            if (parameters.ContainsKey(nameof(PlaceEventViewModel))) //On edit event
             {
                 IsEdit = true;
                 PlaceEventViewModel = parameters[nameof(PlaceEventViewModel)] as PlaceEventViewModel;
             }
-            else
+            else                                                     //On create event
             {
                 var pinId = parameters.GetValue<Guid>(nameof(PlaceEventViewModel.PinId));
 
@@ -77,6 +77,19 @@ namespace GPSNotepad.ViewModels
             Date = PlaceEventViewModel.Time.Date;
             Time = PlaceEventViewModel.Time.TimeOfDay;
         }
+
+        #endregion
+
+        #region ---Private Helpers---
+
+        private async void AddEditPlaceEventHandler()
+        {
+            PlaceEventViewModel.Time = Date.Add(Time);
+            PlaceEventViewModel.Description = Description;
+
+            await NavigationService.GoBackAsync((nameof(PlaceEventViewModel), this.PlaceEventViewModel));
+        }
+
         #endregion
     }
 }

@@ -78,6 +78,7 @@
                 <StackLayout.HeightRequest>
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="Android" Value="50"/>
+                        <On Platform="iOS" Value="50"/>
                     </OnPlatform>
                 </StackLayout.HeightRequest>
                 <Frame Margin="0" Padding="22,0,22,0"  HorizontalOptions="StartAndExpand" Style="{DynamicResource frameStyle}">

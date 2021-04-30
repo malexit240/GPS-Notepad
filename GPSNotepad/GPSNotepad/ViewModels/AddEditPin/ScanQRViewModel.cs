@@ -12,13 +12,23 @@ namespace GPSNotepad.ViewModels
     public class ScanQRViewModel : ViewModelBase
     {
         #region ---Constructors---
+
         public ScanQRViewModel(INavigationService navigationService, IQrScanerService qrScanerService) : base(navigationService)
         {
             QrScanerService = qrScanerService;
         }
+
         #endregion
 
+        #region ---Protected Properties---
+
         protected IQrScanerService QrScanerService { get; set; }
+
+        #endregion
+
+
+
+        #region ---Public Properties---
 
         private string _errorMessage = "";
         public string ErrorMessage
@@ -27,8 +37,25 @@ namespace GPSNotepad.ViewModels
             set => SetProperty(ref _errorMessage, value);
         }
 
+        #endregion
+
+
+        #region ---Commands---
+
         private DelegateCommand<ZXing.Result> _onScanQRResultCommand;
         public DelegateCommand<ZXing.Result> OnScanQRResultCommand => _onScanQRResultCommand ??= new DelegateCommand<ZXing.Result>(OnScanQRResultHandler);
+
+
+        private DelegateCommand _goBackCommand;
+        public DelegateCommand GoBackCommand => _goBackCommand ??= new DelegateCommand(async () =>
+        {
+            await NavigationService.GoBackAsync();
+        });
+
+        #endregion
+
+
+        #region ---Private Handlers---
 
         private void OnScanQRResultHandler(ZXing.Result result)
         {
@@ -39,9 +66,7 @@ namespace GPSNotepad.ViewModels
                 App.Current.Dispatcher.BeginInvokeOnMainThread(async () =>
                 {
                     var parameters = new NavigationParameters()
-                    {
-                    {nameof(Pin), pin}
-                    };
+                    {   {nameof(Pin), pin}  };
 
                     await NavigationService.GoBackAsync(parameters, true, false);
                 });
@@ -52,11 +77,7 @@ namespace GPSNotepad.ViewModels
             }
         }
 
-        private DelegateCommand _goBackCommand;
-        public DelegateCommand GoBackCommand => _goBackCommand ??= new DelegateCommand(async () =>
-        {
-            await NavigationService.GoBackAsync();
-        });
+        #endregion
 
 
 

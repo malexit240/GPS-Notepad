@@ -12,9 +12,11 @@ namespace GPSNotepad.ViewModels
         #region ---Constructors---
 
         public QRCodeModalViewModel(INavigationService navigationService) : base(navigationService) { }
+
         #endregion
 
         #region ---Public Properties---
+
         private string _qRCodeValue;
         public string QRCodeValue
         {
@@ -31,6 +33,7 @@ namespace GPSNotepad.ViewModels
         });
 
         #region ---Overrides---
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
@@ -40,6 +43,7 @@ namespace GPSNotepad.ViewModels
                 QRCodeValue = (string)parameters[nameof(QRCodeModalViewModel.QRCodeValue)];
             }
         }
+
         #endregion
     }
 }

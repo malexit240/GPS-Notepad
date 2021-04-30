@@ -10,17 +10,16 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using GPSNotepad.Converters;
 using Acr.UserDialogs;
-using Xamarin.Essentials;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel;
-using Xamarin.Forms;
 
 namespace GPSNotepad.ViewModels
 {
     public class PinViewModel : BindableBase, IEntityBase
     {
         #region ---Constructors---
+
         public PinViewModel(Guid pinId, Guid userId, string name = "", string description = "", bool favorite = false, Position? position = null, List<PlaceEvent> events = null)
         {
             _pinId = pinId;
@@ -36,15 +35,17 @@ namespace GPSNotepad.ViewModels
 
             PinService = App.Current.Container.Resolve<IPinService>();
         }
+
         #endregion
 
         #region ---Protected Properties---
         protected IPinService PinService { get; set; }
+
         #endregion
 
         #region ---Public Properties---
-        public PinViewModel Self => this;
 
+        public PinViewModel Self => this;
 
         private string _adress = "";
         public string Address
@@ -99,10 +100,11 @@ namespace GPSNotepad.ViewModels
             get => _favorite;
             set
             {
-                if (_favorite == value)
-                    return;
-                SetProperty(ref _favorite, value);
-                PinService?.Update(this.GetModelPin());
+                if (_favorite != value)
+                {
+                    SetProperty(ref _favorite, value);
+                    PinService?.Update(this.GetModelPin());
+                }
             }
         }
 
@@ -112,11 +114,49 @@ namespace GPSNotepad.ViewModels
             get => _events;
             set => SetProperty(ref _events, value);
         }
+
         #endregion
 
         #region ---Commands---
+
         private ICommand _deletePinContextCommand;
-        public ICommand DeletePinContextCommand => _deletePinContextCommand ??= new DelegateCommand(() =>
+        public ICommand DeletePinContextCommand => _deletePinContextCommand ??= new DelegateCommand(DeleteCommandHandler);
+
+        #endregion
+
+        #region ---IEntityBase Implementation---
+        public Guid Id => _pinId;
+        #endregion
+
+        #region ---Overrides---
+
+        public override int GetHashCode() => HashCode.Combine(Id);
+
+        public override bool Equals(object obj)
+        {
+            var pin = (IEntityBase)obj;
+
+            return this.PinId == pin?.Id;
+        }
+
+        protected override async void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            base.OnPropertyChanged(args);
+
+            switch (args.PropertyName)
+            {
+                case nameof(Position):
+                    Address = await GetAddress() ?? FormatedPosition;
+                    break;
+            }
+        }
+
+        #endregion
+
+
+        #region ---Private Helpers---
+
+        private void DeleteCommandHandler()
         {
             UserDialogs.Instance.Confirm(new ConfirmConfig()
             {
@@ -131,19 +171,6 @@ namespace GPSNotepad.ViewModels
                         PinService.Delete(this.GetModelPin());
                 }
             });
-        });
-        #endregion
-
-        protected override async void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            base.OnPropertyChanged(args);
-
-            switch (args.PropertyName)
-            {
-                case nameof(Position):
-                    Address = await GetAddress() ?? FormatedPosition;
-                    break;
-            }
         }
 
         private async Task<string> GetAddress()
@@ -163,18 +190,6 @@ namespace GPSNotepad.ViewModels
             return addresses?.FirstOrDefault();
         }
 
-        #region ---IEntityBase Implementation---
-        public Guid Id => _pinId;
-        #endregion
-
-        #region ---Overrides---
-        public override int GetHashCode() => HashCode.Combine(Id);
-        public override bool Equals(object obj)
-        {
-            var pin = (IEntityBase)obj;
-
-            return this.PinId == pin?.Id;
-        }
         #endregion
     }
 }

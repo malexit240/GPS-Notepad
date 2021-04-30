@@ -31,21 +31,26 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Destructors---
+
         ~BindableMap()
         {
             this.CameraMoveStarted -= OnCameraMoveStarted;
             this.CameraIdled -= OnCameraIdled;
             this.CameraMoving -= OnCameraMoving;
         }
+
         #endregion
 
         #region ---Private Fields---
+
         private bool _isMapLoading;
 
         private bool _isIdle;
+
         #endregion
 
         #region ---Source Properties---
+
         public ObservableCollection<PinViewModel> PinsSource
         {
             get => (ObservableCollection<PinViewModel>)GetValue(PinsSourceProperty);
@@ -73,12 +78,15 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Events---
+
         public event EventHandler MapLoaded;
 
         public event EventHandler<PinTappedEventArgs> ShowDetaiPinView;
+
         #endregion
 
         #region ---Public Methods---
+
         public void RaiseShowDetaiPinView(Pin pin)
         {
             ShowDetaiPinView?.Invoke(this, new PinTappedEventArgs(pin));
@@ -115,6 +123,10 @@ namespace GPSNotepad.Controls
                                                         defaultValue: true,
                                                         coerceValue: OnIsLightStylePropertyCoerceValue);
 
+        #endregion
+
+        #region ---Event Handlers---
+
         private static object OnIsLightStylePropertyCoerceValue(BindableObject bindable, object value)
         {
             var isLightStyle = (bool)value;
@@ -124,9 +136,6 @@ namespace GPSNotepad.Controls
             return value;
         }
 
-        #endregion
-
-        #region ---Event Handlers---
         private void OnCameraIdled(object sender, CameraIdledEventArgs e)
         {
             _isIdle = true;
@@ -174,6 +183,7 @@ namespace GPSNotepad.Controls
         {
             this.UpdatePinsSource(PinsSource);
         }
+
         #endregion
 
         #region ---Private Helpers---
@@ -204,10 +214,9 @@ namespace GPSNotepad.Controls
             {
                 this.Cluster();
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
+
         #endregion
     }
 }

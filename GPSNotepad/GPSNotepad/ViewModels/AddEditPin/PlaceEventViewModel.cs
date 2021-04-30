@@ -14,9 +14,11 @@ namespace GPSNotepad.ViewModels
             Time = time;
             Description = description;
         }
+
         #endregion
 
         #region ---Public Properties---
+
         public PlaceEventViewModel Self => this;
 
         private Guid _placeEventId;
@@ -49,14 +51,19 @@ namespace GPSNotepad.ViewModels
 
         public string TimeString => Time.ToShortTimeString();
         public string DateString => Time.ToShortDateString();
+
         #endregion
 
         #region ---IEntityBase Implementation---
+
         public Guid Id => _placeEventId;
+
         #endregion
 
         #region ---Overrides---
+
         public override int GetHashCode() => HashCode.Combine(Id);
+
         public override bool Equals(object obj)
         {
             if (!(obj is IEntityBase))
@@ -66,6 +73,7 @@ namespace GPSNotepad.ViewModels
 
             return this.PlaceEventId == pin.Id;
         }
+
         #endregion
     }
 }

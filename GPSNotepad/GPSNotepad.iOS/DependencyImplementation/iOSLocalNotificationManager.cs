@@ -1,4 +1,4 @@
-﻿using GPSNotepad.Services.NotificationService;
+﻿using GPSNotepad.PlatformDependencyInterfaces;
 using Shiny;
 using System.Collections.Generic;
 using UIKit;
@@ -10,17 +10,7 @@ namespace GPSNotepad.iOS
     public class iOSLocalNotificationManager : ILocalNotificationManager
     {
 
-        public void RegisterUserNotificationSettings()
-        {
-            if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
-            {
-                var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
-                    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
-                );
-
-                UIApplication.SharedApplication.RegisterUserNotificationSettings(notificationSettings);
-            }
-        }
+        #region ILocalNotificationManager---
 
         public void ScheduleLocalNotifications(List<FutureNotification> futureNotifications)
         {
@@ -30,6 +20,22 @@ namespace GPSNotepad.iOS
             foreach (var notification in futureNotifications)
             {
                 RegisterNotification(notification);
+            }
+        }
+
+        #endregion
+
+        #region ---Private Helpers---
+
+        private void RegisterUserNotificationSettings()
+        {
+            if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                var notificationSettings = UIUserNotificationSettings.GetSettingsForTypes(
+                    UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound, null
+                );
+
+                UIApplication.SharedApplication.RegisterUserNotificationSettings(notificationSettings);
             }
         }
 
@@ -48,6 +54,8 @@ namespace GPSNotepad.iOS
 
             UIApplication.SharedApplication.ScheduleLocalNotification(notification);
         }
+
+        #endregion
 
 
     }

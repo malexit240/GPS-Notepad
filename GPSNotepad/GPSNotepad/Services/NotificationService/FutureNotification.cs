@@ -19,6 +19,7 @@ namespace GPSNotepad
         #endregion
 
         #region ---Public Properties---
+
         public int Id { get; set; }
 
         public string NotificationTitle { get; set; }
@@ -28,9 +29,11 @@ namespace GPSNotepad
         public DateTime TimeToNotify { get; set; }
 
         public bool IsFired { get; set; }
+
         #endregion
 
         #region ---Internal Classes---
+
         public class Comparer : IComparer<FutureNotification>
         {
             public int Compare(FutureNotification x, FutureNotification y)
@@ -38,6 +41,7 @@ namespace GPSNotepad
                 return x.TimeToNotify.CompareTo(y.TimeToNotify);
             }
         }
+
         #endregion
     }
 }

@@ -18,13 +18,13 @@ using GPSNotepad.Comparers;
 using GPSNotepad.Enums;
 using System.ComponentModel;
 using Acr.UserDialogs;
-using GPSNotepad.Services.Settings;
 
 namespace GPSNotepad.ViewModels
 {
     public class MainPageViewModel : ViewModelBase
     {
         #region ---Constructors---
+
         public MainPageViewModel(INavigationService navigationService, IAuthorizationService authorizationService, IPinService pinService, IQrScanerService qrScanerService) : base(navigationService)
         {
             PinService = pinService;
@@ -40,9 +40,11 @@ namespace GPSNotepad.ViewModels
             pinService.LoadUserPins(AuthorizationService.GetCurrenUserId());
 
         }
+
         #endregion
 
         #region ---Protected Properties---
+
         protected IPinService PinService { get; set; }
         protected IQrScanerService QrScanerService { get; set; }
         protected IAuthorizationService AuthorizationService { get; set; }
@@ -50,6 +52,7 @@ namespace GPSNotepad.ViewModels
         #endregion
 
         #region ---Public Properties---
+
         private ObservableCollection<PinViewModel> _pins;
         public ObservableCollection<PinViewModel> Pins
         {
@@ -100,19 +103,65 @@ namespace GPSNotepad.ViewModels
         }
 
         public MainMapViewModel MainMapViewModel { get; set; }
+
         #endregion
 
         #region ---Commands---
 
         private ICommand _editPinContextCommand;
         public ICommand EditPinContextCommand => _editPinContextCommand ??= new DelegateCommand<PinViewModel>(EditPinContextHandler);
-        private async void EditPinContextHandler(PinViewModel pin)
-        {
-            await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage), (nameof(PinViewModel), pin));
-        }
+
 
         private ICommand _showQRCodeCommand;
         public ICommand ShowQRCodeCommand => _showQRCodeCommand ??= new DelegateCommand<PinViewModel>(ShowQRCodeHandler);
+
+
+        private ICommand _goToAddPinFormCommand = null;
+        public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
+
+
+        private ICommand _hideDetailViewCommand;
+        public ICommand HideDetailPinViewCommand => _hideDetailViewCommand ??= new DelegateCommand(HideDetailPinViewHandler);
+
+
+        private DelegateCommand<PinViewModel> _pinTappedCommand;
+        public DelegateCommand<PinViewModel> PinTappedCommand => _pinTappedCommand ??= new DelegateCommand<PinViewModel>(PinTappedHandler);
+
+
+        private DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> _onShowDetailPinViewCommand;
+        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetailPinViewCommand => _onShowDetailPinViewCommand ??= new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>(OnShowDetailPinViewHandler);
+
+
+        private ICommand _logoutCommand;
+        public ICommand LogoutCommand => _logoutCommand ??= new DelegateCommand(LogoutCommandHandler);
+
+
+        private ICommand _goToSettingsPageCommand;
+        public ICommand GoToSettingsPageCommand => _goToSettingsPageCommand ??= new DelegateCommand(() =>
+        {
+            this.NavigationService.NavigateAsync($"{nameof(SettingsPage)}");
+        });
+
+        #endregion
+
+        #region ---Overrides---
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
+        {
+            switch (args.PropertyName)
+            {
+                case nameof(IsSearchFieldFoccused):
+                    IsDropDownPinsVisible = IsSearchFieldFoccused;
+                    break;
+            }
+
+            base.OnPropertyChanged(args);
+        }
+
+        #endregion
+
+        #region ---Private Helpers---
+
         private void ShowQRCodeHandler(PinViewModel pin)
         {
             var parameters = new NavigationParameters();
@@ -120,28 +169,19 @@ namespace GPSNotepad.ViewModels
             NavigationService.NavigateAsync(nameof(QRCodeModalPage), parameters, useModalNavigation: true, false);
         }
 
-        private ICommand _scanQrCommand;
-        public ICommand ScanQrCommand => _scanQrCommand ??= new DelegateCommand<string>((result) =>
+        private async void EditPinContextHandler(PinViewModel pin)
         {
+            await NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage), (nameof(PinViewModel), pin));
+        }
 
-        });
-
-
-        private ICommand _goToAddPinFormCommand = null;
-        public ICommand GoToAddPinFormCommand => _goToAddPinFormCommand ??= new DelegateCommand(GoToAddPinFormHandler);
         private void GoToAddPinFormHandler() => NavigationService.NavigateAsync(nameof(AddEditPinAndEventsTabbedPage));
 
-
-        private ICommand _hideDetailViewCommand;
-        public ICommand HideDetailPinViewCommand => _hideDetailViewCommand ??= new DelegateCommand(HideDetailPinViewHandler);
         private void HideDetailPinViewHandler()
         {
             SelectedPin = null;
             MainMapViewModel.ShowDetailView = false;
         }
 
-        private DelegateCommand<PinViewModel> _pinTappedCommand;
-        public DelegateCommand<PinViewModel> PinTappedCommand => _pinTappedCommand ??= new DelegateCommand<PinViewModel>(PinTappedHandler);
         private void PinTappedHandler(PinViewModel pin)
         {
             ChoosenPage = 0;
@@ -150,9 +190,6 @@ namespace GPSNotepad.ViewModels
                 MainMapViewModel.Span.LongitudeDegrees);
         }
 
-
-        private DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> _onShowDetailPinViewCommand;
-        public DelegateCommand<Xamarin.Forms.GoogleMaps.Pin> OnShowDetailPinViewCommand => _onShowDetailPinViewCommand ??= new DelegateCommand<Xamarin.Forms.GoogleMaps.Pin>(OnShowDetailPinViewHandler);
         private void OnShowDetailPinViewHandler(Xamarin.Forms.GoogleMaps.Pin pin)
         {
             if (!Guid.TryParse(pin.Label, out Guid id))
@@ -161,8 +198,6 @@ namespace GPSNotepad.ViewModels
             MainMapViewModel.ShowDetailView = true;
         }
 
-        private ICommand _logoutCommand;
-        public ICommand LogoutCommand => _logoutCommand ??= new DelegateCommand(LogoutCommandHandler);
         private void LogoutCommandHandler()
         {
             UserDialogs.Instance.Confirm(new ConfirmConfig()
@@ -184,28 +219,6 @@ namespace GPSNotepad.ViewModels
 
         }
 
-        private ICommand _goToSettingsPageCommand;
-        public ICommand GoToSettingsPageCommand => _goToSettingsPageCommand ??= new DelegateCommand(() =>
-        {
-            this.NavigationService.NavigateAsync($"{nameof(SettingsPage)}");
-        });
-
-        #endregion
-
-        protected override void OnPropertyChanged(PropertyChangedEventArgs args)
-        {
-            switch (args.PropertyName)
-            {
-                case nameof(IsSearchFieldFoccused):
-
-                    IsDropDownPinsVisible = IsSearchFieldFoccused;
-                    break;
-            }
-
-            base.OnPropertyChanged(args);
-        }
-
-        #region ---Private Helpers---
         private void SortPins(IComparer<Pin> comparer)
         {
             var pins = Pins.Select(p => p.GetModelPin()).ToList();
@@ -233,6 +246,7 @@ namespace GPSNotepad.ViewModels
                     Pins.Remove(message.ChangedPin.ToViewModel());
                     break;
             }
+
             CurrentPosition.GetAsync().
                 ContinueWith(result =>
                 {

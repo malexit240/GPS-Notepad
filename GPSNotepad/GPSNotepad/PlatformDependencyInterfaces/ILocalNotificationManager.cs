@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace GPSNotepad.Services.NotificationService
+namespace GPSNotepad.PlatformDependencyInterfaces
 {
     public interface ILocalNotificationManager
     {
-        void RegisterUserNotificationSettings();
         void ScheduleLocalNotifications(List<FutureNotification> futureNotifications);
     }
 

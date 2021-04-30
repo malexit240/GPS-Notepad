@@ -7,6 +7,7 @@ using Xamarin.Essentials;
 using System.Linq;
 using System.Collections.Generic;
 using System;
+using GPSNotepad.PlatformDependencyInterfaces;
 
 namespace GPSNotepad.Services.NotificationService
 {
