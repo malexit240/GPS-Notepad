@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GPSNotepad {
+namespace GPSNotepad.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace GPSNotepad {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GPSNotepad.MapStyles", typeof(MapStyles).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GPSNotepad.Resources.MapStyles", typeof(MapStyles).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

@@ -48,7 +48,7 @@
     <Compile Update="Controls\DropDown.xaml.cs">
       <DependentUpon>DropDown.xaml</DependentUpon>
     </Compile>
-    <Compile Update="MapStyles.Designer.cs">
+    <Compile Update="Resources\MapStyles.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>MapStyles.resx</DependentUpon>
@@ -88,7 +88,7 @@
     <EmbeddedResource Update="DarkTheme.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="MapStyles.resx">
+    <EmbeddedResource Update="Resources\MapStyles.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>MapStyles.Designer.cs</LastGenOutput>
     </EmbeddedResource>

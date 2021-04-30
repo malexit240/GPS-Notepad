@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using GPSNotepad.ViewModels;
 using System.Linq;
 using System.IO;
+using GPSNotepad.Resources;
 
 namespace GPSNotepad.Controls
 {
@@ -86,6 +87,7 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Bindable Source Properties---
+
         public static readonly BindableProperty PinsSourceProperty = BindableProperty.Create(
                                                          propertyName: nameof(PinsSource),
                                                          returnType: typeof(ObservableCollection<PinViewModel>),
@@ -175,7 +177,8 @@ namespace GPSNotepad.Controls
         #endregion
 
         #region ---Private Helpers---
-        private async void UpdatePinsSource(ObservableCollection<PinViewModel> newSource)
+
+        private void UpdatePinsSource(ObservableCollection<PinViewModel> newSource)
         {
             Pins.Clear();
 
