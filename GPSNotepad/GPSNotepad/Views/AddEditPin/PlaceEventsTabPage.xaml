@@ -28,21 +28,31 @@
 
                         <SwipeView BackgroundColor="{DynamicResource PageBackgroundColor}">
                             <SwipeView.RightItems>
-                                <!--#region EDIT EVENT -->
-                                <SwipeItem Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
-                                           Source={x:Reference page}}"
-                                           CommandParameter="{Binding Self}"
-                                           BackgroundColor="{DynamicResource PrimaryColor}"
-                                           IconImageSource="ic_edit.png"/>
+
+                                <!--#region EDIT PIN -->
+                                <SwipeItemView Command="{Binding Path=BindingContext.EditPlaceEventContextCommand,
+                                               Source={x:Reference page}}"
+                                               CommandParameter="{Binding Self}"
+                                               BackgroundColor="{DynamicResource PrimaryColor}"
+                                               Padding="15,0,15,0">
+
+                                    <Image  HeightRequest="10" WidthRequest="10" Aspect="AspectFit" Source="ic_edit.png"/>
+
+                                </SwipeItemView>
                                 <!--#endregion-->
 
-                                <!--#region DELETE EVENT -->
-                                <SwipeItem Command="{Binding Path=BindingContext.DeletePlaceEventCommand,
-                                           Source={x:Reference page}}"
-                                           CommandParameter="{Binding Self}"
-                                           BackgroundColor="{DynamicResource ErrorColor}"
-                                           IconImageSource="ic_delete.png"/>
+                                <!--#region DELETE PIN -->
+                                <SwipeItemView Command="{Binding Path=BindingContext.DeletePlaceEventCommand,
+                                               Source={x:Reference page}}"
+                                               CommandParameter="{Binding Self}"
+                                               BackgroundColor="{DynamicResource ErrorColor}"
+                                               Padding="15,0,15,0">
+
+                                    <Image HeightRequest="10" WidthRequest="10" Aspect="AspectFit" Source="ic_delete.png"/>
+
+                                </SwipeItemView>
                                 <!--#endregion-->
+
                             </SwipeView.RightItems>
 
                             <SwipeView.Content>

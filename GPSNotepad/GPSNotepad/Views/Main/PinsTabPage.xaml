@@ -33,7 +33,7 @@
                                                BackgroundColor="{DynamicResource SuccsessColor}"
                                                Padding="15,0,15,0">
 
-                                    <Image HeightRequest="15" WidthRequest="15"  Source="ic_qr.png"/>
+                                    <Image HeightRequest="10" WidthRequest="10"  Aspect="AspectFit" Source="ic_qr.png"/>
 
                                 </SwipeItemView>
                                 <!--#endregion-->
@@ -45,7 +45,7 @@
                                                BackgroundColor="{DynamicResource PrimaryColor}"
                                                Padding="15,0,15,0">
 
-                                    <Image  HeightRequest="15" WidthRequest="15" Source="ic_edit.png"/>
+                                    <Image  HeightRequest="10" WidthRequest="10" Aspect="AspectFit" Source="ic_edit.png"/>
 
                                 </SwipeItemView>
                                 <!--#endregion-->
@@ -55,7 +55,7 @@
                                                BackgroundColor="{DynamicResource ErrorColor}"
                                                Padding="15,0,15,0">
 
-                                    <Image HeightRequest="15" WidthRequest="15" Source="ic_delete.png"/>
+                                    <Image HeightRequest="10" WidthRequest="10" Aspect="AspectFit" Source="ic_delete.png"/>
 
                                 </SwipeItemView>
                                 <!--#endregion-->
