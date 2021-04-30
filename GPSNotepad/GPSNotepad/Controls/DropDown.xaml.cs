@@ -8,10 +8,16 @@ namespace GPSNotepad.Controls
 {
     public partial class DropDown : StackLayout
     {
+        #region ---Constructors---
+
         public DropDown()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region ---Public Properties---
 
         public new bool IsVisible
         {
@@ -19,10 +25,56 @@ namespace GPSNotepad.Controls
             set => SetValue(IsVisibleProperty, value);
         }
 
+        public ObservableCollection<PinViewModel> PinsSource
+        {
+            get => (ObservableCollection<PinViewModel>)GetValue(PinsSourceProperty);
+            set => SetValue(PinsSourceProperty, value);
+        }
+
+        public ICommand PinTappedCommand
+        {
+            get => (ICommand)GetValue(PinTappedCommandProperty);
+            set => SetValue(PinTappedCommandProperty, value);
+        }
+
+        #endregion
+
+        #region ---Public Static Proeprties---
+
         public static new BindableProperty IsVisibleProperty = BindableProperty.Create(nameof(IsVisible),
             typeof(bool),
             typeof(DropDown),
             coerceValue: OnCoerceValue);
+
+        public static BindableProperty PinsSourceProperty = BindableProperty.Create(
+            nameof(PinsSource),
+            typeof(ObservableCollection<PinViewModel>),
+            typeof(DropDown),
+            propertyChanged: OnPinsSourcePropertyChanged);
+
+        public static BindableProperty PinTappedCommandProperty = BindableProperty.Create(
+            nameof(PinsSource),
+            typeof(ICommand),
+            typeof(DropDown));
+        #endregion
+
+        #region ---Event Handlers---
+
+        private static void OnPinsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var dropDown = bindable as DropDown;
+            var source = newValue as ObservableCollection<PinViewModel>;
+
+            if (dropDown != null && source != null)
+            {
+                BindableLayout.SetItemsSource(dropDown.stackLayout, source);
+            }
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            PinTappedCommand?.Execute((sender as Grid).BindingContext);
+        }
 
         private static object OnCoerceValue(BindableObject bindable, object value)
         {
@@ -32,6 +84,10 @@ namespace GPSNotepad.Controls
 
             return value;
         }
+
+        #endregion
+
+        #region ---Private Helpers---
 
         private async void AnimateVisibility(bool visibility)
         {
@@ -55,43 +111,6 @@ namespace GPSNotepad.Controls
             }
         }
 
-        public ObservableCollection<PinViewModel> PinsSource
-        {
-            get => (ObservableCollection<PinViewModel>)GetValue(PinsSourceProperty);
-            set => SetValue(PinsSourceProperty, value);
-        }
-
-        public static BindableProperty PinsSourceProperty = BindableProperty.Create(
-            nameof(PinsSource),
-            typeof(ObservableCollection<PinViewModel>),
-            typeof(DropDown),
-            propertyChanged: OnPinsSourcePropertyChanged);
-
-        public ICommand PinTappedCommand
-        {
-            get => (ICommand)GetValue(PinTappedCommandProperty);
-            set => SetValue(PinTappedCommandProperty, value);
-        }
-
-        public static BindableProperty PinTappedCommandProperty = BindableProperty.Create(
-            nameof(PinsSource),
-            typeof(ICommand),
-            typeof(DropDown));
-
-        private static void OnPinsSourcePropertyChanged(BindableObject bindable, object oldValue, object newValue)
-        {
-            var dropDown = bindable as DropDown;
-            var source = newValue as ObservableCollection<PinViewModel>;
-
-            if (dropDown != null && source != null)
-            {
-                BindableLayout.SetItemsSource(dropDown.stackLayout, source);
-            }
-        }
-
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-            PinTappedCommand?.Execute((sender as Grid).BindingContext);
-        }
+        #endregion
     }
 }

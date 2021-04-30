@@ -12,14 +12,19 @@ namespace GPSNotepad.Controls
 {
     public partial class SearchEntry : StackLayout
     {
+        #region ---Constructors---
+
         public SearchEntry()
         {
             InitializeComponent();
             searchEntry.Focused += SearchEntry_Focused;
             searchEntry.Unfocused += SearchEntry_Unfocused;
             searchEntry.TextChanged += SearchEntry_TextChanged;
-
         }
+
+        #endregion
+
+        #region ---Public Properties---
 
         public string SearchText
         {
@@ -27,19 +32,26 @@ namespace GPSNotepad.Controls
             set => SetValue(SearchTextProperty, value);
         }
 
+        #endregion
+
+        #region ---Public Static Properties---
+
         public static BindableProperty SearchTextProperty = BindableProperty.Create(
-            nameof(SearchText),
-            typeof(string),
-            typeof(DropDown),
-            defaultBindingMode: BindingMode.TwoWay,
-            propertyChanged: OnSearchTextPropertyChanged);
+           nameof(SearchText),
+           typeof(string),
+           typeof(DropDown),
+           defaultBindingMode: BindingMode.TwoWay,
+           propertyChanged: OnSearchTextPropertyChanged);
+
+        #endregion
+
+
+        #region ---Event Handlers---
 
         private static void OnSearchTextPropertyChanged(BindableObject bindable, object oldValue, object newValue)
         {
             (bindable as SearchEntry).searchEntry.Text = newValue as string;
         }
-
-
 
         private void SearchEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -58,10 +70,11 @@ namespace GPSNotepad.Controls
             await clearButton.ScaleTo(1);
         }
 
-
         private void ClearButtonClicked(object sender, EventArgs e)
         {
             this.searchEntry.Text = string.Empty;
         }
+
+        #endregion
     }
 }

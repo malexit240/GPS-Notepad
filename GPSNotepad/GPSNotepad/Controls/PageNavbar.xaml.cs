@@ -1,15 +1,19 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace GPSNotepad.Controls
 {
     public partial class PageNavbar : Grid
     {
+        #region ---Constructors---
+
         public PageNavbar()
         {
             InitializeComponent();
         }
+
+        #endregion
+
+        #region ---Public Properties---
 
         public string Title
         {
@@ -17,19 +21,21 @@ namespace GPSNotepad.Controls
             set => SetValue(TitleProperty, value);
         }
 
-        public static BindableProperty TitleProperty = BindableProperty.Create(
-            nameof(Title),
-            typeof(string),
-            typeof(PageNavbar),
-            coerceValue: OnTitlePropertyChanged);
-
-
-
         public bool IsBackButtonEnabled
         {
             get => (bool)GetValue(IsBackButtonEnabledProperty);
             set => SetValue(IsBackButtonEnabledProperty, value);
         }
+
+        #endregion
+
+        #region ---Public Static Properties---
+
+        public static BindableProperty TitleProperty = BindableProperty.Create(
+            nameof(Title),
+            typeof(string),
+            typeof(PageNavbar),
+            coerceValue: OnTitlePropertyChanged);
 
         public static BindableProperty IsBackButtonEnabledProperty = BindableProperty.Create(
             nameof(IsBackButtonEnabled),
@@ -37,6 +43,10 @@ namespace GPSNotepad.Controls
             typeof(PageNavbar),
             true,
             coerceValue: OnIsBackButtonEnabledPropertyChanged);
+
+        #endregion
+
+        #region ---Event Handlers---
 
         private static object OnIsBackButtonEnabledPropertyChanged(BindableObject bindable, object value)
         {
@@ -64,5 +74,7 @@ namespace GPSNotepad.Controls
 
             return value;
         }
+
+        #endregion
     }
 }

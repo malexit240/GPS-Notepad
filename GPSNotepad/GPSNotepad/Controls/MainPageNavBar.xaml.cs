@@ -7,6 +7,8 @@ namespace GPSNotepad.Controls
 {
     public partial class MainPageNavBar : StackLayout
     {
+        #region ---Constructors---
+
         public MainPageNavBar()
         {
             InitializeComponent();
@@ -15,76 +17,15 @@ namespace GPSNotepad.Controls
             this.searchField.SetBinding(SearchEntry.SearchTextProperty, new Binding(nameof(SearchText)));
         }
 
+        #endregion
+
+        #region ---Public Properties---
+
         public bool IsFoccused
         {
             get => (bool)GetValue(IsFoccusedProperty);
             set => SetValue(IsFoccusedProperty, value);
         }
-
-        public static BindableProperty IsFoccusedProperty = BindableProperty.Create(
-            nameof(IsFoccused),
-            typeof(bool),
-            typeof(MainPageNavBar),
-            defaultBindingMode: BindingMode.OneWayToSource);
-
-        public ICommand SettingsButtonCommand
-        {
-            get => (ICommand)GetValue(SettingsButtonCommandProperty);
-            set => SetValue(SettingsButtonCommandProperty, value);
-        }
-
-        public static BindableProperty SettingsButtonCommandProperty = BindableProperty.Create(
-            nameof(SettingsButtonCommand),
-            typeof(ICommand),
-            typeof(MainPageNavBar));
-
-        public ICommand LogoutButtonCommand
-        {
-            get => (ICommand)GetValue(LogoutButtonCommandProperty);
-            set => SetValue(LogoutButtonCommandProperty, value);
-        }
-
-        public static BindableProperty LogoutButtonCommandProperty = BindableProperty.Create(
-            nameof(LogoutButtonCommand),
-            typeof(ICommand),
-            typeof(MainPageNavBar));
-
-
-        public string SearchPlaceholderText
-        {
-            get => (string)GetValue(SearchPlaceholderTextProperty);
-            set => SetValue(SearchPlaceholderTextProperty, value);
-        }
-
-        public static BindableProperty SearchPlaceholderTextProperty = BindableProperty.Create(
-            nameof(SearchPlaceholderText),
-            typeof(string),
-            typeof(MainPageNavBar),
-            defaultBindingMode: BindingMode.TwoWay);
-
-
-
-        public ICommand OnSearchFieldFocused => new DelegateCommand(async () =>
-        {
-            this.CancelButton.IsVisible = true;
-            this.SettingsButton.IsVisible = false;
-            IsFoccused = true;
-            searchField.LayoutTo(new Rectangle(searchField.X, searchField.Y, searchField.Width + logoutButton.Width * 1.05, searchField.Height));
-            await logoutButton.ScaleTo(0);
-        });
-
-
-
-        public ICommand OnSearchFieldUnfocused => new DelegateCommand(async () =>
-       {
-           this.CancelButton.IsVisible = false;
-           this.SettingsButton.IsVisible = true;
-
-           IsFoccused = false;
-           logoutButton.ScaleTo(1);
-           await searchField.LayoutTo(new Rectangle(searchField.X, searchField.Y, searchField.Width - logoutButton.Width * 1.05, searchField.Height));
-
-       });
 
         public string SearchText
         {
@@ -92,12 +33,71 @@ namespace GPSNotepad.Controls
             set => SetValue(SearchTextProperty, value);
         }
 
-        public static BindableProperty SearchTextProperty = BindableProperty.Create(
-            nameof(SearchText),
+        public string SearchPlaceholderText
+        {
+            get => (string)GetValue(SearchPlaceholderTextProperty);
+            set => SetValue(SearchPlaceholderTextProperty, value);
+        }
+
+        public ICommand SettingsButtonCommand
+        {
+            get => (ICommand)GetValue(SettingsButtonCommandProperty);
+            set => SetValue(SettingsButtonCommandProperty, value);
+        }
+
+        public ICommand LogoutButtonCommand
+        {
+            get => (ICommand)GetValue(LogoutButtonCommandProperty);
+            set => SetValue(LogoutButtonCommandProperty, value);
+        }
+
+        #endregion
+
+        #region ---Public Static Properties---
+
+        public static BindableProperty LogoutButtonCommandProperty = BindableProperty.Create(
+            nameof(LogoutButtonCommand),
+            typeof(ICommand),
+            typeof(MainPageNavBar));
+
+        public static BindableProperty IsFoccusedProperty = BindableProperty.Create(
+         nameof(IsFoccused),
+         typeof(bool),
+         typeof(MainPageNavBar),
+         defaultBindingMode: BindingMode.OneWayToSource);
+
+        public static BindableProperty SettingsButtonCommandProperty = BindableProperty.Create(
+            nameof(SettingsButtonCommand),
+            typeof(ICommand),
+            typeof(MainPageNavBar));
+
+
+        public static BindableProperty SearchPlaceholderTextProperty = BindableProperty.Create(
+            nameof(SearchPlaceholderText),
             typeof(string),
             typeof(MainPageNavBar),
             defaultBindingMode: BindingMode.TwoWay);
 
+        public static BindableProperty SearchTextProperty = BindableProperty.Create(
+           nameof(SearchText),
+           typeof(string),
+           typeof(MainPageNavBar),
+           defaultBindingMode: BindingMode.TwoWay);
+
+        #endregion
+
+        #region ---Commands---
+
+        private ICommand _onSearchFieldFocused;
+        public ICommand OnSearchFieldFocused => _onSearchFieldFocused ??= new DelegateCommand(OnSearchFieldFocusedHandler);
+
+
+        private ICommand _onSearchFieldUnfocused;
+        public ICommand OnSearchFieldUnfocused => _onSearchFieldUnfocused ??= new DelegateCommand(OnSearchFieldUnfocusedHandler);
+
+        #endregion
+
+        #region ---Event Handler---
 
         private void UnfocusSearchField(object sender, EventArgs e)
         {
@@ -114,5 +114,30 @@ namespace GPSNotepad.Controls
         {
             LogoutButtonCommand?.Execute(null);
         }
+
+        #endregion
+
+        #region ---Private Helpers---
+
+        private async void OnSearchFieldFocusedHandler()
+        {
+            this.CancelButton.IsVisible = true;
+            this.SettingsButton.IsVisible = false;
+            IsFoccused = true;
+            searchField.LayoutTo(new Rectangle(searchField.X, searchField.Y, searchField.Width + logoutButton.Width * 1.05, searchField.Height));
+            await logoutButton.ScaleTo(0);
+        }
+
+        private async void OnSearchFieldUnfocusedHandler()
+        {
+            this.CancelButton.IsVisible = false;
+            this.SettingsButton.IsVisible = true;
+
+            IsFoccused = false;
+            logoutButton.ScaleTo(1);
+            await searchField.LayoutTo(new Rectangle(searchField.X, searchField.Y, searchField.Width - logoutButton.Width * 1.05, searchField.Height));
+        }
+
+        #endregion
     }
 }

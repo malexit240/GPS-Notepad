@@ -84,7 +84,8 @@
             <!--#region TO MY LOCATION BUTTON -->
 
             <Frame Grid.Row="0" Grid.RowSpan="2"
-                   Style="{DynamicResource shadowFloatFrameStyle}"/>
+                   Style="{DynamicResource shadowFloatFrameStyle}"
+                   IsVisible="{Binding Path=MainMapViewModel.ShowMoveToMyLocationButton}"/>
 
             <Button Grid.Row="0" Grid.RowSpan="2"
                     ImageSource="ic_location.png"
@@ -96,6 +97,7 @@
         </Grid>
 
         <!--#region SEARCH BAR -->
+
         <StackLayout Grid.Row="0" BackgroundColor="{DynamicResource PageBackgroundColor}">
 
             <controls:MainPageNavBar IsFoccused="{Binding IsSearchFieldFoccused}" 
@@ -104,7 +106,9 @@
                                      SettingsButtonCommand="{Binding GoToSettingsPageCommand}"
                                      LogoutButtonCommand="{Binding LogoutCommand}"/>
         </StackLayout>
+
         <!--#endregion-->
+
     </Grid>
     <!--#endregion-->
 </controls:BasePage>

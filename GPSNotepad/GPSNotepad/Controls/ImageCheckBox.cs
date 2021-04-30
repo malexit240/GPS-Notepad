@@ -6,14 +6,17 @@ namespace GPSNotepad.Controls
     public class ImageCheckBox : ImageButton
     {
         #region ---Constructors---
+
         public ImageCheckBox()
         {
             this.BackgroundColor = Color.Transparent;
             this.Clicked += OnImageCheckBoxClicked;
         }
+
         #endregion
 
         #region ---Public Properties---
+
         public bool IsChecked
         {
             get => (bool)GetValue(IsCheckedProperty);
@@ -31,9 +34,11 @@ namespace GPSNotepad.Controls
             get => (ImageSource)GetValue(UncheckedImageSourceProperty);
             set => SetValue(UncheckedImageSourceProperty, value);
         }
+
         #endregion
 
         #region ---Public Static Properties---
+
         public static BindableProperty IsCheckedProperty = BindableProperty.Create(nameof(IsChecked),
             typeof(bool),
             typeof(ImageCheckBox),
@@ -50,9 +55,11 @@ namespace GPSNotepad.Controls
             typeof(ImageSource),
             typeof(ImageCheckBox),
             propertyChanged: OnUncheckedImageSourcePropertyChanged);
+
         #endregion
 
         #region ---Event Handlers---
+
         private void OnImageCheckBoxClicked(object sender, EventArgs e)
         {
             IsChecked = !IsChecked;
