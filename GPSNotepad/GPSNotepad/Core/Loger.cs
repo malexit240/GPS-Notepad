@@ -17,11 +17,10 @@ namespace GPSNotepad
             NotificationManager = Shiny.ShinyHost.Resolve<INotificationManager>();
 
             Notification = new Notification();
-            //Notification.Channel = Channel.Create();
+
             if (DeviceInfo.Platform == DevicePlatform.Android)
             {
                 Notification.Android.Category = "8977";
-
             }
         }
         #endregion

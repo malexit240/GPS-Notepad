@@ -106,9 +106,7 @@ namespace GPSNotepad.Services.PinService
                     pin.Events.Add(@event);
                 }
 
-                MessagingCenter.Send(App.Current, "pins_state_changed",
-                        new PinsStateChangedMessage(new List<Pin>() { pin },
-                        PinsStateChangedType.UpdateEvents));
+               
             }
         }
 

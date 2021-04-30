@@ -7,35 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
 using GPSNotepad.Services.PinService;
-using GPSNotepad.Entities;
-using GPSNotepad.Repositories;
 using Xamarin.Essentials;
-using Microsoft.EntityFrameworkCore;
 
 namespace GPSNotepad
 {
-    public static class NotificationLoader
-    {
-        public static List<Pin> GetAllPins()
-        {
-            var token = Preferences.Get("SessionToken", Guid.Empty.ToString());
-
-            User user;
-            List<Pin> pins = null;
-            List<PlaceEvent> events = new List<PlaceEvent>();
-
-            using var context = new Context();
-
-            user = context.Users.Select(u => u).Where(u => u.SessionToken == token).FirstOrDefault();
-
-            if (user != null)
-            {
-                pins = context.Pins.Include(pin => pin.Events).Select(p => p).Where(p => p.UserId == user.UserId).ToList();
-            }
-
-            return pins;
-        }
-    }
 
     public class NotificationJob : IJob
     {
@@ -72,16 +47,18 @@ namespace GPSNotepad
             NotificationsShedulde = new List<FutureNotification>();
 
             var pins = NotificationLoader.GetAllPins();
+            var currentTime = DateTime.Now;
 
             foreach (var pin in pins)
             {
-                foreach (var @event in pin.Events.Select(e => e).Where(e => e.Time >= DateTime.Now))
+                var events = (from e in pin.Events where e.Time >= currentTime select e).ToList();
+
+                foreach (var @event in events)
                 {
                     NotificationsShedulde.Add(FutureNotification.Create(pin.Name, @event.Description, @event.Time));
                 }
-
-                NotificationsShedulde.Sort(new FutureNotification.Comparer());
             }
+            NotificationsShedulde.Sort(new FutureNotification.Comparer());
         }
 
         public async Task Run(JobInfo jobInfo, CancellationToken cancelToken)
@@ -96,6 +73,8 @@ namespace GPSNotepad
             {
                 RunOnForeground = true
             };
+
+
 
             if (NotificationsShedulde.Count != 0)
             {

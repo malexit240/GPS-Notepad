@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using GPSNotepad.Services.PlaceEventsService;
 using GPSNotepad.Comparers;
 using GPSNotepad.Converters;
+using Xamarin.Forms;
+using GPSNotepad.Enums;
 
 namespace GPSNotepad.Services.PinService
 {
@@ -75,6 +77,10 @@ namespace GPSNotepad.Services.PinService
                 using var context = new Context();
 
                 pin.Events.ForEach(e => PlaceEventService.CreateOrUpdate(e));
+
+                MessagingCenter.Send(App.Current, "pins_state_changed",
+                        new PinsStateChangedMessage(new List<Pin>() { pin },
+                        PinsStateChangedType.UpdateEvents));
 
                 context.Pins.Update(pin);
                 context.SaveChangesAsync();
